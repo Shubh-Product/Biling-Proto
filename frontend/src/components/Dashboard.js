@@ -7045,97 +7045,29 @@ const Dashboard = () => {
                     </div>
                   )}
 
-                  {/* Prospect Validation with Billing Notice */}
-                  <div className="mt-6 flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <Button
-                        type="button"
-                        onClick={validateCustomerDetails}
-                        disabled={validatingCustomer || customerValidated}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
-                      >
-                        {validatingCustomer ? (
-                          <>
-                            <div className="loading-spinner mr-2"></div>
-                            Validating...
-                          </>
-                        ) : customerValidated ? (
-                          <>
-                            <CheckCircle className="w-4 h-4 text-green-600" />
-                            <span>Prospect validation successful - No existing licenses found</span>
-                          </>
-                        ) : (
-                          'Validate Prospect Details'
-                        )}
-                      </Button>
-                      
-                      <p className="text-orange-800 text-sm font-medium">
-                        Please provide correct details for billing purpose
-                      </p>
-                    </div>
-
-                    {customerValidated && (
-                      <div className="flex items-center space-x-2">
-                        <Button
-                          type="button"
-                          onClick={() => {
-                            setCustomerValidated(false);
-                            setExistingLicenses([]);
-                            setErrors({});
-                          }}
-                          variant="ghost"
-                          size="sm"
-                        >
-                          Edit Details
-                        </Button>
-                        <Button
-                          type="button"
-                          onClick={resetForm}
-                          variant="outline"
-                          size="sm"
-                          className="text-red-600 border-red-300 hover:bg-red-50"
-                        >
-                          <RotateCcw className="w-4 h-4 mr-1" />
-                          Reset Form
-                        </Button>
-                      </div>
-                    )}
+                  {/* Save and Continue Button */}
+                  <div className="mt-6 flex justify-end">
+                    <Button
+                      type="button"
+                      onClick={validateCustomerDetails}
+                      disabled={validatingCustomer || customerValidated}
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-lg disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    >
+                      {validatingCustomer ? (
+                        <>
+                          <div className="loading-spinner mr-2"></div>
+                          Validating...
+                        </>
+                      ) : customerValidated ? (
+                        <>
+                          <CheckCircle className="w-4 h-4 mr-2" />
+                          Saved
+                        </>
+                      ) : (
+                        'Save and Continue'
+                      )}
+                    </Button>
                   </div>
-
-                  {/* Existing Licenses Error */}
-                  {existingLicenses.length > 0 && (
-                    <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
-                      <h4 className="font-semibold text-red-900 mb-2">
-                        ❌ Validation Failed - Existing Licenses Found ({existingLicenses.length})
-                      </h4>
-                      <div className="space-y-2">
-                        {existingLicenses.map((license, index) => (
-                          <div key={index} className="text-sm text-red-800">
-                            • {license.license_number} - {license.product_type} ({license.plan_name}) - 
-                            Status: {license.is_active ? "Active" : "Inactive"}
-                          </div>
-                        ))}
-                      </div>
-                      <p className="text-sm text-red-700 mt-2">
-                        <strong>Cannot proceed:</strong> Customer details match existing license records. 
-                        Please verify customer information or contact support for license upgrades/renewals.
-                      </p>
-                      <div className="mt-3">
-                        <Button
-                          type="button"
-                          onClick={() => {
-                            setExistingLicenses([]);
-                            setErrors({});
-                          }}
-                          variant="outline"
-                          size="sm"
-                          className="text-red-700 border-red-300 hover:bg-red-100"
-                        >
-                          Clear and Retry
-                        </Button>
-                      </div>
-                    </div>
-                  )}
                 </div>
                 )}
 
