@@ -3640,64 +3640,105 @@ const Dashboard = () => {
     );
   }
 
+  // Menu items configuration
+  const menuItems = [
+    { id: 'dashboard', name: 'Dashboard', icon: LayoutDashboard },
+    { id: 'lead', name: 'Lead', icon: Users },
+    { id: 'report', name: 'Report', icon: FileText },
+    { id: 'enquiry', name: 'Enquiry', icon: MessageSquare },
+    { id: 'user', name: 'User', icon: User },
+    { id: 'acl', name: 'ACL', icon: Shield },
+    { id: 'payments', name: 'Payments', icon: Wallet }
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      {/* Header */}
-      <div className="bg-white border-b border-gray-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div 
-              className="flex items-center space-x-3 cursor-pointer hover:opacity-80" 
-              onClick={() => handleNavigationAttempt(() => setShowCreateForm(false), 'dashboard')}
-            >
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
-                <Building2 className="w-6 h-6 text-white" />
+    <div className="flex h-screen bg-gray-50">
+      {/* Sidebar */}
+      <aside className={`${sidebarOpen ? 'w-16' : 'w-16'} bg-white border-r border-gray-200 flex flex-col items-center py-6 space-y-8 transition-all duration-300`}>
+        {/* Logo */}
+        <div className="w-10 h-10 bg-red-500 rounded flex items-center justify-center">
+          <span className="text-white font-bold text-xl">B</span>
+        </div>
+
+        {/* Menu Items */}
+        <nav className="flex-1 flex flex-col space-y-6">
+          {menuItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeMenu === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => setActiveMenu(item.id)}
+                className={`flex flex-col items-center justify-center w-12 h-12 rounded-lg transition-colors ${
+                  isActive 
+                    ? 'bg-blue-50 text-blue-600' 
+                    : 'text-gray-400 hover:text-gray-600 hover:bg-gray-50'
+                }`}
+                title={item.name}
+              >
+                <Icon className="w-6 h-6" />
+                <span className="text-[10px] mt-1">{item.name}</span>
+              </button>
+            );
+          })}
+        </nav>
+      </aside>
+
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Top Header */}
+        <header className="bg-white border-b border-gray-200 shadow-sm">
+          <div className="px-6 py-4">
+            <div className="flex items-center justify-between">
+              {/* Page Title */}
+              <div className="flex items-center space-x-4">
+                <h1 className="text-xl font-semibold text-gray-900">
+                  {activeMenu === 'payments' ? 'BIPL Sales Portal' : menuItems.find(m => m.id === activeMenu)?.name}
+                </h1>
               </div>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900">BIPL Sales Portal</h1>
-                <p className="text-sm text-gray-600">Internal Dashboard</p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              {/* Date Filter, Search, Export - Hidden during Create New Sale */}
-              {!showCreateForm && (
-                <>
-                  
-                  {/* Search Input */}
+
+              {/* Right Side Actions */}
+              <div className="flex items-center space-x-4">
+                {/* Search Bar */}
+                {activeMenu === 'payments' && !showCreateForm && (
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                     <input
                       type="text"
-                      placeholder="Search transactions..."
+                      placeholder="Search by Mobile, GSTIN, Email, Lead ID"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-64"
+                      className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-80"
                     />
                   </div>
-                  
-                  {/* Export Button */}
-                  <button 
-                    onClick={exportToCSV}
-                    className="flex items-center space-x-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium transition-colors"
-                  >
-                    <Download className="w-4 h-4" />
-                    <span>Export</span>
-                  </button>
-                </>
-              )}
-              
-              {/* Create New Sale Button */}
-              <Button 
-                onClick={() => handleNavigationAttempt(() => setShowCreateForm(!showCreateForm))}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2"
-              >
-                <Plus className="w-4 h-4" />
-                <span>Create New Sale</span>
-              </Button>
+                )}
+
+                {/* Menu Toggle */}
+                <button className="p-2 hover:bg-gray-100 rounded-lg">
+                  <Menu className="w-5 h-5 text-gray-600" />
+                </button>
+
+                {/* Switch To User Dropdown */}
+                <select className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <option>Switch To User</option>
+                </select>
+
+                {/* Notification Icons */}
+                <button className="p-2 hover:bg-gray-100 rounded-lg">
+                  <HelpCircle className="w-5 h-5 text-gray-600" />
+                </button>
+                <button className="p-2 hover:bg-gray-100 rounded-lg relative">
+                  <Bell className="w-5 h-5 text-gray-600" />
+                </button>
+
+                {/* User Avatar */}
+                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                  S
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </header>
 
       <div className="max-w-7xl mx-auto p-6 space-y-6">
         {/* Create Transaction Form */}
