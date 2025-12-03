@@ -6988,13 +6988,61 @@ const Dashboard = () => {
                             id="address"
                             value={formData.customerDetails.address}
                             onChange={(e) => setFormData(prev => ({
-                                ...prev,
-                                customerDetails: { ...prev.customerDetails, address: e.target.value }
-                              }))}
-                              rows={3}
-                              disabled={customerValidated}
+                              ...prev,
+                              customerDetails: { ...prev.customerDetails, address: e.target.value }
+                            }))}
+                            disabled={customerValidated}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Row 4 (Bottom): CA License No. and PO Upload */}
+                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div>
+                          <Label htmlFor="caLicenseNumber">CA License No. <span className="text-red-500">*</span></Label>
+                          <Input
+                            id="caLicenseNumber"
+                            value={formData.customerDetails.caLicenseNumber}
+                            onChange={(e) => {
+                              const value = e.target.value.replace(/\D/g, ''); // Only allow digits
+                              if (value.length <= 6) { // Limit to 6 digits
+                                setFormData(prev => ({
+                                  ...prev,
+                                  customerDetails: { ...prev.customerDetails, caLicenseNumber: value }
+                                }));
+                                setCustomerValidated(false);
+                                setErrors(prev => ({ ...prev, caLicenseNumber: "" }));
+                              }
+                            }}
+                            maxLength={6}
+                            required
+                            disabled={customerValidated}
+                            className={errors.caLicenseNumber ? "border-red-500 focus:border-red-500" : ""}
+                          />
+                          {errors.caLicenseNumber && <p className="text-red-500 text-sm mt-1">{errors.caLicenseNumber}</p>}
+                        </div>
+
+                        <div>
+                          <Label htmlFor="poUpload">Upload PO (Optional)</Label>
+                          <div className="mt-1">
+                            <input
+                              id="poUpload"
+                              type="file"
+                              accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                              onChange={(e) => setFormData(prev => ({ ...prev, poUpload: e.target.files[0] }))}
+                              className="hidden"
                             />
+                            <label
+                              htmlFor="poUpload"
+                              className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer transition-colors duration-200"
+                            >
+                              <Upload className="w-4 h-4 mr-2" />
+                              {formData.poUpload ? formData.poUpload.name : 'Browse Files'}
+                            </label>
                           </div>
+                          <p className="text-xs text-gray-500 mt-1">
+                            PDF, DOC, DOCX, JPG, PNG (Max 5MB)
+                          </p>
                         </div>
                       </div>
                     </div>
