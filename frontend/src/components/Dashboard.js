@@ -6806,8 +6806,59 @@ const Dashboard = () => {
 
                   {/* CA Specific Fields */}
                   {formData.licenseType === "CA" && (
-                    <div className="mt-6">
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div>
+                          <Label htmlFor="mobile">Mobile <span className="text-red-500">*</span></Label>
+                          <div className="flex">
+                            <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md">
+                              +91
+                            </span>
+                            <Input
+                              id="mobile"
+                              type="tel"
+                              value={formData.customerDetails.mobile}
+                              onChange={(e) => {
+                                const value = e.target.value.replace(/\D/g, ''); // Only allow digits
+                                if (value.length <= 10) { // Limit to 10 digits
+                                  setFormData(prev => ({
+                                    ...prev,
+                                    customerDetails: { ...prev.customerDetails, mobile: value }
+                                  }));
+                                  setCustomerValidated(false);
+                                  setErrors(prev => ({ ...prev, mobile: "" }));
+                                }
+                              }}
+                              maxLength={10}
+                              required
+                              disabled={customerValidated}
+                              className={`rounded-l-none ${errors.mobile ? "border-red-500 focus:border-red-500" : ""}`}
+                            />
+                          </div>
+                          {errors.mobile && <p className="text-red-500 text-sm mt-1">{errors.mobile}</p>}
+                        </div>
+
+                        <div>
+                          <Label htmlFor="email">Email <span className="text-red-500">*</span></Label>
+                          <Input
+                            id="email"
+                            type="email"
+                            value={formData.customerDetails.email}
+                            onChange={(e) => {
+                              setFormData(prev => ({
+                                ...prev,
+                                customerDetails: { ...prev.customerDetails, email: e.target.value }
+                              }));
+                              setCustomerValidated(false);
+                              setErrors(prev => ({ ...prev, email: "" }));
+                            }}
+                            required
+                            disabled={customerValidated}
+                            className={errors.email ? "border-red-500 focus:border-red-500" : ""}
+                          />
+                          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                        </div>
+
                         <div>
                           <Label htmlFor="name">Name <span className="text-red-500">*</span></Label>
                           <Input
