@@ -7710,30 +7710,7 @@ const Dashboard = () => {
                   <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
                     <h4 id="order-summary-section" className="text-xl font-bold text-blue-900 mb-4">Order Summary</h4>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {/* Customer Details */}
-                      <div>
-                        <h5 className="font-semibold text-gray-900 mb-3">Customer Information</h5>
-                        <div className="space-y-2 text-sm">
-                          <div className="flex justify-between">
-                            <span className="text-gray-600">Name:</span>
-                            <span className="font-medium">{formData.customerDetails.name || 'Not provided'}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-gray-600">Email:</span>
-                            <span className="font-medium">{formData.customerDetails.email}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-gray-600">Mobile:</span>
-                            <span className="font-medium">{formData.customerDetails.mobile}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-gray-600">License Type:</span>
-                            <span className="font-medium">{formData.licenseType}</span>
-                          </div>
-                        </div>
-                      </div>
-
+                    <div>
                       {/* Product & Pricing Details */}
                       <div>
                         <h5 className="font-semibold text-gray-900 mb-3">Product & Pricing</h5>
