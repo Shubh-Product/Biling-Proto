@@ -2191,19 +2191,24 @@ const Dashboard = () => {
   const validateCustomerDetails = async () => {
     const newErrors = {};
 
-    // Validate required fields
+    // Validate mandatory fields
     if (!formData.customerDetails.mobile) {
       newErrors.mobile = "Mobile number is required";
     }
     if (!formData.customerDetails.email) {
       newErrors.email = "Email address is required";
     }
+    if (!formData.customerDetails.name) {
+      newErrors.name = "Name is required";
+    }
+
+    // GSTIN is mandatory for GSTP category
+    if (formData.licenseType === "GST Practitioner" && !formData.customerDetails.gstin) {
+      newErrors.gstin = "GSTIN is required for GSTP category";
+    }
 
     // Additional validation for CA license
     if (formData.licenseType === "CA") {
-      if (!formData.customerDetails.caPanNo) {
-        newErrors.caPanNo = "CA PAN No. is required";
-      }
       if (!formData.customerDetails.caLicenseNumber) {
         newErrors.caLicenseNumber = "CA License Number is required";
       }
