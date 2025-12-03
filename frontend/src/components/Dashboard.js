@@ -7348,12 +7348,15 @@ const Dashboard = () => {
                                     name="duration"
                                     value={duration.value.split(' ')[0]}
                                     checked={formData.duration === duration.value.split(' ')[0]}
-                                    onChange={(e) => setFormData(prev => ({ 
-                                      ...prev, 
-                                      licenseModel: "Subscription", // Set default license model
-                                      duration: e.target.checked ? duration.value.split(' ')[0] : "",
-                                      planName: ""
-                                    }))}
+                                    onChange={(e) => {
+                                      setFormData(prev => ({ 
+                                        ...prev, 
+                                        licenseModel: "Subscription", // Set default license model
+                                        duration: e.target.checked ? duration.value.split(' ')[0] : "",
+                                        planName: ""
+                                      }));
+                                      setPlanQuantities({}); // Reset plan quantities when duration changes
+                                    }}
                                     className="w-4 h-4 text-orange-600 border-gray-300 focus:ring-orange-500 mr-2"
                                   />
                                   <div className="flex flex-col">
