@@ -3690,22 +3690,30 @@ const Dashboard = () => {
         <header className="bg-white border-b border-gray-200 shadow-sm">
           <div className="px-6 py-4">
             <div className="flex items-center justify-between">
-              {/* Page Title with Back Button */}
-              <div className="flex items-center space-x-4">
-                {/* Back to Dashboard Button - Show when in Create Form */}
-                {activeMenu === 'payments' && showCreateForm && (
-                  <Button
-                    variant="ghost"
-                    onClick={() => handleNavigationAttempt(() => setShowCreateForm(false), 'dashboard')}
-                    className="flex items-center space-x-2 text-gray-600 hover:text-gray-900"
-                  >
-                    <ArrowLeft className="w-4 h-4" />
-                    <span>Back to Dashboard</span>
-                  </Button>
+              {/* Page Title with Navigation */}
+              <div className="flex items-center space-x-2">
+                {/* Always show clickable Dashboard link for Payments */}
+                {activeMenu === 'payments' && (
+                  <>
+                    <button
+                      onClick={() => handleNavigationAttempt(() => setShowCreateForm(false), 'dashboard')}
+                      className="text-xl font-semibold text-blue-600 hover:text-blue-700 transition-colors"
+                    >
+                      BIPL Sales Portal
+                    </button>
+                    {showCreateForm && (
+                      <>
+                        <span className="text-gray-400">/</span>
+                        <span className="text-xl font-semibold text-gray-900">Create New Sale</span>
+                      </>
+                    )}
+                  </>
                 )}
-                <h1 className="text-xl font-semibold text-gray-900">
-                  {activeMenu === 'payments' ? (showCreateForm ? 'Create New Sale' : 'BIPL Sales Portal') : menuItems.find(m => m.id === activeMenu)?.name}
-                </h1>
+                {activeMenu !== 'payments' && (
+                  <h1 className="text-xl font-semibold text-gray-900">
+                    {menuItems.find(m => m.id === activeMenu)?.name}
+                  </h1>
+                )}
               </div>
 
               {/* Right Side Actions */}
