@@ -6806,7 +6806,7 @@ const Dashboard = () => {
                   {/* CA Specific Fields */}
                   {formData.licenseType === "CA" && (
                     <div className="space-y-4">
-                      {/* Category Dropdown */}
+                      {/* Row 1: Category, Mobile, Email, Name */}
                       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div>
                           <Label htmlFor="category" className="text-base font-semibold">Category</Label>
@@ -6822,9 +6822,7 @@ const Dashboard = () => {
                             <option value="GST Practitioner">GSTP</option>
                           </select>
                         </div>
-                      </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div>
                           <Label htmlFor="mobile">Mobile <span className="text-red-500">*</span></Label>
                           <div className="flex">
@@ -6894,7 +6892,10 @@ const Dashboard = () => {
                           />
                           {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                         </div>
+                      </div>
 
+                      {/* Row 2: CA License No. */}
+                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div>
                           <Label htmlFor="caLicenseNumber">CA License No. <span className="text-red-500">*</span></Label>
                           <Input
