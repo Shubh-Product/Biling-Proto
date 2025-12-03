@@ -6764,8 +6764,21 @@ const Dashboard = () => {
                         </div>
                       </div>
 
-                      {/* Row 3: State (can add more fields here if needed) */}
+                      {/* Row 3: Pincode, State */}
                       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div>
+                          <Label htmlFor="pincode">Pincode</Label>
+                          <Input
+                            id="pincode"
+                            value={formData.customerDetails.pincode}
+                            onChange={(e) => setFormData(prev => ({
+                              ...prev,
+                              customerDetails: { ...prev.customerDetails, pincode: e.target.value }
+                            }))}
+                            disabled={customerValidated}
+                          />
+                        </div>
+
                         <div>
                           <Label htmlFor="state">State</Label>
                           <Select 
