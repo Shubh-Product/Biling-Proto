@@ -7305,6 +7305,39 @@ const Dashboard = () => {
                       </div>
                     </div>
 
+                    {/* Region Selection - Only show after product type is selected */}
+                    {formData.productType && (
+                      <div className="flex items-center space-x-6">
+                        <Label className="text-base font-semibold whitespace-nowrap">Region <span className="text-red-500">*</span>:</Label>
+                        <div className="flex space-x-3">
+                          {[
+                            { value: "India", label: "India" },
+                            { value: "Indian Subcontinent", label: "Indian Subcontinent" },
+                            { value: "Global", label: "Global" }
+                          ].map((region) => (
+                            <label key={region.value} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all min-w-32 ${
+                              formData.region === region.value 
+                                ? "border-green-500 bg-green-50" 
+                                : "border-gray-200"
+                            }`}>
+                              <input
+                                type="radio"
+                                name="region"
+                                value={region.value}
+                                checked={formData.region === region.value}
+                                onChange={(e) => setFormData(prev => ({ 
+                                  ...prev, 
+                                  region: e.target.value
+                                }))}
+                                className="w-4 h-4 text-green-600 border-gray-300 focus:ring-green-500 mr-3"
+                              />
+                              <span className="text-gray-700 font-medium text-sm">{region.label}</span>
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
                     {/* Desktop Product Configuration */}
                     {formData.productType === "Desktop" && (
                       <div className="space-y-4">
