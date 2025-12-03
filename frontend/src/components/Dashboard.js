@@ -3907,6 +3907,7 @@ const Dashboard = () => {
                               setExistingLicenses([]);
                               setErrors({});
                               setVisibleClientReferences(2);
+                              setPlanQuantities({}); // Reset plan quantities
                               // Reset renewal/upgrade flow states
                               resetRenewalFlow();
                               // Reset mobile app flow states
