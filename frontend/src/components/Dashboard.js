@@ -6715,10 +6715,7 @@ const Dashboard = () => {
                             <p className="text-sm text-gray-500 mt-1">GSTIN format validated</p>
                           )}
                         </div>
-                      </div>
 
-                      {/* Row 2: Company Name, Address, City, Pincode */}
-                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div>
                           <Label htmlFor="company">Company Name</Label>
                           <Input
@@ -6764,19 +6761,6 @@ const Dashboard = () => {
                               ))}
                             </SelectContent>
                           </Select>
-                        </div>
-
-                        <div>
-                          <Label htmlFor="pincode">Pincode</Label>
-                          <Input
-                            id="pincode"
-                            value={formData.customerDetails.pincode}
-                            onChange={(e) => setFormData(prev => ({
-                              ...prev,
-                              customerDetails: { ...prev.customerDetails, pincode: e.target.value }
-                            }))}
-                            disabled={customerValidated}
-                          />
                         </div>
                       </div>
 
