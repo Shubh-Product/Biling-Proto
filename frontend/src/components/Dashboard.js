@@ -3804,13 +3804,13 @@ const Dashboard = () => {
                     </button>
                   </div>
                   
-                  {/* Create New Sale Button */}
+                  {/* Generate Payment Link Button */}
                   <Button 
                     onClick={() => handleNavigationAttempt(() => setShowCreateForm(!showCreateForm))}
                     className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2"
                   >
                     <Plus className="w-4 h-4" />
-                    <span>Create New Sale</span>
+                    <span>Generate Payment Link</span>
                   </Button>
                 </div>
               )}
