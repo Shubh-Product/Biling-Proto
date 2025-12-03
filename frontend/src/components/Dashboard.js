@@ -3690,10 +3690,21 @@ const Dashboard = () => {
         <header className="bg-white border-b border-gray-200 shadow-sm">
           <div className="px-6 py-4">
             <div className="flex items-center justify-between">
-              {/* Page Title */}
+              {/* Page Title with Back Button */}
               <div className="flex items-center space-x-4">
+                {/* Back to Dashboard Button - Show when in Create Form */}
+                {activeMenu === 'payments' && showCreateForm && (
+                  <Button
+                    variant="ghost"
+                    onClick={() => handleNavigationAttempt(() => setShowCreateForm(false), 'dashboard')}
+                    className="flex items-center space-x-2 text-gray-600 hover:text-gray-900"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                    <span>Back to Dashboard</span>
+                  </Button>
+                )}
                 <h1 className="text-xl font-semibold text-gray-900">
-                  {activeMenu === 'payments' ? 'BIPL Sales Portal' : menuItems.find(m => m.id === activeMenu)?.name}
+                  {activeMenu === 'payments' ? (showCreateForm ? 'Create New Sale' : 'BIPL Sales Portal') : menuItems.find(m => m.id === activeMenu)?.name}
                 </h1>
               </div>
 
