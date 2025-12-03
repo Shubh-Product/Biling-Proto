@@ -6894,159 +6894,100 @@ const Dashboard = () => {
                         </div>
                       </div>
 
-                      {/* Row 2: CA License No. */}
+                      {/* Row 2: Company, GSTIN, City, Pincode */}
                       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div>
-                          <Label htmlFor="caLicenseNumber">CA License No. <span className="text-red-500">*</span></Label>
+                          <Label htmlFor="company">Company Name</Label>
                           <Input
-                            id="caLicenseNumber"
-                            value={formData.customerDetails.caLicenseNumber}
-                            onChange={(e) => {
-                              const value = e.target.value.replace(/\D/g, ''); // Only allow digits
-                              if (value.length <= 6) { // Limit to 6 digits
-                                setFormData(prev => ({
-                                  ...prev,
-                                  customerDetails: { ...prev.customerDetails, caLicenseNumber: value }
-                                }));
-                                setCustomerValidated(false);
-                                setErrors(prev => ({ ...prev, caLicenseNumber: "" }));
-                              }
-                            }}
-                            maxLength={6}
-                            required
+                            id="company"
+                            value={formData.customerDetails.company}
+                            onChange={(e) => setFormData(prev => ({
+                              ...prev,
+                              customerDetails: { ...prev.customerDetails, company: e.target.value }
+                            }))}
                             disabled={customerValidated}
-                            className={errors.caLicenseNumber ? "border-red-500 focus:border-red-500" : ""}
                           />
-                          {errors.caLicenseNumber && <p className="text-red-500 text-sm mt-1">{errors.caLicenseNumber}</p>}
                         </div>
 
                         <div>
-                          <Label htmlFor="poUpload">Upload PO (Optional)</Label>
-                          <div className="mt-1">
-                            <input
-                              id="poUpload"
-                              type="file"
-                              accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                              onChange={(e) => setFormData(prev => ({ ...prev, poUpload: e.target.files[0] }))}
-                              className="hidden"
-                            />
-                            <label
-                              htmlFor="poUpload"
-                              className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer transition-colors duration-200"
-                            >
-                              <Upload className="w-4 h-4 mr-2" />
-                              {formData.poUpload ? formData.poUpload.name : 'Browse Files'}
-                            </label>
-                          </div>
-                          <p className="text-xs text-gray-500 mt-1">
-                            PDF, DOC, DOCX, JPG, PNG (Max 5MB)
-                          </p>
+                          <Label htmlFor="gstin">GSTIN</Label>
+                          <Input
+                            id="gstin"
+                            value={formData.customerDetails.gstin}
+                            onChange={(e) => setFormData(prev => ({
+                              ...prev,
+                              customerDetails: { ...prev.customerDetails, gstin: e.target.value.toUpperCase() }
+                            }))}
+                            disabled={customerValidated}
+                            className={errors.gstin ? "border-red-500 focus:border-red-500" : ""}
+                          />
+                          {errors.gstin && <p className="text-red-500 text-sm mt-1">{errors.gstin}</p>}
+                        </div>
+
+                        <div>
+                          <Label htmlFor="city">City</Label>
+                          <Select 
+                            value={formData.customerDetails.city} 
+                            onValueChange={(value) => setFormData(prev => ({
+                              ...prev,
+                              customerDetails: { ...prev.customerDetails, city: value }
+                            }))}
+                            disabled={customerValidated}
+                          >
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select city" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {INDIAN_CITIES.map((city) => (
+                                <SelectItem key={city} value={city}>{city}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+
+                        <div>
+                          <Label htmlFor="pincode">Pincode</Label>
+                          <Input
+                            id="pincode"
+                            value={formData.customerDetails.pincode}
+                            onChange={(e) => setFormData(prev => ({
+                              ...prev,
+                              customerDetails: { ...prev.customerDetails, pincode: e.target.value }
+                            }))}
+                            disabled={customerValidated}
+                          />
                         </div>
                       </div>
 
-                      {/* Customer Information Fields for CA License - Always Visible */}
-                      <div className="mt-6">
-                        <div className="space-y-4">
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div>
-                              <Label htmlFor="name">Name</Label>
-                              <Input
-                                id="name"
-                                value={formData.customerDetails.name}
-                                onChange={(e) => setFormData(prev => ({
-                                  ...prev,
-                                  customerDetails: { ...prev.customerDetails, name: e.target.value }
-                                }))}
-                                disabled={customerValidated}
-                              />
-                            </div>
-                            <div>
-                              <Label htmlFor="company">Company</Label>
-                              <Input
-                                id="company"
-                                value={formData.customerDetails.company}
-                                onChange={(e) => setFormData(prev => ({
-                                  ...prev,
-                                  customerDetails: { ...prev.customerDetails, company: e.target.value }
-                                }))}
-                                disabled={customerValidated}
-                              />
-                            </div>
-                            <div>
-                              <Label htmlFor="gstin">GSTIN</Label>
-                              <Input
-                                id="gstin"
-                                value={formData.customerDetails.gstin}
-                                onChange={(e) => setFormData(prev => ({
-                                  ...prev,
-                                  customerDetails: { ...prev.customerDetails, gstin: e.target.value.toUpperCase() }
-                                }))}
-                                disabled={customerValidated}
-                                className={errors.gstin ? "border-red-500 focus:border-red-500" : ""}
-                              />
-                              {errors.gstin && <p className="text-red-500 text-sm mt-1">{errors.gstin}</p>}
-                            </div>
-                          </div>
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div>
-                              <Label htmlFor="city">City</Label>
-                              <Select 
-                                value={formData.customerDetails.city} 
-                                onValueChange={(value) => setFormData(prev => ({
-                                  ...prev,
-                                  customerDetails: { ...prev.customerDetails, city: value }
-                                }))}
-                                disabled={customerValidated}
-                              >
-                                <SelectTrigger>
-                                  <SelectValue placeholder="Select city" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  {INDIAN_CITIES.map((city) => (
-                                    <SelectItem key={city} value={city}>{city}</SelectItem>
-                                  ))}
-                                </SelectContent>
-                              </Select>
-                            </div>
-                            <div>
-                              <Label htmlFor="pincode">Pincode</Label>
-                              <Input
-                                id="pincode"
-                                value={formData.customerDetails.pincode}
-                                onChange={(e) => setFormData(prev => ({
-                                  ...prev,
-                                  customerDetails: { ...prev.customerDetails, pincode: e.target.value }
-                                }))}
-                                disabled={customerValidated}
-                              />
-                            </div>
-                            <div>
-                              <Label htmlFor="state">State</Label>
-                              <Select 
-                                value={formData.customerDetails.state} 
-                                onValueChange={(value) => setFormData(prev => ({
-                                  ...prev,
-                                  customerDetails: { ...prev.customerDetails, state: value }
-                                }))}
-                                disabled={customerValidated}
-                              >
-                                <SelectTrigger>
-                                  <SelectValue placeholder="Select state" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  {INDIAN_STATES.map((state) => (
-                                    <SelectItem key={state} value={state}>{state}</SelectItem>
-                                  ))}
-                                </SelectContent>
-                              </Select>
-                            </div>
-                          </div>
-                          <div>
-                            <Label htmlFor="address">Address</Label>
-                            <Textarea
-                              id="address"
-                              value={formData.customerDetails.address}
-                              onChange={(e) => setFormData(prev => ({
+                      {/* Row 3: State, Address */}
+                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div>
+                          <Label htmlFor="state">State</Label>
+                          <Select 
+                            value={formData.customerDetails.state} 
+                            onValueChange={(value) => setFormData(prev => ({
+                              ...prev,
+                              customerDetails: { ...prev.customerDetails, state: value }
+                            }))}
+                            disabled={customerValidated}
+                          >
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select state" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {INDIAN_STATES.map((state) => (
+                                <SelectItem key={state} value={state}>{state}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+
+                        <div>
+                          <Label htmlFor="address">Address</Label>
+                          <Input
+                            id="address"
+                            value={formData.customerDetails.address}
+                            onChange={(e) => setFormData(prev => ({
                                 ...prev,
                                 customerDetails: { ...prev.customerDetails, address: e.target.value }
                               }))}
