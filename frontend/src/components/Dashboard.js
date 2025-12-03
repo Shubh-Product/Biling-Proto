@@ -7061,34 +7061,68 @@ const Dashboard = () => {
                     </div>
                   )}
 
-                  {/* Prospect Validation with Billing Notice */}
-                  <div className="mt-6 flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <Button
-                        type="button"
-                        onClick={validateCustomerDetails}
-                        disabled={validatingCustomer || customerValidated}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
-                      >
-                        {validatingCustomer ? (
-                          <>
-                            <div className="loading-spinner mr-2"></div>
-                            Validating...
-                          </>
-                        ) : customerValidated ? (
-                          <>
-                            <CheckCircle className="w-4 h-4 text-green-600" />
-                            <span>Prospect validation successful - No existing licenses found</span>
-                          </>
-                        ) : (
-                          'Validate Prospect Details'
-                        )}
-                      </Button>
-                      
-                      <p className="text-orange-800 text-sm font-medium">
-                        Please provide correct details for billing purpose
-                      </p>
+                  {/* Save and Continue Button */}
+                  <div className="mt-6 flex justify-end">
+                    <Button
+                      type="button"
+                      onClick={() => {
+                        // Validate required fields before collapsing
+                        const newErrors = {};
+                        
+                        if (!formData.customerDetails.mobile) {
+                          newErrors.mobile = "Mobile number is required";
+                        }
+                        if (!formData.customerDetails.email) {
+                          newErrors.email = "Email address is required";
+                        }
+                        if (!formData.customerDetails.name) {
+                          newErrors.name = "Name is required";
+                        }
+                        
+                        // GSTIN is mandatory for GSTP category
+                        if (formData.licenseType === "GST Practitioner" && !formData.customerDetails.gstin) {
+                          newErrors.gstin = "GSTIN is required for GSTP category";
+                        }
+                        
+                        // CA License No. is mandatory for CA
+                        if (formData.licenseType === "CA" && !formData.customerDetails.caLicenseNumber) {
+                          newErrors.caLicenseNumber = "CA License Number is required";
+                        }
+                        
+                        if (Object.keys(newErrors).length > 0) {
+                          setErrors(newErrors);
+                          return;
+                        }
+                        
+                        // If validation passes, collapse the section
+                        setProspectDetailsCollapsed(true);
+                        setErrors({});
+                      }}
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-lg"
+                    >
+                      Save and Continue
+                    </Button>
+                  </div>
+                  </>
+                  )}
+                  
+                  {/* Collapsed Summary View */}
+                  {prospectDetailsCollapsed && (
+                    <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                      <div className="flex items-center space-x-2 text-green-800">
+                        <CheckCircle className="w-5 h-5" />
+                        <span className="font-semibold">Prospect Details Saved</span>
+                      </div>
+                      <div className="mt-2 text-sm text-gray-700">
+                        <p><strong>Name:</strong> {formData.customerDetails.name}</p>
+                        <p><strong>Email:</strong> {formData.customerDetails.email}</p>
+                        <p><strong>Mobile:</strong> +91 {formData.customerDetails.mobile}</p>
+                      </div>
                     </div>
+                  )}
+
+                  <div className="hidden">
+                    <div className="flex items-center space-x-4">
 
                     {customerValidated && (
                       <div className="flex items-center space-x-2">
