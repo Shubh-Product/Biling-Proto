@@ -8093,7 +8093,7 @@ const Dashboard = () => {
                         </td>
                         {/* Actions - Icon Style */}
                         <td className="py-3 px-4 text-center">
-                          <div className="flex items-center space-x-0.5">
+                          <div className="flex items-center justify-center space-x-2">
                             {transaction.status === 'Pending' && (
                               <button
                                 onClick={() => {
