@@ -7265,7 +7265,7 @@ const Dashboard = () => {
                 {formData.transactionType === "New Sales" && customerValidated && areMandatoryClientReferencesComplete() && (
                   <div className="space-y-6">
                     
-                    {/* Product Selection - Desktop, Mandi, Online, Mobile App, Recom */}
+                    {/* Product Selection - Desktop, Mandi, Online, App, Recom */}
                     <div id="product-type-section" className="flex items-center space-x-6">
                       <Label className="text-base font-semibold whitespace-nowrap">Product <span className="text-red-500">*</span>:</Label>
                       <div className="flex space-x-3">
@@ -7273,7 +7273,7 @@ const Dashboard = () => {
                           { value: "Desktop", label: "Desktop" },
                           { value: "Mandi", label: "Mandi" },
                           { value: "Online", label: "Online" },
-                          { value: "Mobile App", label: "Mobile App" },
+                          { value: "App", label: "App" },
                           { value: "Recom", label: "Recom" }
                         ].map((product) => (
                           <label key={product.value} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all w-32 ${
