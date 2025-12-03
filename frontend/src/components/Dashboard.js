@@ -2961,7 +2961,7 @@ const Dashboard = () => {
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2"
           >
             <Plus className="w-4 h-4" />
-            Create New Sale
+            Generate Payment Link
           </Button>
         </div>
         
