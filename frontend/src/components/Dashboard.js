@@ -3925,12 +3925,12 @@ const Dashboard = () => {
                     <select
                       value={formData.licenseType}
                       onChange={(e) => handleLicenseTypeChange(e.target.value)}
-                      className="flex-1 max-w-xs px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                      className="w-48 px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
                     >
-                      <option value="Retail">Retail License</option>
-                      <option value="CA">CA License</option>
-                      <option value="Accountant">Accountant License</option>
-                      <option value="GST Practitioner">GST Practitioner License</option>
+                      <option value="Retail">Regular</option>
+                      <option value="CA">CA</option>
+                      <option value="Accountant">Accountant</option>
+                      <option value="GST Practitioner">GSTP</option>
                     </select>
                   </div>
                 )}
