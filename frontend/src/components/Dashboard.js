@@ -6808,6 +6808,24 @@ const Dashboard = () => {
                   {/* CA Specific Fields */}
                   {formData.licenseType === "CA" && (
                     <div className="space-y-4">
+                      {/* Category Dropdown */}
+                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div>
+                          <Label htmlFor="category" className="text-base font-semibold">Category</Label>
+                          <select
+                            id="category"
+                            value={formData.licenseType}
+                            onChange={(e) => handleLicenseTypeChange(e.target.value)}
+                            className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                          >
+                            <option value="Retail">Regular</option>
+                            <option value="CA">CA</option>
+                            <option value="Accountant">Accountant</option>
+                            <option value="GST Practitioner">GSTP</option>
+                          </select>
+                        </div>
+                      </div>
+
                       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div>
                           <Label htmlFor="mobile">Mobile <span className="text-red-500">*</span></Label>
