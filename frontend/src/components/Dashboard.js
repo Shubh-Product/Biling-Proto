@@ -7290,16 +7290,19 @@ const Dashboard = () => {
                               name="productType"
                               value={product.value}
                               checked={formData.productType === product.value}
-                              onChange={(e) => setFormData(prev => ({ 
-                                ...prev, 
-                                productType: e.target.value,
-                                licenseModel: "",
-                                duration: "",
-                                accessType: "",
-                                userCount: "",
-                                companyCount: "",
-                                planName: ""
-                              }))}
+                              onChange={(e) => {
+                                setFormData(prev => ({ 
+                                  ...prev, 
+                                  productType: e.target.value,
+                                  licenseModel: "",
+                                  duration: "",
+                                  accessType: "",
+                                  userCount: "",
+                                  companyCount: "",
+                                  planName: ""
+                                }));
+                                setPlanQuantities({}); // Reset plan quantities when product type changes
+                              }}
                               className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 mr-3"
                             />
                             <span className="text-gray-700 font-medium text-sm">{product.label}</span>
