@@ -3868,6 +3868,7 @@ const Dashboard = () => {
                                 licenseType: "Retail",
                                 serialNumber: "",
                                 productType: "",
+                                region: "India",
                                 licenseModel: "",
                                 duration: "",
                                 accessType: "",
