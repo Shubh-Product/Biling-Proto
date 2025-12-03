@@ -2623,18 +2623,6 @@ const Dashboard = () => {
             <CardContent>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Customer:</span>
-                  <span className="font-medium">{paymentLinkData.customerDetails.name}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Email:</span>
-                  <span className="font-medium">{paymentLinkData.customerDetails.email}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Mobile:</span>
-                  <span className="font-medium">{paymentLinkData.customerDetails.mobile}</span>
-                </div>
-                <div className="flex justify-between">
                   <span className="text-gray-600">Product:</span>
                   <span className="font-medium">{paymentLinkData.orderSummary.productType}</span>
                 </div>
