@@ -7385,75 +7385,73 @@ const Dashboard = () => {
 
                         {/* Desktop Plans Display - 4 Column Grid with Quantity Controls */}
                         {formData.duration && (
-                          <div data-scroll-target="desktop-plans" className="space-y-3">
+                          <div data-scroll-target="desktop-plans" className="space-y-2">
                             <Label className="text-base font-semibold">Plans <span className="text-red-500">*</span>:</Label>
-                            <div className="grid grid-cols-4 gap-3">
+                            <div className="grid grid-cols-4 gap-2">
                               {getDesktopPlans(formData.licenseModel, formData.duration).map((plan, index) => {
                                 const quantity = planQuantities[plan.name] || 0;
                                 return (
                                   <div 
                                     key={plan.name} 
-                                    className={`border-2 rounded-lg p-3 transition-all ${
+                                    className={`relative border-2 rounded-lg p-2 transition-all ${
                                       quantity > 0
                                         ? "border-blue-500 bg-blue-50 shadow-md" 
                                         : "border-gray-200 hover:border-gray-300"
                                     }`}
                                   >
-                                    <div className="space-y-2">
-                                      {/* Plan Name */}
-                                      <div className="text-xs font-medium text-gray-900 min-h-[32px] flex items-center">
-                                        {plan.name}
-                                      </div>
-                                      
-                                      {/* Price */}
-                                      <div className="flex flex-col space-y-1">
-                                        <span className="text-sm font-bold text-blue-600">
-                                          ₹{plan.price?.toLocaleString('en-IN') || 'Contact'}
+                                    {/* Plan Name */}
+                                    <div className="text-xs font-medium text-gray-900 mb-1 pr-8">
+                                      {plan.name}
+                                    </div>
+                                    
+                                    {/* Price */}
+                                    <div className="flex flex-col mb-1">
+                                      <span className="text-xs font-bold text-blue-600">
+                                        ₹{plan.price?.toLocaleString('en-IN') || 'Contact'}
+                                      </span>
+                                      {/* Show original price (strikethrough) for 1080 day plans */}
+                                      {formData.duration === "1080" && plan.discount > 0 && (
+                                        <span className="text-[10px] text-gray-500 line-through">
+                                          ₹{(plan.basePrice * 3)?.toLocaleString('en-IN')}
                                         </span>
-                                        {/* Show original price (strikethrough) for 1080 day plans */}
-                                        {formData.duration === "1080" && plan.discount > 0 && (
-                                          <span className="text-xs text-gray-500 line-through">
-                                            ₹{(plan.basePrice * 3)?.toLocaleString('en-IN')}
-                                          </span>
-                                        )}
-                                      </div>
+                                      )}
+                                    </div>
 
-                                      {/* Quantity Counter */}
-                                      <div className="flex items-center justify-between bg-white rounded border border-gray-300 px-2 py-1">
-                                        <button
-                                          type="button"
-                                          onClick={() => {
-                                            if (quantity > 0) {
-                                              const newQuantities = { ...planQuantities, [plan.name]: quantity - 1 };
-                                              setPlanQuantities(newQuantities);
-                                              // Update planName if quantity becomes 0
-                                              if (quantity - 1 === 0 && formData.planName === plan.name) {
-                                                setFormData(prev => ({ ...prev, planName: "" }));
-                                              }
-                                            }
-                                          }}
-                                          className="text-gray-600 hover:text-red-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
-                                        >
-                                          -
-                                        </button>
-                                        <span className="text-sm font-semibold text-gray-900 min-w-[20px] text-center">
-                                          {quantity}
-                                        </span>
-                                        <button
-                                          type="button"
-                                          onClick={() => {
-                                            const newQuantities = { ...planQuantities, [plan.name]: quantity + 1 };
+                                    {/* Quantity Counter - Bottom Right */}
+                                    <div className="absolute bottom-1.5 right-1.5 flex items-center bg-white rounded border border-gray-300 px-1 py-0.5">
+                                      <button
+                                        type="button"
+                                        onClick={() => {
+                                          if (quantity > 0) {
+                                            const newQuantities = { ...planQuantities, [plan.name]: quantity - 1 };
                                             setPlanQuantities(newQuantities);
-                                            // Set this plan as selected if it's the first one with quantity
-                                            if (quantity === 0) {
-                                              setFormData(prev => ({ ...prev, planName: plan.name }));
+                                            // Update planName if quantity becomes 0
+                                            if (quantity - 1 === 0 && formData.planName === plan.name) {
+                                              setFormData(prev => ({ ...prev, planName: "" }));
                                             }
-                                          }}
-                                          className="text-gray-600 hover:text-green-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
-                                        >
-                                          +
-                                        </button>
-                                      </div>
+                                          }
+                                        }}
+                                        className="text-gray-600 hover:text-red-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
+                                      >
+                                        -
+                                      </button>
+                                      <span className="text-xs font-semibold text-gray-900 min-w-[12px] text-center px-1">
+                                        {quantity}
+                                      </span>
+                                      <button
+                                        type="button"
+                                        onClick={() => {
+                                          const newQuantities = { ...planQuantities, [plan.name]: quantity + 1 };
+                                          setPlanQuantities(newQuantities);
+                                          // Set this plan as selected if it's the first one with quantity
+                                          if (quantity === 0) {
+                                            setFormData(prev => ({ ...prev, planName: plan.name }));
+                                          }
+                                        }}
+                                        className="text-gray-600 hover:text-green-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
+                                      >
+                                        +
+                                      </button>
                                     </div>
                                   </div>
                                 );
