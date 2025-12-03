@@ -6818,31 +6818,26 @@ const Dashboard = () => {
                     <div className="mt-6">
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                          <Label htmlFor="caPanNo">CA PAN No. <span className="text-red-500">*</span></Label>
+                          <Label htmlFor="name">Name <span className="text-red-500">*</span></Label>
                           <Input
-                            id="caPanNo"
-                            value={formData.customerDetails.caPanNo}
+                            id="name"
+                            value={formData.customerDetails.name}
                             onChange={(e) => {
-                              const value = e.target.value.toUpperCase();
-                              if (value.length <= 10) { // Limit to 10 characters
-                                setFormData(prev => ({
-                                  ...prev,
-                                  customerDetails: { ...prev.customerDetails, caPanNo: value }
-                                }));
-                                setCustomerValidated(false);
-                                setErrors(prev => ({ ...prev, caPanNo: "" }));
-                              }
+                              setFormData(prev => ({
+                                ...prev,
+                                customerDetails: { ...prev.customerDetails, name: e.target.value }
+                              }));
+                              setErrors(prev => ({ ...prev, name: "" }));
                             }}
-                            maxLength={10}
                             required
                             disabled={customerValidated}
-                            className={errors.caPanNo ? "border-red-500 focus:border-red-500" : ""}
+                            className={errors.name ? "border-red-500 focus:border-red-500" : ""}
                           />
-                          {errors.caPanNo && <p className="text-red-500 text-sm mt-1">{errors.caPanNo}</p>}
+                          {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                         </div>
 
                         <div>
-                          <Label htmlFor="caLicenseNumber">CA License Number <span className="text-red-500">*</span></Label>
+                          <Label htmlFor="caLicenseNumber">CA License No. <span className="text-red-500">*</span></Label>
                           <Input
                             id="caLicenseNumber"
                             value={formData.customerDetails.caLicenseNumber}
