@@ -6894,7 +6894,8 @@ const Dashboard = () => {
                         </div>
                       </div>
 
-                      {/* Row 2: CA License No. */}
+                      
+                      {/* Row 2: CA License No. and PO Upload at the bottom */}
                       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div>
                           <Label htmlFor="caLicenseNumber">CA License No. <span className="text-red-500">*</span></Label>
@@ -6943,9 +6944,9 @@ const Dashboard = () => {
                           </p>
                         </div>
                       </div>
-
-                      {/* Customer Information Fields for CA License - Always Visible */}
-                      <div className="mt-6">
+                      
+                      {/* Old CA fields section removed - keeping only the structure above */}
+                      <div className="hidden">
                         <div className="space-y-4">
                           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div>
