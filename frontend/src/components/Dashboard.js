@@ -6959,7 +6959,7 @@ const Dashboard = () => {
                         </div>
                       </div>
 
-                      {/* Row 3: State, Address */}
+                      {/* Row 3: State, Address, CA License No., PO Upload */}
                       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div>
                           <Label htmlFor="state">State</Label>
@@ -6994,10 +6994,7 @@ const Dashboard = () => {
                             disabled={customerValidated}
                           />
                         </div>
-                      </div>
 
-                      {/* Row 4 (Bottom): CA License No. and PO Upload */}
-                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div>
                           <Label htmlFor="caLicenseNumber">CA License No. <span className="text-red-500">*</span></Label>
                           <Input
