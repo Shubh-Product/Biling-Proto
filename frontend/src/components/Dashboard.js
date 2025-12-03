@@ -49,7 +49,6 @@ const Dashboard = () => {
   // Navigation state
   const [activeMenu, setActiveMenu] = useState('payments'); // Default to payments
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [prospectDetailsCollapsed, setProspectDetailsCollapsed] = useState(false);
 
   // Form state
   const [formData, setFormData] = useState({
