@@ -7312,48 +7312,46 @@ const Dashboard = () => {
                           {/* Duration Selection */}
                           <div className="flex items-center space-x-3">
                             <Label className="text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
-                            <div className="flex items-center space-x-3">
-                              <Label className="text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
-                              <div className="flex space-x-2">
-                                {[
-                                  { value: "360", label: "360 Days" },
-                                  { value: "1080", label: "1080 Days" }
-                                ].map((duration) => (
-                                  <label key={duration.value} className={`flex items-center cursor-pointer p-2 border-2 rounded-lg hover:shadow-md transition-all w-32 ${
-                                    formData.duration === duration.value.split(' ')[0] 
-                                      ? "border-orange-500 bg-orange-50" 
-                                      : "border-gray-200"
-                                  }`}>
-                                    <input
-                                      type="checkbox"
-                                      name="duration"
-                                      value={duration.value.split(' ')[0]}
-                                      checked={formData.duration === duration.value.split(' ')[0]}
-                                      onChange={(e) => setFormData(prev => ({ 
-                                        ...prev, 
-                                        duration: e.target.checked ? duration.value.split(' ')[0] : "",
-                                        planName: ""
-                                      }))}
-                                      className="w-4 h-4 text-orange-600 border-gray-300 focus:ring-orange-500 mr-2"
-                                    />
-                                    <div className="flex flex-col">
-                                      <span className="text-gray-700 font-medium text-xs">{duration.label}</span>
-                                      {/* Better 20% OFF styling - inline with the text */}
-                                      {duration.value === "1080" && (
-                                        <span className="text-xs text-green-600 font-semibold">
-                                          20% OFF
-                                        </span>
-                                      )}
-                                    </div>
-                                  </label>
-                                ))}
-                              </div>
+                            <div className="flex space-x-2">
+                              {[
+                                { value: "360", label: "360 Days" },
+                                { value: "1080", label: "1080 Days" }
+                              ].map((duration) => (
+                                <label key={duration.value} className={`flex items-center cursor-pointer p-2 border-2 rounded-lg hover:shadow-md transition-all w-32 ${
+                                  formData.duration === duration.value.split(' ')[0] 
+                                    ? "border-orange-500 bg-orange-50" 
+                                    : "border-gray-200"
+                                }`}>
+                                  <input
+                                    type="checkbox"
+                                    name="duration"
+                                    value={duration.value.split(' ')[0]}
+                                    checked={formData.duration === duration.value.split(' ')[0]}
+                                    onChange={(e) => setFormData(prev => ({ 
+                                      ...prev, 
+                                      licenseModel: "Subscription", // Set default license model
+                                      duration: e.target.checked ? duration.value.split(' ')[0] : "",
+                                      planName: ""
+                                    }))}
+                                    className="w-4 h-4 text-orange-600 border-gray-300 focus:ring-orange-500 mr-2"
+                                  />
+                                  <div className="flex flex-col">
+                                    <span className="text-gray-700 font-medium text-xs">{duration.label}</span>
+                                    {/* Better 20% OFF styling - inline with the text */}
+                                    {duration.value === "1080" && (
+                                      <span className="text-xs text-green-600 font-semibold">
+                                        20% OFF
+                                      </span>
+                                    )}
+                                  </div>
+                                </label>
+                              ))}
                             </div>
-                          )}
+                          </div>
                         </div>
 
                         {/* Desktop Plans Display - 2 Vertical Grids */}
-                        {formData.licenseModel && formData.duration && (
+                        {formData.duration && (
                           <div data-scroll-target="desktop-plans" className="flex items-start space-x-6">
                             <Label className="text-base font-semibold whitespace-nowrap pt-3">Plan <span className="text-red-500">*</span>:</Label>
                             <div className="flex-1 grid grid-cols-2 gap-4">
