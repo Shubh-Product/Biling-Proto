@@ -853,3 +853,20 @@ agent_communication:
         - working: "NA"
           agent: "main"
           comment: "✅ Updated Region implementation per user request. Changed from radio buttons to dropdown select element. Moved Region dropdown to the same row as Product selection for better space utilization. Region dropdown now appears on the right side of the Product selection row with proper spacing (ml-8). Dropdown has min-width of 200px for comfortable selection, green focus ring styling, and smooth hover transitions. Maintains same functionality with India as default selection."
+
+frontend:
+  - task: "Update Desktop Product Plans with New List"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "✅ Successfully updated Desktop product plans with new list of 16 plans. Replaced old Perpetual/Subscription structure with new Subscription-only plans. New plans include: Standard (Single/Multi/Client Server), Saffron (Single/Multi/Client Server), Basic (Single/Multi), Blue (Single/Multi), Enterprise (Single/Multi/Client Server), and Emerald (Single/Multi/Client Server). Added dummy prices ranging from ₹8,000 to ₹50,000. Plans display in 2-column grid after duration selection. Pricing logic automatically calculates 1080-day prices (3x base with 20% discount). All 16 plans now available when Desktop is selected as Product type."
+
+agent_communication:
+    - agent: "main"
+      message: "✅ DESKTOP PLANS UPDATE COMPLETED - Replaced Desktop product structure with new list of 16 plans as specified. Key changes: 1) Removed Perpetual license model - now only Subscription plans, 2) New plan structure: Standard (3 types), Saffron (3 types), Basic (2 types), Blue (2 types), Enterprise (3 types), Emerald (3 types), 3) Dummy prices added (₹8K-₹50K range), 4) Plan names display cleanly with format 'Plan Name - User Type', 5) Existing duration selection (360/1080 days) still works with 20% discount for 1080 days. Ready for testing to verify all 16 plans display correctly when Desktop product is selected."
