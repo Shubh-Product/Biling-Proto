@@ -2166,6 +2166,7 @@ const Dashboard = () => {
     setErrors({});
     setVisibleClientReferences(2);
     setHasUnsavedChanges(false);
+    setPlanQuantities({}); // Reset plan quantities
   };
 
 
