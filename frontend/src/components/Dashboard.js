@@ -7045,67 +7045,97 @@ const Dashboard = () => {
                     </div>
                   )}
 
-                  {/* Save and Continue Button */}
-                  <div className="mt-6 flex justify-end">
-                    <Button
-                      type="button"
-                      onClick={() => {
-                        // Validate required fields before collapsing
-                        const newErrors = {};
-                        
-                        if (!formData.customerDetails.mobile) {
-                          newErrors.mobile = "Mobile number is required";
-                        }
-                        if (!formData.customerDetails.email) {
-                          newErrors.email = "Email address is required";
-                        }
-                        if (!formData.customerDetails.name) {
-                          newErrors.name = "Name is required";
-                        }
-                        
-                        // GSTIN is mandatory for GSTP category
-                        if (formData.licenseType === "GST Practitioner" && !formData.customerDetails.gstin) {
-                          newErrors.gstin = "GSTIN is required for GSTP category";
-                        }
-                        
-                        // CA License No. is mandatory for CA
-                        if (formData.licenseType === "CA" && !formData.customerDetails.caLicenseNumber) {
-                          newErrors.caLicenseNumber = "CA License Number is required";
-                        }
-                        
-                        if (Object.keys(newErrors).length > 0) {
-                          setErrors(newErrors);
-                          return;
-                        }
-                        
-                        // If validation passes, collapse the section
-                        setProspectDetailsCollapsed(true);
-                        setErrors({});
-                      }}
-                      className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-lg"
-                    >
-                      Save and Continue
-                    </Button>
-                  </div>
-                  </>
-                  )}
-                  
-                  {/* Collapsed Summary View */}
-                  {prospectDetailsCollapsed && (
-                    <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                      <div className="flex items-center space-x-2 text-green-800">
-                        <CheckCircle className="w-5 h-5" />
-                        <span className="font-semibold">Prospect Details Saved</span>
+                  {/* Prospect Validation with Billing Notice */}
+                  <div className="mt-6 flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                      <Button
+                        type="button"
+                        onClick={validateCustomerDetails}
+                        disabled={validatingCustomer || customerValidated}
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                      >
+                        {validatingCustomer ? (
+                          <>
+                            <div className="loading-spinner mr-2"></div>
+                            Validating...
+                          </>
+                        ) : customerValidated ? (
+                          <>
+                            <CheckCircle className="w-4 h-4 text-green-600" />
+                            <span>Prospect validation successful - No existing licenses found</span>
+                          </>
+                        ) : (
+                          'Validate Prospect Details'
+                        )}
+                      </Button>
+                      
+                      <p className="text-orange-800 text-sm font-medium">
+                        Please provide correct details for billing purpose
+                      </p>
+                    </div>
+
+                    {customerValidated && (
+                      <div className="flex items-center space-x-2">
+                        <Button
+                          type="button"
+                          onClick={() => {
+                            setCustomerValidated(false);
+                            setExistingLicenses([]);
+                            setErrors({});
+                          }}
+                          variant="ghost"
+                          size="sm"
+                        >
+                          Edit Details
+                        </Button>
+                        <Button
+                          type="button"
+                          onClick={resetForm}
+                          variant="outline"
+                          size="sm"
+                          className="text-red-600 border-red-300 hover:bg-red-50"
+                        >
+                          <RotateCcw className="w-4 h-4 mr-1" />
+                          Reset Form
+                        </Button>
                       </div>
-                      <div className="mt-2 text-sm text-gray-700">
-                        <p><strong>Name:</strong> {formData.customerDetails.name}</p>
-                        <p><strong>Email:</strong> {formData.customerDetails.email}</p>
-                        <p><strong>Mobile:</strong> +91 {formData.customerDetails.mobile}</p>
+                    )}
+                  </div>
+
+                  {/* Existing Licenses Error */}
+                  {existingLicenses.length > 0 && (
+                    <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                      <h4 className="font-semibold text-red-900 mb-2">
+                        ❌ Validation Failed - Existing Licenses Found ({existingLicenses.length})
+                      </h4>
+                      <div className="space-y-2">
+                        {existingLicenses.map((license, index) => (
+                          <div key={index} className="text-sm text-red-800">
+                            • {license.license_number} - {license.product_type} ({license.plan_name}) - 
+                            Status: {license.is_active ? "Active" : "Inactive"}
+                          </div>
+                        ))}
+                      </div>
+                      <p className="text-sm text-red-700 mt-2">
+                        <strong>Cannot proceed:</strong> Customer details match existing license records. 
+                        Please verify customer information or contact support for license upgrades/renewals.
+                      </p>
+                      <div className="mt-3">
+                        <Button
+                          type="button"
+                          onClick={() => {
+                            setExistingLicenses([]);
+                            setErrors({});
+                          }}
+                          variant="outline"
+                          size="sm"
+                          className="text-red-700 border-red-300 hover:bg-red-100"
+                        >
+                          Clear and Retry
+                        </Button>
                       </div>
                     </div>
                   )}
-
-                  {/* Hidden old validation section - removed */}
                 </div>
                 )}
 
