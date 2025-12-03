@@ -8054,71 +8054,45 @@ const Dashboard = () => {
                             )}
                           </div>
                         </td>
-                        {/* Status - Now shows Invoice statuses for Success transactions, or original statuses */}
-                        <td className="py-2 px-0 text-center w-12">
+                        {/* Status - Badge Style */}
+                        <td className="py-3 px-4 text-center">
                           {(() => {
                             // For Success transactions, show Invoice status instead
                             if (transaction.status === 'Success') {
                               const invoiceStatus = getInvoiceStatus(transaction);
                               return (
-                                <div className="leading-tight">
-                                  <p className={`text-xs font-medium ${
-                                    invoiceStatus === 'Generated' ? 'text-green-600' : 'text-amber-600'
-                                  }`}>
-                                    Invoice
-                                  </p>
-                                  <p className={`text-xs font-medium ${
-                                    invoiceStatus === 'Generated' ? 'text-green-600' : 'text-amber-600'
-                                  }`}>
-                                    {invoiceStatus}
-                                  </p>
-                                </div>
+                                <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+                                  invoiceStatus === 'Generated' 
+                                    ? 'bg-green-100 text-green-800' 
+                                    : 'bg-yellow-100 text-yellow-800'
+                                }`}>
+                                  {invoiceStatus}
+                                </span>
                               );
                             }
                             
                             const statusInfo = getStatusDisplay(transaction);
-
-                            // Show statuses with proper line breaks, but exclude Active, Renewal pending, Renewal overdue
-                            if (statusInfo.text === 'Active' || 
-                                statusInfo.text.includes('Renewal pending') || 
-                                statusInfo.text.includes('Renewal overdue') ||
-                                statusInfo.text.includes('Renewal\nOverdue')) {
-                              return null; // Don't show these statuses
+                            let badgeClass = 'bg-gray-100 text-gray-800';
+                            
+                            if (statusInfo.text.includes('Pending')) {
+                              badgeClass = 'bg-yellow-100 text-yellow-800';
+                            } else if (statusInfo.text.includes('Failed')) {
+                              badgeClass = 'bg-red-100 text-red-800';
+                            } else if (statusInfo.text.includes('Due')) {
+                              badgeClass = 'bg-orange-100 text-orange-800';
+                            } else if (statusInfo.text.includes('Active')) {
+                              badgeClass = 'bg-green-100 text-green-800';
                             }
 
-                            if (statusInfo.text.includes('\n')) {
-                              const lines = statusInfo.text.split('\n');
-                              return (
-                                <div className="leading-tight">
-                                  {lines.map((line, index) => (
-                                    <p key={index} className={`text-xs font-medium ${
-                                      statusInfo.text.includes('Renewal Due')
-                                        ? 'text-orange-700'
-                                        : statusInfo.text.includes('Payment\nPending')
-                                          ? 'text-yellow-700'
-                                          : statusInfo.text.includes('Payment\nFailed')
-                                            ? 'text-red-700'
-                                            : statusInfo.text.includes('Cancelled')
-                                              ? 'text-gray-700'
-                                              : 'text-gray-700'
-                                    }`}>
-                                      {line}
-                                    </p>
-                                  ))}
-                                </div>
-                              );
-                            }
-
-                            // Single line status
                             return (
-                              <p className="font-medium leading-tight break-words text-xs text-gray-700">
-                                {statusInfo.text}
-                              </p>
+                              <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${badgeClass}`}>
+                                {statusInfo.text.replace('\n', ' ')}
+                              </span>
                             );
                           })()}
                         </td>
-                        {/* Actions - Now includes Edit Details CTA, but removes Renew/Upgrade CTAs */}
-                        <td className="py-2 px-0 text-left w-16">
+                        {/* Actions - Icon Style */}
+                        <td className="py-3 px-4 text-center">
                           <div className="flex items-center space-x-0.5">
                             {transaction.status === 'Pending' && (
                               <button
