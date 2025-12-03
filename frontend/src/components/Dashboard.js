@@ -536,25 +536,23 @@ const Dashboard = () => {
       // Prices listed are base 360-day prices, 1080-day prices are calculated as (3x base price - 20% discount)
       const productStructure = {
         "Desktop": {
-          "Perpetual": {
-            "Desktop Perpetual Basic Single User": { price: 9999, baseDuration: "360 Days", license: "Perpetual", subType: "Basic", applicableTo: "Single User" },
-            "Desktop Perpetual Basic Multi User": { price: 14999, baseDuration: "360 Days", license: "Perpetual", subType: "Basic", applicableTo: "Multi User" },
-            "Desktop Perpetual Enterprise Single User": { price: 19999, baseDuration: "360 Days", license: "Perpetual", subType: "Enterprise", applicableTo: "Single User" },
-            "Desktop Perpetual Enterprise Multi User": { price: 29999, baseDuration: "360 Days", license: "Perpetual", subType: "Enterprise", applicableTo: "Multi User" },
-            "Desktop Perpetual Enterprise Client Server": { price: 49999, baseDuration: "360 Days", license: "Perpetual", subType: "Enterprise", applicableTo: "Client Server" },
-            "Desktop Perpetual Standard Single User": { price: 14999, baseDuration: "360 Days", license: "Perpetual", subType: "Standard", applicableTo: "Single User" },
-            "Desktop Perpetual Standard Multi User": { price: 24999, baseDuration: "360 Days", license: "Perpetual", subType: "Standard", applicableTo: "Multi User" },
-            "Desktop Perpetual Standard Client Server": { price: 39999, baseDuration: "360 Days", license: "Perpetual", subType: "Standard", applicableTo: "Client Server" }
-          },
           "Subscription": {
-            "Desktop Subscription Blue Single User": { price: 3999, baseDuration: "360 Days", license: "Subscription", subType: "Blue", applicableTo: "Single User" },
-            "Desktop Subscription Blue Multi User": { price: 7999, baseDuration: "360 Days", license: "Subscription", subType: "Blue", applicableTo: "Multi User" },
-            "Desktop Subscription Emerald Single User": { price: 5999, baseDuration: "360 Days", license: "Subscription", subType: "Emerald", applicableTo: "Single User" },
-            "Desktop Subscription Emerald Multi User": { price: 11999, baseDuration: "360 Days", license: "Subscription", subType: "Emerald", applicableTo: "Multi User" },
-            "Desktop Subscription Emerald Client Server": { price: 19999, baseDuration: "360 Days", license: "Subscription", subType: "Emerald", applicableTo: "Client Server" },
-            "Desktop Subscription Saffron Single User": { price: 8999, baseDuration: "360 Days", license: "Subscription", subType: "Saffron", applicableTo: "Single User" },
-            "Desktop Subscription Saffron Multi User": { price: 17999, baseDuration: "360 Days", license: "Subscription", subType: "Saffron", applicableTo: "Multi User" },
-            "Desktop Subscription Saffron Client Server": { price: 29999, baseDuration: "360 Days", license: "Subscription", subType: "Saffron", applicableTo: "Client Server" }
+            "Desktop Subscription Standard - Single User": { price: 12000, baseDuration: "360 Days", license: "Subscription", subType: "Standard", applicableTo: "Single User" },
+            "Desktop Subscription Standard - Multi User": { price: 18000, baseDuration: "360 Days", license: "Subscription", subType: "Standard", applicableTo: "Multi User" },
+            "Desktop Subscription Standard - Client Server": { price: 30000, baseDuration: "360 Days", license: "Subscription", subType: "Standard", applicableTo: "Client Server" },
+            "Desktop Subscription Saffron - Single User": { price: 15000, baseDuration: "360 Days", license: "Subscription", subType: "Saffron", applicableTo: "Single User" },
+            "Desktop Subscription Saffron - Multi User": { price: 22000, baseDuration: "360 Days", license: "Subscription", subType: "Saffron", applicableTo: "Multi User" },
+            "Desktop Subscription Saffron - Client Server": { price: 35000, baseDuration: "360 Days", license: "Subscription", subType: "Saffron", applicableTo: "Client Server" },
+            "Desktop Subscription Basic - Single User": { price: 8000, baseDuration: "360 Days", license: "Subscription", subType: "Basic", applicableTo: "Single User" },
+            "Desktop Subscription Basic - Multi User": { price: 12000, baseDuration: "360 Days", license: "Subscription", subType: "Basic", applicableTo: "Multi User" },
+            "Desktop Subscription Blue - Single User": { price: 10000, baseDuration: "360 Days", license: "Subscription", subType: "Blue", applicableTo: "Single User" },
+            "Desktop Subscription Blue - Multi User": { price: 15000, baseDuration: "360 Days", license: "Subscription", subType: "Blue", applicableTo: "Multi User" },
+            "Desktop Subscription Enterprise - Single User": { price: 20000, baseDuration: "360 Days", license: "Subscription", subType: "Enterprise", applicableTo: "Single User" },
+            "Desktop Subscription Enterprise - Multi User": { price: 30000, baseDuration: "360 Days", license: "Subscription", subType: "Enterprise", applicableTo: "Multi User" },
+            "Desktop Subscription Enterprise - Client Server": { price: 50000, baseDuration: "360 Days", license: "Subscription", subType: "Enterprise", applicableTo: "Client Server" },
+            "Desktop Subscription Emerald - Single User": { price: 18000, baseDuration: "360 Days", license: "Subscription", subType: "Emerald", applicableTo: "Single User" },
+            "Desktop Subscription Emerald - Multi User": { price: 28000, baseDuration: "360 Days", license: "Subscription", subType: "Emerald", applicableTo: "Multi User" },
+            "Desktop Subscription Emerald - Client Server": { price: 45000, baseDuration: "360 Days", license: "Subscription", subType: "Emerald", applicableTo: "Client Server" }
           }
         },
         "Mobile App": {
