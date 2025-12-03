@@ -3740,7 +3740,35 @@ const Dashboard = () => {
           </div>
         </header>
 
-      <div className="max-w-7xl mx-auto p-6 space-y-6">
+        {/* Main Content */}
+        <main className="flex-1 overflow-y-auto bg-gradient-to-br from-slate-50 to-slate-100">
+          {activeMenu === 'payments' ? (
+            // Payments Content (BIPL Sales Portal)
+            <div className="max-w-7xl mx-auto p-6 space-y-6">
+              {/* Action Buttons - Shown only on dashboard view */}
+              {!showCreateForm && (
+                <div className="flex justify-between items-center">
+                  <div className="flex space-x-2">
+                    {/* Export Button */}
+                    <button 
+                      onClick={exportToCSV}
+                      className="flex items-center space-x-2 px-4 py-2 bg-white hover:bg-gray-50 text-gray-700 rounded-lg text-sm font-medium border border-gray-300 transition-colors"
+                    >
+                      <Download className="w-4 h-4" />
+                      <span>Export</span>
+                    </button>
+                  </div>
+                  
+                  {/* Create New Sale Button */}
+                  <Button 
+                    onClick={() => handleNavigationAttempt(() => setShowCreateForm(!showCreateForm))}
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Create New Sale</span>
+                  </Button>
+                </div>
+              )}
         {/* Create Transaction Form */}
         {showCreateForm && (
           <Card>
