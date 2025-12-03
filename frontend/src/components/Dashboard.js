@@ -6580,12 +6580,12 @@ const Dashboard = () => {
                   </div>
                 )}
 
-                {/* Customer Details */}
+                {/* Prospect Details */}
                 {formData.transactionType === "New Sales" && (
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Customer Details</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Prospect Details</h3>
                   
-                  {/* Required Fields - Always Visible */}
+                  {/* Mandatory Fields Row 1 */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div>
                       <Label htmlFor="mobile">Mobile <span className="text-red-500">*</span></Label>
@@ -6639,25 +6639,33 @@ const Dashboard = () => {
                     </div>
                   </div>
 
-                  {/* Customer Information Fields - Always Visible */}
+                  {/* Prospect Information Fields - For non-CA categories */}
                   {formData.licenseType !== "CA" && (
                     <div className="space-y-4">
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                          <Label htmlFor="name">Name</Label>
+                          <Label htmlFor="name">Name <span className="text-red-500">*</span></Label>
                           <Input
                             id="name"
                             value={formData.customerDetails.name}
-                            onChange={(e) => setFormData(prev => ({
-                              ...prev,
-                              customerDetails: { ...prev.customerDetails, name: e.target.value }
-                            }))}
+                            onChange={(e) => {
+                              setFormData(prev => ({
+                                ...prev,
+                                customerDetails: { ...prev.customerDetails, name: e.target.value }
+                              }));
+                              setErrors(prev => ({ ...prev, name: "" }));
+                            }}
+                            required
                             disabled={customerValidated}
+                            className={errors.name ? "border-red-500 focus:border-red-500" : ""}
                           />
+                          {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                         </div>
 
                         <div>
-                          <Label htmlFor="gstin">GSTIN</Label>
+                          <Label htmlFor="gstin">
+                            GSTIN {formData.licenseType === "GST Practitioner" && <span className="text-red-500">*</span>}
+                          </Label>
                           <Input
                             id="gstin"
                             value={formData.customerDetails.gstin}
@@ -6686,11 +6694,11 @@ const Dashboard = () => {
                                       country: 'India'
                                     }
                                   }));
-                                  // Removed toast popup
                                 }
                               }
                             }}
                             maxLength={15}
+                            required={formData.licenseType === "GST Practitioner"}
                             disabled={customerValidated}
                             className={errors.gstin ? "border-red-500 focus:border-red-500" : ""}
                           />
