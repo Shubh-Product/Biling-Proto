@@ -7913,6 +7913,36 @@ const Dashboard = () => {
         {/* Transactions Table - Only show when not creating a new transaction */}
         {!showCreateForm && (
         <div className="w-full max-w-none">
+          {/* Filter Tabs */}
+          <div className="mb-4 flex flex-wrap gap-2">
+            {[
+              { id: 'upgrade1080', label: '1080 Upgrade Opp.', count: get1080DayUpgradeOpportunities().length },
+              { id: 'recom', label: 'Recom Bundle', count: getRecomBundleOpportunities().length },
+              { id: 'mobileapp', label: 'Mobile Bundle', count: getMobileAppBundleOpportunities().length }
+            ].map((filter) => (
+              <button
+                key={filter.id}
+                onClick={() => setSelectedQuickFilter(filter.id)}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  selectedQuickFilter === filter.id
+                    ? 'bg-gray-900 text-white'
+                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                }`}
+              >
+                {filter.label}
+                {filter.count > 0 && (
+                  <span className={`ml-2 px-2 py-0.5 rounded-full text-xs ${
+                    selectedQuickFilter === filter.id
+                      ? 'bg-white text-gray-900'
+                      : 'bg-gray-200 text-gray-700'
+                  }`}>
+                    {filter.count}
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+
           <div>
             {filteredTransactions.length === 0 ? (
               <div className="text-center py-12">
@@ -7923,12 +7953,15 @@ const Dashboard = () => {
                 <p className="text-gray-600">Try adjusting your search or filter criteria</p>
               </div>
             ) : (
-              <div className="w-full overflow-x-auto">
-                <table className="w-full min-w-[800px] text-xs table-fixed border-collapse">
+              <div className="w-full overflow-x-auto bg-white rounded-lg shadow-sm">
+                <table className="w-full text-sm border-collapse">
                   <thead>
-                    <tr className="border-b border-gray-200">
+                    <tr className="bg-blue-900 text-white">
+                      <th className="text-left py-3 px-4 font-semibold">
+                        <input type="checkbox" className="w-4 h-4 rounded" />
+                      </th>
                       <th
-                        className="text-left py-2 px-0 font-medium text-gray-700 cursor-pointer hover:bg-gray-50 select-none w-10"
+                        className="text-left py-3 px-4 font-semibold cursor-pointer hover:bg-blue-800"
                         onClick={() => handleSort('created_at')}
                       >
                         <div className="flex items-center space-x-1">
@@ -7936,11 +7969,11 @@ const Dashboard = () => {
                           {getSortIcon('created_at')}
                         </div>
                       </th>
-                      <th className="text-left py-2 px-0 font-medium text-gray-700 w-28">Customer Details</th>
-                      <th className="text-left py-2 px-0 font-medium text-gray-700 w-10">Sold By</th>
-                      <th className="text-left py-2 px-0 font-medium text-gray-700 w-16">Name</th>
+                      <th className="text-left py-3 px-4 font-semibold">Customer Details</th>
+                      <th className="text-left py-3 px-4 font-semibold">Sold By</th>
+                      <th className="text-left py-3 px-4 font-semibold">Name</th>
                       <th
-                        className="text-left py-2 px-0 font-medium text-gray-700 cursor-pointer hover:bg-gray-50 select-none w-24"
+                        className="text-left py-3 px-4 font-semibold cursor-pointer hover:bg-blue-800"
                         onClick={() => handleSort('product_type')}
                       >
                         <div className="flex items-center space-x-1">
@@ -7948,9 +7981,9 @@ const Dashboard = () => {
                           {getSortIcon('product_type')}
                         </div>
                       </th>
-                      <th className="text-left py-2 px-0 font-medium text-gray-700 w-12">Amount</th>
+                      <th className="text-left py-3 px-4 font-semibold">Amount</th>
                       <th
-                        className="text-center py-2 px-0 font-medium text-gray-700 cursor-pointer hover:bg-gray-50 select-none w-12"
+                        className="text-center py-3 px-4 font-semibold cursor-pointer hover:bg-blue-800"
                         onClick={() => handleSort('status')}
                       >
                         <div className="flex items-center justify-center space-x-1">
@@ -7958,7 +7991,7 @@ const Dashboard = () => {
                           {getSortIcon('status')}
                         </div>
                       </th>
-                      <th className="text-left py-2 px-0 font-medium text-gray-700 w-16">Actions</th>
+                      <th className="text-center py-3 px-4 font-semibold">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
