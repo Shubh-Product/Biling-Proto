@@ -2879,6 +2879,7 @@ const Dashboard = () => {
             ],
             poUpload: null,
             productType: "",
+            region: "India",
             planName: "",
             discountPercent: 0
           });
