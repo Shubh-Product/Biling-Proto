@@ -3730,7 +3730,7 @@ const Dashboard = () => {
                     {showCreateForm && (
                       <>
                         <span className="text-gray-400">/</span>
-                        <span className="text-xl font-semibold text-gray-900">Create New Sale</span>
+                        <span className="text-xl font-semibold text-gray-900">Generate Payment Link</span>
                       </>
                     )}
                   </>
