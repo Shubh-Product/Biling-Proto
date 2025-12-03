@@ -3002,28 +3002,12 @@ const Dashboard = () => {
             <CardContent>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Customer:</span>
-                  <span className="font-medium">{formData.customerDetails.name || 'N/A'}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Email:</span>
-                  <span className="font-medium">{formData.customerDetails.email}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Mobile:</span>
-                  <span className="font-medium">+91 {formData.customerDetails.mobile}</span>
-                </div>
-                <div className="flex justify-between">
                   <span className="text-gray-600">Product:</span>
                   <span className="font-medium">{formData.productType}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Plan:</span>
                   <span className="font-medium">{formData.planName}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">License Type:</span>
-                  <span className="font-medium">{formData.licenseType}</span>
                 </div>
                 <hr className="my-4" />
                 <div className="flex justify-between">
