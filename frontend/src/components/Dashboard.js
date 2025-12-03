@@ -3918,30 +3918,20 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                {/* License Category Selection - Step 2 (Only for New Sales) */}
+                {/* Category Dropdown - Step 2 (Only for New Sales) */}
                 {formData.transactionType === "New Sales" && (
                   <div className="flex items-center space-x-6">
-                    <Label className="text-base font-semibold whitespace-nowrap">License Category:</Label>
-                    <div className="flex-1 flex flex-wrap gap-6">
-                      {[
-                        { value: "Retail", label: "Retail License" },
-                        { value: "CA", label: "CA License" },
-                        { value: "Accountant", label: "Accountant License" },
-                        { value: "GST Practitioner", label: "GST Practitioner License" }
-                      ].map((license) => (
-                        <label key={license.value} className="flex items-center cursor-pointer">
-                          <input
-                            type="radio"
-                            name="licenseType"
-                            value={license.value}
-                            checked={formData.licenseType === license.value}
-                            onChange={(e) => handleLicenseTypeChange(e.target.value)}
-                            className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 mr-3"
-                          />
-                          <span className="text-gray-900 text-sm font-medium">{license.label}</span>
-                        </label>
-                      ))}
-                    </div>
+                    <Label className="text-base font-semibold whitespace-nowrap">Category:</Label>
+                    <select
+                      value={formData.licenseType}
+                      onChange={(e) => handleLicenseTypeChange(e.target.value)}
+                      className="flex-1 max-w-xs px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                    >
+                      <option value="Retail">Retail License</option>
+                      <option value="CA">CA License</option>
+                      <option value="Accountant">Accountant License</option>
+                      <option value="GST Practitioner">GST Practitioner License</option>
+                    </select>
                   </div>
                 )}
 
