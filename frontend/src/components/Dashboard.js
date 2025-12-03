@@ -2519,12 +2519,26 @@ const Dashboard = () => {
   };
 
   // Apply search filter on sorted transactions
-  const filteredTransactions = sortedTransactions.filter(transaction =>
-    transaction.customer_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    transaction.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    transaction.product_type.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    transaction.status.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredTransactions = sortedTransactions.filter(transaction => {
+    const searchLower = searchTerm.toLowerCase();
+    return (
+      // Search by customer name
+      transaction.customer_name.toLowerCase().includes(searchLower) ||
+      // Search by mobile (check both customer_mobile and salesperson mobile)
+      (transaction.customer_mobile && transaction.customer_mobile.toLowerCase().includes(searchLower)) ||
+      (transaction.salesperson?.mobile && transaction.salesperson.mobile.toLowerCase().includes(searchLower)) ||
+      // Search by email
+      (transaction.customer_email && transaction.customer_email.toLowerCase().includes(searchLower)) ||
+      (transaction.salesperson?.email && transaction.salesperson.email.toLowerCase().includes(searchLower)) ||
+      // Search by GSTIN
+      (transaction.customer_gstin && transaction.customer_gstin.toLowerCase().includes(searchLower)) ||
+      // Search by Payment ID (transaction ID)
+      transaction.id.toLowerCase().includes(searchLower) ||
+      // Also keep existing searches
+      transaction.product_type.toLowerCase().includes(searchLower) ||
+      transaction.status.toLowerCase().includes(searchLower)
+    );
+  });
 
   if (loading) {
     return (
