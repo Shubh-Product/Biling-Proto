@@ -4252,15 +4252,16 @@ const Dashboard = () => {
                         <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
                           <h3 id="upgrade-plans-section" className="text-lg font-semibold text-blue-900 mb-4">Choose Upgrade Product & Plan</h3>
                           
-                          {/* Product Type Selection - Desktop, Busy Online, Mazu, RDP */}
+                          {/* Product Selection - Desktop, Mandi, Online, Mobile App, Recom */}
                           <div className="flex items-center space-x-6">
-                            <Label className="text-base font-semibold whitespace-nowrap">Product Type <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-base font-semibold whitespace-nowrap">Product <span className="text-red-500">*</span>:</Label>
                             <div className="flex space-x-3">
                               {[
                                 { value: "Desktop", label: "Desktop" },
-                                { value: "Busy Online", label: "Busy Online" },
-                                { value: "Mazu", label: "Mazu" },
-                                { value: "RDP", label: "RDP" }
+                                { value: "Mandi", label: "Mandi" },
+                                { value: "Online", label: "Online" },
+                                { value: "Mobile App", label: "Mobile App" },
+                                { value: "Recom", label: "Recom" }
                               ].map((product) => (
                                 <label key={product.value} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all w-32 ${
                                   formData.productType === product.value 
