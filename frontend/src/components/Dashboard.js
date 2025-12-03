@@ -6713,7 +6713,10 @@ const Dashboard = () => {
                             <p className="text-sm text-gray-500 mt-1">GSTIN format validated</p>
                           )}
                         </div>
+                      </div>
 
+                      {/* Row 2: Company Name, Address, City, Pincode */}
+                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div>
                           <Label htmlFor="company">Company Name</Label>
                           <Input
@@ -6726,90 +6729,76 @@ const Dashboard = () => {
                             disabled={customerValidated}
                           />
                         </div>
-                      </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                           <Label htmlFor="address">Address</Label>
-                          <Textarea
+                          <Input
                             id="address"
                             value={formData.customerDetails.address}
                             onChange={(e) => setFormData(prev => ({
                               ...prev,
                               customerDetails: { ...prev.customerDetails, address: e.target.value }
                             }))}
-                            rows={3}
                             disabled={customerValidated}
                           />
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <Label htmlFor="pincode">Pin Code</Label>
-                            <Input
-                              id="pincode"
-                              value={formData.customerDetails.pincode}
-                              onChange={(e) => setFormData(prev => ({
-                                ...prev,
-                                customerDetails: { ...prev.customerDetails, pincode: e.target.value }
-                              }))}
-                              disabled={customerValidated}
-                            />
-                          </div>
+                        <div>
+                          <Label htmlFor="city">City</Label>
+                          <Select 
+                            value={formData.customerDetails.city} 
+                            onValueChange={(value) => setFormData(prev => ({
+                              ...prev,
+                              customerDetails: { ...prev.customerDetails, city: value }
+                            }))}
+                            disabled={customerValidated}
+                          >
+                            <SelectTrigger>
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {INDIAN_CITIES.map((city) => (
+                                <SelectItem key={city} value={city}>{city}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
 
-                          <div>
-                            <Label htmlFor="city">City</Label>
-                            <Select 
-                              value={formData.customerDetails.city} 
-                              onValueChange={(value) => setFormData(prev => ({
-                                ...prev,
-                                customerDetails: { ...prev.customerDetails, city: value }
-                              }))}
-                              disabled={customerValidated}
-                            >
-                              <SelectTrigger>
-                                <SelectValue />
-                              </SelectTrigger>
-                              <SelectContent>
-                                {INDIAN_CITIES.map((city) => (
-                                  <SelectItem key={city} value={city}>{city}</SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                          </div>
+                        <div>
+                          <Label htmlFor="pincode">Pincode</Label>
+                          <Input
+                            id="pincode"
+                            value={formData.customerDetails.pincode}
+                            onChange={(e) => setFormData(prev => ({
+                              ...prev,
+                              customerDetails: { ...prev.customerDetails, pincode: e.target.value }
+                            }))}
+                            disabled={customerValidated}
+                          />
+                        </div>
+                      </div>
 
-                          <div>
-                            <Label htmlFor="state">State</Label>
-                            <Select 
-                              value={formData.customerDetails.state} 
-                              onValueChange={(value) => setFormData(prev => ({
-                                ...prev,
-                                customerDetails: { ...prev.customerDetails, state: value }
-                              }))}
-                              disabled={customerValidated}
-                            >
-                              <SelectTrigger>
-                                <SelectValue />
-                              </SelectTrigger>
-                              <SelectContent>
-                                {INDIAN_STATES.map((state) => (
-                                  <SelectItem key={state} value={state}>{state}</SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                          </div>
-
-                          <div>
-                            <Label htmlFor="country">Country</Label>
-                            <Input
-                              id="country"
-                              value={formData.customerDetails.country}
-                              onChange={(e) => setFormData(prev => ({
-                                ...prev,
-                                customerDetails: { ...prev.customerDetails, country: e.target.value }
-                              }))}
-                            />
-                          </div>
+                      {/* Row 3: State (can add more fields here if needed) */}
+                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div>
+                          <Label htmlFor="state">State</Label>
+                          <Select 
+                            value={formData.customerDetails.state} 
+                            onValueChange={(value) => setFormData(prev => ({
+                              ...prev,
+                              customerDetails: { ...prev.customerDetails, state: value }
+                            }))}
+                            disabled={customerValidated}
+                          >
+                            <SelectTrigger>
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {INDIAN_STATES.map((state) => (
+                                <SelectItem key={state} value={state}>{state}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
                         </div>
                       </div>
                     </div>
