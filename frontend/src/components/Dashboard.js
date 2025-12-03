@@ -6571,22 +6571,7 @@ const Dashboard = () => {
                 {/* Prospect Details */}
                 {formData.transactionType === "New Sales" && (
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-semibold text-gray-900">Prospect Details</h3>
-                    {prospectDetailsCollapsed && (
-                      <button
-                        type="button"
-                        onClick={() => setProspectDetailsCollapsed(false)}
-                        className="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center"
-                      >
-                        <Edit className="w-4 h-4 mr-1" />
-                        Edit
-                      </button>
-                    )}
-                  </div>
-
-                  {!prospectDetailsCollapsed && (
-                  <>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Prospect Details</h3>
                   
                   {/* Prospect Information Fields - For non-CA categories */}
                   {formData.licenseType !== "CA" && (
