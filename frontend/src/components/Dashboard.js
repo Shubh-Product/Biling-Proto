@@ -45,6 +45,10 @@ const Dashboard = () => {
   const [submitting, setSubmitting] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [showCreateForm, setShowCreateForm] = useState(false); // Default to show transactions table
+  
+  // Navigation state
+  const [activeMenu, setActiveMenu] = useState('payments'); // Default to payments
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   // Form state
   const [formData, setFormData] = useState({
