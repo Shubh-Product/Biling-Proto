@@ -7004,7 +7004,7 @@ const Dashboard = () => {
                     </div>
                   )}
 
-                  {/* Customer Validation with Billing Notice */}
+                  {/* Prospect Validation with Billing Notice */}
                   <div className="mt-6 flex items-center justify-between">
                     <div className="flex items-center space-x-4">
                       <Button
@@ -7021,10 +7021,10 @@ const Dashboard = () => {
                         ) : customerValidated ? (
                           <>
                             <CheckCircle className="w-4 h-4 text-green-600" />
-                            <span>Customer validation successful - No existing licenses found</span>
+                            <span>Prospect validation successful - No existing licenses found</span>
                           </>
                         ) : (
-                          'Validate Customer Details'
+                          'Validate Prospect Details'
                         )}
                       </Button>
                       
