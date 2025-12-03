@@ -3834,26 +3834,22 @@ const Dashboard = () => {
             <CardContent className="pt-6">
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* License Type */}
-                {/* Transaction Type Selection - Step 1 */}
-                <div className="flex items-center space-x-6">
-                  <Label className="text-base font-semibold whitespace-nowrap">Transaction Type:</Label>
-                  <div className="flex-1 flex flex-wrap gap-6">
+                {/* Transaction Type Tabs - Step 1 */}
+                <div className="border-b border-gray-200">
+                  <div className="flex space-x-1">
                     {[
-                      { value: "New Sales", label: "New Sales" },
-                      { value: "Renewal/Upgrade", label: "Renewal/Upgrade" },
-                      { value: "Mobile App", label: "Mobile App" },
-                      { value: "Recom", label: "Recom" },
-                      { value: "Bundle Offer", label: "Bundle Offer" },
-                      { value: "Cancel Txn", label: "Cancel Txn" }
-                    ].map((transaction) => (
-                      <label key={transaction.value} className="flex items-center cursor-pointer">
-                        <input
-                          type="radio"
-                          name="transactionType"
-                          value={transaction.value}
-                          checked={formData.transactionType === transaction.value}
-                          onChange={(e) => {
-                            const newTransactionType = e.target.value;
+                      { value: "New Sales", label: "New Sale", icon: "📝" },
+                      { value: "Renewal/Upgrade", label: "Renewal", icon: "🔄" },
+                      { value: "Mobile App", label: "Upgrade", icon: "📱" },
+                      { value: "Recom", label: "Offers", icon: "🎁" }
+                    ].map((tab) => {
+                      const isActive = formData.transactionType === tab.value;
+                      return (
+                        <button
+                          key={tab.value}
+                          type="button"
+                          onClick={() => {
+                            const newTransactionType = tab.value;
                             
                             // Reset journey for specific transaction types
                             if (['Renewal/Upgrade', 'Mobile App', 'Recom', 'Bundle Offer'].includes(newTransactionType)) {
@@ -3908,11 +3904,17 @@ const Dashboard = () => {
                               setFormData(prev => ({ ...prev, transactionType: newTransactionType }));
                             }
                           }}
-                          className="w-4 h-4 text-purple-600 border-gray-300 focus:ring-purple-500 mr-3"
-                        />
-                        <span className="text-gray-900 text-sm font-medium">{transaction.label}</span>
-                      </label>
-                    ))}
+                          className={`px-6 py-3 text-sm font-semibold transition-all ${
+                            isActive
+                              ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50'
+                              : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50 border-b-2 border-transparent'
+                          }`}
+                        >
+                          <span className="mr-2">{tab.icon}</span>
+                          {tab.label}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 
