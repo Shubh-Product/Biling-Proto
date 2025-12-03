@@ -2762,6 +2762,7 @@ const Dashboard = () => {
                 licenseType: "Retail",
                 serialNumber: "",
                 productType: "",
+                region: "India",
                 licenseModel: "",
                 duration: "",
                 accessType: "",
@@ -2789,7 +2790,6 @@ const Dashboard = () => {
                   { name: "", email: "", mobile: "", gstin: "", company: "", address: "" }
                 ],
                 poUpload: null,
-                productType: "",
                 planName: "",
                 discountPercent: 0
               });
