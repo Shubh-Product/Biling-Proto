@@ -7307,41 +7307,11 @@ const Dashboard = () => {
                     {/* Desktop Product Configuration */}
                     {formData.productType === "Desktop" && (
                       <div className="space-y-4">
-                        {/* License Model and Duration Selection - Combined in same line */}
+                        {/* Duration Selection for Desktop */}
                         <div className="flex items-center space-x-8">
+                          {/* Duration Selection */}
                           <div className="flex items-center space-x-3">
-                            <Label className="text-base font-semibold whitespace-nowrap">License Model <span className="text-red-500">*</span>:</Label>
-                            <div className="flex space-x-2">
-                              {[
-                                { value: "Perpetual", label: "Perpetual" },
-                                { value: "Subscription", label: "Subscription" }
-                              ].map((model) => (
-                                <label key={model.value} className={`flex items-center cursor-pointer p-2 border-2 rounded-lg hover:shadow-md transition-all w-28 ${
-                                  formData.licenseModel === model.value 
-                                    ? "border-green-500 bg-green-50" 
-                                    : "border-gray-200"
-                                }`}>
-                                  <input
-                                    type="checkbox"
-                                    name="licenseModel"
-                                    value={model.value}
-                                    checked={formData.licenseModel === model.value}
-                                    onChange={(e) => setFormData(prev => ({ 
-                                      ...prev, 
-                                      licenseModel: e.target.checked ? model.value : "",
-                                      duration: "",
-                                      planName: ""
-                                    }))}
-                                    className="w-4 h-4 text-green-600 border-gray-300 focus:ring-green-500 mr-2"
-                                  />
-                                  <span className="text-gray-700 font-medium text-xs">{model.label}</span>
-                                </label>
-                              ))}
-                            </div>
-                          </div>
-
-                          {/* Duration Selection for Desktop */}
-                          {formData.licenseModel && (
+                            <Label className="text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
                             <div className="flex items-center space-x-3">
                               <Label className="text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
                               <div className="flex space-x-2">
