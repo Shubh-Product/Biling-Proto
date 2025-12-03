@@ -8716,6 +8716,29 @@ const Dashboard = () => {
           </div>
         </div>
       )}
+            </div>
+          ) : (
+            // Other Menu Content (Placeholder)
+            <div className="flex items-center justify-center h-full">
+              <Card className="max-w-md">
+                <CardContent className="py-12 text-center">
+                  <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    {menuItems.find(m => m.id === activeMenu) && 
+                      React.createElement(menuItems.find(m => m.id === activeMenu).icon, { className: "w-8 h-8 text-gray-400" })
+                    }
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    {menuItems.find(m => m.id === activeMenu)?.name}
+                  </h3>
+                  <p className="text-gray-600">
+                    This section is under construction
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+        </main>
+      </div>
     </div>
   );
 };
