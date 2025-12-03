@@ -1827,6 +1827,7 @@ const Dashboard = () => {
         ca_license_number: ""
       },
       productType: "",
+      region: "India",
       licenseModel: "",
       duration: "",
       planName: "",
