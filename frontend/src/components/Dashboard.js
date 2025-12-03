@@ -56,6 +56,7 @@ const Dashboard = () => {
     licenseType: "Retail",
     serialNumber: "",
     productType: "",
+    region: "India", // Default region
     licenseModel: "", // Perpetual or Subscription for Desktop
     duration: "", // 360 or 1080 for Desktop, 360 or 90 for Busy Online
     accessType: "", // Access or Client Server for Busy Online
