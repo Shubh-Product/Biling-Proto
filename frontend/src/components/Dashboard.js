@@ -2889,6 +2889,7 @@ const Dashboard = () => {
           setExistingLicenses([]);
           setErrors({});
           setVisibleClientReferences(2);
+          setPlanQuantities({}); // Reset plan quantities
           setShowCreateForm(false);
         }, 2000);
       }, 3000);
