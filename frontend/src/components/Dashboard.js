@@ -3923,23 +3923,6 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                {/* Category Dropdown - Step 2 (Only for New Sales) */}
-                {formData.transactionType === "New Sales" && (
-                  <div className="flex items-center space-x-6">
-                    <Label className="text-base font-semibold whitespace-nowrap">Category:</Label>
-                    <select
-                      value={formData.licenseType}
-                      onChange={(e) => handleLicenseTypeChange(e.target.value)}
-                      className="w-48 px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
-                    >
-                      <option value="Retail">Regular</option>
-                      <option value="CA">CA</option>
-                      <option value="Accountant">Accountant</option>
-                      <option value="GST Practitioner">GSTP</option>
-                    </select>
-                  </div>
-                )}
-
                 {/* Universal TDS Toggle removed - now inside Order Summary sections */}
 
                 {/* Renewal/Upgrade Flow (For Renewal/Upgrade transaction type) */}
