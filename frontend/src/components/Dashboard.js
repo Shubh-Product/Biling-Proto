@@ -2157,6 +2157,7 @@ const Dashboard = () => {
         { name: "", email: "", mobile: "", gstin: "", company: "", address: "" }
       ],
       productType: "",
+      region: "India",
       planName: "",
       discountPercent: 0
     });
