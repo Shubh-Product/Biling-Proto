@@ -2800,6 +2800,7 @@ const Dashboard = () => {
               setExistingLicenses([]);
               setErrors({});
               setVisibleClientReferences(2);
+              setPlanQuantities({}); // Reset plan quantities
             }}
             variant="outline"
             className="px-8 py-2"
