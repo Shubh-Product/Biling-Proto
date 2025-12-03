@@ -86,7 +86,6 @@ const Dashboard = () => {
       { name: "", email: "", mobile: "", gstin: "", company: "", address: "" }
     ],
     poUpload: null,
-    productType: "",
     planName: "",
     discountPercent: 0
   });
