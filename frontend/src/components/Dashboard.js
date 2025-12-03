@@ -3687,8 +3687,8 @@ const Dashboard = () => {
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Header */}
-        <header className="bg-white border-b border-gray-200">
-          <div className="px-6 py-3">
+        <header className="bg-white border-b border-gray-200 shadow-sm">
+          <div className="px-6 py-4">
             <div className="flex items-center justify-between">
               {/* Page Title with Navigation */}
               <div className="flex items-center space-x-2">
@@ -3697,28 +3697,28 @@ const Dashboard = () => {
                   <>
                     <button
                       onClick={() => handleNavigationAttempt(() => setShowCreateForm(false), 'dashboard')}
-                      className="text-2xl font-normal text-gray-800 hover:text-blue-600 transition-colors"
+                      className="text-xl font-semibold text-blue-600 hover:text-blue-700 transition-colors"
                     >
-                      Dashboard
+                      BIPL Sales Portal
                     </button>
                     {showCreateForm && (
                       <>
                         <span className="text-gray-400">/</span>
-                        <span className="text-xl font-normal text-gray-600">Create New Sale</span>
+                        <span className="text-xl font-semibold text-gray-900">Create New Sale</span>
                       </>
                     )}
                   </>
                 )}
                 {activeMenu !== 'payments' && (
-                  <h1 className="text-2xl font-normal text-gray-800">
+                  <h1 className="text-xl font-semibold text-gray-900">
                     {menuItems.find(m => m.id === activeMenu)?.name}
                   </h1>
                 )}
               </div>
 
               {/* Right Side Actions */}
-              <div className="flex items-center space-x-3">
-                {/* Search Bar - Only on payments dashboard */}
+              <div className="flex items-center space-x-4">
+                {/* Search Bar */}
                 {activeMenu === 'payments' && !showCreateForm && (
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -3727,36 +3727,31 @@ const Dashboard = () => {
                       placeholder="Search by Mobile, GSTIN, Email, Lead ID"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10 pr-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 w-80"
+                      className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-80"
                     />
                   </div>
                 )}
 
                 {/* Menu Toggle */}
-                <button className="p-2 hover:bg-gray-100 rounded-md">
+                <button className="p-2 hover:bg-gray-100 rounded-lg">
                   <Menu className="w-5 h-5 text-gray-600" />
                 </button>
 
-                {/* ASM Dropdown */}
-                <select className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white text-gray-700">
-                  <option>ASM</option>
-                  <option>Manager</option>
-                  <option>Admin</option>
+                {/* Switch To User Dropdown */}
+                <select className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <option>Switch To User</option>
                 </select>
 
-                {/* Help Icon */}
-                <button className="p-2 hover:bg-gray-100 rounded-full">
+                {/* Notification Icons */}
+                <button className="p-2 hover:bg-gray-100 rounded-lg">
                   <HelpCircle className="w-5 h-5 text-gray-600" />
                 </button>
-
-                {/* Notification Bell with Badge */}
-                <button className="p-2 hover:bg-gray-100 rounded-full relative">
+                <button className="p-2 hover:bg-gray-100 rounded-lg relative">
                   <Bell className="w-5 h-5 text-gray-600" />
-                  <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                 </button>
 
                 {/* User Avatar */}
-                <div className="w-9 h-9 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
                   S
                 </div>
               </div>
