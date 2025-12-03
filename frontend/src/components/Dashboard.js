@@ -7996,20 +7996,24 @@ const Dashboard = () => {
                   </thead>
                   <tbody>
                     {filteredTransactions.map((transaction, index) => (
-                      <tr key={transaction.id} className="border-b border-gray-100 hover:bg-gray-50">
+                      <tr key={transaction.id} className="border-b border-gray-200 hover:bg-gray-50">
+                        {/* Checkbox */}
+                        <td className="py-3 px-4">
+                          <input type="checkbox" className="w-4 h-4 rounded" />
+                        </td>
                         {/* Date */}
-                        <td className="py-2 px-0 text-left w-10">
+                        <td className="py-3 px-4">
                           <div className="leading-tight">
-                            <p className="text-gray-900 font-medium text-xs">{formatDate(transaction.created_at).dateMonth}</p>
+                            <p className="text-gray-900 font-medium text-sm">{formatDate(transaction.created_at).dateMonth}</p>
                             <p className="text-gray-600 text-xs">{formatDate(transaction.created_at).year}</p>
                           </div>
                         </td>
                         {/* Customer Details with Serial No. after City */}
-                        <td className="py-2 px-0 text-left w-28">
+                        <td className="py-3 px-4">
                           <div>
-                            <p className="font-medium text-gray-900 truncate text-xs">{transaction.customer_name}</p>
+                            <p className="font-medium text-gray-900 text-sm">{transaction.customer_name}</p>
                             <div className="flex items-center space-x-1">
-                              <p className="text-gray-500 truncate text-xs">{transaction.customer_city}</p>
+                              <p className="text-gray-500 text-xs">{transaction.customer_city}</p>
                               {(transaction.status === 'Success') && (
                                 <button
                                   onClick={() => window.open(successTransactionUrl, '_blank')}
@@ -8022,31 +8026,31 @@ const Dashboard = () => {
                           </div>
                         </td>
                         {/* Sold By */}
-                        <td className="py-2 px-0 text-left w-10">
-                          <p className="font-medium text-gray-900 text-xs">
+                        <td className="py-3 px-4">
+                          <p className="font-medium text-gray-900 text-sm">
                             {transaction.team_name || (transaction.is_inside_sales ? 'Inside' : 'Chennai Centre')}
                           </p>
                         </td>
                         {/* Name */}
-                        <td className="py-2 px-0 text-left w-16">
-                          <p className="font-medium text-gray-900 text-xs leading-tight break-words">
+                        <td className="py-3 px-4">
+                          <p className="font-medium text-gray-900 text-sm">
                             {transaction.salesperson?.name || 'N/A'}
                           </p>
                         </td>
                         {/* Product & Plan */}
-                        <td className="py-2 px-0 text-left w-24">
+                        <td className="py-3 px-4">
                           <div>
-                            <p className="font-medium text-gray-900 truncate text-xs">{transaction.product_type}</p>
-                            <p className="text-gray-500 truncate text-xs">{transaction.plan_details.plan_name}</p>
+                            <p className="font-medium text-gray-900 text-sm">{transaction.product_type}</p>
+                            <p className="text-gray-500 text-xs">{transaction.plan_details.plan_name}</p>
                             <p className="text-gray-500 text-xs">{transaction.license_type}</p>
                           </div>
                         </td>
                         {/* Amount */}
-                        <td className="py-2 px-0 text-left w-12">
+                        <td className="py-3 px-4">
                           <div>
-                            <p className="font-medium text-blue-600 text-xs">{formatCurrency(transaction.final_amount)}</p>
+                            <p className="font-semibold text-gray-900 text-sm">{formatCurrency(transaction.final_amount)}</p>
                             {transaction.discount_percent > 0 && (
-                              <p className="text-green-600 text-xs">{transaction.discount_percent}%</p>
+                              <p className="text-green-600 text-xs">{transaction.discount_percent}% off</p>
                             )}
                           </div>
                         </td>
