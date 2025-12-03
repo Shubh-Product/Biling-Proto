@@ -1837,6 +1837,7 @@ const Dashboard = () => {
     setCustomerValidated(false);
     setExistingLicenses([]);
     setErrors({});
+    setPlanQuantities({}); // Reset plan quantities
     
     // Reset renewal/upgrade flow
     resetRenewalFlow();
