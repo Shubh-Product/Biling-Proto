@@ -8193,35 +8193,7 @@ const Dashboard = () => {
         {/* Transactions Table - Only show when not creating a new transaction */}
         {!showCreateForm && (
         <div className="w-full max-w-none">
-          {/* Filter Tabs */}
-          <div className="mb-4 flex flex-wrap gap-2">
-            {[
-              { id: 'upgrade1080', label: '1080 Upgrade Opp.', count: get1080DayUpgradeOpportunities().length },
-              { id: 'recom', label: 'Recom Bundle', count: getRecomBundleOpportunities().length },
-              { id: 'mobileapp', label: 'Mobile Bundle', count: getMobileAppBundleOpportunities().length }
-            ].map((filter) => (
-              <button
-                key={filter.id}
-                onClick={() => setSelectedQuickFilter(filter.id)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  selectedQuickFilter === filter.id
-                    ? 'bg-gray-900 text-white'
-                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-                }`}
-              >
-                {filter.label}
-                {filter.count > 0 && (
-                  <span className={`ml-2 px-2 py-0.5 rounded-full text-xs ${
-                    selectedQuickFilter === filter.id
-                      ? 'bg-white text-gray-900'
-                      : 'bg-gray-200 text-gray-700'
-                  }`}>
-                    {filter.count}
-                  </span>
-                )}
-              </button>
-            ))}
-          </div>
+          {/* Old filter tabs removed - now using header filters */}
 
           <div>
             {filteredTransactions.length === 0 ? (
