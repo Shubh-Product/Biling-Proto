@@ -8430,10 +8430,11 @@ const Dashboard = () => {
 
             {/* Modal Content */}
             <div className="p-6">
-              {/* Customer Information */}
+              {/* Customer & Order Details - Merged Section */}
               <div className="mb-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Customer Information</h3>
-                <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">Customer & Order Details</h3>
+                <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-lg p-4 space-y-2">
+                  {/* Customer Information */}
                   <div className="flex justify-between">
                     <span className="text-gray-600">Name:</span>
                     <span className="font-medium text-gray-900">{selectedTransaction.customer_name}</span>
@@ -8462,40 +8463,38 @@ const Dashboard = () => {
                       <span className="font-medium text-gray-900">{selectedTransaction.customer_city}</span>
                     </div>
                   )}
-                </div>
-              </div>
-
-              {/* Order Details */}
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Order Details</h3>
-                <div className="bg-blue-50 rounded-lg p-4 space-y-3">
+                  
+                  {/* Divider */}
+                  <div className="border-t border-gray-300 my-3"></div>
+                  
+                  {/* Order Information */}
                   <div className="flex justify-between">
-                    <span className="text-gray-700">Transaction ID:</span>
+                    <span className="text-gray-600">Transaction ID:</span>
                     <span className="font-medium text-gray-900">{selectedTransaction.id}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-700">Date:</span>
+                    <span className="text-gray-600">Date:</span>
                     <span className="font-medium text-gray-900">{new Date(selectedTransaction.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-700">Product:</span>
+                    <span className="text-gray-600">Product:</span>
                     <span className="font-medium text-gray-900">{selectedTransaction.product_type}</span>
                   </div>
                   {selectedTransaction.plan_name && (
                     <div className="flex justify-between">
-                      <span className="text-gray-700">Plan:</span>
+                      <span className="text-gray-600">Plan:</span>
                       <span className="font-medium text-gray-900">{selectedTransaction.plan_name}</span>
                     </div>
                   )}
                   {selectedTransaction.license_type && (
                     <div className="flex justify-between">
-                      <span className="text-gray-700">License Type:</span>
+                      <span className="text-gray-600">License Type:</span>
                       <span className="font-medium text-gray-900">{selectedTransaction.license_type}</span>
                     </div>
                   )}
                   {selectedTransaction.duration && (
                     <div className="flex justify-between">
-                      <span className="text-gray-700">Duration:</span>
+                      <span className="text-gray-600">Duration:</span>
                       <span className="font-medium text-gray-900">{selectedTransaction.duration} days</span>
                     </div>
                   )}
