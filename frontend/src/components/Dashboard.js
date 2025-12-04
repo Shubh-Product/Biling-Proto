@@ -8216,8 +8216,14 @@ const Dashboard = () => {
                         </td>
                         {/* Customer - Contact Name, Company Name, City */}
                         <td className="py-3 px-4">
-                          <div>
-                            <p className="font-medium text-gray-900 text-sm">{transaction.customer_name}</p>
+                          <div 
+                            className="cursor-pointer hover:bg-blue-50 p-2 rounded transition-colors"
+                            onClick={() => {
+                              setSelectedTransaction(transaction);
+                              setShowOrderSummaryModal(true);
+                            }}
+                          >
+                            <p className="font-medium text-blue-600 text-sm hover:text-blue-800">{transaction.customer_name}</p>
                             <p className="text-gray-600 text-xs">{transaction.customer_company || 'N/A'}</p>
                             <p className="text-gray-500 text-xs">{transaction.customer_city}</p>
                           </div>
