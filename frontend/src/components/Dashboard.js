@@ -1635,6 +1635,16 @@ const Dashboard = () => {
   // Get filtered transactions based on selected quick filter
   const getFilteredTransactionsByQuickFilter = () => {
     switch (selectedQuickFilter) {
+      case 'all':
+        return getDateFilteredTransactions();
+      case 'pending':
+        return getDateFilteredTransactions().filter(t => t.status === 'Pending');
+      case 'received':
+        return getDateFilteredTransactions().filter(t => t.status === 'Success');
+      case 'expired':
+        return getDateFilteredTransactions().filter(t => t.status === 'Expired');
+      case 'cancelled':
+        return getDateFilteredTransactions().filter(t => t.status === 'Cancelled');
       case 'renewal':
         // Apply renewal sub-filter
         switch (selectedRenewalSubFilter) {
