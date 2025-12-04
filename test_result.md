@@ -1107,3 +1107,20 @@ frontend:
 agent_communication:
     - agent: "main"
       message: "✅ BUTTON LAYOUT UPDATE COMPLETED - Removed Export button and relocated Generate Payment Link. Key changes: Removed Export button with Download icon entirely, Moved Generate Payment Link button to filter row (same row as quick filters), Updated layout to justify-between with filters on left and button on right, Button maintains blue styling and Plus icon, Added whitespace-nowrap and flex-shrink-0 for proper button sizing. Cleaner interface with all controls consolidated in header area. Ready for use."
+
+frontend:
+  - task: "Remove Old Filter Tabs (1080 Upgrade, Recom Bundle, Mobile Bundle)"
+    implemented: true
+    working: "YES"
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: "YES"
+          agent: "main"
+          comment: "✅ Successfully removed old filter tabs from payments dashboard. Removed three legacy filter buttons: '1080 Upgrade Opp.' (with count badge showing 5), 'Recom Bundle' (with count 1), and 'Mobile Bundle' (with count 1). These were rendered in separate section below header using selectedQuickFilter state with values 'upgrade1080', 'recom', 'mobileapp'. Removed entire filter tabs section (lines 8196-8224) including button rendering logic with dark active state styling and count badges. Replaced with comment indicating old tabs removed. The new header filter buttons (All Leads, Not Attempted, etc.) now serve as primary filtering mechanism. Cleaner interface without duplicate filtering options. Frontend compiled successfully."
+
+agent_communication:
+    - agent: "main"
+      message: "✅ OLD FILTER TABS REMOVAL COMPLETED - Removed legacy filter buttons from payments dashboard. Deleted three filter tabs: 1080 Upgrade Opp., Recom Bundle, and Mobile Bundle with their count badges and selection logic. These used functions get1080DayUpgradeOpportunities(), getRecomBundleOpportunities(), and getMobileAppBundleOpportunities() for counts. Removed button rendering section with active state styling (dark background) and count badges. New header filters (All Leads, Not Attempted, M0, M-1, etc.) are now the primary filtering system. Single, unified filter interface in header. Ready for use."
