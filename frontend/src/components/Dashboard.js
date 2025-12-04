@@ -8467,28 +8467,138 @@ const Dashboard = () => {
                         {/* Status - Badge Style */}
                         <td className="py-3 px-4 text-center">
                           {(() => {
-                            // For Success transactions, show Invoice status instead
-                            if (transaction.status === 'Success') {
-                              const invoiceStatus = getInvoiceStatus(transaction);
-                              return (
-                                <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
-                                  invoiceStatus === 'Generated' 
-                                    ? 'bg-green-100 text-green-800' 
-                                    : 'bg-yellow-100 text-yellow-800'
-                                }`}>
-                                  {invoiceStatus}
-                                </span>
-                              );
+                            const status = transaction.status;
+                            let badgeClass = 'bg-gray-100 text-gray-800';
+                            let statusText = status;
+                            
+                            if (status === 'Success') {
+                              badgeClass = 'bg-green-100 text-green-800';
+                              statusText = 'Received';
+                            } else if (status === 'Pending') {
+                              badgeClass = 'bg-yellow-100 text-yellow-800';
+                              statusText = 'Pending';
+                            } else if (status === 'Failed') {
+                              badgeClass = 'bg-red-100 text-red-800';
+                              statusText = 'Failed';
+                            } else if (status === 'Expired') {
+                              badgeClass = 'bg-orange-100 text-orange-800';
+                              statusText = 'Expired';
+                            } else if (status === 'Cancelled') {
+                              badgeClass = 'bg-gray-100 text-gray-800';
+                              statusText = 'Cancelled';
                             }
                             
-                            const statusInfo = getStatusDisplay(transaction);
-                            let badgeClass = 'bg-gray-100 text-gray-800';
+                            return (
+                              <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${badgeClass}`}>
+                                {statusText}
+                              </span>
+                            );
+                          })()}
+                        </td>
+                        
+                        {/* Payment Method */}
+                        <td className="py-3 px-4">
+                          <p className="text-gray-900 text-sm">
+                            {transaction.payment_method || 'N/A'}
+                          </p>
+                        </td>
+                        
+                        {/* Actions - Resend, WhatsApp, Menu */}
+                        <td className="py-3 px-4">
+                          <div className="flex items-center justify-center space-x-1">
+                            {/* Resend Payment Link */}
+                            <button
+                              onClick={() => {
+                                console.log('Resend payment link for:', transaction.id);
+                              }}
+                              className="text-blue-600 hover:text-blue-800 p-1.5 rounded hover:bg-blue-50"
+                              title="Resend Payment Link"
+                            >
+                              <RefreshCw className="w-4 h-4" />
+                            </button>
                             
-                            if (statusInfo.text.includes('Pending')) {
-                              badgeClass = 'bg-yellow-100 text-yellow-800';
-                            } else if (statusInfo.text.includes('Failed')) {
-                              badgeClass = 'bg-red-100 text-red-800';
-                            } else if (statusInfo.text.includes('Due')) {
+                            {/* WhatsApp */}
+                            <button
+                              onClick={() => {
+                                window.open(`https://wa.me/91${transaction.customer_mobile}`, '_blank');
+                              }}
+                              className="text-green-600 hover:text-green-800 p-1.5 rounded hover:bg-green-50"
+                              title="Send via WhatsApp"
+                            >
+                              <MessageSquare className="w-4 h-4" />
+                            </button>
+                            
+                            {/* Three-dots Menu */}
+                            <div className="relative">
+                              <button
+                                onClick={() => {
+                                  // Toggle menu for this transaction
+                                  console.log('Show menu for:', transaction.id);
+                                }}
+                                className="text-gray-600 hover:text-gray-800 p-1.5 rounded hover:bg-gray-50"
+                                title="More actions"
+                              >
+                                <span className="text-lg font-bold">⋮</span>
+                              </button>
+                              {/* Menu dropdown would be implemented here */}
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        </div>
+        )}
+
+              {/* Warning Modal */}
+      {showWarningModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <div className="flex items-center space-x-3 mb-4">
+              <AlertTriangle className="w-6 h-6 text-orange-500" />
+              <h3 className="text-lg font-semibold text-gray-900">Unsaved Changes</h3>
+            </div>
+            
+            <p className="text-gray-600 mb-6">
+              You have unsaved changes that will be lost if you continue. What would you like to do?
+            </p>
+            
+            <div className="space-y-3">
+              <Button
+                onClick={proceedWithoutSaving}
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+              >
+                Continue
+              </Button>
+              
+              <Button
+                onClick={() => {
+                  setShowWarningModal(false);
+                  setPendingNavigation(null);
+                  setNavigationType(null);
+                }}
+                variant="outline"
+                className="w-full border-gray-300 text-gray-700 hover:bg-gray-50"
+              >
+                Cancel
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* License Type Change Warning Dialog */}
+      {showLicenseChangeWarning && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[60]">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4 relative z-[61]">
+            <div className="flex items-center space-x-3 mb-4">
+              <AlertTriangle className="w-6 h-6 text-amber-500" />
+              <h3 className="text-lg font-semibold text-gray-900">License Type Change Warning</h3>
+            </div>
                               badgeClass = 'bg-orange-100 text-orange-800';
                             } else if (statusInfo.text.includes('Active')) {
                               badgeClass = 'bg-green-100 text-green-800';
