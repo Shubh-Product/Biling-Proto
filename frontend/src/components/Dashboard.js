@@ -3741,31 +3741,20 @@ const Dashboard = () => {
                 )}
               </div>
 
-              {/* Search Fields - Center */}
+              {/* Search Bar - Center */}
               {activeMenu === 'payments' && !showCreateForm && (
-                <div className="flex items-center gap-2">
+                <div className="flex-1 max-w-2xl relative">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                   <input
                     type="text"
-                    placeholder="Mobile"
+                    placeholder="Search by Mobile, GSTIN, Email, Lead ID..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-32 px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
+                    className="w-full pl-11 pr-12 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
                   />
-                  <input
-                    type="text"
-                    placeholder="Email"
-                    className="w-32 px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
-                  />
-                  <input
-                    type="text"
-                    placeholder="GSTIN"
-                    className="w-32 px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Payment ID"
-                    className="w-32 px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
-                  />
+                  <button className="absolute right-3 top-1/2 transform -translate-y-1/2 p-1 hover:bg-gray-200 rounded transition-colors">
+                    <Filter className="w-4 h-4 text-gray-600" />
+                  </button>
                 </div>
               )}
 
