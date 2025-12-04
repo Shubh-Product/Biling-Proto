@@ -143,6 +143,10 @@ const Dashboard = () => {
     city: '',
     state: ''
   });
+  
+  // Prospect Details Accordion State
+  const [isProspectDetailsOpen, setIsProspectDetailsOpen] = useState(true);
+  const [isProspectDetailsSaved, setIsProspectDetailsSaved] = useState(false);
 
   // TDS Toggle Handler with Confirmation
   const handleTdsToggle = (newValue) => {
