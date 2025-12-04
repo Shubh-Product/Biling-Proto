@@ -8216,12 +8216,13 @@ const Dashboard = () => {
                             {transaction.salesperson?.name || 'System'}
                           </p>
                         </td>
-                        {/* Product & Plan */}
+                        {/* Product & Plan - Desktop Reg SS 1 Y format */}
                         <td className="py-3 px-4">
                           <div>
                             <p className="font-medium text-gray-900 text-sm">{transaction.product_type}</p>
-                            <p className="text-gray-500 text-xs">{transaction.plan_details.plan_name}</p>
-                            <p className="text-gray-500 text-xs">{transaction.license_type}</p>
+                            <p className="text-gray-600 text-xs">
+                              {transaction.license_type} {transaction.plan_details?.model || ''} {transaction.plan_details?.duration || ''}
+                            </p>
                           </div>
                         </td>
                         {/* Amount */}
