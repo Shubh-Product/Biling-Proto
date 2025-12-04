@@ -1842,6 +1842,8 @@ const Dashboard = () => {
     setExistingLicenses([]);
     setErrors({});
     setPlanQuantities({}); // Reset plan quantities
+    setIsProspectDetailsOpen(true); // Reset accordion to open
+    setIsProspectDetailsSaved(false); // Reset saved state
     
     // Reset renewal/upgrade flow
     resetRenewalFlow();
