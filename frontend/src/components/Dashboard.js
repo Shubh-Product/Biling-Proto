@@ -147,6 +147,9 @@ const Dashboard = () => {
   // Prospect Details Accordion State
   const [isProspectDetailsOpen, setIsProspectDetailsOpen] = useState(true);
   const [isProspectDetailsSaved, setIsProspectDetailsSaved] = useState(false);
+  
+  // Payment Link Modal State
+  const [showPaymentLinkModal, setShowPaymentLinkModal] = useState(false);
 
   // TDS Toggle Handler with Confirmation
   const handleTdsToggle = (newValue) => {
