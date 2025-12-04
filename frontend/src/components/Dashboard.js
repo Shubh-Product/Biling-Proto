@@ -8600,19 +8600,6 @@ const Dashboard = () => {
               <AlertTriangle className="w-6 h-6 text-amber-500" />
               <h3 className="text-lg font-semibold text-gray-900">License Type Change Warning</h3>
             </div>
-                              badgeClass = 'bg-orange-100 text-orange-800';
-                            } else if (statusInfo.text.includes('Active')) {
-                              badgeClass = 'bg-green-100 text-green-800';
-                            }
-
-                            return (
-                              <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${badgeClass}`}>
-                                {statusInfo.text.replace('\n', ' ')}
-                              </span>
-                            );
-                          })()}
-                        </td>
-                        {/* Actions - Icon Style */}
                         {/* Old actions removed - new actions above */}
                       </tr>
                     ))}
