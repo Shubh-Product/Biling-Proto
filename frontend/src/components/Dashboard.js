@@ -8189,10 +8189,6 @@ const Dashboard = () => {
                   <tbody>
                     {filteredTransactions.map((transaction, index) => (
                       <tr key={transaction.id} className="border-b border-gray-200 hover:bg-gray-50">
-                        {/* Checkbox */}
-                        <td className="py-3 px-4">
-                          <input type="checkbox" className="w-4 h-4 rounded" />
-                        </td>
                         {/* Date */}
                         <td className="py-3 px-4">
                           <div className="leading-tight">
