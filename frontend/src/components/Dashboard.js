@@ -2748,27 +2748,6 @@ const Dashboard = () => {
         <div className="flex justify-center gap-4 mt-8">
           <Button
             onClick={() => {
-              // Initialize invoice form with existing customer data
-              setInvoiceFormData({
-                mobile: paymentLinkData.customerDetails.mobile || '',
-                email: paymentLinkData.customerDetails.email || '',
-                gstin: '',
-                companyName: '',
-                customerName: paymentLinkData.customerDetails.name || '',
-                address: '',
-                pincode: '',
-                city: '',
-                state: ''
-              });
-              setShowPaymentLinkPage(false);
-              setShowDummyPaymentPage(true);
-            }}
-            className="bg-green-600 hover:bg-green-700 px-8 py-2"
-          >
-            Proceed to Pay (dummy)
-          </Button>
-          <Button
-            onClick={() => {
               setShowPaymentLinkPage(false);
               setShowCreateForm(false);
               // Reset form data
