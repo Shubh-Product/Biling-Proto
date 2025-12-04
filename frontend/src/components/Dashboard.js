@@ -2799,6 +2799,8 @@ const Dashboard = () => {
               setErrors({});
               setVisibleClientReferences(2);
               setPlanQuantities({}); // Reset plan quantities
+              setIsProspectDetailsOpen(true); // Reset accordion to open
+              setIsProspectDetailsSaved(false); // Reset saved state
             }}
             variant="outline"
             className="px-8 py-2"
@@ -2968,6 +2970,8 @@ const Dashboard = () => {
               setErrors({});
               setVisibleClientReferences(2);
               setPlanQuantities({}); // Reset plan quantities
+              setIsProspectDetailsOpen(true); // Reset accordion to open
+              setIsProspectDetailsSaved(false); // Reset saved state
             }}
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2"
           >
