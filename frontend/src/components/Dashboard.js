@@ -3764,7 +3764,11 @@ const Dashboard = () => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="w-full pl-11 pr-12 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
                   />
-                  <button className="absolute right-3 top-1/2 transform -translate-y-1/2 p-1 hover:bg-gray-200 rounded transition-colors">
+                  <button 
+                    onClick={() => setShowAdvancedFilter(true)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 p-1 hover:bg-gray-200 rounded transition-colors"
+                    title="Advanced Filters"
+                  >
                     <Filter className="w-4 h-4 text-gray-600" />
                   </button>
                 </div>
