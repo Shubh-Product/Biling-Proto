@@ -150,29 +150,6 @@ const Dashboard = () => {
   
   // Payment Link Modal State
   const [showPaymentLinkModal, setShowPaymentLinkModal] = useState(false);
-  
-  // My Payments Dashboard Filters
-  const [globalSearch, setGlobalSearch] = useState({
-    mobile: '',
-    email: '',
-    gstin: '',
-    paymentId: ''
-  });
-  const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
-  const [advancedFilters, setAdvancedFilters] = useState({
-    partnerName: '',
-    status: [],
-    generatedBy: '',
-    transactionType: '',
-    scheme: '',
-    product: '',
-    licenseType: 'All',
-    linkValidityFrom: '',
-    linkValidityTo: '',
-    subscriptionId: '',
-    offers: 'All'
-  });
-  const [dateRange, setDateRange] = useState('all');
 
   // TDS Toggle Handler with Confirmation
   const handleTdsToggle = (newValue) => {
@@ -8121,298 +8098,90 @@ const Dashboard = () => {
           </Card>
         )}
 
-        {/* My Payments Dashboard - Only show when not creating a new transaction */}
+        {/* Transactions Table - Only show when not creating a new transaction */}
         {!showCreateForm && (
-        <div className="w-full max-w-none space-y-6">
-          {/* Header Section */}
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">My Payments Dashboard</h1>
-            <p className="text-gray-600">Track and manage all payment links and transactions</p>
-          </div>
-          
-          {/* Global Search Box */}
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Search Payments</h2>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Mobile</label>
-                <input
-                  type="text"
-                  placeholder="Enter mobile number"
-                  value={globalSearch.mobile}
-                  onChange={(e) => setGlobalSearch(prev => ({ ...prev, mobile: e.target.value }))}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                <input
-                  type="email"
-                  placeholder="Enter email address"
-                  value={globalSearch.email}
-                  onChange={(e) => setGlobalSearch(prev => ({ ...prev, email: e.target.value }))}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">GSTIN</label>
-                <input
-                  type="text"
-                  placeholder="Enter GSTIN"
-                  value={globalSearch.gstin}
-                  onChange={(e) => setGlobalSearch(prev => ({ ...prev, gstin: e.target.value }))}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Payment ID</label>
-                <input
-                  type="text"
-                  placeholder="Enter payment ID"
-                  value={globalSearch.paymentId}
-                  onChange={(e) => setGlobalSearch(prev => ({ ...prev, paymentId: e.target.value }))}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-            </div>
-          </div>
-          
-          {/* Quick Filters Section */}
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Quick Filters</h2>
-            <div className="flex flex-wrap gap-3">
-              {/* Date Filter */}
-              <div>
-                <select
-                  value={dateRange}
-                  onChange={(e) => setDateRange(e.target.value)}
-                  className="px-4 py-2 border-2 border-gray-300 rounded-lg text-sm font-medium hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white cursor-pointer"
-                >
-                  <option value="all">All Time</option>
-                  <option value="today">Today</option>
-                  <option value="yesterday">Yesterday</option>
-                  <option value="last7days">Last 7 Days</option>
-                  <option value="last30days">Last 30 Days</option>
-                  <option value="thismonth">This Month</option>
-                  <option value="lastmonth">Last Month</option>
-                  <option value="custom">Custom Date Range</option>
-                </select>
-              </div>
-              
-              {/* Status Quick Filters */}
-              {[
-                { id: 'pending', label: 'Pending', count: transactions.filter(t => t.status === 'Pending').length, color: 'yellow' },
-                { id: 'received', label: 'Received', count: transactions.filter(t => t.status === 'Success').length, color: 'green' },
-                { id: 'expired', label: 'Expired', count: transactions.filter(t => t.status === 'Expired').length, color: 'red' },
-                { id: 'cancelled', label: 'Cancelled', count: transactions.filter(t => t.status === 'Cancelled').length, color: 'gray' }
-              ].map((filter) => (
-                <button
-                  key={filter.id}
-                  onClick={() => setSelectedQuickFilter(selectedQuickFilter === filter.id ? '' : filter.id)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all border-2 ${
-                    selectedQuickFilter === filter.id
-                      ? `bg-${filter.color}-100 border-${filter.color}-500 text-${filter.color}-800`
-                      : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400'
-                  }`}
-                >
-                  {filter.label}
-                  <span className={`ml-2 px-2 py-0.5 rounded-full text-xs font-bold ${
+        <div className="w-full max-w-none">
+          {/* Filter Tabs */}
+          <div className="mb-4 flex flex-wrap gap-2">
+            {[
+              { id: 'upgrade1080', label: '1080 Upgrade Opp.', count: get1080DayUpgradeOpportunities().length },
+              { id: 'recom', label: 'Recom Bundle', count: getRecomBundleOpportunities().length },
+              { id: 'mobileapp', label: 'Mobile Bundle', count: getMobileAppBundleOpportunities().length }
+            ].map((filter) => (
+              <button
+                key={filter.id}
+                onClick={() => setSelectedQuickFilter(filter.id)}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  selectedQuickFilter === filter.id
+                    ? 'bg-gray-900 text-white'
+                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                }`}
+              >
+                {filter.label}
+                {filter.count > 0 && (
+                  <span className={`ml-2 px-2 py-0.5 rounded-full text-xs ${
                     selectedQuickFilter === filter.id
                       ? 'bg-white text-gray-900'
-                      : 'bg-gray-100 text-gray-700'
+                      : 'bg-gray-200 text-gray-700'
                   }`}>
                     {filter.count}
                   </span>
-                </button>
-              ))}
-            </div>
-          </div>
-          
-          {/* Advanced Filters Panel */}
-          <div className="bg-white rounded-lg shadow-sm">
-            <button
-              onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-              className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
-            >
-              <div className="flex items-center space-x-2">
-                <h2 className="text-lg font-semibold text-gray-900">Advanced Filters</h2>
-                {Object.values(advancedFilters).some(v => v && v.length > 0 && v !== 'All') && (
-                  <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded">Active</span>
                 )}
-              </div>
-              {showAdvancedFilters ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
-            </button>
-            
-            {showAdvancedFilters && (
-              <div className="p-6 border-t border-gray-200">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Partner Name</label>
-                    <input
-                      type="text"
-                      placeholder="Enter partner name"
-                      value={advancedFilters.partnerName}
-                      onChange={(e) => setAdvancedFilters(prev => ({ ...prev, partnerName: e.target.value }))}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Generated By</label>
-                    <input
-                      type="text"
-                      placeholder="Employee/Partner name"
-                      value={advancedFilters.generatedBy}
-                      onChange={(e) => setAdvancedFilters(prev => ({ ...prev, generatedBy: e.target.value }))}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Transaction Type</label>
-                    <select
-                      value={advancedFilters.transactionType}
-                      onChange={(e) => setAdvancedFilters(prev => ({ ...prev, transactionType: e.target.value }))}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-                    >
-                      <option value="">All Types</option>
-                      <option value="New Sales">New Sales</option>
-                      <option value="Renewal">Renewal</option>
-                      <option value="Upgrade">Upgrade</option>
-                    </select>
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Product</label>
-                    <select
-                      value={advancedFilters.product}
-                      onChange={(e) => setAdvancedFilters(prev => ({ ...prev, product: e.target.value }))}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-                    >
-                      <option value="">All Products</option>
-                      <option value="Desktop">Busy Desktop</option>
-                      <option value="Busy Online">Busy Online</option>
-                      <option value="Mazu">Mazu</option>
-                      <option value="RDP">RDP</option>
-                    </select>
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">License Type</label>
-                    <select
-                      value={advancedFilters.licenseType}
-                      onChange={(e) => setAdvancedFilters(prev => ({ ...prev, licenseType: e.target.value }))}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-                    >
-                      <option value="All">All</option>
-                      <option value="Perpetual">Perpetual</option>
-                      <option value="Subscription">Subscription</option>
-                    </select>
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Offers</label>
-                    <select
-                      value={advancedFilters.offers}
-                      onChange={(e) => setAdvancedFilters(prev => ({ ...prev, offers: e.target.value }))}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-                    >
-                      <option value="All">All</option>
-                      <option value="With">With Offer</option>
-                      <option value="Without">Without Offer</option>
-                    </select>
-                  </div>
-                </div>
-                
-                <div className="mt-4 flex items-center justify-end space-x-3">
-                  <button
-                    onClick={() => {
-                      setAdvancedFilters({
-                        partnerName: '',
-                        status: [],
-                        generatedBy: '',
-                        transactionType: '',
-                        scheme: '',
-                        product: '',
-                        licenseType: 'All',
-                        linkValidityFrom: '',
-                        linkValidityTo: '',
-                        subscriptionId: '',
-                        offers: 'All'
-                      });
-                    }}
-                    className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm"
-                  >
-                    Clear Filters
-                  </button>
-                  <button
-                    onClick={() => setShowAdvancedFilters(false)}
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm"
-                  >
-                    Apply Filters
-                  </button>
-                </div>
-              </div>
-            )}
+              </button>
+            ))}
           </div>
 
-          {/* Payment Listing Table */}
           <div>
             {filteredTransactions.length === 0 ? (
-              <div className="bg-white rounded-lg shadow-sm p-12 text-center">
+              <div className="text-center py-12">
                 <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
                   <Search className="w-8 h-8 text-gray-400" />
                 </div>
-                <h3 className="text-lg font-medium text-gray-900 mb-2">No payments found</h3>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">No transactions found</h3>
                 <p className="text-gray-600">Try adjusting your search or filter criteria</p>
               </div>
             ) : (
-              <div className="bg-white rounded-lg shadow-sm">
-                <div className="px-6 py-4 border-b border-gray-200">
-                  <h2 className="text-lg font-semibold text-gray-900">Payment Listings ({filteredTransactions.length})</h2>
-                </div>
-                <div className="w-full overflow-x-auto">
-                  <table className="w-full text-sm border-collapse">
-                    <thead>
-                      <tr className="bg-gray-50 border-b border-gray-200">
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">
-                          <input type="checkbox" className="w-4 h-4 rounded" />
-                        </th>
-                        <th
-                          className="text-left py-3 px-4 font-semibold text-gray-700 cursor-pointer hover:bg-gray-100"
-                          onClick={() => handleSort('created_at')}
-                        >
-                          <div className="flex items-center space-x-1">
-                            <span>Date</span>
-                            {getSortIcon('created_at')}
-                          </div>
-                        </th>
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Customer</th>
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Partner Name</th>
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Generated By</th>
-                        <th
-                          className="text-left py-3 px-4 font-semibold text-gray-700 cursor-pointer hover:bg-gray-100"
-                          onClick={() => handleSort('product_type')}
-                        >
-                          <div className="flex items-center space-x-1">
-                            <span>Product & Plan</span>
-                            {getSortIcon('product_type')}
-                          </div>
-                        </th>
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Amount</th>
-                        <th
-                          className="text-center py-3 px-4 font-semibold text-gray-700 cursor-pointer hover:bg-gray-100"
-                          onClick={() => handleSort('status')}
-                        >
-                          <div className="flex items-center justify-center space-x-1">
-                            <span>Status</span>
-                            {getSortIcon('status')}
-                          </div>
-                        </th>
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">Payment Method</th>
-                        <th className="text-center py-3 px-4 font-semibold text-gray-700">Actions</th>
-                      </tr>
-                    </thead>
+              <div className="w-full overflow-x-auto bg-white rounded-lg shadow-sm">
+                <table className="w-full text-sm border-collapse">
+                  <thead>
+                    <tr className="bg-blue-900 text-white">
+                      <th className="text-left py-3 px-4 font-semibold">
+                        <input type="checkbox" className="w-4 h-4 rounded" />
+                      </th>
+                      <th
+                        className="text-left py-3 px-4 font-semibold cursor-pointer hover:bg-blue-800"
+                        onClick={() => handleSort('created_at')}
+                      >
+                        <div className="flex items-center space-x-1">
+                          <span>Date</span>
+                          {getSortIcon('created_at')}
+                        </div>
+                      </th>
+                      <th className="text-left py-3 px-4 font-semibold">Customer Details</th>
+                      <th className="text-left py-3 px-4 font-semibold">Sold By</th>
+                      <th className="text-left py-3 px-4 font-semibold">Name</th>
+                      <th
+                        className="text-left py-3 px-4 font-semibold cursor-pointer hover:bg-blue-800"
+                        onClick={() => handleSort('product_type')}
+                      >
+                        <div className="flex items-center space-x-1">
+                          <span>Product & Plan</span>
+                          {getSortIcon('product_type')}
+                        </div>
+                      </th>
+                      <th className="text-left py-3 px-4 font-semibold">Amount</th>
+                      <th
+                        className="text-center py-3 px-4 font-semibold cursor-pointer hover:bg-blue-800"
+                        onClick={() => handleSort('status')}
+                      >
+                        <div className="flex items-center justify-center space-x-1">
+                          <span>Status</span>
+                          {getSortIcon('status')}
+                        </div>
+                      </th>
+                      <th className="text-center py-3 px-4 font-semibold">Actions</th>
+                    </tr>
+                  </thead>
                   <tbody>
                     {filteredTransactions.map((transaction, index) => (
                       <tr key={transaction.id} className="border-b border-gray-200 hover:bg-gray-50">
@@ -8427,24 +8196,33 @@ const Dashboard = () => {
                             <p className="text-gray-600 text-xs">{formatDate(transaction.created_at).year}</p>
                           </div>
                         </td>
-                        {/* Customer - Contact Name, Company, City */}
+                        {/* Customer Details with Serial No. after City */}
                         <td className="py-3 px-4">
                           <div>
                             <p className="font-medium text-gray-900 text-sm">{transaction.customer_name}</p>
-                            <p className="text-gray-600 text-xs">{transaction.customer_company || 'N/A'}</p>
-                            <p className="text-gray-500 text-xs">{transaction.customer_city}</p>
+                            <div className="flex items-center space-x-1">
+                              <p className="text-gray-500 text-xs">{transaction.customer_city}</p>
+                              {(transaction.status === 'Success') && (
+                                <button
+                                  onClick={() => window.open(successTransactionUrl, '_blank')}
+                                  className="text-blue-600 hover:text-blue-800 hover:underline font-medium text-xs whitespace-nowrap"
+                                >
+                                  #{transaction.id.replace('TXN-', '')}
+                                </button>
+                              )}
+                            </div>
                           </div>
                         </td>
-                        {/* Partner Name */}
+                        {/* Sold By */}
                         <td className="py-3 px-4">
-                          <p className="text-gray-900 text-sm">
-                            {transaction.team_name || (transaction.is_inside_sales ? 'Inside Sales Direct' : 'Chennai Centre')}
+                          <p className="font-medium text-gray-900 text-sm">
+                            {transaction.team_name || (transaction.is_inside_sales ? 'Inside' : 'Chennai Centre')}
                           </p>
                         </td>
-                        {/* Generated By - User Name */}
+                        {/* Name */}
                         <td className="py-3 px-4">
-                          <p className="text-gray-900 text-sm">
-                            {transaction.salesperson?.name || 'System'}
+                          <p className="font-medium text-gray-900 text-sm">
+                            {transaction.salesperson?.name || 'N/A'}
                           </p>
                         </td>
                         {/* Product & Plan */}
@@ -8467,138 +8245,99 @@ const Dashboard = () => {
                         {/* Status - Badge Style */}
                         <td className="py-3 px-4 text-center">
                           {(() => {
-                            const status = transaction.status;
-                            let badgeClass = 'bg-gray-100 text-gray-800';
-                            let statusText = status;
-                            
-                            if (status === 'Success') {
-                              badgeClass = 'bg-green-100 text-green-800';
-                              statusText = 'Received';
-                            } else if (status === 'Pending') {
-                              badgeClass = 'bg-yellow-100 text-yellow-800';
-                              statusText = 'Pending';
-                            } else if (status === 'Failed') {
-                              badgeClass = 'bg-red-100 text-red-800';
-                              statusText = 'Failed';
-                            } else if (status === 'Expired') {
-                              badgeClass = 'bg-orange-100 text-orange-800';
-                              statusText = 'Expired';
-                            } else if (status === 'Cancelled') {
-                              badgeClass = 'bg-gray-100 text-gray-800';
-                              statusText = 'Cancelled';
+                            // For Success transactions, show Invoice status instead
+                            if (transaction.status === 'Success') {
+                              const invoiceStatus = getInvoiceStatus(transaction);
+                              return (
+                                <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+                                  invoiceStatus === 'Generated' 
+                                    ? 'bg-green-100 text-green-800' 
+                                    : 'bg-yellow-100 text-yellow-800'
+                                }`}>
+                                  {invoiceStatus}
+                                </span>
+                              );
                             }
                             
+                            const statusInfo = getStatusDisplay(transaction);
+                            let badgeClass = 'bg-gray-100 text-gray-800';
+                            
+                            if (statusInfo.text.includes('Pending')) {
+                              badgeClass = 'bg-yellow-100 text-yellow-800';
+                            } else if (statusInfo.text.includes('Failed')) {
+                              badgeClass = 'bg-red-100 text-red-800';
+                            } else if (statusInfo.text.includes('Due')) {
+                              badgeClass = 'bg-orange-100 text-orange-800';
+                            } else if (statusInfo.text.includes('Active')) {
+                              badgeClass = 'bg-green-100 text-green-800';
+                            }
+
                             return (
                               <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${badgeClass}`}>
-                                {statusText}
+                                {statusInfo.text.replace('\n', ' ')}
                               </span>
                             );
                           })()}
                         </td>
-                        
-                        {/* Payment Method */}
-                        <td className="py-3 px-4">
-                          <p className="text-gray-900 text-sm">
-                            {transaction.payment_method || 'N/A'}
-                          </p>
-                        </td>
-                        
-                        {/* Actions - Resend, WhatsApp, Menu */}
-                        <td className="py-3 px-4">
-                          <div className="flex items-center justify-center space-x-1">
-                            {/* Resend Payment Link */}
+                        {/* Actions - Icon Style */}
+                        <td className="py-3 px-4 text-center">
+                          <div className="flex items-center justify-center space-x-2">
+                            {/* Email Icon */}
                             <button
                               onClick={() => {
-                                console.log('Resend payment link for:', transaction.id);
+                                setEmailFormData({
+                                  customerEmail: 'customer@example.com',
+                                  transactionId: transaction.id
+                                });
+                                setSelectedTransaction(transaction);
+                                setShowEmailModal(true);
                               }}
-                              className="text-blue-600 hover:text-blue-800 p-1.5 rounded hover:bg-blue-50"
-                              title="Resend Payment Link"
+                              className="text-gray-600 hover:text-blue-600 p-1.5 rounded hover:bg-blue-50"
+                              title="Send email"
                             >
-                              <RefreshCw className="w-4 h-4" />
+                              <Mail className="w-5 h-5" />
                             </button>
                             
-                            {/* WhatsApp */}
+                            {/* Phone Icon */}
                             <button
                               onClick={() => {
-                                window.open(`https://wa.me/91${transaction.customer_mobile}`, '_blank');
+                                console.log('Call customer:', transaction.salesperson?.mobile);
                               }}
-                              className="text-green-600 hover:text-green-800 p-1.5 rounded hover:bg-green-50"
-                              title="Send via WhatsApp"
+                              className="text-gray-600 hover:text-green-600 p-1.5 rounded hover:bg-green-50"
+                              title="Call customer"
                             >
-                              <MessageSquare className="w-4 h-4" />
+                              <Smartphone className="w-5 h-5" />
                             </button>
                             
-                            {/* Three-dots Menu */}
-                            <div className="relative">
-                              <button
-                                onClick={() => {
-                                  // Toggle menu for this transaction
-                                  console.log('Show menu for:', transaction.id);
-                                }}
-                                className="text-gray-600 hover:text-gray-800 p-1.5 rounded hover:bg-gray-50"
-                                title="More actions"
-                              >
-                                <span className="text-lg font-bold">⋮</span>
-                              </button>
-                              {/* Menu dropdown would be implemented here */}
-                            </div>
+                            {/* Clock/Schedule Icon */}
+                            <button
+                              onClick={() => {
+                                console.log('Schedule follow-up for:', transaction.id);
+                              }}
+                              className="text-gray-600 hover:text-orange-600 p-1.5 rounded hover:bg-orange-50"
+                              title="Schedule follow-up"
+                            >
+                              <RotateCcw className="w-5 h-5" />
+                            </button>
                           </div>
                         </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
-                </div>
               </div>
             )}
           </div>
         </div>
         )}
 
-        {/* Warning Modal */}
-        {showWarningModal && (
+              {/* Warning Modal */}
+      {showWarningModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
             <div className="flex items-center space-x-3 mb-4">
               <AlertTriangle className="w-6 h-6 text-orange-500" />
               <h3 className="text-lg font-semibold text-gray-900">Unsaved Changes</h3>
-            </div>
-            
-            <p className="text-gray-600 mb-6">
-              You have unsaved changes that will be lost if you continue. What would you like to do?
-            </p>
-            
-            <div className="space-y-3">
-              <Button
-                onClick={proceedWithoutSaving}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-              >
-                Continue
-              </Button>
-              
-              <Button
-                onClick={() => {
-                  setShowWarningModal(false);
-                  setPendingNavigation(null);
-                  setNavigationType(null);
-                }}
-                variant="outline"
-                className="w-full border-gray-300 text-gray-700 hover:bg-gray-50"
-              >
-                Cancel
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* License Type Change Warning Dialog */}
-      {showLicenseChangeWarning && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[60]">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4 relative z-[61]">
-            <div className="flex items-center space-x-3 mb-4">
-              <AlertTriangle className="w-6 h-6 text-amber-500" />
-              <h3 className="text-lg font-semibold text-gray-900">License Type Change Warning</h3>
             </div>
             
             <p className="text-gray-600 mb-6">
