@@ -3791,102 +3791,112 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Filter Buttons Row - Only show on payments dashboard */}
+          {/* Filter Buttons Row with Generate Payment Link - Only show on payments dashboard */}
           {activeMenu === 'payments' && !showCreateForm && (
             <div className="px-6 pb-4">
-
-              {/* Filter Buttons */}
-              <div className="flex items-center space-x-2 overflow-x-auto pb-1">
-                <button
-                  onClick={() => setSelectedQuickFilter('')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-                    selectedQuickFilter === ''
-                      ? 'bg-gray-900 text-white shadow-sm'
-                      : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-                  }`}
+              <div className="flex items-center justify-between gap-4">
+                {/* Filter Buttons */}
+                <div className="flex items-center space-x-2 overflow-x-auto pb-1 flex-1">
+                  <button
+                    onClick={() => setSelectedQuickFilter('')}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                      selectedQuickFilter === ''
+                        ? 'bg-gray-900 text-white shadow-sm'
+                        : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    All Leads
+                  </button>
+                  <button
+                    onClick={() => setSelectedQuickFilter('not-attempted')}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                      selectedQuickFilter === 'not-attempted'
+                        ? 'bg-gray-900 text-white shadow-sm'
+                        : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    Not Attempted
+                  </button>
+                  <button
+                    onClick={() => setSelectedQuickFilter('refer-partner')}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                      selectedQuickFilter === 'refer-partner'
+                        ? 'bg-gray-900 text-white shadow-sm'
+                        : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    Refer to Owner Partner
+                  </button>
+                  <button
+                    onClick={() => setSelectedQuickFilter('m0')}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                      selectedQuickFilter === 'm0'
+                        ? 'bg-gray-900 text-white shadow-sm'
+                        : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    M0
+                  </button>
+                  <button
+                    onClick={() => setSelectedQuickFilter('m-1')}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                      selectedQuickFilter === 'm-1'
+                        ? 'bg-gray-900 text-white shadow-sm'
+                        : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    M-1
+                  </button>
+                  <button
+                    onClick={() => setSelectedQuickFilter('interested')}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                      selectedQuickFilter === 'interested'
+                        ? 'bg-gray-900 text-white shadow-sm'
+                        : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    Interested
+                  </button>
+                  <button
+                    onClick={() => setSelectedQuickFilter('pending-followup')}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                      selectedQuickFilter === 'pending-followup'
+                        ? 'bg-gray-900 text-white shadow-sm'
+                        : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    Pending Follow Up
+                  </button>
+                  <button
+                    onClick={() => setSelectedQuickFilter('upcoming-followup')}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                      selectedQuickFilter === 'upcoming-followup'
+                        ? 'bg-gray-900 text-white shadow-sm'
+                        : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    Upcoming Follow Up
+                  </button>
+                  <button
+                    onClick={() => setSelectedQuickFilter('with-offers')}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                      selectedQuickFilter === 'with-offers'
+                        ? 'bg-gray-900 text-white shadow-sm'
+                        : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    With Offers
+                  </button>
+                </div>
+                
+                {/* Generate Payment Link Button */}
+                <Button 
+                  onClick={() => handleNavigationAttempt(() => setShowCreateForm(!showCreateForm))}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2 whitespace-nowrap flex-shrink-0"
                 >
-                  All Leads
-                </button>
-                <button
-                  onClick={() => setSelectedQuickFilter('not-attempted')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-                    selectedQuickFilter === 'not-attempted'
-                      ? 'bg-gray-900 text-white shadow-sm'
-                      : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  Not Attempted
-                </button>
-                <button
-                  onClick={() => setSelectedQuickFilter('refer-partner')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-                    selectedQuickFilter === 'refer-partner'
-                      ? 'bg-gray-900 text-white shadow-sm'
-                      : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  Refer to Owner Partner
-                </button>
-                <button
-                  onClick={() => setSelectedQuickFilter('m0')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-                    selectedQuickFilter === 'm0'
-                      ? 'bg-gray-900 text-white shadow-sm'
-                      : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  M0
-                </button>
-                <button
-                  onClick={() => setSelectedQuickFilter('m-1')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-                    selectedQuickFilter === 'm-1'
-                      ? 'bg-gray-900 text-white shadow-sm'
-                      : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  M-1
-                </button>
-                <button
-                  onClick={() => setSelectedQuickFilter('interested')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-                    selectedQuickFilter === 'interested'
-                      ? 'bg-gray-900 text-white shadow-sm'
-                      : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  Interested
-                </button>
-                <button
-                  onClick={() => setSelectedQuickFilter('pending-followup')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-                    selectedQuickFilter === 'pending-followup'
-                      ? 'bg-gray-900 text-white shadow-sm'
-                      : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  Pending Follow Up
-                </button>
-                <button
-                  onClick={() => setSelectedQuickFilter('upcoming-followup')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-                    selectedQuickFilter === 'upcoming-followup'
-                      ? 'bg-gray-900 text-white shadow-sm'
-                      : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  Upcoming Follow Up
-                </button>
-                <button
-                  onClick={() => setSelectedQuickFilter('with-offers')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-                    selectedQuickFilter === 'with-offers'
-                      ? 'bg-gray-900 text-white shadow-sm'
-                      : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  With Offers
-                </button>
+                  <Plus className="w-4 h-4" />
+                  <span>Generate Payment Link</span>
+                </Button>
               </div>
             </div>
           )}
