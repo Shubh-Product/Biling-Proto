@@ -3707,7 +3707,13 @@ const Dashboard = () => {
             return (
               <button
                 key={item.id}
-                onClick={() => setActiveMenu(item.id)}
+                onClick={() => {
+                  setActiveMenu(item.id);
+                  // If clicking on Payments, reset payment link page to show main listing
+                  if (item.id === 'payments') {
+                    setShowPaymentLinkPage(false);
+                  }
+                }}
                 className={`flex flex-col items-center justify-center w-12 h-12 rounded-lg transition-colors ${
                   isActive 
                     ? 'bg-blue-50 text-blue-600' 
