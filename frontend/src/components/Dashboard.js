@@ -3715,76 +3715,178 @@ const Dashboard = () => {
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Header */}
-        <header className="bg-white border-b border-gray-200 shadow-sm">
+        <header className="bg-white border-b border-gray-200">
+          {/* Top Row - Title and Right Actions */}
           <div className="px-6 py-4">
             <div className="flex items-center justify-between">
-              {/* Page Title with Navigation */}
-              <div className="flex items-center space-x-2">
-                {/* Always show clickable Dashboard link for Payments */}
+              {/* Page Title */}
+              <div>
                 {activeMenu === 'payments' && (
                   <>
                     <button
                       onClick={() => handleNavigationAttempt(() => setShowCreateForm(false), 'dashboard')}
-                      className="text-xl font-semibold text-blue-600 hover:text-blue-700 transition-colors"
+                      className="text-2xl font-bold text-blue-900 hover:text-blue-800 transition-colors"
                     >
                       BIPL Sales Portal
                     </button>
                     {showCreateForm && (
-                      <>
-                        <span className="text-gray-400">/</span>
-                        <span className="text-xl font-semibold text-gray-900">Generate Payment Link</span>
-                      </>
+                      <span className="text-xl font-semibold text-gray-600"> / Generate Payment Link</span>
                     )}
                   </>
                 )}
                 {activeMenu !== 'payments' && (
-                  <h1 className="text-xl font-semibold text-gray-900">
+                  <h1 className="text-2xl font-bold text-blue-900">
                     {menuItems.find(m => m.id === activeMenu)?.name}
                   </h1>
                 )}
               </div>
 
               {/* Right Side Actions */}
-              <div className="flex items-center space-x-4">
-                {/* Search Bar */}
-                {activeMenu === 'payments' && !showCreateForm && (
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                    <input
-                      type="text"
-                      placeholder="Search by Mobile, Email, GSTIN, Payment ID"
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-80"
-                    />
-                  </div>
-                )}
+              <div className="flex items-center space-x-3">
+                {/* ASM Dropdown */}
+                <select className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white hover:bg-gray-50 transition-colors">
+                  <option>ASM</option>
+                  <option>Sales Manager</option>
+                  <option>Team Leader</option>
+                </select>
 
                 {/* Menu Toggle */}
-                <button className="p-2 hover:bg-gray-100 rounded-lg">
+                <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                   <Menu className="w-5 h-5 text-gray-600" />
                 </button>
 
-                {/* Switch To User Dropdown */}
-                <select className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                  <option>Switch To User</option>
-                </select>
-
-                {/* Notification Icons */}
-                <button className="p-2 hover:bg-gray-100 rounded-lg">
-                  <HelpCircle className="w-5 h-5 text-gray-600" />
-                </button>
-                <button className="p-2 hover:bg-gray-100 rounded-lg relative">
+                {/* Notification Bell with Badge */}
+                <button className="p-2 hover:bg-gray-100 rounded-lg relative transition-colors">
                   <Bell className="w-5 h-5 text-gray-600" />
+                  <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                </button>
+
+                {/* Shield Icon */}
+                <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                  <Shield className="w-5 h-5 text-gray-600" />
                 </button>
 
                 {/* User Avatar */}
-                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                <div className="w-9 h-9 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
                   S
                 </div>
               </div>
             </div>
           </div>
+
+          {/* Search Bar and Filters Row - Only show on payments dashboard */}
+          {activeMenu === 'payments' && !showCreateForm && (
+            <div className="px-6 pb-4 space-y-3">
+              {/* Search Bar */}
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                <input
+                  type="text"
+                  placeholder="Search by Mobile, GSTIN, Email, Lead ID..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-11 pr-12 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
+                />
+                <button className="absolute right-3 top-1/2 transform -translate-y-1/2 p-1 hover:bg-gray-200 rounded transition-colors">
+                  <Filter className="w-4 h-4 text-gray-600" />
+                </button>
+              </div>
+
+              {/* Filter Buttons */}
+              <div className="flex items-center space-x-2 overflow-x-auto pb-1">
+                <button
+                  onClick={() => setSelectedQuickFilter('')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                    selectedQuickFilter === ''
+                      ? 'bg-gray-900 text-white shadow-sm'
+                      : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  All Leads
+                </button>
+                <button
+                  onClick={() => setSelectedQuickFilter('not-attempted')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                    selectedQuickFilter === 'not-attempted'
+                      ? 'bg-gray-900 text-white shadow-sm'
+                      : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  Not Attempted
+                </button>
+                <button
+                  onClick={() => setSelectedQuickFilter('refer-partner')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                    selectedQuickFilter === 'refer-partner'
+                      ? 'bg-gray-900 text-white shadow-sm'
+                      : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  Refer to Owner Partner
+                </button>
+                <button
+                  onClick={() => setSelectedQuickFilter('m0')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                    selectedQuickFilter === 'm0'
+                      ? 'bg-gray-900 text-white shadow-sm'
+                      : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  M0
+                </button>
+                <button
+                  onClick={() => setSelectedQuickFilter('m-1')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                    selectedQuickFilter === 'm-1'
+                      ? 'bg-gray-900 text-white shadow-sm'
+                      : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  M-1
+                </button>
+                <button
+                  onClick={() => setSelectedQuickFilter('interested')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                    selectedQuickFilter === 'interested'
+                      ? 'bg-gray-900 text-white shadow-sm'
+                      : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  Interested
+                </button>
+                <button
+                  onClick={() => setSelectedQuickFilter('pending-followup')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                    selectedQuickFilter === 'pending-followup'
+                      ? 'bg-gray-900 text-white shadow-sm'
+                      : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  Pending Follow Up
+                </button>
+                <button
+                  onClick={() => setSelectedQuickFilter('upcoming-followup')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                    selectedQuickFilter === 'upcoming-followup'
+                      ? 'bg-gray-900 text-white shadow-sm'
+                      : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  Upcoming Follow Up
+                </button>
+                <button
+                  onClick={() => setSelectedQuickFilter('with-offers')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                    selectedQuickFilter === 'with-offers'
+                      ? 'bg-gray-900 text-white shadow-sm'
+                      : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  With Offers
+                </button>
+              </div>
+            </div>
+          )}
         </header>
 
         {/* Main Content */}
