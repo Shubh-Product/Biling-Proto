@@ -937,3 +937,20 @@ frontend:
 agent_communication:
     - agent: "main"
       message: "✅ DURATION OPTIONS UPDATE COMPLETED - Converted Duration checkboxes to radio buttons with reduced sizes. Key changes: 1) Changed from checkbox to radio button type for proper single-selection behavior, 2) Reduced box width from 32 to 28 units (w-32 → w-28), 3) Reduced padding from p-2 to px-2 py-1.5, 4) Reduced radio button size from 4×4 to 3.5×3.5 units, 5) Made 20% OFF label smaller (text-[10px]), 6) Simplified onChange handler to use value directly. Now users can only select one duration option at a time (mutually exclusive), which is more appropriate UX than checkboxes. Ready for testing to verify radio button behavior and compact sizing work correctly."
+
+frontend:
+  - task: "Update Category Field Label Size for Consistency"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "low"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "✅ Successfully updated Category field label to be consistent with other fields in Prospect Details section. Removed custom className 'text-base font-semibold' from Category label (found at two locations: line ~6565 and ~6795). Category label now uses default Label component styling, matching Mobile, Email, Name, and other form field labels. This ensures visual consistency across all form fields in the Prospect Details section. All labels now have uniform size and weight."
+
+agent_communication:
+    - agent: "main"
+      message: "✅ CATEGORY LABEL CONSISTENCY UPDATE COMPLETED - Made Category field label consistent with other fields in Prospect Details section. Removed custom text-base font-semibold styling from Category label at two locations. Now uses default Label styling matching all other form fields (Mobile, Email, Name, GSTIN, etc.). Simple but important consistency fix for better visual hierarchy. Ready for testing to verify label appears with consistent sizing."
