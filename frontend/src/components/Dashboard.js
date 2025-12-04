@@ -3848,7 +3848,7 @@ const Dashboard = () => {
         <main className="flex-1 overflow-y-auto bg-gradient-to-br from-slate-50 to-slate-100">
           {activeMenu === 'payments' ? (
             // Payments Content (BIPL Sales Portal)
-            <div className="max-w-7xl mx-auto p-6 space-y-6">
+            <div className="max-w-full mx-auto p-6 space-y-6">
               {/* Action buttons removed - Generate Payment Link moved to filter row */}
               
               {/* Back Button - Shown in Create Form */}
