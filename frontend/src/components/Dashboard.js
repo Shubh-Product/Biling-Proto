@@ -8533,19 +8533,6 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              {/* Status Badge */}
-              <div className="mt-6 flex justify-center">
-                <span className={`inline-block px-4 py-2 rounded-full text-sm font-semibold ${
-                  selectedTransaction.status === 'Success' ? 'bg-green-100 text-green-800' :
-                  selectedTransaction.status === 'Pending' ? 'bg-yellow-100 text-yellow-800' :
-                  selectedTransaction.status === 'Failed' ? 'bg-red-100 text-red-800' :
-                  selectedTransaction.status === 'Expired' ? 'bg-orange-100 text-orange-800' :
-                  selectedTransaction.status === 'Cancelled' ? 'bg-gray-200 text-gray-800' :
-                  'bg-blue-100 text-blue-800'
-                }`}>
-                  Status: {selectedTransaction.status}
-                </span>
-              </div>
             </div>
 
             {/* Modal Footer */}
