@@ -1124,3 +1124,20 @@ frontend:
 agent_communication:
     - agent: "main"
       message: "✅ OLD FILTER TABS REMOVAL COMPLETED - Removed legacy filter buttons from payments dashboard. Deleted three filter tabs: 1080 Upgrade Opp., Recom Bundle, and Mobile Bundle with their count badges and selection logic. These used functions get1080DayUpgradeOpportunities(), getRecomBundleOpportunities(), and getMobileAppBundleOpportunities() for counts. Removed button rendering section with active state styling (dark background) and count badges. New header filters (All Leads, Not Attempted, M0, M-1, etc.) are now the primary filtering system. Single, unified filter interface in header. Ready for use."
+
+frontend:
+  - task: "Replace Filter Buttons with Status-Based Filters"
+    implemented: true
+    working: "YES"
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: "YES"
+          agent: "main"
+          comment: "✅ Successfully replaced all 9 filter buttons with 4 status-based filters. Removed: All Leads, Not Attempted, Refer to Owner Partner, M0, M-1, Interested, Pending Follow Up, Upcoming Follow Up, With Offers. Added: Pending, Received, Expired, Cancelled - each with dynamic count badges. Implemented using array.map() with filter objects containing id, label, count (calculated from transactions.filter by status), and color property. Counts calculated in real-time: Pending (status='Pending'), Received (status='Success'), Expired (status='Expired'), Cancelled (status='Cancelled'). Count badges display with white background when filter active, gray when inactive. Toggle behavior - clicking active filter deselects it. Clean, focused filtering based on payment status. Frontend compiled successfully."
+
+agent_communication:
+    - agent: "main"
+      message: "✅ FILTER BUTTONS REPLACEMENT COMPLETED - Replaced 9 lead-based filters with 4 status-based payment filters. New filters: Pending (count), Received (count), Expired (count), Cancelled (count). Each filter shows real-time count calculated from transactions array filtered by status field. Pending uses 'Pending' status, Received uses 'Success' status, Expired uses 'Expired', Cancelled uses 'Cancelled'. Count badges styled with white (active) or gray (inactive) backgrounds. Toggle behavior allows deselecting active filter. Cleaner, more relevant filtering for payment dashboard. Ready for use."
