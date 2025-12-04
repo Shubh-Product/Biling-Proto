@@ -3819,7 +3819,8 @@ const Dashboard = () => {
                     { id: 'pending', label: 'Pending', count: transactions.filter(t => t.status === 'Pending').length, color: 'yellow' },
                     { id: 'received', label: 'Received', count: transactions.filter(t => t.status === 'Success').length, color: 'green' },
                     { id: 'expired', label: 'Expired', count: transactions.filter(t => t.status === 'Expired').length, color: 'red' },
-                    { id: 'cancelled', label: 'Cancelled', count: transactions.filter(t => t.status === 'Cancelled').length, color: 'gray' }
+                    { id: 'cancelled', label: 'Cancelled', count: transactions.filter(t => t.status === 'Cancelled').length, color: 'gray' },
+                    { id: 'draft', label: 'Draft', count: transactions.filter(t => t.status === 'Draft').length, color: 'purple' }
                   ].map((filter) => (
                     <button
                       key={filter.id}
