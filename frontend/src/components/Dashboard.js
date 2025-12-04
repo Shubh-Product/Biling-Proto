@@ -239,6 +239,9 @@ const Dashboard = () => {
   // Quick filters state
   const [selectedQuickFilter, setSelectedQuickFilter] = useState('upgrade1080'); // 'upgrade1080', 'recom', 'mobileapp'
 
+  // Three dots menu state
+  const [openMenuId, setOpenMenuId] = useState(null);
+
   // Sold By filter state
   const [selectedSoldByFilter, setSelectedSoldByFilter] = useState('inside_sales'); // 'inside_sales', 'partner'
 
