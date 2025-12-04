@@ -8601,15 +8601,6 @@ const Dashboard = () => {
               <h3 className="text-lg font-semibold text-gray-900">License Type Change Warning</h3>
             </div>
             
-            {/* Warning Modal */}
-        {showWarningModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-            <div className="flex items-center space-x-3 mb-4">
-              <AlertTriangle className="w-6 h-6 text-orange-500" />
-              <h3 className="text-lg font-semibold text-gray-900">Unsaved Changes</h3>
-            </div>
-            
             <p className="text-gray-600 mb-6">
               You have unsaved changes that will be lost if you continue. What would you like to do?
             </p>
