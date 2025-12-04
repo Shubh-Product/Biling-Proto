@@ -3795,98 +3795,33 @@ const Dashboard = () => {
           {activeMenu === 'payments' && !showCreateForm && (
             <div className="px-6 pb-4">
               <div className="flex items-center justify-between gap-4">
-                {/* Filter Buttons */}
+                {/* Status Filter Buttons */}
                 <div className="flex items-center space-x-2 overflow-x-auto pb-1 flex-1">
-                  <button
-                    onClick={() => setSelectedQuickFilter('')}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-                      selectedQuickFilter === ''
-                        ? 'bg-gray-900 text-white shadow-sm'
-                        : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-                    }`}
-                  >
-                    All Leads
-                  </button>
-                  <button
-                    onClick={() => setSelectedQuickFilter('not-attempted')}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-                      selectedQuickFilter === 'not-attempted'
-                        ? 'bg-gray-900 text-white shadow-sm'
-                        : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-                    }`}
-                  >
-                    Not Attempted
-                  </button>
-                  <button
-                    onClick={() => setSelectedQuickFilter('refer-partner')}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-                      selectedQuickFilter === 'refer-partner'
-                        ? 'bg-gray-900 text-white shadow-sm'
-                        : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-                    }`}
-                  >
-                    Refer to Owner Partner
-                  </button>
-                  <button
-                    onClick={() => setSelectedQuickFilter('m0')}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-                      selectedQuickFilter === 'm0'
-                        ? 'bg-gray-900 text-white shadow-sm'
-                        : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-                    }`}
-                  >
-                    M0
-                  </button>
-                  <button
-                    onClick={() => setSelectedQuickFilter('m-1')}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-                      selectedQuickFilter === 'm-1'
-                        ? 'bg-gray-900 text-white shadow-sm'
-                        : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-                    }`}
-                  >
-                    M-1
-                  </button>
-                  <button
-                    onClick={() => setSelectedQuickFilter('interested')}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-                      selectedQuickFilter === 'interested'
-                        ? 'bg-gray-900 text-white shadow-sm'
-                        : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-                    }`}
-                  >
-                    Interested
-                  </button>
-                  <button
-                    onClick={() => setSelectedQuickFilter('pending-followup')}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-                      selectedQuickFilter === 'pending-followup'
-                        ? 'bg-gray-900 text-white shadow-sm'
-                        : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-                    }`}
-                  >
-                    Pending Follow Up
-                  </button>
-                  <button
-                    onClick={() => setSelectedQuickFilter('upcoming-followup')}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-                      selectedQuickFilter === 'upcoming-followup'
-                        ? 'bg-gray-900 text-white shadow-sm'
-                        : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-                    }`}
-                  >
-                    Upcoming Follow Up
-                  </button>
-                  <button
-                    onClick={() => setSelectedQuickFilter('with-offers')}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-                      selectedQuickFilter === 'with-offers'
-                        ? 'bg-gray-900 text-white shadow-sm'
-                        : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-                    }`}
-                  >
-                    With Offers
-                  </button>
+                  {[
+                    { id: 'pending', label: 'Pending', count: transactions.filter(t => t.status === 'Pending').length, color: 'yellow' },
+                    { id: 'received', label: 'Received', count: transactions.filter(t => t.status === 'Success').length, color: 'green' },
+                    { id: 'expired', label: 'Expired', count: transactions.filter(t => t.status === 'Expired').length, color: 'red' },
+                    { id: 'cancelled', label: 'Cancelled', count: transactions.filter(t => t.status === 'Cancelled').length, color: 'gray' }
+                  ].map((filter) => (
+                    <button
+                      key={filter.id}
+                      onClick={() => setSelectedQuickFilter(selectedQuickFilter === filter.id ? '' : filter.id)}
+                      className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                        selectedQuickFilter === filter.id
+                          ? 'bg-gray-900 text-white shadow-sm'
+                          : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                      }`}
+                    >
+                      {filter.label}
+                      <span className={`ml-2 px-2 py-0.5 rounded-full text-xs font-bold ${
+                        selectedQuickFilter === filter.id
+                          ? 'bg-white text-gray-900'
+                          : 'bg-gray-100 text-gray-700'
+                      }`}>
+                        {filter.count}
+                      </span>
+                    </button>
+                  ))}
                 </div>
                 
                 {/* Generate Payment Link Button */}
