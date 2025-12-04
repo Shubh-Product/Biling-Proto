@@ -265,13 +265,17 @@ const Dashboard = () => {
       if (showDateDropdown && !event.target.closest('.date-dropdown')) {
         setShowDateDropdown(false);
       }
+      // Close three dots menu when clicking outside
+      if (openMenuId && !event.target.closest('.relative')) {
+        setOpenMenuId(null);
+      }
     };
     
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [showDateDropdown]);
+  }, [showDateDropdown, openMenuId]);
 
   // Track unsaved changes
   useEffect(() => {
