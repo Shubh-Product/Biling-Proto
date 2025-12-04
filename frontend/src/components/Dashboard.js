@@ -237,7 +237,7 @@ const Dashboard = () => {
   const [customDateRange, setCustomDateRange] = useState({ start: '', end: '' });
 
   // Quick filters state
-  const [selectedQuickFilter, setSelectedQuickFilter] = useState('upgrade1080'); // 'upgrade1080', 'recom', 'mobileapp'
+  const [selectedQuickFilter, setSelectedQuickFilter] = useState('all'); // 'all', 'pending', 'received', 'expired', 'cancelled'
 
   // Three dots menu state
   const [openMenuId, setOpenMenuId] = useState(null);
