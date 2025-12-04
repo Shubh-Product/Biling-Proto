@@ -8121,37 +8121,239 @@ const Dashboard = () => {
           </Card>
         )}
 
-        {/* Transactions Table - Only show when not creating a new transaction */}
+        {/* My Payments Dashboard - Only show when not creating a new transaction */}
         {!showCreateForm && (
-        <div className="w-full max-w-none">
-          {/* Filter Tabs */}
-          <div className="mb-4 flex flex-wrap gap-2">
-            {[
-              { id: 'upgrade1080', label: '1080 Upgrade Opp.', count: get1080DayUpgradeOpportunities().length },
-              { id: 'recom', label: 'Recom Bundle', count: getRecomBundleOpportunities().length },
-              { id: 'mobileapp', label: 'Mobile Bundle', count: getMobileAppBundleOpportunities().length }
-            ].map((filter) => (
-              <button
-                key={filter.id}
-                onClick={() => setSelectedQuickFilter(filter.id)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  selectedQuickFilter === filter.id
-                    ? 'bg-gray-900 text-white'
-                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-                }`}
-              >
-                {filter.label}
-                {filter.count > 0 && (
-                  <span className={`ml-2 px-2 py-0.5 rounded-full text-xs ${
+        <div className="w-full max-w-none space-y-6">
+          {/* Header Section */}
+          <div className="bg-white rounded-lg shadow-sm p-6">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">My Payments Dashboard</h1>
+            <p className="text-gray-600">Track and manage all payment links and transactions</p>
+          </div>
+          
+          {/* Global Search Box */}
+          <div className="bg-white rounded-lg shadow-sm p-6">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Search Payments</h2>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Mobile</label>
+                <input
+                  type="text"
+                  placeholder="Enter mobile number"
+                  value={globalSearch.mobile}
+                  onChange={(e) => setGlobalSearch(prev => ({ ...prev, mobile: e.target.value }))}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                <input
+                  type="email"
+                  placeholder="Enter email address"
+                  value={globalSearch.email}
+                  onChange={(e) => setGlobalSearch(prev => ({ ...prev, email: e.target.value }))}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">GSTIN</label>
+                <input
+                  type="text"
+                  placeholder="Enter GSTIN"
+                  value={globalSearch.gstin}
+                  onChange={(e) => setGlobalSearch(prev => ({ ...prev, gstin: e.target.value }))}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Payment ID</label>
+                <input
+                  type="text"
+                  placeholder="Enter payment ID"
+                  value={globalSearch.paymentId}
+                  onChange={(e) => setGlobalSearch(prev => ({ ...prev, paymentId: e.target.value }))}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            </div>
+          </div>
+          
+          {/* Quick Filters Section */}
+          <div className="bg-white rounded-lg shadow-sm p-6">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Quick Filters</h2>
+            <div className="flex flex-wrap gap-3">
+              {/* Date Filter */}
+              <div>
+                <select
+                  value={dateRange}
+                  onChange={(e) => setDateRange(e.target.value)}
+                  className="px-4 py-2 border-2 border-gray-300 rounded-lg text-sm font-medium hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white cursor-pointer"
+                >
+                  <option value="all">All Time</option>
+                  <option value="today">Today</option>
+                  <option value="yesterday">Yesterday</option>
+                  <option value="last7days">Last 7 Days</option>
+                  <option value="last30days">Last 30 Days</option>
+                  <option value="thismonth">This Month</option>
+                  <option value="lastmonth">Last Month</option>
+                  <option value="custom">Custom Date Range</option>
+                </select>
+              </div>
+              
+              {/* Status Quick Filters */}
+              {[
+                { id: 'pending', label: 'Pending', count: transactions.filter(t => t.status === 'Pending').length, color: 'yellow' },
+                { id: 'received', label: 'Received', count: transactions.filter(t => t.status === 'Success').length, color: 'green' },
+                { id: 'expired', label: 'Expired', count: transactions.filter(t => t.status === 'Expired').length, color: 'red' },
+                { id: 'cancelled', label: 'Cancelled', count: transactions.filter(t => t.status === 'Cancelled').length, color: 'gray' }
+              ].map((filter) => (
+                <button
+                  key={filter.id}
+                  onClick={() => setSelectedQuickFilter(selectedQuickFilter === filter.id ? '' : filter.id)}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all border-2 ${
+                    selectedQuickFilter === filter.id
+                      ? `bg-${filter.color}-100 border-${filter.color}-500 text-${filter.color}-800`
+                      : 'bg-white border-gray-300 text-gray-700 hover:border-gray-400'
+                  }`}
+                >
+                  {filter.label}
+                  <span className={`ml-2 px-2 py-0.5 rounded-full text-xs font-bold ${
                     selectedQuickFilter === filter.id
                       ? 'bg-white text-gray-900'
-                      : 'bg-gray-200 text-gray-700'
+                      : 'bg-gray-100 text-gray-700'
                   }`}>
                     {filter.count}
                   </span>
+                </button>
+              ))}
+            </div>
+          </div>
+          
+          {/* Advanced Filters Panel */}
+          <div className="bg-white rounded-lg shadow-sm">
+            <button
+              onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
+              className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+            >
+              <div className="flex items-center space-x-2">
+                <h2 className="text-lg font-semibold text-gray-900">Advanced Filters</h2>
+                {Object.values(advancedFilters).some(v => v && v.length > 0 && v !== 'All') && (
+                  <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded">Active</span>
                 )}
-              </button>
-            ))}
+              </div>
+              {showAdvancedFilters ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+            </button>
+            
+            {showAdvancedFilters && (
+              <div className="p-6 border-t border-gray-200">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Partner Name</label>
+                    <input
+                      type="text"
+                      placeholder="Enter partner name"
+                      value={advancedFilters.partnerName}
+                      onChange={(e) => setAdvancedFilters(prev => ({ ...prev, partnerName: e.target.value }))}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Generated By</label>
+                    <input
+                      type="text"
+                      placeholder="Employee/Partner name"
+                      value={advancedFilters.generatedBy}
+                      onChange={(e) => setAdvancedFilters(prev => ({ ...prev, generatedBy: e.target.value }))}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Transaction Type</label>
+                    <select
+                      value={advancedFilters.transactionType}
+                      onChange={(e) => setAdvancedFilters(prev => ({ ...prev, transactionType: e.target.value }))}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                    >
+                      <option value="">All Types</option>
+                      <option value="New Sales">New Sales</option>
+                      <option value="Renewal">Renewal</option>
+                      <option value="Upgrade">Upgrade</option>
+                    </select>
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Product</label>
+                    <select
+                      value={advancedFilters.product}
+                      onChange={(e) => setAdvancedFilters(prev => ({ ...prev, product: e.target.value }))}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                    >
+                      <option value="">All Products</option>
+                      <option value="Desktop">Busy Desktop</option>
+                      <option value="Busy Online">Busy Online</option>
+                      <option value="Mazu">Mazu</option>
+                      <option value="RDP">RDP</option>
+                    </select>
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">License Type</label>
+                    <select
+                      value={advancedFilters.licenseType}
+                      onChange={(e) => setAdvancedFilters(prev => ({ ...prev, licenseType: e.target.value }))}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                    >
+                      <option value="All">All</option>
+                      <option value="Perpetual">Perpetual</option>
+                      <option value="Subscription">Subscription</option>
+                    </select>
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Offers</label>
+                    <select
+                      value={advancedFilters.offers}
+                      onChange={(e) => setAdvancedFilters(prev => ({ ...prev, offers: e.target.value }))}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                    >
+                      <option value="All">All</option>
+                      <option value="With">With Offer</option>
+                      <option value="Without">Without Offer</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div className="mt-4 flex items-center justify-end space-x-3">
+                  <button
+                    onClick={() => {
+                      setAdvancedFilters({
+                        partnerName: '',
+                        status: [],
+                        generatedBy: '',
+                        transactionType: '',
+                        scheme: '',
+                        product: '',
+                        licenseType: 'All',
+                        linkValidityFrom: '',
+                        linkValidityTo: '',
+                        subscriptionId: '',
+                        offers: 'All'
+                      });
+                    }}
+                    className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm"
+                  >
+                    Clear Filters
+                  </button>
+                  <button
+                    onClick={() => setShowAdvancedFilters(false)}
+                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm"
+                  >
+                    Apply Filters
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
 
           <div>
