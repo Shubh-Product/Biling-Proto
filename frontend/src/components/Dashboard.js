@@ -3716,18 +3716,18 @@ const Dashboard = () => {
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Header */}
         <header className="bg-white border-b border-gray-200">
-          {/* Top Row - Title and Right Actions */}
+          {/* Single Row - Title, Search Bar, and Right Actions */}
           <div className="px-6 py-4">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-6">
               {/* Page Title */}
-              <div>
+              <div className="flex-shrink-0">
                 {activeMenu === 'payments' && (
                   <>
                     <button
                       onClick={() => handleNavigationAttempt(() => setShowCreateForm(false), 'dashboard')}
-                      className="text-2xl font-bold text-blue-900 hover:text-blue-800 transition-colors"
+                      className="text-2xl font-bold text-blue-900 hover:text-blue-800 transition-colors whitespace-nowrap"
                     >
-                      BIPL Sales Portal
+                      My Payments Dashboard
                     </button>
                     {showCreateForm && (
                       <span className="text-xl font-semibold text-gray-600"> / Generate Payment Link</span>
@@ -3741,8 +3741,25 @@ const Dashboard = () => {
                 )}
               </div>
 
+              {/* Search Bar - Center */}
+              {activeMenu === 'payments' && !showCreateForm && (
+                <div className="flex-1 max-w-2xl relative">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                  <input
+                    type="text"
+                    placeholder="Search by Mobile, GSTIN, Email, Lead ID..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full pl-11 pr-12 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
+                  />
+                  <button className="absolute right-3 top-1/2 transform -translate-y-1/2 p-1 hover:bg-gray-200 rounded transition-colors">
+                    <Filter className="w-4 h-4 text-gray-600" />
+                  </button>
+                </div>
+              )}
+
               {/* Right Side Actions */}
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-3 flex-shrink-0">
                 {/* ASM Dropdown */}
                 <select className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white hover:bg-gray-50 transition-colors">
                   <option>ASM</option>
@@ -3774,23 +3791,9 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Search Bar and Filters Row - Only show on payments dashboard */}
+          {/* Filter Buttons Row - Only show on payments dashboard */}
           {activeMenu === 'payments' && !showCreateForm && (
-            <div className="px-6 pb-4 space-y-3">
-              {/* Search Bar */}
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                <input
-                  type="text"
-                  placeholder="Search by Mobile, GSTIN, Email, Lead ID..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-11 pr-12 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
-                />
-                <button className="absolute right-3 top-1/2 transform -translate-y-1/2 p-1 hover:bg-gray-200 rounded transition-colors">
-                  <Filter className="w-4 h-4 text-gray-600" />
-                </button>
-              </div>
+            <div className="px-6 pb-4">
 
               {/* Filter Buttons */}
               <div className="flex items-center space-x-2 overflow-x-auto pb-1">
