@@ -1002,8 +1002,8 @@ const Dashboard = () => {
       }
     });
     
-    setShowPaymentLinkPage(true);
-    setShowCreateForm(false);
+    // Show modal instead of navigating to new page
+    setShowPaymentLinkModal(true);
   };
 
   // Serial Number Validation for Renewal/Upgrade
