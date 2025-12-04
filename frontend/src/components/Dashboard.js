@@ -2627,17 +2627,6 @@ const Dashboard = () => {
 
     return (
       <div className="max-w-4xl mx-auto p-6">
-        <div className="mb-6">
-          <Button
-            variant="ghost"
-            onClick={() => setShowPaymentLinkPage(false)}
-            className="mb-4"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Dashboard
-          </Button>
-        </div>
-
         {/* Payment Link Sent Confirmation */}
         <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-6">
           <div className="flex items-center space-x-2 mb-4">
