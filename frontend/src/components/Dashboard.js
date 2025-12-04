@@ -8234,83 +8234,92 @@ const Dashboard = () => {
                             )}
                           </div>
                         </td>
-                        {/* Status - Badge Style */}
+                        {/* Status - Initiated, Pending, Received, Failed, Expired, Cancelled, Inv Generated, Inv Pending */}
                         <td className="py-3 px-4 text-center">
                           {(() => {
-                            // For Success transactions, show Invoice status instead
-                            if (transaction.status === 'Success') {
-                              const invoiceStatus = getInvoiceStatus(transaction);
-                              return (
-                                <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
-                                  invoiceStatus === 'Generated' 
-                                    ? 'bg-green-100 text-green-800' 
-                                    : 'bg-yellow-100 text-yellow-800'
-                                }`}>
-                                  {invoiceStatus}
-                                </span>
-                              );
-                            }
-                            
-                            const statusInfo = getStatusDisplay(transaction);
+                            const status = transaction.status;
                             let badgeClass = 'bg-gray-100 text-gray-800';
+                            let statusText = status;
                             
-                            if (statusInfo.text.includes('Pending')) {
+                            // Map statuses to display text
+                            if (status === 'Success') {
+                              const invoiceStatus = getInvoiceStatus?.(transaction) || 'Generated';
+                              statusText = invoiceStatus === 'Generated' ? 'Inv Generated' : 'Inv Pending';
+                              badgeClass = invoiceStatus === 'Generated' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800';
+                            } else if (status === 'Initiated') {
+                              badgeClass = 'bg-blue-100 text-blue-800';
+                              statusText = 'Initiated';
+                            } else if (status === 'Pending') {
                               badgeClass = 'bg-yellow-100 text-yellow-800';
-                            } else if (statusInfo.text.includes('Failed')) {
+                              statusText = 'Pending';
+                            } else if (status === 'Failed') {
                               badgeClass = 'bg-red-100 text-red-800';
-                            } else if (statusInfo.text.includes('Due')) {
+                              statusText = 'Failed';
+                            } else if (status === 'Expired') {
                               badgeClass = 'bg-orange-100 text-orange-800';
-                            } else if (statusInfo.text.includes('Active')) {
-                              badgeClass = 'bg-green-100 text-green-800';
+                              statusText = 'Expired';
+                            } else if (status === 'Cancelled') {
+                              badgeClass = 'bg-gray-200 text-gray-800';
+                              statusText = 'Cancelled';
                             }
 
                             return (
                               <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${badgeClass}`}>
-                                {statusInfo.text.replace('\n', ' ')}
+                                {statusText}
                               </span>
                             );
                           })()}
                         </td>
-                        {/* Actions - Icon Style */}
-                        <td className="py-3 px-4 text-center">
-                          <div className="flex items-center justify-center space-x-2">
-                            {/* Email Icon */}
+                        
+                        {/* Payment Method - Card, UPI, Netbanking */}
+                        <td className="py-3 px-4">
+                          <p className="text-gray-900 text-sm">
+                            {transaction.payment_method || 'N/A'}
+                          </p>
+                        </td>
+                        
+                        {/* Actions - Resend, WhatsApp, Three Dots Menu */}
+                        <td className="py-3 px-4">
+                          <div className="flex items-center justify-center space-x-1">
+                            {/* Resend Payment Link */}
                             <button
                               onClick={() => {
-                                setEmailFormData({
-                                  customerEmail: 'customer@example.com',
-                                  transactionId: transaction.id
-                                });
-                                setSelectedTransaction(transaction);
-                                setShowEmailModal(true);
+                                console.log('Resend payment link for:', transaction.id);
                               }}
-                              className="text-gray-600 hover:text-blue-600 p-1.5 rounded hover:bg-blue-50"
-                              title="Send email"
+                              className="text-blue-600 hover:text-blue-800 p-1.5 rounded hover:bg-blue-50"
+                              title="Resend Payment Link"
                             >
-                              <Mail className="w-5 h-5" />
+                              <RefreshCw className="w-4 h-4" />
                             </button>
                             
-                            {/* Phone Icon */}
+                            {/* WhatsApp */}
                             <button
                               onClick={() => {
-                                console.log('Call customer:', transaction.salesperson?.mobile);
+                                window.open(`https://wa.me/91${transaction.customer_mobile}`, '_blank');
                               }}
-                              className="text-gray-600 hover:text-green-600 p-1.5 rounded hover:bg-green-50"
-                              title="Call customer"
+                              className="text-green-600 hover:text-green-800 p-1.5 rounded hover:bg-green-50"
+                              title="Send via WhatsApp"
                             >
-                              <Smartphone className="w-5 h-5" />
+                              <MessageSquare className="w-4 h-4" />
                             </button>
                             
-                            {/* Clock/Schedule Icon */}
-                            <button
-                              onClick={() => {
-                                console.log('Schedule follow-up for:', transaction.id);
-                              }}
-                              className="text-gray-600 hover:text-orange-600 p-1.5 rounded hover:bg-orange-50"
-                              title="Schedule follow-up"
-                            >
-                              <RotateCcw className="w-5 h-5" />
-                            </button>
+                            {/* Three Dots Menu - Download Invoice, Send Invoice, Cancel */}
+                            <div className="relative">
+                              <button
+                                onClick={() => {
+                                  // Toggle menu for this transaction
+                                  console.log('Show menu for:', transaction.id);
+                                }}
+                                className="text-gray-600 hover:text-gray-800 p-1.5 rounded hover:bg-gray-50"
+                                title="More actions"
+                              >
+                                <MoreVertical className="w-4 h-4" />
+                              </button>
+                              {/* Dropdown menu would be implemented here with:
+                                  - Download Invoice
+                                  - Send Invoice
+                                  - Cancel */}
+                            </div>
                           </div>
                         </td>
                       </tr>
