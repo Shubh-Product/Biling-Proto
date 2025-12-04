@@ -1090,3 +1090,20 @@ frontend:
 agent_communication:
     - agent: "main"
       message: "✅ HEADER LAYOUT UPDATE COMPLETED - Moved search bar to header row and renamed to My Payments Dashboard. Key changes: Single-row layout with left (title), center (search), right (actions), Title renamed to 'My Payments Dashboard' with whitespace-nowrap, Search bar uses flex-1 with max-w-2xl for responsive width, Added gap-6 for proper spacing between sections, Filter buttons remain in separate row below. Clean, compact header design with better space utilization. Ready for use."
+
+frontend:
+  - task: "Remove Export Button and Move Generate Payment Link to Filter Row"
+    implemented: true
+    working: "YES"
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: "YES"
+          agent: "main"
+          comment: "✅ Successfully removed Export button and moved Generate Payment Link button to filter row. Removed entire action buttons section containing Export button with Download icon. Moved Generate Payment Link button from main content area to filter buttons row in header. Updated filter row to use justify-between layout with flex-1 for filters (left) and flex-shrink-0 for button (right). Button maintains blue styling (bg-blue-600) with Plus icon and whitespace-nowrap to prevent wrapping. Filter buttons now share same row with Generate Payment Link button creating cleaner, more compact interface. Frontend compiled successfully. Better space utilization with all controls in header area."
+
+agent_communication:
+    - agent: "main"
+      message: "✅ BUTTON LAYOUT UPDATE COMPLETED - Removed Export button and relocated Generate Payment Link. Key changes: Removed Export button with Download icon entirely, Moved Generate Payment Link button to filter row (same row as quick filters), Updated layout to justify-between with filters on left and button on right, Button maintains blue styling and Plus icon, Added whitespace-nowrap and flex-shrink-0 for proper button sizing. Cleaner interface with all controls consolidated in header area. Ready for use."
