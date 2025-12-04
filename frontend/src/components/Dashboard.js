@@ -8309,19 +8309,61 @@ const Dashboard = () => {
                             {/* Three Dots Menu - Download Invoice, Send Invoice, Cancel */}
                             <div className="relative">
                               <button
-                                onClick={() => {
-                                  // Toggle menu for this transaction
-                                  console.log('Show menu for:', transaction.id);
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setOpenMenuId(openMenuId === transaction.id ? null : transaction.id);
                                 }}
                                 className="text-gray-600 hover:text-gray-800 p-1.5 rounded hover:bg-gray-50"
                                 title="More actions"
                               >
                                 <MoreVertical className="w-4 h-4" />
                               </button>
-                              {/* Dropdown menu would be implemented here with:
-                                  - Download Invoice
-                                  - Send Invoice
-                                  - Cancel */}
+                              
+                              {/* Dropdown Menu */}
+                              {openMenuId === transaction.id && (
+                                <div 
+                                  className="absolute right-0 top-full mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  <div className="py-1">
+                                    {/* Download Invoice */}
+                                    <button
+                                      onClick={() => {
+                                        console.log('Download invoice for:', transaction.id);
+                                        setOpenMenuId(null);
+                                      }}
+                                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center space-x-2"
+                                    >
+                                      <Download className="w-4 h-4" />
+                                      <span>Download Invoice</span>
+                                    </button>
+                                    
+                                    {/* Send Invoice */}
+                                    <button
+                                      onClick={() => {
+                                        console.log('Send invoice for:', transaction.id);
+                                        setOpenMenuId(null);
+                                      }}
+                                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center space-x-2"
+                                    >
+                                      <Mail className="w-4 h-4" />
+                                      <span>Send Invoice</span>
+                                    </button>
+                                    
+                                    {/* Cancel */}
+                                    <button
+                                      onClick={() => {
+                                        console.log('Cancel transaction:', transaction.id);
+                                        setOpenMenuId(null);
+                                      }}
+                                      className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center space-x-2"
+                                    >
+                                      <X className="w-4 h-4" />
+                                      <span>Cancel</span>
+                                    </button>
+                                  </div>
+                                </div>
+                              )}
                             </div>
                           </div>
                         </td>
