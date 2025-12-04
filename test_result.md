@@ -920,3 +920,20 @@ frontend:
 agent_communication:
     - agent: "main"
       message: "✅ INVOICE-STYLE ORDER SUMMARY COMPLETED - Transformed Order Summary into professional invoice table. Key features: 1) 6-column table structure (S.No, Product, Duration, Quantity, Rate, Amount), 2) Dynamic line item generation from planQuantities state, 3) Automatic serial numbering, 4) Real-time calculations for each row (Rate × Quantity = Amount), 5) Summary section with Total, License Discount, TDS toggle, TDS amount, GST, and Grand Total, 6) Responsive to quantity changes, 7) Clean table styling with borders, hover effects, 8) Empty state message when no items selected. Desktop product uses new invoice format, other products retain legacy format. Ready for testing to verify invoice table displays correctly and calculations work as expected."
+
+frontend:
+  - task: "Convert Duration Options to Radio Buttons with Reduced Size"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "✅ Successfully converted Duration options from checkboxes to radio buttons and reduced box sizes. Changed input type from 'checkbox' to 'radio' for mutually exclusive selection. Reduced box dimensions: width from w-32 to w-28, padding from p-2 to px-2 py-1.5 for more compact design. Reduced radio button size from w-4 h-4 to w-3.5 h-3.5. Made 20% OFF text smaller (text-[10px] instead of text-xs). Simplified onChange logic - now uses e.target.value directly instead of e.target.checked conditional. Radio buttons ensure only one duration can be selected at a time (360 Days or 1080 Days). Maintains orange theme (border-orange-500, bg-orange-50) when selected. Cleaner, more compact design with proper radio button behavior."
+
+agent_communication:
+    - agent: "main"
+      message: "✅ DURATION OPTIONS UPDATE COMPLETED - Converted Duration checkboxes to radio buttons with reduced sizes. Key changes: 1) Changed from checkbox to radio button type for proper single-selection behavior, 2) Reduced box width from 32 to 28 units (w-32 → w-28), 3) Reduced padding from p-2 to px-2 py-1.5, 4) Reduced radio button size from 4×4 to 3.5×3.5 units, 5) Made 20% OFF label smaller (text-[10px]), 6) Simplified onChange handler to use value directly. Now users can only select one duration option at a time (mutually exclusive), which is more appropriate UX than checkboxes. Ready for testing to verify radio button behavior and compact sizing work correctly."
