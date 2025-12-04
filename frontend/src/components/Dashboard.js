@@ -8971,7 +8971,7 @@ const Dashboard = () => {
                   onClick={() => {
                     setShowPaymentLinkModal(false);
                     // Reset form for new payment link
-                    handleCreateNew();
+                    resetForm();
                   }}
                   className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center space-x-2 transition-colors"
                 >
