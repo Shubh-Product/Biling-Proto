@@ -954,3 +954,20 @@ frontend:
 agent_communication:
     - agent: "main"
       message: "✅ CATEGORY LABEL CONSISTENCY UPDATE COMPLETED - Made Category field label consistent with other fields in Prospect Details section. Removed custom text-base font-semibold styling from Category label at two locations. Now uses default Label styling matching all other form fields (Mobile, Email, Name, GSTIN, etc.). Simple but important consistency fix for better visual hierarchy. Ready for testing to verify label appears with consistent sizing."
+
+frontend:
+  - task: "Convert Prospect Details to Accordion with Save and Continue"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "✅ Successfully converted Prospect Details section into an accordion component. Added state management: isProspectDetailsOpen (default: true) and isProspectDetailsSaved (default: false). Accordion header shows section title with checkmark and 'Saved' label after validation. Header is clickable only after save - toggles open/closed state with ChevronUp/ChevronDown icons. When user clicks 'Save and Continue' button, validateCustomerDetails function now sets isProspectDetailsSaved to true and collapses accordion (isProspectDetailsOpen to false). Accordion content (all form fields) wrapped in conditional rendering based on isProspectDetailsOpen state. Subsequent sections (Client References, Product Selection) appear below collapsed accordion. Added accordion state resets to all form reset functions (handleCreateNew, reset button clicks, transaction type changes). Accordion styling: blue background when open, gray when closed, with border and smooth transitions. Professional accordion UI with proper state management and user flow."
+
+agent_communication:
+    - agent: "main"
+      message: "✅ PROSPECT DETAILS ACCORDION IMPLEMENTATION COMPLETED - Transformed Prospect Details into collapsible accordion. Key features: 1) Added isProspectDetailsOpen and isProspectDetailsSaved state variables, 2) Accordion header with title, checkmark indicator, and chevron toggle, 3) Header clickable only after save for expand/collapse, 4) Save and Continue button triggers validation, saves state, and collapses accordion, 5) Subsequent sections (Client References, Product Selection, Order Summary) appear below collapsed accordion, 6) State resets on all form resets, 7) Visual feedback with blue (open) and gray (closed) backgrounds. Clean accordion pattern improves form UX by organizing sections and showing progress. Ready for testing to verify accordion behavior, save functionality, and section transitions work correctly."
