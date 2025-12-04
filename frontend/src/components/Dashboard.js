@@ -7683,8 +7683,155 @@ const Dashboard = () => {
                     <h4 id="order-summary-section" className="text-xl font-bold text-blue-900 mb-4">Order Summary</h4>
                     
                     <div>
-                      {/* Product & Pricing Details */}
-                      <div>
+                      {/* Invoice-Style Table */}
+                      <div className="bg-white rounded-lg border border-gray-300 overflow-hidden">
+                        <table className="w-full">
+                          <thead className="bg-gray-100 border-b border-gray-300">
+                            <tr>
+                              <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">S.No</th>
+                              <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">Product</th>
+                              <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">Duration</th>
+                              <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">Quantity</th>
+                              <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Rate</th>
+                              <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Amount</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-gray-200">
+                            {/* Generate line items from planQuantities */}
+                            {(() => {
+                              const lineItems = [];
+                              let serialNo = 1;
+                              
+                              // For Desktop product with plan quantities
+                              if (formData.productType === "Desktop" && formData.duration) {
+                                const plans = getDesktopPlans(formData.licenseModel, formData.duration);
+                                plans.forEach(plan => {
+                                  const quantity = planQuantities[plan.name] || 0;
+                                  if (quantity > 0) {
+                                    const rate = plan.price;
+                                    const amount = rate * quantity;
+                                    lineItems.push(
+                                      <tr key={plan.name} className="hover:bg-gray-50">
+                                        <td className="px-3 py-2 text-sm text-gray-700">{serialNo++}</td>
+                                        <td className="px-3 py-2 text-sm text-gray-900">{plan.name}</td>
+                                        <td className="px-3 py-2 text-sm text-center text-gray-700">{formData.duration} Days</td>
+                                        <td className="px-3 py-2 text-sm text-center text-gray-700">{quantity}</td>
+                                        <td className="px-3 py-2 text-sm text-right text-gray-700">₹{rate.toLocaleString('en-IN')}</td>
+                                        <td className="px-3 py-2 text-sm text-right font-medium text-gray-900">₹{amount.toLocaleString('en-IN')}</td>
+                                      </tr>
+                                    );
+                                  }
+                                });
+                              }
+                              
+                              // Show "No items" message if no line items
+                              if (lineItems.length === 0) {
+                                return (
+                                  <tr>
+                                    <td colSpan="6" className="px-3 py-4 text-sm text-center text-gray-500 italic">
+                                      Select plans and add quantities to see line items
+                                    </td>
+                                  </tr>
+                                );
+                              }
+                              
+                              return lineItems;
+                            })()}
+                          </tbody>
+                        </table>
+                        
+                        {/* Summary Section */}
+                        {(() => {
+                          // Calculate totals
+                          let subtotal = 0;
+                          if (formData.productType === "Desktop" && formData.duration) {
+                            const plans = getDesktopPlans(formData.licenseModel, formData.duration);
+                            plans.forEach(plan => {
+                              const quantity = planQuantities[plan.name] || 0;
+                              if (quantity > 0) {
+                                subtotal += plan.price * quantity;
+                              }
+                            });
+                          }
+                          
+                          // Calculate discount if applicable
+                          const licenseDiscount = getDiscountByLicenseType(formData.licenseType);
+                          const discountAmount = Math.round((subtotal * licenseDiscount) / 100);
+                          const afterDiscount = subtotal - discountAmount;
+                          
+                          // Calculate TDS if enabled
+                          const tdsAmount = formData.deductTds ? Math.round(afterDiscount * 0.1) : 0;
+                          const afterTds = afterDiscount - tdsAmount;
+                          
+                          // Calculate GST
+                          const gstAmount = Math.round(afterTds * 0.18);
+                          const grandTotal = afterTds + gstAmount;
+                          
+                          // Only show summary if there are line items
+                          if (subtotal === 0) return null;
+                          
+                          return (
+                            <div className="border-t border-gray-300 bg-gray-50">
+                              <div className="px-3 py-2 space-y-2">
+                                {/* Total */}
+                                <div className="flex justify-between items-center">
+                                  <span className="text-sm font-medium text-gray-700">Total:</span>
+                                  <span className="text-sm font-semibold text-gray-900">₹{subtotal.toLocaleString('en-IN')}</span>
+                                </div>
+                                
+                                {/* License Discount */}
+                                {licenseDiscount > 0 && (
+                                  <div className="flex justify-between items-center">
+                                    <span className="text-sm font-medium text-gray-700">License Discount ({licenseDiscount}%):</span>
+                                    <span className="text-sm font-semibold text-green-600">-₹{discountAmount.toLocaleString('en-IN')}</span>
+                                  </div>
+                                )}
+                                
+                                {/* TDS Toggle */}
+                                <div className="flex justify-between items-center border-t pt-2">
+                                  <span className="text-sm font-medium text-gray-700">Deduct TDS:</span>
+                                  <label className="relative inline-flex items-center cursor-pointer">
+                                    <input
+                                      type="checkbox"
+                                      checked={formData.deductTds}
+                                      onChange={(e) => handleTdsToggle(e.target.checked)}
+                                      className="sr-only peer"
+                                    />
+                                    <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+                                    <span className="ml-2 text-xs font-medium text-gray-700">
+                                      {formData.deductTds ? 'ON' : 'OFF'}
+                                    </span>
+                                  </label>
+                                </div>
+                                
+                                {/* TDS Deduction */}
+                                {formData.deductTds && (
+                                  <div className="flex justify-between items-center">
+                                    <span className="text-sm font-medium text-gray-700">TDS (10%):</span>
+                                    <span className="text-sm font-semibold text-red-600">-₹{tdsAmount.toLocaleString('en-IN')}</span>
+                                  </div>
+                                )}
+                                
+                                {/* GST */}
+                                <div className="flex justify-between items-center">
+                                  <span className="text-sm font-medium text-gray-700">GST (18%):</span>
+                                  <span className="text-sm font-semibold text-gray-900">₹{gstAmount.toLocaleString('en-IN')}</span>
+                                </div>
+                                
+                                {/* Grand Total */}
+                                <div className="flex justify-between items-center border-t pt-2 mt-2">
+                                  <span className="text-base font-bold text-gray-900">Grand Total:</span>
+                                  <span className="text-lg font-bold text-blue-600">₹{grandTotal.toLocaleString('en-IN')}</span>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })()}
+                      </div>
+                      
+                      {/* Legacy Product & Pricing Details for non-Desktop products */}
+                      {formData.productType !== "Desktop" && (
+                        <div className="mt-4">
                         <h5 className="font-semibold text-gray-900 mb-3">Product & Pricing</h5>
                         <div className="space-y-2 text-sm">
                           <div className="flex justify-between">
