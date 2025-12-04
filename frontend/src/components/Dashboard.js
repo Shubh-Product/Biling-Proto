@@ -7319,32 +7319,32 @@ const Dashboard = () => {
                                 { value: "360", label: "360 Days" },
                                 { value: "1080", label: "1080 Days" }
                               ].map((duration) => (
-                                <label key={duration.value} className={`flex items-center cursor-pointer p-2 border-2 rounded-lg hover:shadow-md transition-all w-32 ${
-                                  formData.duration === duration.value.split(' ')[0] 
+                                <label key={duration.value} className={`flex items-center cursor-pointer px-2 py-1.5 border-2 rounded-lg hover:shadow-md transition-all w-28 ${
+                                  formData.duration === duration.value
                                     ? "border-orange-500 bg-orange-50" 
                                     : "border-gray-200"
                                 }`}>
                                   <input
-                                    type="checkbox"
+                                    type="radio"
                                     name="duration"
-                                    value={duration.value.split(' ')[0]}
-                                    checked={formData.duration === duration.value.split(' ')[0]}
+                                    value={duration.value}
+                                    checked={formData.duration === duration.value}
                                     onChange={(e) => {
                                       setFormData(prev => ({ 
                                         ...prev, 
                                         licenseModel: "Subscription", // Set default license model
-                                        duration: e.target.checked ? duration.value.split(' ')[0] : "",
+                                        duration: e.target.value,
                                         planName: ""
                                       }));
                                       setPlanQuantities({}); // Reset plan quantities when duration changes
                                     }}
-                                    className="w-4 h-4 text-orange-600 border-gray-300 focus:ring-orange-500 mr-2"
+                                    className="w-3.5 h-3.5 text-orange-600 border-gray-300 focus:ring-orange-500 mr-2"
                                   />
                                   <div className="flex flex-col">
                                     <span className="text-gray-700 font-medium text-xs">{duration.label}</span>
                                     {/* Better 20% OFF styling - inline with the text */}
                                     {duration.value === "1080" && (
-                                      <span className="text-xs text-green-600 font-semibold">
+                                      <span className="text-[10px] text-green-600 font-semibold">
                                         20% OFF
                                       </span>
                                     )}
