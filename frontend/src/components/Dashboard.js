@@ -2171,6 +2171,8 @@ const Dashboard = () => {
     setVisibleClientReferences(2);
     setHasUnsavedChanges(false);
     setPlanQuantities({}); // Reset plan quantities
+    setIsProspectDetailsOpen(true); // Reset accordion to open
+    setIsProspectDetailsSaved(false); // Reset saved state
   };
 
 
