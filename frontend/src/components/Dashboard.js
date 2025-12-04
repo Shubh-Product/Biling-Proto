@@ -1645,6 +1645,8 @@ const Dashboard = () => {
         return getDateFilteredTransactions().filter(t => t.status === 'Expired');
       case 'cancelled':
         return getDateFilteredTransactions().filter(t => t.status === 'Cancelled');
+      case 'draft':
+        return getDateFilteredTransactions().filter(t => t.status === 'Draft');
       case 'renewal':
         // Apply renewal sub-filter
         switch (selectedRenewalSubFilter) {
