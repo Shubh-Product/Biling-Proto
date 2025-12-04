@@ -8435,6 +8435,155 @@ const Dashboard = () => {
         </div>
       )}
 
+      {/* Order Summary Modal */}
+      {showOrderSummaryModal && selectedTransaction && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setShowOrderSummaryModal(false)}>
+          <div className="bg-white rounded-lg max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            {/* Modal Header */}
+            <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+              <h2 className="text-xl font-bold text-gray-900">Order Summary</h2>
+              <button
+                onClick={() => setShowOrderSummaryModal(false)}
+                className="text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6">
+              {/* Customer Information */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">Customer Information</h3>
+                <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Name:</span>
+                    <span className="font-medium text-gray-900">{selectedTransaction.customer_name}</span>
+                  </div>
+                  {selectedTransaction.customer_company && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Company:</span>
+                      <span className="font-medium text-gray-900">{selectedTransaction.customer_company}</span>
+                    </div>
+                  )}
+                  {selectedTransaction.customer_email && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Email:</span>
+                      <span className="font-medium text-gray-900">{selectedTransaction.customer_email}</span>
+                    </div>
+                  )}
+                  {selectedTransaction.customer_mobile && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Mobile:</span>
+                      <span className="font-medium text-gray-900">{selectedTransaction.customer_mobile}</span>
+                    </div>
+                  )}
+                  {selectedTransaction.customer_city && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">City:</span>
+                      <span className="font-medium text-gray-900">{selectedTransaction.customer_city}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Order Details */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">Order Details</h3>
+                <div className="bg-blue-50 rounded-lg p-4 space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-gray-700">Transaction ID:</span>
+                    <span className="font-medium text-gray-900">{selectedTransaction.id}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-700">Date:</span>
+                    <span className="font-medium text-gray-900">{new Date(selectedTransaction.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-700">Product:</span>
+                    <span className="font-medium text-gray-900">{selectedTransaction.product_type}</span>
+                  </div>
+                  {selectedTransaction.plan_name && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-700">Plan:</span>
+                      <span className="font-medium text-gray-900">{selectedTransaction.plan_name}</span>
+                    </div>
+                  )}
+                  {selectedTransaction.license_type && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-700">License Type:</span>
+                      <span className="font-medium text-gray-900">{selectedTransaction.license_type}</span>
+                    </div>
+                  )}
+                  {selectedTransaction.duration && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-700">Duration:</span>
+                      <span className="font-medium text-gray-900">{selectedTransaction.duration} days</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Pricing Breakdown */}
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">Pricing Breakdown</h3>
+                <div className="bg-white border border-gray-200 rounded-lg p-4 space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Base Amount:</span>
+                    <span className="font-medium text-gray-900">₹{selectedTransaction.base_amount?.toLocaleString('en-IN') || '0'}</span>
+                  </div>
+                  {selectedTransaction.discount_amount > 0 && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Discount ({selectedTransaction.discount_percent}%):</span>
+                      <span className="font-medium text-green-600">-₹{selectedTransaction.discount_amount?.toLocaleString('en-IN')}</span>
+                    </div>
+                  )}
+                  {selectedTransaction.tds_amount > 0 && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">TDS Deducted (10%):</span>
+                      <span className="font-medium text-orange-600">-₹{selectedTransaction.tds_amount?.toLocaleString('en-IN')}</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">GST (18%):</span>
+                    <span className="font-medium text-gray-900">₹{selectedTransaction.tax_amount?.toLocaleString('en-IN') || '0'}</span>
+                  </div>
+                  <div className="border-t pt-3 flex justify-between">
+                    <span className="text-gray-900 font-bold text-lg">Final Amount:</span>
+                    <span className="font-bold text-blue-600 text-lg">₹{selectedTransaction.final_amount?.toLocaleString('en-IN') || '0'}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Status Badge */}
+              <div className="mt-6 flex justify-center">
+                <span className={`inline-block px-4 py-2 rounded-full text-sm font-semibold ${
+                  selectedTransaction.status === 'Success' ? 'bg-green-100 text-green-800' :
+                  selectedTransaction.status === 'Pending' ? 'bg-yellow-100 text-yellow-800' :
+                  selectedTransaction.status === 'Failed' ? 'bg-red-100 text-red-800' :
+                  selectedTransaction.status === 'Expired' ? 'bg-orange-100 text-orange-800' :
+                  selectedTransaction.status === 'Cancelled' ? 'bg-gray-200 text-gray-800' :
+                  'bg-blue-100 text-blue-800'
+                }`}>
+                  Status: {selectedTransaction.status}
+                </span>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="sticky bottom-0 bg-gray-50 border-t border-gray-200 px-6 py-4 flex justify-end gap-3">
+              <Button
+                onClick={() => setShowOrderSummaryModal(false)}
+                variant="outline"
+                className="border-gray-300 text-gray-700 hover:bg-gray-100"
+              >
+                Close
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* License Type Change Warning Dialog */}
       {showLicenseChangeWarning && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[60]">
