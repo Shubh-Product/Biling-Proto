@@ -8433,13 +8433,17 @@ const Dashboard = () => {
               {/* Customer Information */}
               <div className="mb-4">
                 <h3 className="text-sm font-semibold text-gray-700 mb-2">Customer Information:</h3>
-                <div className="flex items-center gap-2 text-sm">
+                <div className="flex items-center gap-2 text-sm flex-wrap">
+                  <span className="text-gray-600">Name:</span>
                   <span className="font-medium text-gray-900">{selectedTransaction.customer_name}</span>
                   <span className="text-gray-400">|</span>
+                  <span className="text-gray-600">Company:</span>
                   <span className="text-gray-900">{selectedTransaction.customer_company || 'N/A'}</span>
                   <span className="text-gray-400">|</span>
+                  <span className="text-gray-600">Mobile:</span>
                   <span className="text-gray-900">{selectedTransaction.customer_mobile || 'N/A'}</span>
                   <span className="text-gray-400">|</span>
+                  <span className="text-gray-600">Email:</span>
                   <span className="text-gray-900">{selectedTransaction.customer_email || 'N/A'}</span>
                 </div>
               </div>
@@ -8447,11 +8451,14 @@ const Dashboard = () => {
               {/* Order Detail */}
               <div className="mb-6">
                 <h3 className="text-sm font-semibold text-gray-700 mb-2">Order Detail:</h3>
-                <div className="flex items-center gap-2 text-sm">
+                <div className="flex items-center gap-2 text-sm flex-wrap">
+                  <span className="text-gray-600">Payment ID:</span>
                   <span className="font-medium text-gray-900">{selectedTransaction.id}</span>
                   <span className="text-gray-400">|</span>
+                  <span className="text-gray-600">Date:</span>
                   <span className="text-gray-900">{new Date(selectedTransaction.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                   <span className="text-gray-400">|</span>
+                  <span className="text-gray-600">Status:</span>
                   <span className={`font-medium ${
                     selectedTransaction.status === 'Success' ? 'text-green-600' :
                     selectedTransaction.status === 'Pending' ? 'text-yellow-600' :
