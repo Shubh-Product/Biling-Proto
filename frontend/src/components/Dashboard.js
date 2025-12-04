@@ -2276,6 +2276,8 @@ const Dashboard = () => {
         // Validation successful - auto-select first product and first plan
         setErrors({});
         setCustomerValidated(true);
+        setIsProspectDetailsSaved(true);
+        setIsProspectDetailsOpen(false); // Collapse accordion after save
         
         // Auto-select first product and its first plan
         const firstProduct = getFirstProductType();
