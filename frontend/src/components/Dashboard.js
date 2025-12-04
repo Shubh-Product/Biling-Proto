@@ -8223,6 +8223,9 @@ const Dashboard = () => {
                             }}
                           >
                             <p className="font-medium text-blue-600 text-sm hover:text-blue-800">{transaction.customer_name}</p>
+                            {transaction.customer_mobile && (
+                              <p className="text-gray-700 text-xs font-medium">{transaction.customer_mobile}</p>
+                            )}
                             <p className="text-gray-600 text-xs">{transaction.customer_company || 'N/A'}</p>
                             <p className="text-gray-500 text-xs">{transaction.customer_city}</p>
                           </div>
