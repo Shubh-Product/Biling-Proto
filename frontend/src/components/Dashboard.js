@@ -8917,10 +8917,18 @@ const Dashboard = () => {
 
             {/* Modal Content */}
             <div className="p-6 space-y-6">
-              {/* Success Message */}
-              <div className="flex items-center space-x-3 text-green-600 bg-green-50 p-4 rounded-lg">
-                <CheckCircle className="w-6 h-6" />
-                <span className="font-medium">Payment link has been generated successfully!</span>
+              {/* Success Message with Email and Mobile */}
+              <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                <div className="flex items-start space-x-3 mb-3">
+                  <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-medium text-green-800 mb-2">Payment link has been generated and sent successfully!</p>
+                    <div className="space-y-1 text-sm text-green-700">
+                      <p>📧 Email: <span className="font-medium">{paymentLinkData.customerDetails.email}</span></p>
+                      <p>📱 Mobile: <span className="font-medium">+91 {paymentLinkData.customerDetails.mobile}</span></p>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Payment Link Section */}
@@ -8946,84 +8954,29 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              {/* Order Summary */}
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Order Summary</h3>
-                <div className="bg-gray-50 rounded-lg p-4 space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Product:</span>
-                    <span className="font-medium">{paymentLinkData.orderSummary.productType}</span>
-                  </div>
-                  {paymentLinkData.orderSummary.planName && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Plan:</span>
-                      <span className="font-medium">{paymentLinkData.orderSummary.planName}</span>
-                    </div>
-                  )}
-                  {paymentLinkData.orderSummary.duration && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Duration:</span>
-                      <span className="font-medium">{paymentLinkData.orderSummary.duration}</span>
-                    </div>
-                  )}
-                  {paymentLinkData.orderSummary.userCount && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Users:</span>
-                      <span className="font-medium">{paymentLinkData.orderSummary.userCount}</span>
-                    </div>
-                  )}
-                  {paymentLinkData.orderSummary.companyCount && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Companies:</span>
-                      <span className="font-medium">{paymentLinkData.orderSummary.companyCount}</span>
-                    </div>
-                  )}
-                  <div className="border-t border-gray-300 pt-2 mt-2"></div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Base Amount:</span>
-                    <span className="font-medium">₹{paymentLinkData.orderSummary.basePrice?.toLocaleString('en-IN')}</span>
-                  </div>
-                  {paymentLinkData.orderSummary.discountAmount > 0 && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Discount ({paymentLinkData.orderSummary.discountPercent}%):</span>
-                      <span className="font-medium text-green-600">-₹{paymentLinkData.orderSummary.discountAmount?.toLocaleString('en-IN')}</span>
-                    </div>
-                  )}
-                  {paymentLinkData.orderSummary.tdsAmount > 0 && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">TDS (10%):</span>
-                      <span className="font-medium text-red-600">-₹{paymentLinkData.orderSummary.tdsAmount?.toLocaleString('en-IN')}</span>
-                    </div>
-                  )}
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">GST (18%):</span>
-                    <span className="font-medium">₹{paymentLinkData.orderSummary.taxAmount?.toLocaleString('en-IN')}</span>
-                  </div>
-                  <div className="border-t border-gray-300 pt-2 mt-2"></div>
-                  <div className="flex justify-between text-lg">
-                    <span className="font-bold text-gray-900">Total Amount:</span>
-                    <span className="font-bold text-blue-600">₹{paymentLinkData.orderSummary.finalAmount?.toLocaleString('en-IN')}</span>
-                  </div>
-                </div>
-              </div>
-
               {/* Action Buttons */}
-              <div className="flex items-center justify-end space-x-3 pt-4 border-t border-gray-200">
+              <div className="flex items-center justify-between pt-4 border-t border-gray-200">
                 <button
-                  onClick={() => setShowPaymentLinkModal(false)}
-                  className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                  onClick={() => {
+                    setShowPaymentLinkModal(false);
+                    setShowCreateForm(false);
+                    setActiveMenu('dashboard');
+                  }}
+                  className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors flex items-center space-x-2"
                 >
-                  Close
+                  <ArrowLeft className="w-4 h-4" />
+                  <span>Back to Dashboard</span>
                 </button>
                 <button
                   onClick={() => {
-                    // Could integrate with WhatsApp API or email service
-                    window.open(`https://wa.me/91${paymentLinkData.customerDetails.mobile}?text=${encodeURIComponent('Payment Link: ' + paymentLinkData.paymentLink)}`, '_blank');
+                    setShowPaymentLinkModal(false);
+                    // Reset form for new payment link
+                    handleCreateNew();
                   }}
-                  className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg flex items-center space-x-2 transition-colors"
+                  className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center space-x-2 transition-colors"
                 >
-                  <Share className="w-4 h-4" />
-                  <span>Share via WhatsApp</span>
+                  <Plus className="w-4 h-4" />
+                  <span>Generate Another Payment Link</span>
                 </button>
               </div>
             </div>
