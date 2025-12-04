@@ -8612,47 +8612,7 @@ const Dashboard = () => {
                           })()}
                         </td>
                         {/* Actions - Icon Style */}
-                        <td className="py-3 px-4 text-center">
-                          <div className="flex items-center justify-center space-x-2">
-                            {/* Email Icon */}
-                            <button
-                              onClick={() => {
-                                setEmailFormData({
-                                  customerEmail: 'customer@example.com',
-                                  transactionId: transaction.id
-                                });
-                                setSelectedTransaction(transaction);
-                                setShowEmailModal(true);
-                              }}
-                              className="text-gray-600 hover:text-blue-600 p-1.5 rounded hover:bg-blue-50"
-                              title="Send email"
-                            >
-                              <Mail className="w-5 h-5" />
-                            </button>
-                            
-                            {/* Phone Icon */}
-                            <button
-                              onClick={() => {
-                                console.log('Call customer:', transaction.salesperson?.mobile);
-                              }}
-                              className="text-gray-600 hover:text-green-600 p-1.5 rounded hover:bg-green-50"
-                              title="Call customer"
-                            >
-                              <Smartphone className="w-5 h-5" />
-                            </button>
-                            
-                            {/* Clock/Schedule Icon */}
-                            <button
-                              onClick={() => {
-                                console.log('Schedule follow-up for:', transaction.id);
-                              }}
-                              className="text-gray-600 hover:text-orange-600 p-1.5 rounded hover:bg-orange-50"
-                              title="Schedule follow-up"
-                            >
-                              <RotateCcw className="w-5 h-5" />
-                            </button>
-                          </div>
-                        </td>
+                        {/* Old actions removed - new actions above */}
                       </tr>
                     ))}
                   </tbody>
