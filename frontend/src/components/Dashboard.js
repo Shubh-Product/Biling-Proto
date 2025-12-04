@@ -8528,33 +8528,65 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              {/* Pricing Breakdown */}
+              {/* Order Summary Table */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Pricing Breakdown</h3>
-                <div className="bg-white border border-gray-200 rounded-lg p-4 space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Base Amount:</span>
-                    <span className="font-medium text-gray-900">₹{selectedTransaction.base_amount?.toLocaleString('en-IN') || '0'}</span>
-                  </div>
-                  {selectedTransaction.discount_amount > 0 && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Discount ({selectedTransaction.discount_percent}%):</span>
-                      <span className="font-medium text-green-600">-₹{selectedTransaction.discount_amount?.toLocaleString('en-IN')}</span>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">Order Summary</h3>
+                <div className="bg-white rounded-lg border border-gray-300 overflow-hidden">
+                  <table className="w-full">
+                    <thead className="bg-gray-100 border-b border-gray-300">
+                      <tr>
+                        <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">S.No</th>
+                        <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">Product</th>
+                        <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">Duration</th>
+                        <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">Quantity</th>
+                        <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Rate</th>
+                        <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      <tr className="hover:bg-gray-50">
+                        <td className="px-3 py-2 text-sm text-gray-700">1</td>
+                        <td className="px-3 py-2 text-sm text-gray-900">{selectedTransaction.plan_name || selectedTransaction.product_type}</td>
+                        <td className="px-3 py-2 text-sm text-center text-gray-700">{selectedTransaction.duration ? `${selectedTransaction.duration} Days` : 'N/A'}</td>
+                        <td className="px-3 py-2 text-sm text-center text-gray-700">1</td>
+                        <td className="px-3 py-2 text-sm text-right text-gray-700">₹{selectedTransaction.base_amount?.toLocaleString('en-IN') || '0'}</td>
+                        <td className="px-3 py-2 text-sm text-right font-medium text-gray-900">₹{selectedTransaction.base_amount?.toLocaleString('en-IN') || '0'}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  
+                  {/* Summary Section */}
+                  <div className="border-t border-gray-300 bg-gray-50 p-4">
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm font-semibold text-gray-700">Total:</span>
+                        <span className="text-sm font-semibold text-gray-900">₹{selectedTransaction.base_amount?.toLocaleString('en-IN') || '0'}</span>
+                      </div>
+                      
+                      {selectedTransaction.discount_amount > 0 && (
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm text-gray-600">Discount ({selectedTransaction.discount_percent}%):</span>
+                          <span className="text-sm font-medium text-green-600">-₹{selectedTransaction.discount_amount?.toLocaleString('en-IN')}</span>
+                        </div>
+                      )}
+                      
+                      {selectedTransaction.tds_amount > 0 && (
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm text-gray-600">Deduct TDS:</span>
+                          <span className="text-sm font-medium text-orange-600">-₹{selectedTransaction.tds_amount?.toLocaleString('en-IN')}</span>
+                        </div>
+                      )}
+                      
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600">GST (18%):</span>
+                        <span className="text-sm font-medium text-gray-900">₹{selectedTransaction.tax_amount?.toLocaleString('en-IN') || '0'}</span>
+                      </div>
+                      
+                      <div className="flex justify-between items-center pt-2 border-t border-gray-300">
+                        <span className="text-base font-bold text-gray-900">Grand Total:</span>
+                        <span className="text-base font-bold text-blue-600">₹{selectedTransaction.final_amount?.toLocaleString('en-IN') || '0'}</span>
+                      </div>
                     </div>
-                  )}
-                  {selectedTransaction.tds_amount > 0 && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">TDS Deducted (10%):</span>
-                      <span className="font-medium text-orange-600">-₹{selectedTransaction.tds_amount?.toLocaleString('en-IN')}</span>
-                    </div>
-                  )}
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">GST (18%):</span>
-                    <span className="font-medium text-gray-900">₹{selectedTransaction.tax_amount?.toLocaleString('en-IN') || '0'}</span>
-                  </div>
-                  <div className="border-t pt-3 flex justify-between">
-                    <span className="text-gray-900 font-bold text-lg">Final Amount:</span>
-                    <span className="font-bold text-blue-600 text-lg">₹{selectedTransaction.final_amount?.toLocaleString('en-IN') || '0'}</span>
                   </div>
                 </div>
               </div>
