@@ -244,7 +244,6 @@ const Dashboard = () => {
 
   // Order Summary Modal state
   const [showOrderSummaryModal, setShowOrderSummaryModal] = useState(false);
-  const [selectedTransaction, setSelectedTransaction] = useState(null);
 
   // Sold By filter state
   const [selectedSoldByFilter, setSelectedSoldByFilter] = useState('inside_sales'); // 'inside_sales', 'partner'
