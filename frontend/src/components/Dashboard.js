@@ -150,6 +150,29 @@ const Dashboard = () => {
   
   // Payment Link Modal State
   const [showPaymentLinkModal, setShowPaymentLinkModal] = useState(false);
+  
+  // My Payments Dashboard Filters
+  const [globalSearch, setGlobalSearch] = useState({
+    mobile: '',
+    email: '',
+    gstin: '',
+    paymentId: ''
+  });
+  const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
+  const [advancedFilters, setAdvancedFilters] = useState({
+    partnerName: '',
+    status: [],
+    generatedBy: '',
+    transactionType: '',
+    scheme: '',
+    product: '',
+    licenseType: 'All',
+    linkValidityFrom: '',
+    linkValidityTo: '',
+    subscriptionId: '',
+    offers: 'All'
+  });
+  const [dateRange, setDateRange] = useState('all');
 
   // TDS Toggle Handler with Confirmation
   const handleTdsToggle = (newValue) => {
