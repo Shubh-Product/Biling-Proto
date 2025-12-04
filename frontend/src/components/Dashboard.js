@@ -6562,7 +6562,7 @@ const Dashboard = () => {
                       {/* Row 1: Category, Mobile, Email, Name */}
                       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div>
-                          <Label htmlFor="category" className="text-base font-semibold">Category</Label>
+                          <Label htmlFor="category">Category</Label>
                           <select
                             id="category"
                             value={formData.licenseType}
@@ -6792,7 +6792,7 @@ const Dashboard = () => {
                       {/* Row 1: Category, Mobile, Email, Name */}
                       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div>
-                          <Label htmlFor="category" className="text-base font-semibold">Category</Label>
+                          <Label htmlFor="category">Category</Label>
                           <select
                             id="category"
                             value={formData.licenseType}
