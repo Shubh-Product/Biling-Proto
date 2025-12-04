@@ -8430,74 +8430,36 @@ const Dashboard = () => {
 
             {/* Modal Content */}
             <div className="p-6">
-              {/* Customer & Order Details - Merged Section */}
+              {/* Customer Information */}
+              <div className="mb-4">
+                <h3 className="text-sm font-semibold text-gray-700 mb-2">Customer Information:</h3>
+                <div className="flex items-center gap-2 text-sm">
+                  <span className="font-medium text-gray-900">{selectedTransaction.customer_name}</span>
+                  <span className="text-gray-400">|</span>
+                  <span className="text-gray-900">{selectedTransaction.customer_company || 'N/A'}</span>
+                  <span className="text-gray-400">|</span>
+                  <span className="text-gray-900">{selectedTransaction.customer_mobile || 'N/A'}</span>
+                  <span className="text-gray-400">|</span>
+                  <span className="text-gray-900">{selectedTransaction.customer_email || 'N/A'}</span>
+                </div>
+              </div>
+
+              {/* Order Detail */}
               <div className="mb-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Customer & Order Details</h3>
-                <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-lg p-4 space-y-2">
-                  {/* Customer Information */}
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Name:</span>
-                    <span className="font-medium text-gray-900">{selectedTransaction.customer_name}</span>
-                  </div>
-                  {selectedTransaction.customer_company && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Company:</span>
-                      <span className="font-medium text-gray-900">{selectedTransaction.customer_company}</span>
-                    </div>
-                  )}
-                  {selectedTransaction.customer_email && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Email:</span>
-                      <span className="font-medium text-gray-900">{selectedTransaction.customer_email}</span>
-                    </div>
-                  )}
-                  {selectedTransaction.customer_mobile && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Mobile:</span>
-                      <span className="font-medium text-gray-900">{selectedTransaction.customer_mobile}</span>
-                    </div>
-                  )}
-                  {selectedTransaction.customer_city && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">City:</span>
-                      <span className="font-medium text-gray-900">{selectedTransaction.customer_city}</span>
-                    </div>
-                  )}
-                  
-                  {/* Divider */}
-                  <div className="border-t border-gray-300 my-3"></div>
-                  
-                  {/* Order Information */}
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Transaction ID:</span>
-                    <span className="font-medium text-gray-900">{selectedTransaction.id}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Date:</span>
-                    <span className="font-medium text-gray-900">{new Date(selectedTransaction.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Product:</span>
-                    <span className="font-medium text-gray-900">{selectedTransaction.product_type}</span>
-                  </div>
-                  {selectedTransaction.plan_name && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Plan:</span>
-                      <span className="font-medium text-gray-900">{selectedTransaction.plan_name}</span>
-                    </div>
-                  )}
-                  {selectedTransaction.license_type && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">License Type:</span>
-                      <span className="font-medium text-gray-900">{selectedTransaction.license_type}</span>
-                    </div>
-                  )}
-                  {selectedTransaction.duration && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Duration:</span>
-                      <span className="font-medium text-gray-900">{selectedTransaction.duration} days</span>
-                    </div>
-                  )}
+                <h3 className="text-sm font-semibold text-gray-700 mb-2">Order Detail:</h3>
+                <div className="flex items-center gap-2 text-sm">
+                  <span className="font-medium text-gray-900">{selectedTransaction.id}</span>
+                  <span className="text-gray-400">|</span>
+                  <span className="text-gray-900">{new Date(selectedTransaction.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                  <span className="text-gray-400">|</span>
+                  <span className={`font-medium ${
+                    selectedTransaction.status === 'Success' ? 'text-green-600' :
+                    selectedTransaction.status === 'Pending' ? 'text-yellow-600' :
+                    selectedTransaction.status === 'Failed' ? 'text-red-600' :
+                    selectedTransaction.status === 'Expired' ? 'text-orange-600' :
+                    selectedTransaction.status === 'Cancelled' ? 'text-gray-600' :
+                    'text-blue-600'
+                  }`}>{selectedTransaction.status}</span>
                 </div>
               </div>
 
