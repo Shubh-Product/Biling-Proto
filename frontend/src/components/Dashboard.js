@@ -8236,7 +8236,9 @@ const Dashboard = () => {
                         {/* Product & Plan - Desktop Reg SS 1 Y format */}
                         <td className="py-3 px-4">
                           <div>
-                            <p className="font-medium text-gray-900 text-sm">{transaction.product_type}</p>
+                            <p className="font-medium text-gray-900 text-sm">
+                              {transaction.plan_name || transaction.product_type || 'Busy Desktop'}
+                            </p>
                             <p className="text-gray-600 text-xs">
                               {transaction.license_type} {transaction.plan_details?.model || ''} {transaction.plan_details?.duration || ''}
                             </p>
