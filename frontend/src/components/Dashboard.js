@@ -8151,9 +8151,6 @@ const Dashboard = () => {
                 <table className="w-full text-sm border-collapse">
                   <thead>
                     <tr className="bg-blue-900 text-white">
-                      <th className="text-left py-3 px-4 font-semibold">
-                        <input type="checkbox" className="w-4 h-4 rounded" />
-                      </th>
                       <th
                         className="text-left py-3 px-4 font-semibold cursor-pointer hover:bg-blue-800"
                         onClick={() => handleSort('created_at')}
