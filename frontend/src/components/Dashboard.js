@@ -245,6 +245,22 @@ const Dashboard = () => {
   // Order Summary Modal state
   const [showOrderSummaryModal, setShowOrderSummaryModal] = useState(false);
 
+  // Advanced Filter Modal state
+  const [showAdvancedFilter, setShowAdvancedFilter] = useState(false);
+  const [advancedFilters, setAdvancedFilters] = useState({
+    partnerName: '',
+    status: [],
+    generatedBy: '',
+    transactionType: '',
+    scheme: '',
+    product: '',
+    licenseType: 'All',
+    linkValidityFrom: '',
+    linkValidityTo: '',
+    subscriptionId: '',
+    offers: 'All'
+  });
+
   // Sold By filter state
   const [selectedSoldByFilter, setSelectedSoldByFilter] = useState('inside_sales'); // 'inside_sales', 'partner'
 
