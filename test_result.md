@@ -903,3 +903,20 @@ frontend:
 agent_communication:
     - agent: "main"
       message: "✅ CUSTOMER INFORMATION REMOVAL COMPLETED - Removed Customer Information section from all Order Summary instances. Key changes: 1) Main Order Summary (~line 7710): Removed entire Customer Information section with grid column, now shows only Product & Pricing, 2) Payment Link Page Order Summary (~line 2618): Removed Customer, Email, Mobile fields, 3) Payment Page Order Summary (~line 2995): Removed Customer, Email, Mobile, License Type fields. Order Summaries now focus exclusively on product and pricing details including product name, plan, duration, base amount, discounts, GST, and final amount. Ready for testing to verify Order Summary displays correctly without customer information in all flows."
+
+frontend:
+  - task: "Convert Order Summary to Invoice-Style Table"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "✅ Successfully converted Order Summary to invoice-style table format. Created table with 6 columns: S.No, Product, Duration, Quantity, Rate, Amount. Implemented dynamic line item generation based on planQuantities state - each plan with quantity > 0 automatically appears as a row. Table features: header row with gray background, hover effect on rows, proper alignment (left for text, center for duration/qty, right for amounts). Summary section at bottom includes: Total (subtotal of all line items), License Discount (if applicable based on license type), TDS toggle with ON/OFF switch (smaller design), TDS deduction (10% if enabled), GST (18%), Grand Total (bold and highlighted in blue). Calculations automatically update as quantities change. Shows 'No items' message when no plans selected. Non-Desktop products (Busy Online, RDP) still use legacy display format. Clean, professional invoice layout matching typical billing format."
+
+agent_communication:
+    - agent: "main"
+      message: "✅ INVOICE-STYLE ORDER SUMMARY COMPLETED - Transformed Order Summary into professional invoice table. Key features: 1) 6-column table structure (S.No, Product, Duration, Quantity, Rate, Amount), 2) Dynamic line item generation from planQuantities state, 3) Automatic serial numbering, 4) Real-time calculations for each row (Rate × Quantity = Amount), 5) Summary section with Total, License Discount, TDS toggle, TDS amount, GST, and Grand Total, 6) Responsive to quantity changes, 7) Clean table styling with borders, hover effects, 8) Empty state message when no items selected. Desktop product uses new invoice format, other products retain legacy format. Ready for testing to verify invoice table displays correctly and calculations work as expected."
