@@ -6555,10 +6555,42 @@ const Dashboard = () => {
                   </div>
                 )}
 
-                {/* Prospect Details */}
+                {/* Prospect Details Accordion */}
                 {formData.transactionType === "New Sales" && (
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Prospect Details</h3>
+                <div className="border border-gray-300 rounded-lg overflow-hidden">
+                  {/* Accordion Header */}
+                  <div 
+                    className={`flex items-center justify-between px-6 py-4 cursor-pointer transition-colors ${
+                      isProspectDetailsOpen ? 'bg-blue-50 border-b border-gray-300' : 'bg-gray-50 hover:bg-gray-100'
+                    }`}
+                    onClick={() => {
+                      if (isProspectDetailsSaved) {
+                        setIsProspectDetailsOpen(!isProspectDetailsOpen);
+                      }
+                    }}
+                  >
+                    <div className="flex items-center space-x-3">
+                      <h3 className="text-lg font-semibold text-gray-900">Prospect Details</h3>
+                      {isProspectDetailsSaved && (
+                        <span className="flex items-center space-x-1 text-sm text-green-600">
+                          <CheckCircle className="w-4 h-4" />
+                          <span>Saved</span>
+                        </span>
+                      )}
+                    </div>
+                    {isProspectDetailsSaved && (
+                      <button
+                        type="button"
+                        className="text-gray-600 hover:text-gray-900"
+                      >
+                        {isProspectDetailsOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                      </button>
+                    )}
+                  </div>
+                  
+                  {/* Accordion Content */}
+                  {isProspectDetailsOpen && (
+                  <div className="p-6 bg-white">
                   
                   {/* Prospect Information Fields - For non-CA categories */}
                   {formData.licenseType !== "CA" && (
