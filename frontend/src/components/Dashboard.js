@@ -8919,13 +8919,13 @@ const Dashboard = () => {
             <div className="p-6 space-y-6">
               {/* Success Message with Email and Mobile */}
               <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-                <div className="flex items-start space-x-3 mb-3">
+                <div className="flex items-start space-x-3">
                   <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-medium text-green-800 mb-2">Payment link has been generated and sent successfully!</p>
+                    <p className="font-medium text-green-800 mb-2">Payment link has been successfully generated and sent on:</p>
                     <div className="space-y-1 text-sm text-green-700">
-                      <p>📧 Email: <span className="font-medium">{paymentLinkData.customerDetails.email}</span></p>
-                      <p>📱 Mobile: <span className="font-medium">+91 {paymentLinkData.customerDetails.mobile}</span></p>
+                      <p>Email: <span className="font-medium">{paymentLinkData.customerDetails.email}</span></p>
+                      <p>Mobile: <span className="font-medium">+91 {paymentLinkData.customerDetails.mobile}</span></p>
                     </div>
                   </div>
                 </div>
