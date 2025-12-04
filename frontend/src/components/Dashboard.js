@@ -3815,6 +3815,7 @@ const Dashboard = () => {
                 {/* Status Filter Buttons */}
                 <div className="flex items-center space-x-2 overflow-x-auto pb-1 flex-1">
                   {[
+                    { id: 'all', label: 'All', count: transactions.length, color: 'blue' },
                     { id: 'pending', label: 'Pending', count: transactions.filter(t => t.status === 'Pending').length, color: 'yellow' },
                     { id: 'received', label: 'Received', count: transactions.filter(t => t.status === 'Success').length, color: 'green' },
                     { id: 'expired', label: 'Expired', count: transactions.filter(t => t.status === 'Expired').length, color: 'red' },
@@ -3822,7 +3823,7 @@ const Dashboard = () => {
                   ].map((filter) => (
                     <button
                       key={filter.id}
-                      onClick={() => setSelectedQuickFilter(selectedQuickFilter === filter.id ? '' : filter.id)}
+                      onClick={() => setSelectedQuickFilter(filter.id)}
                       className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
                         selectedQuickFilter === filter.id
                           ? 'bg-gray-900 text-white shadow-sm'
