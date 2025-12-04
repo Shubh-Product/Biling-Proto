@@ -237,7 +237,7 @@ const Dashboard = () => {
   const [customDateRange, setCustomDateRange] = useState({ start: '', end: '' });
 
   // Quick filters state
-  const [selectedQuickFilter, setSelectedQuickFilter] = useState('all'); // 'all', 'pending', 'received', 'expired', 'cancelled'
+  const [selectedQuickFilter, setSelectedQuickFilter] = useState('all'); // 'all', 'pending', 'received', 'expired', 'cancelled', 'draft'
 
   // Three dots menu state
   const [openMenuId, setOpenMenuId] = useState(null);
