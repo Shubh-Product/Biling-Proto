@@ -3687,6 +3687,62 @@ const Dashboard = () => {
 
   // Make Payment Page Component
   const MakePaymentPage = () => {
+    const [billingData, setBillingData] = React.useState({
+      mobile: '',
+      email: '',
+      name: '',
+      gstin: '',
+      companyName: '',
+      address: '',
+      city: '',
+      pincode: '',
+      state: ''
+    });
+    
+    const [gstinFetching, setGstinFetching] = React.useState(false);
+    const [errors, setErrors] = React.useState({});
+
+    // Handle GSTIN auto-fetch
+    const handleGstinChange = async (value) => {
+      setBillingData(prev => ({ ...prev, gstin: value.toUpperCase() }));
+      
+      // If GSTIN is 15 characters, try to fetch details
+      if (value.length === 15) {
+        setGstinFetching(true);
+        try {
+          // Simulate GSTIN API call - Replace with actual API
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          
+          // Mock data - Replace with actual API response
+          const mockGstData = {
+            companyName: 'BUSY INFOTECH PRIVATE LIMITED',
+            address: '456 Business Park, Tech Hub',
+            city: 'Mumbai',
+            state: 'Maharashtra',
+            pincode: '400001'
+          };
+          
+          setBillingData(prev => ({
+            ...prev,
+            companyName: mockGstData.companyName,
+            address: mockGstData.address,
+            city: mockGstData.city,
+            state: mockGstData.state,
+            pincode: mockGstData.pincode
+          }));
+          
+          setErrors(prev => ({ ...prev, gstin: '' }));
+        } catch (error) {
+          setErrors(prev => ({ ...prev, gstin: 'Failed to fetch GSTIN details' }));
+        } finally {
+          setGstinFetching(false);
+        }
+      }
+    };
+
+    // Check if GSTIN is filled to disable certain fields
+    const isGstinFilled = billingData.gstin.length === 15;
+
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setShowMakePaymentPage(false)}>
         <div className="bg-gray-50 rounded-lg max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
@@ -3699,69 +3755,142 @@ const Dashboard = () => {
           
           <div className="p-8">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Left Side - Account & Billing Details */}
+              {/* Left Side - Billing Information */}
               <div className="lg:col-span-2 space-y-8">
-                {/* 1. Account Details */}
+                {/* 1. Billing Information */}
                 <div>
-                  <h3 className="text-3xl font-bold text-gray-900 mb-6" style={{ fontFamily: 'Georgia, serif' }}>1. Account Details</h3>
-                  <div className="grid grid-cols-3 gap-8">
-                    <div>
-                      <label className="block text-lg text-gray-700 mb-3">Full Name</label>
-                      <input 
-                        type="text" 
-                        placeholder="Full Name" 
-                        className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-400" 
-                      />
-                      <p className="text-xs text-red-500 mt-2">Invalid Mobile? Can&apos;t be blank</p>
-                    </div>
+                  <h3 className="text-3xl font-bold text-gray-900 mb-6" style={{ fontFamily: 'Georgia, serif' }}>1. Billing Information</h3>
+                  
+                  {/* Row 1: Mobile, Email, Name */}
+                  <div className="grid grid-cols-3 gap-8 mb-6">
                     <div>
                       <label className="block text-lg text-gray-700 mb-3">Mobile*</label>
                       <input 
                         type="text" 
                         placeholder="Mobile*" 
-                        className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-400" 
+                        value={billingData.mobile}
+                        onChange={(e) => setBillingData(prev => ({ ...prev, mobile: e.target.value }))}
+                        className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-900" 
                       />
-                      <p className="text-xs text-red-500 mt-2">Invalid Email ID? Can&apos;t be blank</p>
+                      {errors.mobile && <p className="text-xs text-red-500 mt-2">{errors.mobile}</p>}
                     </div>
                     <div>
-                      <label className="block text-lg text-gray-700 mb-3">Email ID*</label>
+                      <label className="block text-lg text-gray-700 mb-3">Email*</label>
+                      <input 
+                        type="email" 
+                        placeholder="Email*" 
+                        value={billingData.email}
+                        onChange={(e) => setBillingData(prev => ({ ...prev, email: e.target.value }))}
+                        className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-900" 
+                      />
+                      {errors.email && <p className="text-xs text-red-500 mt-2">{errors.email}</p>}
+                    </div>
+                    <div>
+                      <label className="block text-lg text-gray-700 mb-3">Name*</label>
                       <input 
                         type="text" 
-                        placeholder="Email ID*" 
-                        className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-400" 
+                        placeholder="Name" 
+                        value={billingData.name}
+                        onChange={(e) => setBillingData(prev => ({ ...prev, name: e.target.value }))}
+                        className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-900" 
                       />
+                      {errors.name && <p className="text-xs text-red-500 mt-2">{errors.name}</p>}
                     </div>
                   </div>
-                </div>
 
-                {/* 2. Billing */}
-                <div>
-                  <h3 className="text-3xl font-bold text-gray-900 mb-6" style={{ fontFamily: 'Georgia, serif' }}>2. Billing</h3>
+                  {/* Row 2: GSTIN, Company Name */}
+                  <div className="grid grid-cols-2 gap-8 mb-6">
+                    <div>
+                      <label className="block text-lg text-gray-700 mb-3">GSTIN (with auto fetch)</label>
+                      <div className="relative">
+                        <input 
+                          type="text" 
+                          placeholder="GSTIN" 
+                          value={billingData.gstin}
+                          onChange={(e) => handleGstinChange(e.target.value)}
+                          maxLength={15}
+                          className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-900" 
+                        />
+                        {gstinFetching && (
+                          <div className="absolute right-0 top-2">
+                            <svg className="animate-spin h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                          </div>
+                        )}
+                      </div>
+                      {errors.gstin && <p className="text-xs text-red-500 mt-2">{errors.gstin}</p>}
+                      {isGstinFilled && <p className="text-xs text-green-600 mt-2">✓ GSTIN details auto-filled</p>}
+                    </div>
+                    <div>
+                      <label className="block text-lg text-gray-700 mb-3">Company Name*</label>
+                      <input 
+                        type="text" 
+                        placeholder="Company Name" 
+                        value={billingData.companyName}
+                        onChange={(e) => setBillingData(prev => ({ ...prev, companyName: e.target.value }))}
+                        disabled={isGstinFilled}
+                        className={`w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent ${isGstinFilled ? 'text-gray-500 cursor-not-allowed' : 'text-gray-900'}`}
+                      />
+                      {errors.companyName && <p className="text-xs text-red-500 mt-2">{errors.companyName}</p>}
+                    </div>
+                  </div>
+
+                  {/* Row 3: Address, City, Pincode */}
+                  <div className="grid grid-cols-3 gap-8 mb-6">
+                    <div>
+                      <label className="block text-lg text-gray-700 mb-3">Address*</label>
+                      <input 
+                        type="text" 
+                        placeholder="Address" 
+                        value={billingData.address}
+                        onChange={(e) => setBillingData(prev => ({ ...prev, address: e.target.value }))}
+                        disabled={isGstinFilled}
+                        className={`w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent ${isGstinFilled ? 'text-gray-500 cursor-not-allowed' : 'text-gray-900'}`}
+                      />
+                      {errors.address && <p className="text-xs text-red-500 mt-2">{errors.address}</p>}
+                    </div>
+                    <div>
+                      <label className="block text-lg text-gray-700 mb-3">City*</label>
+                      <input 
+                        type="text" 
+                        placeholder="City" 
+                        value={billingData.city}
+                        onChange={(e) => setBillingData(prev => ({ ...prev, city: e.target.value }))}
+                        disabled={isGstinFilled}
+                        className={`w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent ${isGstinFilled ? 'text-gray-500 cursor-not-allowed' : 'text-gray-900'}`}
+                      />
+                      {errors.city && <p className="text-xs text-red-500 mt-2">{errors.city}</p>}
+                    </div>
+                    <div>
+                      <label className="block text-lg text-gray-700 mb-3">Pincode*</label>
+                      <input 
+                        type="text" 
+                        placeholder="Pincode" 
+                        value={billingData.pincode}
+                        onChange={(e) => setBillingData(prev => ({ ...prev, pincode: e.target.value }))}
+                        disabled={isGstinFilled}
+                        maxLength={6}
+                        className={`w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent ${isGstinFilled ? 'text-gray-500 cursor-not-allowed' : 'text-gray-900'}`}
+                      />
+                      {errors.pincode && <p className="text-xs text-red-500 mt-2">{errors.pincode}</p>}
+                    </div>
+                  </div>
+
+                  {/* Row 4: State */}
                   <div className="grid grid-cols-3 gap-8">
                     <div>
                       <label className="block text-lg text-gray-700 mb-3">State*</label>
                       <input 
                         type="text" 
-                        placeholder="State*" 
-                        className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-400" 
+                        placeholder="State" 
+                        value={billingData.state}
+                        onChange={(e) => setBillingData(prev => ({ ...prev, state: e.target.value }))}
+                        disabled={isGstinFilled}
+                        className={`w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent ${isGstinFilled ? 'text-gray-500 cursor-not-allowed' : 'text-gray-900'}`}
                       />
-                      <p className="text-xs text-red-500 mt-2">Invalid State? Can&apos;t be blank</p>
-                    </div>
-                    <div>
-                      <label className="block text-lg text-gray-700 mb-3">Billing Address</label>
-                      <input 
-                        type="text" 
-                        placeholder="Billing Address" 
-                        className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-400" 
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-lg text-gray-700 mb-3">GSTIN (optional)</label>
-                      <input 
-                        type="text" 
-                        placeholder="GSTIN (OPTIONAL)" 
-                        className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-400" 
-                      />
+                      {errors.state && <p className="text-xs text-red-500 mt-2">{errors.state}</p>}
                     </div>
                   </div>
                 </div>
