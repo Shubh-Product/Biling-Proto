@@ -3616,7 +3616,7 @@ const Dashboard = () => {
                     <span className="text-blue-600">₹{paymentLinkData?.orderSummary?.finalAmount?.toLocaleString('en-IN')}</span>
                   </div>
                 </div>
-              </div>
+                </div>
 
               {/* Payment Method Selection (Dummy) */}
               <div>
@@ -8852,7 +8852,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+                </div>
 
               {/* Payment Link Section */}
               <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
@@ -8903,7 +8903,7 @@ const Dashboard = () => {
                     })()}
                   </div>
                 </div>
-              </div>
+                </div>
 
             </div>
 
@@ -9730,7 +9730,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+                </div>
 
               {/* Payment Link Section */}
               <div>
