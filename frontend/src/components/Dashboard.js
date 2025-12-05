@@ -3685,6 +3685,223 @@ const Dashboard = () => {
     );
   }
 
+  // Make Payment Page Component
+  const MakePaymentPage = () => {
+    const [gstinLocked, setGstinLocked] = useState(false);
+
+    const handleGstinChange = (e) => {
+      const gstin = e.target.value;
+      setBillingInfo({...billingInfo, gstin});
+      
+      // Lock fields if GSTIN is entered (11 characters or more)
+      if (gstin.length >= 11) {
+        setGstinLocked(true);
+      } else {
+        setGstinLocked(false);
+      }
+    };
+
+    return (
+      <div className="max-w-5xl mx-auto p-6 space-y-6">
+        {/* Section 1: Billing Information */}
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <h2 className="text-xl font-bold text-gray-900 mb-4">Billing Information</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Name */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Name *</label>
+              <input
+                type="text"
+                value={billingInfo.name}
+                onChange={(e) => setBillingInfo({...billingInfo, name: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter name"
+              />
+            </div>
+
+            {/* Mobile */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Mobile *</label>
+              <input
+                type="tel"
+                value={billingInfo.mobile}
+                onChange={(e) => setBillingInfo({...billingInfo, mobile: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter mobile number"
+              />
+            </div>
+
+            {/* Email */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
+              <input
+                type="email"
+                value={billingInfo.email}
+                onChange={(e) => setBillingInfo({...billingInfo, email: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter email"
+              />
+            </div>
+
+            {/* GSTIN */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">GSTIN</label>
+              <input
+                type="text"
+                value={billingInfo.gstin}
+                onChange={handleGstinChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter GSTIN (auto-fetch enabled)"
+                maxLength="15"
+              />
+            </div>
+
+            {/* Company Name */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Company Name</label>
+              <input
+                type="text"
+                value={billingInfo.companyName}
+                onChange={(e) => setBillingInfo({...billingInfo, companyName: e.target.value})}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter company name"
+              />
+            </div>
+
+            {/* Address */}
+            <div className="md:col-span-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Address</label>
+              <input
+                type="text"
+                value={billingInfo.address}
+                onChange={(e) => !gstinLocked && setBillingInfo({...billingInfo, address: e.target.value})}
+                disabled={gstinLocked}
+                className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${gstinLocked ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                placeholder="Enter address"
+              />
+            </div>
+
+            {/* City */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">City</label>
+              <input
+                type="text"
+                value={billingInfo.city}
+                onChange={(e) => !gstinLocked && setBillingInfo({...billingInfo, city: e.target.value})}
+                disabled={gstinLocked}
+                className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${gstinLocked ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                placeholder="Enter city"
+              />
+            </div>
+
+            {/* Pincode */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Pincode</label>
+              <input
+                type="text"
+                value={billingInfo.pincode}
+                onChange={(e) => !gstinLocked && setBillingInfo({...billingInfo, pincode: e.target.value})}
+                disabled={gstinLocked}
+                className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${gstinLocked ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                placeholder="Enter pincode"
+                maxLength="6"
+              />
+            </div>
+
+            {/* State */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">State</label>
+              <input
+                type="text"
+                value={billingInfo.state}
+                onChange={(e) => !gstinLocked && setBillingInfo({...billingInfo, state: e.target.value})}
+                disabled={gstinLocked}
+                className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${gstinLocked ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                placeholder="Enter state"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Section 2: Product and Pricing Information */}
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <h2 className="text-xl font-bold text-gray-900 mb-4">Product and Pricing Information</h2>
+          
+          {/* Product Table */}
+          <div className="bg-white rounded-lg border border-gray-300 overflow-hidden mb-4">
+            <table className="w-full">
+              <thead className="bg-gray-100 border-b border-gray-300">
+                <tr>
+                  <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">S.No</th>
+                  <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">Product</th>
+                  <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">Duration</th>
+                  <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">Quantity</th>
+                  <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Rate</th>
+                  <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Amount</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                <tr className="hover:bg-gray-50">
+                  <td className="px-3 py-2 text-sm text-gray-700">1</td>
+                  <td className="px-3 py-2 text-sm text-gray-900">Standard - Client Server</td>
+                  <td className="px-3 py-2 text-sm text-center text-gray-700">360 Days</td>
+                  <td className="px-3 py-2 text-sm text-center text-gray-700">1</td>
+                  <td className="px-3 py-2 text-sm text-right text-gray-700">₹12,000</td>
+                  <td className="px-3 py-2 text-sm text-right font-medium text-gray-900">₹12,000</td>
+                </tr>
+              </tbody>
+            </table>
+            
+            {/* Summary Section */}
+            <div className="border-t border-gray-300 bg-gray-50 p-4">
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-semibold text-gray-700">Total:</span>
+                  <span className="text-sm font-semibold text-gray-900">₹12,000</span>
+                </div>
+                
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600">TDS Deduction:</span>
+                  <span className="text-sm font-medium text-orange-600">₹0</span>
+                </div>
+                
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600">GST (18%):</span>
+                  <span className="text-sm font-medium text-gray-900">₹2,160</span>
+                </div>
+                
+                <div className="flex justify-between items-center pt-2 border-t border-gray-300">
+                  <span className="text-base font-bold text-gray-900">Grand Total:</span>
+                  <span className="text-base font-bold text-blue-600">₹14,160</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Pay Now Button */}
+        <div className="flex justify-center gap-4">
+          <Button
+            onClick={() => setShowMakePaymentPage(false)}
+            variant="outline"
+            className="px-8 py-2 border-gray-300 text-gray-700 hover:bg-gray-100"
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={() => {
+              // Handle payment processing
+              alert('Processing payment...');
+            }}
+            className="bg-green-600 hover:bg-green-700 text-white px-8 py-2"
+          >
+            Pay Now
+          </Button>
+        </div>
+      </div>
+    );
+  };
+
   // Menu items configuration
   const menuItems = [
     { id: 'dashboard', name: 'Dashboard', icon: LayoutDashboard },
