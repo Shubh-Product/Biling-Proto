@@ -3702,119 +3702,42 @@ const Dashboard = () => {
             <div className="bg-gray-50 rounded-lg p-6">
               <h3 className="text-lg font-bold text-gray-900 mb-4">Billing Information</h3>
               <div className="grid grid-cols-4 gap-4">
-            {/* Name */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Name *</label>
-              <input
-                type="text"
-                value={billingInfo.name}
-                onChange={(e) => setBillingInfo({...billingInfo, name: e.target.value})}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter name"
-              />
-            </div>
-
-            {/* Mobile */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Mobile *</label>
-              <input
-                type="tel"
-                value={billingInfo.mobile}
-                onChange={(e) => setBillingInfo({...billingInfo, mobile: e.target.value})}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter mobile number"
-              />
-            </div>
-
-            {/* Email */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
-              <input
-                type="email"
-                value={billingInfo.email}
-                onChange={(e) => setBillingInfo({...billingInfo, email: e.target.value})}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter email"
-              />
-            </div>
-
-            {/* GSTIN */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">GSTIN</label>
-              <input
-                type="text"
-                value={billingInfo.gstin}
-                onChange={handleGstinChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter GSTIN (auto-fetch enabled)"
-                maxLength="15"
-              />
-            </div>
-
-            {/* Company Name */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Company Name</label>
-              <input
-                type="text"
-                value={billingInfo.companyName}
-                onChange={(e) => setBillingInfo({...billingInfo, companyName: e.target.value})}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter company name"
-              />
-            </div>
-
-            {/* Address */}
-            <div className="md:col-span-4">
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Address</label>
-              <input
-                type="text"
-                value={billingInfo.address}
-                onChange={(e) => !gstinLocked && setBillingInfo({...billingInfo, address: e.target.value})}
-                disabled={gstinLocked}
-                className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${gstinLocked ? 'bg-gray-100 cursor-not-allowed' : ''}`}
-                placeholder="Enter address"
-              />
-            </div>
-
-            {/* City */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">City</label>
-              <input
-                type="text"
-                value={billingInfo.city}
-                onChange={(e) => !gstinLocked && setBillingInfo({...billingInfo, city: e.target.value})}
-                disabled={gstinLocked}
-                className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${gstinLocked ? 'bg-gray-100 cursor-not-allowed' : ''}`}
-                placeholder="Enter city"
-              />
-            </div>
-
-            {/* Pincode */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Pincode</label>
-              <input
-                type="text"
-                value={billingInfo.pincode}
-                onChange={(e) => !gstinLocked && setBillingInfo({...billingInfo, pincode: e.target.value})}
-                disabled={gstinLocked}
-                className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${gstinLocked ? 'bg-gray-100 cursor-not-allowed' : ''}`}
-                placeholder="Enter pincode"
-                maxLength="6"
-              />
-            </div>
-
-            {/* State */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">State</label>
-              <input
-                type="text"
-                value={billingInfo.state}
-                onChange={(e) => !gstinLocked && setBillingInfo({...billingInfo, state: e.target.value})}
-                disabled={gstinLocked}
-                className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${gstinLocked ? 'bg-gray-100 cursor-not-allowed' : ''}`}
-                placeholder="Enter state"
-              />
-            </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Name</label>
+                  <input type="text" className="w-full px-3 py-2 border rounded-lg" placeholder="Enter name" />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Mobile</label>
+                  <input type="text" className="w-full px-3 py-2 border rounded-lg" placeholder="Enter mobile" />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+                  <input type="text" className="w-full px-3 py-2 border rounded-lg" placeholder="Enter email" />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">GSTIN</label>
+                  <input type="text" className="w-full px-3 py-2 border rounded-lg" placeholder="Enter GSTIN" />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Company</label>
+                  <input type="text" className="w-full px-3 py-2 border rounded-lg" placeholder="Enter company" />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">City</label>
+                  <input type="text" className="w-full px-3 py-2 border rounded-lg" placeholder="Enter city" />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Pincode</label>
+                  <input type="text" className="w-full px-3 py-2 border rounded-lg" placeholder="Enter pincode" />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">State</label>
+                  <input type="text" className="w-full px-3 py-2 border rounded-lg" placeholder="Enter state" />
+                </div>
+                <div className="col-span-4">
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Address</label>
+                  <input type="text" className="w-full px-3 py-2 border rounded-lg" placeholder="Enter address" />
+                </div>
           </div>
         </div>
 
