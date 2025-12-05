@@ -8504,11 +8504,11 @@ const Dashboard = () => {
                     <tbody className="divide-y divide-gray-200">
                       <tr className="hover:bg-gray-50">
                         <td className="px-3 py-2 text-sm text-gray-700">1</td>
-                        <td className="px-3 py-2 text-sm text-gray-900">{selectedTransaction.plan_name || selectedTransaction.product_type}</td>
-                        <td className="px-3 py-2 text-sm text-center text-gray-700">{selectedTransaction.duration ? `${selectedTransaction.duration} Days` : 'N/A'}</td>
+                        <td className="px-3 py-2 text-sm text-gray-900">{selectedTransaction.plan_name || selectedTransaction.product_type || 'Busy Desktop Subscription'}</td>
+                        <td className="px-3 py-2 text-sm text-center text-gray-700">{selectedTransaction.duration ? `${selectedTransaction.duration} Days` : '360 Days'}</td>
                         <td className="px-3 py-2 text-sm text-center text-gray-700">1</td>
-                        <td className="px-3 py-2 text-sm text-right text-gray-700">₹{selectedTransaction.base_amount?.toLocaleString('en-IN') || '0'}</td>
-                        <td className="px-3 py-2 text-sm text-right font-medium text-gray-900">₹{selectedTransaction.base_amount?.toLocaleString('en-IN') || '0'}</td>
+                        <td className="px-3 py-2 text-sm text-right text-gray-700">₹{(selectedTransaction.base_amount || 12000).toLocaleString('en-IN')}</td>
+                        <td className="px-3 py-2 text-sm text-right font-medium text-gray-900">₹{(selectedTransaction.base_amount || 12000).toLocaleString('en-IN')}</td>
                       </tr>
                     </tbody>
                   </table>
