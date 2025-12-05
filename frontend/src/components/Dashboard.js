@@ -3783,7 +3783,7 @@ const Dashboard = () => {
             </div>
 
             {/* Address */}
-            <div className="md:col-span-2">
+            <div className="md:col-span-4">
               <label className="block text-sm font-semibold text-gray-700 mb-2">Address</label>
               <input
                 type="text"
