@@ -3909,51 +3909,62 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              {/* Right Side - Product Details Card */}
-              <div className="lg:col-span-1">
+              {/* Product Details Section - Below Billing Information */}
+              <div>
                 <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-indigo-100 rounded-3xl p-8 shadow-xl border-2 border-blue-200">
-                  <h3 className="text-2xl font-bold text-blue-900 mb-8 pb-4 border-b-2 border-blue-300" style={{ fontFamily: 'Georgia, serif' }}>Product Details</h3>
+                  <h3 className="text-3xl font-bold text-blue-900 mb-8 pb-4 border-b-2 border-blue-300" style={{ fontFamily: 'Georgia, serif' }}>Product Details</h3>
                   
-                  <div className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {/* Product Name */}
                     <div>
-                      <div className="flex items-center gap-2 mb-2">
+                      <div className="flex items-center gap-2 mb-3">
                         <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                         </svg>
                         <p className="text-sm text-gray-600">Product Name</p>
                       </div>
-                      <p className="text-2xl font-bold text-gray-900 ml-7">Standard - Client Server</p>
-                    </div>
-
-                    {/* Features */}
-                    <div className="bg-green-100 rounded-lg px-4 py-3 ml-7">
-                      <p className="text-sm font-medium text-green-800">Free Mobile App, Enhanced Features</p>
+                      <p className="text-xl font-bold text-gray-900">Standard - Client Server</p>
+                      <div className="bg-green-100 rounded-lg px-3 py-2 mt-3">
+                        <p className="text-xs font-medium text-green-800">Free Mobile App, Enhanced Features</p>
+                      </div>
                     </div>
 
                     {/* Validity */}
                     <div>
-                      <div className="flex items-center gap-2 mb-2">
+                      <div className="flex items-center gap-2 mb-3">
                         <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         <p className="text-sm text-gray-600">Validity</p>
                       </div>
-                      <p className="text-3xl font-bold text-gray-900 ml-7">360 days</p>
+                      <p className="text-3xl font-bold text-gray-900">360 days</p>
                     </div>
 
                     {/* Price */}
                     <div>
-                      <div className="flex items-center gap-2 mb-2">
+                      <div className="flex items-center gap-2 mb-3">
                         <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         <p className="text-sm text-gray-600">Price</p>
                       </div>
-                      <div className="ml-7">
-                        <p className="text-4xl font-bold text-gray-900">₹14,160</p>
+                      <div>
+                        <p className="text-3xl font-bold text-gray-900">₹14,160</p>
                         <p className="text-sm text-gray-600 mt-1">excluding GST</p>
                       </div>
+                    </div>
+
+                    {/* Proceed to Pay Button - Moved here */}
+                    <div className="flex items-center">
+                      <button 
+                        onClick={() => alert('Processing payment...')}
+                        className="bg-red-400 hover:bg-red-500 text-white text-lg font-semibold px-12 py-4 rounded-xl shadow-md flex items-center gap-3 transition-colors w-full justify-center"
+                      >
+                        Proceed to Pay
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
                     </div>
                   </div>
                 </div>
