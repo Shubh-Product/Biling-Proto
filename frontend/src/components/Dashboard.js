@@ -8451,7 +8451,6 @@ const Dashboard = () => {
             <div className="p-6">
               {/* Customer Information */}
               <div className="mb-4">
-                <h3 className="text-sm font-semibold text-gray-700 mb-2">Customer Information:</h3>
                 <div className="flex items-center gap-2 text-sm flex-wrap">
                   <span className="text-gray-600 font-bold">Name:</span>
                   <span className="font-medium text-gray-900">{selectedTransaction.customer_name}</span>
