@@ -8217,8 +8217,12 @@ const Dashboard = () => {
                             {transaction.customer_mobile && (
                               <p className="text-gray-700 text-xs font-medium">{transaction.customer_mobile}</p>
                             )}
-                            <p className="text-gray-600 text-xs truncate max-w-[200px]" title={transaction.customer_company || 'N/A'}>{transaction.customer_company || 'N/A'}</p>
-                            <p className="text-gray-500 text-xs">{transaction.customer_city}</p>
+                            {transaction.customer_company && (
+                              <p className="text-gray-600 text-xs truncate max-w-[200px]" title={transaction.customer_company}>{transaction.customer_company}</p>
+                            )}
+                            {transaction.customer_city && (
+                              <p className="text-gray-500 text-xs">{transaction.customer_city}</p>
+                            )}
                           </div>
                         </td>
                         {/* Partner Name - Inside Sales Direct Delhi, Inside Sales Renewal, etc. */}
