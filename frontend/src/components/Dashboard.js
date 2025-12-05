@@ -3863,11 +3863,11 @@ const Dashboard = () => {
                   <td className="px-3 py-2 text-sm text-right text-gray-700">₹12,000</td>
                   <td className="px-3 py-2 text-sm text-right font-medium text-gray-900">₹12,000</td>
                 </tr>
-              </tbody>
-            </table>
-            
-            {/* Summary Section */}
-            <div className="border-t border-gray-300 bg-gray-50 p-4">
+                  </tbody>
+                </table>
+                
+                {/* Summary Section */}
+                <div className="border-t border-gray-300 bg-gray-50 p-4">
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="text-sm font-semibold text-gray-700">Total:</span>
