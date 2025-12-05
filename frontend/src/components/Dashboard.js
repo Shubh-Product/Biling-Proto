@@ -4115,11 +4115,6 @@ const Dashboard = () => {
             <div className="max-w-full mx-auto p-6 space-y-6">
               {/* Action buttons removed - Generate Payment Link moved to filter row */}
               
-        {/* Make Payment Page */}
-        {showMakePaymentPage ? (
-          <MakePaymentPage />
-        ) : (
-          <>
         {/* Create Transaction Form */}
         {showCreateForm && (
           <Card>
