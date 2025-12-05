@@ -3794,12 +3794,12 @@ const Dashboard = () => {
                         </svg>
                         <p className="text-sm text-gray-600">Product Name</p>
                       </div>
-                      <p className="text-2xl font-bold text-gray-900 ml-7">Busy SAFFRON</p>
+                      <p className="text-2xl font-bold text-gray-900 ml-7">Standard - Client Server</p>
                     </div>
 
                     {/* Features */}
                     <div className="bg-green-100 rounded-lg px-4 py-3 ml-7">
-                      <p className="text-sm font-medium text-green-800">Free Mobile App, Personalised Invoices</p>
+                      <p className="text-sm font-medium text-green-800">Free Mobile App, Enhanced Features</p>
                     </div>
 
                     {/* Validity */}
@@ -3810,7 +3810,7 @@ const Dashboard = () => {
                         </svg>
                         <p className="text-sm text-gray-600">Validity</p>
                       </div>
-                      <p className="text-3xl font-bold text-gray-900 ml-7">90 days</p>
+                      <p className="text-3xl font-bold text-gray-900 ml-7">360 days</p>
                     </div>
 
                     {/* Price */}
@@ -3822,7 +3822,7 @@ const Dashboard = () => {
                         <p className="text-sm text-gray-600">Price</p>
                       </div>
                       <div className="ml-7">
-                        <p className="text-4xl font-bold text-gray-900">₹999</p>
+                        <p className="text-4xl font-bold text-gray-900">₹14,160</p>
                         <p className="text-sm text-gray-600 mt-1">excluding GST</p>
                       </div>
                     </div>
