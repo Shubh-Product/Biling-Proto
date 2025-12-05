@@ -3844,7 +3844,7 @@ const Dashboard = () => {
               {/* Product Table */}
               <div className="bg-white rounded-lg border border-gray-300 overflow-hidden mb-4">
                 <table className="w-full">
-              <thead className="bg-gray-100 border-b border-gray-300">
+                  <thead className="bg-gray-100 border-b border-gray-300">
                 <tr>
                   <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">S.No</th>
                   <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">Product</th>
