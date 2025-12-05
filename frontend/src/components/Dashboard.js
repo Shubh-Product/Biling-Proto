@@ -3702,11 +3702,25 @@ const Dashboard = () => {
     };
 
     return (
-      <div className="max-w-5xl mx-auto p-6 space-y-6">
-        {/* Section 1: Billing Information */}
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Billing Information</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setShowMakePaymentPage(false)}>
+        <div className="bg-white rounded-lg max-w-7xl w-full mx-4 max-h-[85vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          {/* Modal Header */}
+          <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+            <h2 className="text-xl font-bold text-gray-900">Make Payment</h2>
+            <button
+              onClick={() => setShowMakePaymentPage(false)}
+              className="text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+
+          {/* Modal Content */}
+          <div className="p-6 space-y-6">
+            {/* Section 1: Billing Information */}
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Billing Information</h3>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {/* Name */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">Name *</label>
