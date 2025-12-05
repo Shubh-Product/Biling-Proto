@@ -8678,6 +8678,8 @@ const Dashboard = () => {
           </div>
         </div>
         )}
+        </>
+        )}
 
               {/* Warning Modal */}
       {showWarningModal && (
