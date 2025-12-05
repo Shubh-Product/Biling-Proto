@@ -8239,7 +8239,10 @@ const Dashboard = () => {
                         <td className="py-3 px-4">
                           <div>
                             <p className="font-medium text-gray-900 text-sm">
-                              {transaction.plan_name || transaction.product_type || 'Busy Desktop'}
+                              {(() => {
+                                const productNames = ['Standard - Client Server', 'Basic - Single User', 'Standard - Single User', 'Mobile App', 'Online', 'Mandi'];
+                                return transaction.plan_name || transaction.product_type || productNames[Math.floor(Math.random() * productNames.length)];
+                              })()}
                             </p>
                             <p className="text-gray-600 text-xs">
                               {transaction.license_type} {transaction.plan_details?.model || ''} {transaction.plan_details?.duration || ''}
