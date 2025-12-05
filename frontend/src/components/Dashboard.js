@@ -3859,19 +3859,6 @@ const Dashboard = () => {
             <div className="max-w-full mx-auto p-6 space-y-6">
               {/* Action buttons removed - Generate Payment Link moved to filter row */}
               
-              {/* Back Button - Shown in Create Form */}
-              {showCreateForm && (
-                <div className="flex items-center">
-                  <Button
-                    variant="ghost"
-                    onClick={() => handleNavigationAttempt(() => setShowCreateForm(false), 'dashboard')}
-                    className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 px-4 py-2"
-                  >
-                    <ArrowLeft className="w-4 h-4" />
-                    <span className="font-medium">Back to BIPL Sales Portal Dashboard</span>
-                  </Button>
-                </div>
-              )}
         {/* Create Transaction Form */}
         {showCreateForm && (
           <Card>
