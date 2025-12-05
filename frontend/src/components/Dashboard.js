@@ -8766,13 +8766,16 @@ const Dashboard = () => {
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Scheme
                   </label>
-                  <input
-                    type="text"
+                  <select
                     value={advancedFilters.scheme}
                     onChange={(e) => setAdvancedFilters({...advancedFilters, scheme: e.target.value})}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Enter scheme"
-                  />
+                  >
+                    <option value="">All</option>
+                    <option value="Standard Scheme">Standard Scheme</option>
+                    <option value="Premium Scheme">Premium Scheme</option>
+                    <option value="Enterprise Scheme">Enterprise Scheme</option>
+                  </select>
                 </div>
 
                 {/* 6. Product */}
