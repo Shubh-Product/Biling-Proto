@@ -8812,44 +8812,55 @@ const Dashboard = () => {
                   </select>
                 </div>
 
-                {/* 8. Link Validity - From Date */}
+                {/* 8. Link Validity From */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Link Validity (From Date)
+                    Link Validity From
                   </label>
-                  <input
-                    type="date"
+                  <select
                     value={advancedFilters.linkValidityFrom}
                     onChange={(e) => setAdvancedFilters({...advancedFilters, linkValidityFrom: e.target.value})}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
+                  >
+                    <option value="">All</option>
+                    <option value="last7days">Last 7 Days</option>
+                    <option value="last30days">Last 30 Days</option>
+                    <option value="last90days">Last 90 Days</option>
+                  </select>
                 </div>
 
-                {/* 8. Link Validity - To Date */}
+                {/* 9. Link Validity To */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Link Validity (To Date)
+                    Link Validity To
                   </label>
-                  <input
-                    type="date"
+                  <select
                     value={advancedFilters.linkValidityTo}
                     onChange={(e) => setAdvancedFilters({...advancedFilters, linkValidityTo: e.target.value})}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
+                  >
+                    <option value="">All</option>
+                    <option value="next7days">Next 7 Days</option>
+                    <option value="next30days">Next 30 Days</option>
+                    <option value="next90days">Next 90 Days</option>
+                  </select>
                 </div>
 
-                {/* 9. Subscription ID */}
+                {/* 10. Subscription ID */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Subscription ID
                   </label>
-                  <input
-                    type="text"
+                  <select
                     value={advancedFilters.subscriptionId}
                     onChange={(e) => setAdvancedFilters({...advancedFilters, subscriptionId: e.target.value})}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Enter subscription ID"
-                  />
+                  >
+                    <option value="">All</option>
+                    <option value="SUB-001">SUB-001</option>
+                    <option value="SUB-002">SUB-002</option>
+                    <option value="SUB-003">SUB-003</option>
+                  </select>
                 </div>
 
                 {/* 10. Offers */}
