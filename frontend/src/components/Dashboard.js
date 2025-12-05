@@ -8670,21 +8670,21 @@ const Dashboard = () => {
       {/* Advanced Filter Modal */}
       {showAdvancedFilter && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setShowAdvancedFilter(false)}>
-          <div className="bg-white rounded-lg max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white rounded-lg max-w-7xl w-full mx-4 max-h-[70vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             {/* Modal Header */}
-            <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-gray-900">Advanced Filters</h2>
+            <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between">
+              <h2 className="text-lg font-bold text-gray-900">Advanced Filters</h2>
               <button
                 onClick={() => setShowAdvancedFilter(false)}
                 className="text-gray-400 hover:text-gray-600 transition-colors"
               >
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Modal Content */}
             <div className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 {/* 1. Partner Name */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
