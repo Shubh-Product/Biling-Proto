@@ -3689,7 +3689,7 @@ const Dashboard = () => {
   const MakePaymentPage = () => {
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setShowMakePaymentPage(false)}>
-        <div className="bg-white rounded-lg max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+        <div className="bg-gray-50 rounded-lg max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
           <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
             <h2 className="text-xl font-bold text-gray-900">Make Payment</h2>
             <button onClick={() => setShowMakePaymentPage(false)} className="text-gray-400 hover:text-gray-600">
@@ -3700,138 +3700,130 @@ const Dashboard = () => {
           <div className="p-8">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Left Side - Account & Billing Details */}
-              <div className="lg:col-span-2 space-y-6">
+              <div className="lg:col-span-2 space-y-8">
                 {/* 1. Account Details */}
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6">1. Account Details</h3>
-                  <div className="grid grid-cols-3 gap-4">
+                  <h3 className="text-3xl font-bold text-gray-900 mb-6" style={{ fontFamily: 'Georgia, serif' }}>1. Account Details</h3>
+                  <div className="grid grid-cols-3 gap-8">
                     <div>
-                      <label className="block text-base text-gray-700 mb-2">Full Name</label>
-                      <input type="text" placeholder="Full Name" className="w-full px-4 py-3 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none" />
-                      <p className="text-xs text-red-500 mt-1">Invalid Mobile? Can&apos;t be blank</p>
+                      <label className="block text-lg text-gray-700 mb-3">Full Name</label>
+                      <input 
+                        type="text" 
+                        placeholder="Full Name" 
+                        className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-400" 
+                      />
+                      <p className="text-xs text-red-500 mt-2">Invalid Mobile? Can&apos;t be blank</p>
                     </div>
                     <div>
-                      <label className="block text-base text-gray-700 mb-2">Mobile*</label>
-                      <input type="text" placeholder="Mobile*" className="w-full px-4 py-3 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none" />
-                      <p className="text-xs text-red-500 mt-1">Invalid Email ID? Can&apos;t be blank</p>
+                      <label className="block text-lg text-gray-700 mb-3">Mobile*</label>
+                      <input 
+                        type="text" 
+                        placeholder="Mobile*" 
+                        className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-400" 
+                      />
+                      <p className="text-xs text-red-500 mt-2">Invalid Email ID? Can&apos;t be blank</p>
                     </div>
                     <div>
-                      <label className="block text-base text-gray-700 mb-2">Email ID*</label>
-                      <input type="text" placeholder="Email ID*" className="w-full px-4 py-3 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none" />
+                      <label className="block text-lg text-gray-700 mb-3">Email ID*</label>
+                      <input 
+                        type="text" 
+                        placeholder="Email ID*" 
+                        className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-400" 
+                      />
                     </div>
                   </div>
                 </div>
 
                 {/* 2. Billing */}
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6">2. Billing</h3>
-                  <div className="grid grid-cols-3 gap-4 mb-4">
+                  <h3 className="text-3xl font-bold text-gray-900 mb-6" style={{ fontFamily: 'Georgia, serif' }}>2. Billing</h3>
+                  <div className="grid grid-cols-3 gap-8">
                     <div>
-                      <label className="block text-base text-gray-700 mb-2">State*</label>
-                      <input type="text" placeholder="State*" className="w-full px-4 py-3 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none" />
-                      <p className="text-xs text-red-500 mt-1">Invalid State? Can&apos;t be blank</p>
+                      <label className="block text-lg text-gray-700 mb-3">State*</label>
+                      <input 
+                        type="text" 
+                        placeholder="State*" 
+                        className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-400" 
+                      />
+                      <p className="text-xs text-red-500 mt-2">Invalid State? Can&apos;t be blank</p>
                     </div>
                     <div>
-                      <label className="block text-base text-gray-700 mb-2">Billing Address</label>
-                      <input type="text" placeholder="Billing Address" className="w-full px-4 py-3 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none" />
+                      <label className="block text-lg text-gray-700 mb-3">Billing Address</label>
+                      <input 
+                        type="text" 
+                        placeholder="Billing Address" 
+                        className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-400" 
+                      />
                     </div>
                     <div>
-                      <label className="block text-base text-gray-700 mb-2">GSTIN (optional)</label>
-                      <input type="text" placeholder="GSTIN (OPTIONAL)" className="w-full px-4 py-3 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none" />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-3 gap-4">
-                    <div>
-                      <label className="block text-base text-gray-700 mb-2">City</label>
-                      <input type="text" placeholder="City" className="w-full px-4 py-3 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none" />
-                    </div>
-                    <div>
-                      <label className="block text-base text-gray-700 mb-2">Pincode</label>
-                      <input type="text" placeholder="Pincode" className="w-full px-4 py-3 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none" />
-                    </div>
-                    <div>
-                      <label className="block text-base text-gray-700 mb-2">Company</label>
-                      <input type="text" placeholder="Company Name" className="w-full px-4 py-3 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none" />
+                      <label className="block text-lg text-gray-700 mb-3">GSTIN (optional)</label>
+                      <input 
+                        type="text" 
+                        placeholder="GSTIN (OPTIONAL)" 
+                        className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-400" 
+                      />
                     </div>
                   </div>
                 </div>
 
                 {/* Proceed to Pay Button */}
-                <div className="pt-4">
+                <div className="pt-6">
                   <button 
                     onClick={() => alert('Processing payment...')}
-                    className="bg-red-500 hover:bg-red-600 text-white text-lg font-semibold px-12 py-4 rounded-lg shadow-lg flex items-center gap-2"
+                    className="bg-red-400 hover:bg-red-500 text-white text-xl font-semibold px-16 py-4 rounded-xl shadow-md flex items-center gap-3 transition-colors"
                   >
                     Proceed to Pay
-                    <span className="text-xl">›</span>
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
+                    </svg>
                   </button>
                 </div>
               </div>
 
               {/* Right Side - Product Details Card */}
               <div className="lg:col-span-1">
-                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 shadow-lg border-2 border-blue-200">
-                  <h3 className="text-2xl font-bold text-blue-900 mb-6 pb-3 border-b-2 border-blue-300">Product Details</h3>
+                <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-indigo-100 rounded-3xl p-8 shadow-xl border-2 border-blue-200">
+                  <h3 className="text-2xl font-bold text-blue-900 mb-8 pb-4 border-b-2 border-blue-300" style={{ fontFamily: 'Georgia, serif' }}>Product Details</h3>
                   
                   <div className="space-y-6">
                     {/* Product Name */}
-                    <div className="flex items-start gap-3">
-                      <div className="bg-white rounded-lg p-2">
+                    <div>
+                      <div className="flex items-center gap-2 mb-2">
                         <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                         </svg>
+                        <p className="text-sm text-gray-600">Product Name</p>
                       </div>
-                      <div className="flex-1">
-                        <p className="text-sm text-gray-600 mb-1">Product Name</p>
-                        <p className="text-xl font-bold text-gray-900">Standard - Client Server</p>
-                      </div>
+                      <p className="text-2xl font-bold text-gray-900 ml-7">Busy SAFFRON</p>
                     </div>
 
                     {/* Features */}
-                    <div className="bg-green-50 rounded-lg p-3">
-                      <p className="text-sm font-semibold text-green-700">Free Mobile App, Enhanced Features</p>
+                    <div className="bg-green-100 rounded-lg px-4 py-3 ml-7">
+                      <p className="text-sm font-medium text-green-800">Free Mobile App, Personalised Invoices</p>
                     </div>
 
                     {/* Validity */}
-                    <div className="flex items-start gap-3">
-                      <div className="bg-white rounded-lg p-2">
+                    <div>
+                      <div className="flex items-center gap-2 mb-2">
                         <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
+                        <p className="text-sm text-gray-600">Validity</p>
                       </div>
-                      <div className="flex-1">
-                        <p className="text-sm text-gray-600 mb-1">Validity</p>
-                        <p className="text-2xl font-bold text-gray-900">360 days</p>
-                      </div>
+                      <p className="text-3xl font-bold text-gray-900 ml-7">90 days</p>
                     </div>
 
                     {/* Price */}
-                    <div className="flex items-start gap-3">
-                      <div className="bg-white rounded-lg p-2">
+                    <div>
+                      <div className="flex items-center gap-2 mb-2">
                         <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
+                        <p className="text-sm text-gray-600">Price</p>
                       </div>
-                      <div className="flex-1">
-                        <p className="text-sm text-gray-600 mb-1">Price</p>
-                        <p className="text-3xl font-bold text-gray-900">₹14,160</p>
-                        <p className="text-xs text-gray-500 mt-1">including GST</p>
-                      </div>
-                    </div>
-
-                    {/* Pricing Breakdown */}
-                    <div className="bg-white rounded-lg p-4 space-y-2 text-sm">
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Base Amount:</span>
-                        <span className="font-semibold">₹12,000</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">GST (18%):</span>
-                        <span className="font-semibold">₹2,160</span>
-                      </div>
-                      <div className="border-t pt-2 flex justify-between">
-                        <span className="font-bold text-gray-900">Total:</span>
-                        <span className="font-bold text-blue-600">₹14,160</span>
+                      <div className="ml-7">
+                        <p className="text-4xl font-bold text-gray-900">₹999</p>
+                        <p className="text-sm text-gray-600 mt-1">excluding GST</p>
                       </div>
                     </div>
                   </div>
