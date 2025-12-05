@@ -3708,7 +3708,7 @@ const Dashboard = () => {
                     <div>
                       <label className="block text-base text-gray-700 mb-2">Full Name</label>
                       <input type="text" placeholder="Full Name" className="w-full px-4 py-3 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none" />
-                      <p className="text-xs text-red-500 mt-1">Invalid Mobile? Can't be blank</p>
+                      <p className="text-xs text-red-500 mt-1">Invalid Mobile? Can&apos;t be blank</p>
                     </div>
                     <div>
                       <label className="block text-base text-gray-700 mb-2">Mobile*</label>
