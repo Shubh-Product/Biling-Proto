@@ -3894,19 +3894,6 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-
-                {/* Proceed to Pay Button */}
-                <div className="pt-6">
-                  <button 
-                    onClick={() => alert('Processing payment...')}
-                    className="bg-red-400 hover:bg-red-500 text-white text-xl font-semibold px-16 py-4 rounded-xl shadow-md flex items-center gap-3 transition-colors"
-                  >
-                    Proceed to Pay
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                </div>
               </div>
 
               {/* Product Details Section - Below Billing Information */}
