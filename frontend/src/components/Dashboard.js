@@ -3736,7 +3736,7 @@ const Dashboard = () => {
                       onClick={() => handleNavigationAttempt(() => setShowCreateForm(false), 'dashboard')}
                       className="text-2xl font-bold text-blue-900 hover:text-blue-800 transition-colors whitespace-nowrap"
                     >
-                      My Payments Dashboard
+                      My Payments
                     </button>
                     {showCreateForm && (
                       <span className="text-xl font-semibold text-gray-600"> / Generate Payment Link</span>
