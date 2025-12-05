@@ -3853,8 +3853,8 @@ const Dashboard = () => {
                   <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Rate</th>
                   <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Amount</th>
                 </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
                 <tr className="hover:bg-gray-50">
                   <td className="px-3 py-2 text-sm text-gray-700">1</td>
                   <td className="px-3 py-2 text-sm text-gray-900">Standard - Client Server</td>
