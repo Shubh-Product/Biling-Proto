@@ -3840,6 +3840,18 @@ const Dashboard = () => {
                   ))}
                 </div>
                 
+                {/* Make Payment Button */}
+                <Button 
+                  onClick={() => {
+                    // Handle Make Payment action
+                    console.log('Make Payment clicked');
+                  }}
+                  className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2 whitespace-nowrap flex-shrink-0"
+                >
+                  <CreditCard className="w-4 h-4" />
+                  <span>Make Payment</span>
+                </Button>
+
                 {/* Generate Payment Link Button */}
                 <Button 
                   onClick={() => handleNavigationAttempt(() => setShowCreateForm(!showCreateForm))}
