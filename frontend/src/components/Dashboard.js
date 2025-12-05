@@ -3757,10 +3757,8 @@ const Dashboard = () => {
             <div className="space-y-8">
               {/* Billing Information Section */}
               <div>
-                {/* 1. Billing Information */}
+                {/* Billing Information Fields */}
                 <div>
-                  <h3 className="text-3xl font-bold text-gray-900 mb-6" style={{ fontFamily: 'Georgia, serif' }}>1. Billing Information</h3>
-                  
                   {/* Row 1: Mobile, Email, Name */}
                   <div className="grid grid-cols-3 gap-8 mb-6">
                     <div>
