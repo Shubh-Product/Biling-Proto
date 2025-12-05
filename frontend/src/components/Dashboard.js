@@ -3834,12 +3834,12 @@ const Dashboard = () => {
                 placeholder="Enter state"
               />
             </div>
-          </div>
-        </div>
+              </div>
+            </div>
 
-        {/* Section 2: Product and Pricing Information */}
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Product and Pricing Information</h2>
+            {/* Section 2: Product and Pricing Information */}
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Product and Pricing Information</h3>
           
           {/* Product Table */}
           <div className="bg-white rounded-lg border border-gray-300 overflow-hidden mb-4">
