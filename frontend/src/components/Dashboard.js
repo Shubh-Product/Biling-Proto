@@ -3729,7 +3729,7 @@ const Dashboard = () => {
                     <div>
                       <label className="block text-base text-gray-700 mb-2">State*</label>
                       <input type="text" placeholder="State*" className="w-full px-4 py-3 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none" />
-                      <p className="text-xs text-red-500 mt-1">Invalid State? Can't be blank</p>
+                      <p className="text-xs text-red-500 mt-1">Invalid State? Can&apos;t be blank</p>
                     </div>
                     <div>
                       <label className="block text-base text-gray-700 mb-2">Billing Address</label>
