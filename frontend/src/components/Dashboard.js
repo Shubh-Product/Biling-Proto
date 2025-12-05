@@ -3699,10 +3699,9 @@ const Dashboard = () => {
             </button>
           </div>
           <div className="p-6 space-y-6">
-            {/* Section 1: Billing Information */}
             <div className="bg-gray-50 rounded-lg p-6">
               <h3 className="text-lg font-bold text-gray-900 mb-4">Billing Information</h3>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-4 gap-4">
             {/* Name */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">Name *</label>
