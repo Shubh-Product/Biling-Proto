@@ -8518,7 +8518,7 @@ const Dashboard = () => {
               </div>
 
               {/* Order Detail */}
-              <div className="mb-4">
+              <div className="mb-6">
                 <div className="flex items-center gap-2 text-sm flex-wrap">
                   <span className="text-gray-600 font-bold">Payment ID:</span>
                   <span className="font-medium text-gray-900">{selectedTransaction.id}</span>
@@ -8535,12 +8535,7 @@ const Dashboard = () => {
                     selectedTransaction.status === 'Cancelled' ? 'text-gray-600' :
                     'text-blue-600'
                   }`}>{selectedTransaction.status}</span>
-                </div>
-              </div>
-
-              {/* Second Row - Order ID & Payment Method */}
-              <div className="mb-6">
-                <div className="flex items-center gap-2 text-sm flex-wrap">
+                  <span className="text-gray-400">|</span>
                   <span className="text-gray-600 font-bold">Order ID:</span>
                   <span className="font-medium text-gray-900">{selectedTransaction.id || 'ORD-' + Math.floor(Math.random() * 100000)}</span>
                   <span className="text-gray-400">|</span>
