@@ -8241,7 +8241,7 @@ const Dashboard = () => {
                             <p className="font-medium text-gray-900 text-sm">
                               {(() => {
                                 const productNames = ['Standard - Client Server', 'Basic - Single User', 'Standard - Single User', 'Mobile App', 'Online', 'Mandi'];
-                                return transaction.plan_name || transaction.product_type || productNames[Math.floor(Math.random() * productNames.length)];
+                                return productNames[index % productNames.length];
                               })()}
                             </p>
                             <p className="text-gray-600 text-xs">
