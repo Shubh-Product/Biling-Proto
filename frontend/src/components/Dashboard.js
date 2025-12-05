@@ -3754,9 +3754,9 @@ const Dashboard = () => {
           </div>
           
           <div className="p-8">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Left Side - Billing Information */}
-              <div className="lg:col-span-2 space-y-8">
+            <div className="space-y-8">
+              {/* Billing Information Section */}
+              <div>
                 {/* 1. Billing Information */}
                 <div>
                   <h3 className="text-3xl font-bold text-gray-900 mb-6" style={{ fontFamily: 'Georgia, serif' }}>1. Billing Information</h3>
