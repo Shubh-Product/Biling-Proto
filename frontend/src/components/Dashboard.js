@@ -3888,11 +3888,11 @@ const Dashboard = () => {
                   <span className="text-base font-bold text-gray-900">Grand Total:</span>
                   <span className="text-base font-bold text-blue-600">₹14,160</span>
                 </div>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Modal Footer */}
+          {/* Modal Footer */}
           <div className="sticky bottom-0 bg-gray-50 border-t border-gray-200 px-6 py-4 flex justify-end gap-4">
             <Button
               onClick={() => setShowMakePaymentPage(false)}
