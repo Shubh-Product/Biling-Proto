@@ -3689,33 +3689,15 @@ const Dashboard = () => {
   const MakePaymentPage = () => {
     const [gstinLocked, setGstinLocked] = useState(false);
 
-    const handleGstinChange = (e) => {
-      const gstin = e.target.value;
-      setBillingInfo({...billingInfo, gstin});
-      
-      // Lock fields if GSTIN is entered (11 characters or more)
-      if (gstin.length >= 11) {
-        setGstinLocked(true);
-      } else {
-        setGstinLocked(false);
-      }
-    };
-
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setShowMakePaymentPage(false)}>
         <div className="bg-white rounded-lg max-w-7xl w-full mx-4 max-h-[85vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-          {/* Modal Header */}
           <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
             <h2 className="text-xl font-bold text-gray-900">Make Payment</h2>
-            <button
-              onClick={() => setShowMakePaymentPage(false)}
-              className="text-gray-400 hover:text-gray-600 transition-colors"
-            >
+            <button onClick={() => setShowMakePaymentPage(false)} className="text-gray-400 hover:text-gray-600">
               <X className="w-6 h-6" />
             </button>
           </div>
-
-          {/* Modal Content */}
           <div className="p-6 space-y-6">
             {/* Section 1: Billing Information */}
             <div className="bg-gray-50 rounded-lg p-6">
