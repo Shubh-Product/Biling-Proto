@@ -3683,7 +3683,7 @@ const Dashboard = () => {
         <PaymentLinkPage />
       </div>
     );
-  }
+  };
 
   // Make Payment Page Component
   const MakePaymentPage = () => {
