@@ -3738,8 +3738,8 @@ const Dashboard = () => {
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Address</label>
                   <input type="text" className="w-full px-3 py-2 border rounded-lg" placeholder="Enter address" />
                 </div>
-          </div>
-        </div>
+              </div>
+            </div>
 
             <div className="bg-gray-50 rounded-lg p-6">
               <h3 className="text-lg font-bold text-gray-900 mb-4">Product and Pricing</h3>
@@ -3751,6 +3751,7 @@ const Dashboard = () => {
                 <p className="text-base font-bold text-blue-600 mt-4"><strong>Grand Total:</strong> ₹14,160</p>
               </div>
             </div>
+          </div>
 
           <div className="sticky bottom-0 bg-gray-50 border-t px-6 py-4 flex justify-end gap-4">
             <Button onClick={() => setShowMakePaymentPage(false)} variant="outline" className="px-8 py-2">
