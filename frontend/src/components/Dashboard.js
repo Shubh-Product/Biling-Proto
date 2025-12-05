@@ -8528,12 +8528,12 @@ const Dashboard = () => {
                         </div>
                       )}
                       
-                      {selectedTransaction.tds_amount > 0 && (
-                        <div className="flex justify-between items-center">
-                          <span className="text-sm text-gray-600">Deduct TDS:</span>
-                          <span className="text-sm font-medium text-orange-600">-₹{selectedTransaction.tds_amount?.toLocaleString('en-IN')}</span>
-                        </div>
-                      )}
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600">TDS Deduction:</span>
+                        <span className="text-sm font-medium text-orange-600">
+                          {selectedTransaction.tds_amount > 0 ? `-₹${selectedTransaction.tds_amount?.toLocaleString('en-IN')}` : '₹0'}
+                        </span>
+                      </div>
                       
                       <div className="flex justify-between items-center">
                         <span className="text-sm text-gray-600">GST (18%):</span>
