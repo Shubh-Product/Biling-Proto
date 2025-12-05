@@ -249,16 +249,16 @@ const Dashboard = () => {
   const [showAdvancedFilter, setShowAdvancedFilter] = useState(false);
   const [advancedFilters, setAdvancedFilters] = useState({
     partnerName: '',
-    status: [],
+    status: '',
     generatedBy: '',
     transactionType: '',
     scheme: '',
     product: '',
-    licenseType: 'All',
+    licenseType: '',
     linkValidityFrom: '',
     linkValidityTo: '',
     subscriptionId: '',
-    offers: 'All'
+    offers: ''
   });
 
   // Sold By filter state
