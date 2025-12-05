@@ -261,6 +261,20 @@ const Dashboard = () => {
     offers: ''
   });
 
+  // Make Payment Page state
+  const [showMakePaymentPage, setShowMakePaymentPage] = useState(false);
+  const [billingInfo, setBillingInfo] = useState({
+    mobile: '',
+    email: '',
+    name: '',
+    gstin: '',
+    companyName: '',
+    address: '',
+    city: '',
+    pincode: '',
+    state: ''
+  });
+
   // Sold By filter state
   const [selectedSoldByFilter, setSelectedSoldByFilter] = useState('inside_sales'); // 'inside_sales', 'partner'
 
