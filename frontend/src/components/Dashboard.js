@@ -8887,16 +8887,16 @@ const Dashboard = () => {
                 onClick={() => {
                   setAdvancedFilters({
                     partnerName: '',
-                    status: [],
+                    status: '',
                     generatedBy: '',
                     transactionType: '',
                     scheme: '',
                     product: '',
-                    licenseType: 'All',
+                    licenseType: '',
                     linkValidityFrom: '',
                     linkValidityTo: '',
                     subscriptionId: '',
-                    offers: 'All'
+                    offers: ''
                   });
                 }}
                 variant="outline"
