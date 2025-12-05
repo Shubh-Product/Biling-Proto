@@ -8489,7 +8489,6 @@ const Dashboard = () => {
 
               {/* Order Summary Table */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Order Summary</h3>
                 <div className="bg-white rounded-lg border border-gray-300 overflow-hidden">
                   <table className="w-full">
                     <thead className="bg-gray-100 border-b border-gray-300">
