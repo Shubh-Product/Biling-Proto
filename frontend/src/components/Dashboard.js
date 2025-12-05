@@ -3752,22 +3752,11 @@ const Dashboard = () => {
               </div>
             </div>
 
-          {/* Modal Footer */}
-          <div className="sticky bottom-0 bg-gray-50 border-t border-gray-200 px-6 py-4 flex justify-end gap-4">
-            <Button
-              onClick={() => setShowMakePaymentPage(false)}
-              variant="outline"
-              className="px-8 py-2 border-gray-300 text-gray-700 hover:bg-gray-100"
-            >
+          <div className="sticky bottom-0 bg-gray-50 border-t px-6 py-4 flex justify-end gap-4">
+            <Button onClick={() => setShowMakePaymentPage(false)} variant="outline" className="px-8 py-2">
               Cancel
             </Button>
-            <Button
-              onClick={() => {
-                // Handle payment processing
-                alert('Processing payment...');
-              }}
-              className="bg-green-600 hover:bg-green-700 text-white px-8 py-2"
-            >
+            <Button onClick={() => alert('Payment processing')} className="bg-green-600 hover:bg-green-700 text-white px-8 py-2">
               Pay Now
             </Button>
           </div>
