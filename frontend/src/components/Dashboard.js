@@ -8617,6 +8617,57 @@ const Dashboard = () => {
                 </div>
               </div>
 
+              {/* Payment Link Section */}
+              <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <h3 className="text-sm font-semibold text-gray-900 mb-3">Payment Link Status</h3>
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-2">
+                    {(() => {
+                      // Calculate if link is expired (assuming 7 days validity)
+                      const createdDate = new Date(selectedTransaction.created_at);
+                      const validTillDate = new Date(createdDate);
+                      validTillDate.setDate(validTillDate.getDate() + 7);
+                      const isExpired = new Date() > validTillDate;
+                      
+                      if (isExpired) {
+                        return (
+                          <>
+                            <span className="text-sm text-red-600 font-medium">
+                              Expired On: {validTillDate.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                            </span>
+                            <button className="ml-4 px-3 py-1.5 bg-orange-500 text-white text-sm rounded-lg hover:bg-orange-600">
+                              Extend For 7 Days
+                            </button>
+                          </>
+                        );
+                      } else {
+                        const daysRemaining = Math.ceil((validTillDate - new Date()) / (1000 * 60 * 60 * 24));
+                        return (
+                          <>
+                            <span className="text-sm text-green-600 font-medium">
+                              Valid Till: {validTillDate.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })} ({daysRemaining} days left)
+                            </span>
+                            <button 
+                              onClick={() => {
+                                const paymentLink = `https://payment.example.com/pay/${selectedTransaction.id}`;
+                                navigator.clipboard.writeText(paymentLink);
+                                alert('Payment link copied to clipboard!');
+                              }}
+                              className="ml-4 px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 flex items-center gap-2"
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                              </svg>
+                              Copy Payment Link
+                            </button>
+                          </>
+                        );
+                      }
+                    })()}
+                  </div>
+                </div>
+              </div>
+
             </div>
 
             {/* Modal Footer */}
