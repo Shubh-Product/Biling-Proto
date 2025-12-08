@@ -4142,7 +4142,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* UPI */}
-                <div className="border border-gray-200 rounded-lg p-3 mb-3 hover:border-blue-500 cursor-pointer">
+                <div onClick={() => setSelectedPaymentMethod('upi')} className="border border-gray-200 rounded-lg p-3 mb-3 hover:border-blue-500 cursor-pointer">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
