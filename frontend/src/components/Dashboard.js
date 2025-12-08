@@ -3795,7 +3795,7 @@ const Dashboard = () => {
                       {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name}</p>}
                     </div>
                     <div>
-                      <label className="block text-sm text-gray-700 mb-2">GSTIN (with auto fetch)</label>
+                      <label className="block text-sm text-gray-700 mb-2">GSTIN</label>
                       <div className="relative">
                         <input 
                           type="text" 
