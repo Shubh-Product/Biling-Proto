@@ -3823,7 +3823,6 @@ const Dashboard = () => {
                         )}
                       </div>
                       {errors.gstin && <p className="text-xs text-red-500 mt-0.5">{errors.gstin}</p>}
-                      {isGstinFilled && <p className="text-xs text-green-600 mt-0.5">✓ Auto-filled</p>}
                     </div>
                   </div>
 
