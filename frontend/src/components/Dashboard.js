@@ -3892,10 +3892,10 @@ const Dashboard = () => {
 
               {/* Product Details Section - Below Billing Information */}
               <div>
-                <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-indigo-100 rounded-3xl p-8 shadow-xl border-2 border-blue-200">
-                  <h3 className="text-3xl font-bold text-blue-900 mb-8 pb-4 border-b-2 border-blue-300" style={{ fontFamily: 'Georgia, serif' }}>Product Details</h3>
+                <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-indigo-100 rounded-2xl p-5 shadow-xl border-2 border-blue-200">
+                  <h3 className="text-2xl font-bold text-blue-900 mb-4 pb-3 border-b-2 border-blue-300" style={{ fontFamily: 'Georgia, serif' }}>Product Details</h3>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {/* Product Name */}
                     <div>
                       <div className="flex items-center gap-2 mb-3">
