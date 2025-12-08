@@ -3961,10 +3961,10 @@ const Dashboard = () => {
                   </div>
 
                   {/* Proceed to Pay Button */}
-                  <div className="mt-2">
+                  <div className="mt-2 flex justify-center">
                     <button 
                       onClick={() => setShowPaymentGateway(true)}
-                      className="bg-red-400 hover:bg-red-500 text-white text-sm font-semibold px-6 py-2 rounded-lg shadow-md flex items-center gap-2 transition-colors w-full justify-center"
+                      className="bg-red-400 hover:bg-red-500 text-white text-sm font-semibold px-8 py-2 rounded-lg shadow-md flex items-center gap-2 transition-colors"
                     >
                       Proceed to Pay
                       <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
