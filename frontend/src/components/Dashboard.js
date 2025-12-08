@@ -3902,35 +3902,27 @@ const Dashboard = () => {
                       <tbody>
                         <tr className="border-b border-gray-100">
                           <td className="py-1.5 px-2 text-gray-800">1</td>
-                          <td className="py-1.5 px-2 text-gray-800">Desktop Subscription</td>
+                          <td className="py-1.5 px-2 text-gray-800">Basic - Single User</td>
                           <td className="py-1.5 px-2 text-gray-800">360 Days</td>
                           <td className="py-1.5 px-2 text-gray-800">1</td>
-                          <td className="py-1.5 px-2 text-right text-gray-800">₹12,000</td>
-                          <td className="py-1.5 px-2 text-right font-semibold text-gray-900">₹12,000</td>
+                          <td className="py-1.5 px-2 text-right text-gray-800">₹9,999</td>
+                          <td className="py-1.5 px-2 text-right font-semibold text-gray-900">₹9,999</td>
                         </tr>
                         <tr className="border-b border-gray-100">
                           <td className="py-1.5 px-2 text-gray-800">2</td>
-                          <td className="py-1.5 px-2 text-gray-800">Mobile App Premium</td>
+                          <td className="py-1.5 px-2 text-gray-800">Mobile App</td>
                           <td className="py-1.5 px-2 text-gray-800">360 Days</td>
-                          <td className="py-1.5 px-2 text-gray-800">2</td>
-                          <td className="py-1.5 px-2 text-right text-gray-800">₹3,000</td>
-                          <td className="py-1.5 px-2 text-right font-semibold text-gray-900">₹6,000</td>
+                          <td className="py-1.5 px-2 text-gray-800">1</td>
+                          <td className="py-1.5 px-2 text-right text-gray-800">₹2,999</td>
+                          <td className="py-1.5 px-2 text-right font-semibold text-gray-900">₹2,999</td>
                         </tr>
                         <tr className="border-b border-gray-100">
                           <td className="py-1.5 px-2 text-gray-800">3</td>
-                          <td className="py-1.5 px-2 text-gray-800">Cloud Storage</td>
+                          <td className="py-1.5 px-2 text-gray-800">Recom</td>
                           <td className="py-1.5 px-2 text-gray-800">365 Days</td>
                           <td className="py-1.5 px-2 text-gray-800">1</td>
-                          <td className="py-1.5 px-2 text-right text-gray-800">₹5,000</td>
-                          <td className="py-1.5 px-2 text-right font-semibold text-gray-900">₹5,000</td>
-                        </tr>
-                        <tr className="border-b border-gray-100">
-                          <td className="py-1.5 px-2 text-gray-800">4</td>
-                          <td className="py-1.5 px-2 text-gray-800">Support & Maintenance</td>
-                          <td className="py-1.5 px-2 text-gray-800">365 Days</td>
-                          <td className="py-1.5 px-2 text-gray-800">1</td>
-                          <td className="py-1.5 px-2 text-right text-gray-800">₹8,000</td>
-                          <td className="py-1.5 px-2 text-right font-semibold text-gray-900">₹8,000</td>
+                          <td className="py-1.5 px-2 text-right text-gray-800">₹5,900</td>
+                          <td className="py-1.5 px-2 text-right font-semibold text-gray-900">₹5,900</td>
                         </tr>
                       </tbody>
                     </table>
@@ -3940,7 +3932,7 @@ const Dashboard = () => {
                   <div className="bg-white rounded-lg p-2 space-y-1">
                     <div className="flex justify-between text-xs">
                       <span className="text-gray-700">Total:</span>
-                      <span className="font-semibold text-gray-900">₹31,000</span>
+                      <span className="font-semibold text-gray-900">₹18,898</span>
                     </div>
                     <div className="flex justify-between text-xs">
                       <span className="text-gray-700">TDS Deduction:</span>
@@ -3948,11 +3940,11 @@ const Dashboard = () => {
                     </div>
                     <div className="flex justify-between text-xs">
                       <span className="text-gray-700">GST (18%):</span>
-                      <span className="font-semibold text-gray-900">₹5,580</span>
+                      <span className="font-semibold text-gray-900">₹3,402</span>
                     </div>
                     <div className="flex justify-between text-sm pt-1 border-t border-gray-200">
                       <span className="font-bold text-gray-900">Grand Total:</span>
-                      <span className="font-bold text-blue-900">₹36,580</span>
+                      <span className="font-bold text-blue-900">₹22,300</span>
                     </div>
                   </div>
 
