@@ -4196,8 +4196,10 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                {/* Continue Button */}
-                <div className="mt-4">
+                </div>
+                
+                {/* Continue Button - Fixed at bottom */}
+                <div className="mt-3 pt-3 border-t border-gray-200 flex-shrink-0">
                   <button
                     onClick={() => {
                       setShowAcknowledgement(true);
@@ -4216,16 +4218,12 @@ const Dashboard = () => {
                         });
                       }, 1000);
                     }}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg text-sm font-semibold transition-colors"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-lg text-sm font-semibold transition-colors"
                   >
                     Continue
                   </button>
-                </div>
-                
-                {/* Footer */}
-                <div className="mt-4 pt-4 border-t border-gray-200">
-                  <p className="text-xs text-gray-500 text-center">
-                    By proceeding, I agree to Razorpay's <span className="text-blue-600 cursor-pointer">Privacy Notice</span> · <span className="text-blue-600 cursor-pointer">Edit Preferences</span>
+                  <p className="text-xs text-gray-500 text-center mt-2">
+                    By proceeding, I agree to Razorpay's <span className="text-blue-600 cursor-pointer">Privacy Notice</span>
                   </p>
                 </div>
               </div>
