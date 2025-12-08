@@ -4124,7 +4124,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* Cards */}
-                <div onClick={() => setSelectedPaymentMethod('card')} className="border border-gray-200 rounded-lg p-3 mb-3 hover:border-blue-500 cursor-pointer">
+                <div className="border border-gray-200 rounded-lg p-3 mb-3 hover:border-blue-500 cursor-pointer">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -4134,7 +4134,7 @@ const Dashboard = () => {
                       </div>
                       <div>
                         <p className="text-sm font-semibold text-gray-900">Cards</p>
-                        <p className="text-xs text-gray-500">Credit/Debit/ATM Card</p>
+                        <p className="text-xs text-gray-500">Also enjoy compli...</p>
                       </div>
                     </div>
                     <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -4144,7 +4144,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* Netbanking */}
-                <div onClick={() => setSelectedPaymentMethod('netbanking')} className="border border-gray-200 rounded-lg p-3 mb-3 hover:border-blue-500 cursor-pointer">
+                <div className="border border-gray-200 rounded-lg p-3 mb-3 hover:border-blue-500 cursor-pointer">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
@@ -4164,7 +4164,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* Wallet */}
-                <div onClick={() => setSelectedPaymentMethod('wallet')} className="border border-gray-200 rounded-lg p-3 mb-3 hover:border-blue-500 cursor-pointer">
+                <div className="border border-gray-200 rounded-lg p-3 mb-3 hover:border-blue-500 cursor-pointer">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
@@ -4182,187 +4182,6 @@ const Dashboard = () => {
                     </svg>
                   </div>
                 </div>
-                
-                {/* Payment Method Forms */}
-                {selectedPaymentMethod && (
-                  <div className="mt-4 border-t pt-4">
-                    {/* UPI Form */}
-                    {selectedPaymentMethod === 'upi' && (
-                      <div className="space-y-3">
-                        <button onClick={() => setSelectedPaymentMethod(null)} className="text-blue-600 text-xs flex items-center gap-1">
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                          </svg>
-                          Back
-                        </button>
-                        <h3 className="font-semibold text-sm">Enter UPI ID</h3>
-                        <input
-                          type="text"
-                          placeholder="yourname@upi"
-                          value={upiId}
-                          onChange={(e) => setUpiId(e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-500"
-                        />
-                        <button
-                          onClick={processPayment}
-                          disabled={!upiId || paymentProcessing}
-                          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg text-sm font-semibold disabled:bg-gray-300 disabled:cursor-not-allowed"
-                        >
-                          {paymentProcessing ? 'Processing...' : 'Verify & Pay ₹22,300'}
-                        </button>
-                      </div>
-                    )}
-                    
-                    {/* Card Form */}
-                    {selectedPaymentMethod === 'card' && (
-                      <div className="space-y-3">
-                        <button onClick={() => setSelectedPaymentMethod(null)} className="text-blue-600 text-xs flex items-center gap-1">
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                          </svg>
-                          Back
-                        </button>
-                        <h3 className="font-semibold text-sm">Enter Card Details</h3>
-                        <input
-                          type="text"
-                          placeholder="Card Number"
-                          value={cardNumber}
-                          onChange={(e) => setCardNumber(e.target.value.replace(/\s/g, '').replace(/(\d{4})/g, '$1 ').trim())}
-                          maxLength={19}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-500"
-                        />
-                        <input
-                          type="text"
-                          placeholder="Cardholder Name"
-                          value={cardName}
-                          onChange={(e) => setCardName(e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-500"
-                        />
-                        <div className="grid grid-cols-2 gap-2">
-                          <input
-                            type="text"
-                            placeholder="MM/YY"
-                            value={cardExpiry}
-                            onChange={(e) => setCardExpiry(e.target.value)}
-                            maxLength={5}
-                            className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-500"
-                          />
-                          <input
-                            type="password"
-                            placeholder="CVV"
-                            value={cardCvv}
-                            onChange={(e) => setCardCvv(e.target.value)}
-                            maxLength={3}
-                            className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-500"
-                          />
-                        </div>
-                        <button
-                          onClick={processPayment}
-                          disabled={!cardNumber || !cardName || !cardExpiry || !cardCvv || paymentProcessing}
-                          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg text-sm font-semibold disabled:bg-gray-300 disabled:cursor-not-allowed"
-                        >
-                          {paymentProcessing ? 'Processing...' : 'Pay ₹22,300'}
-                        </button>
-                      </div>
-                    )}
-                    
-                    {/* Netbanking Form */}
-                    {selectedPaymentMethod === 'netbanking' && (
-                      <div className="space-y-3">
-                        <button onClick={() => setSelectedPaymentMethod(null)} className="text-blue-600 text-xs flex items-center gap-1">
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                          </svg>
-                          Back
-                        </button>
-                        <h3 className="font-semibold text-sm">Select Your Bank</h3>
-                        <div className="grid grid-cols-2 gap-2">
-                          {['HDFC Bank', 'ICICI Bank', 'SBI', 'Axis Bank', 'Kotak Bank', 'PNB'].map((bank) => (
-                            <button
-                              key={bank}
-                              onClick={() => setSelectedBank(bank)}
-                              className={`px-3 py-2 border rounded-lg text-xs ${selectedBank === bank ? 'border-blue-600 bg-blue-50' : 'border-gray-300'}`}
-                            >
-                              {bank}
-                            </button>
-                          ))}
-                        </div>
-                        <button
-                          onClick={processPayment}
-                          disabled={!selectedBank || paymentProcessing}
-                          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg text-sm font-semibold disabled:bg-gray-300 disabled:cursor-not-allowed"
-                        >
-                          {paymentProcessing ? 'Processing...' : 'Continue to Bank'}
-                        </button>
-                      </div>
-                    )}
-                    
-                    {/* Wallet Form */}
-                    {selectedPaymentMethod === 'wallet' && (
-                      <div className="space-y-3">
-                        <button onClick={() => setSelectedPaymentMethod(null)} className="text-blue-600 text-xs flex items-center gap-1">
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                          </svg>
-                          Back
-                        </button>
-                        <h3 className="font-semibold text-sm">Select Wallet</h3>
-                        <div className="space-y-2">
-                          {['Paytm', 'PhonePe', 'MobiKwik', 'Amazon Pay'].map((wallet) => (
-                            <button
-                              key={wallet}
-                              onClick={() => setSelectedWallet(wallet)}
-                              className={`w-full px-3 py-2 border rounded-lg text-xs text-left ${selectedWallet === wallet ? 'border-blue-600 bg-blue-50' : 'border-gray-300'}`}
-                            >
-                              {wallet}
-                            </button>
-                          ))}
-                        </div>
-                        <button
-                          onClick={processPayment}
-                          disabled={!selectedWallet || paymentProcessing}
-                          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg text-sm font-semibold disabled:bg-gray-300 disabled:cursor-not-allowed"
-                        >
-                          {paymentProcessing ? 'Processing...' : 'Pay ₹22,300'}
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                )}
-                
-                {/* Success/Failure Messages */}
-                {paymentSuccess && (
-                  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[70]">
-                    <div className="bg-white rounded-lg p-6 max-w-sm">
-                      <div className="text-center">
-                        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                          <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                        </div>
-                        <h3 className="text-lg font-bold text-gray-900 mb-2">Payment Successful!</h3>
-                        <p className="text-sm text-gray-600">₹22,300 paid successfully</p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-                
-                {paymentFailed && (
-                  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[70]">
-                    <div className="bg-white rounded-lg p-6 max-w-sm">
-                      <div className="text-center">
-                        <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                          <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                          </svg>
-                        </div>
-                        <h3 className="text-lg font-bold text-gray-900 mb-2">Payment Failed!</h3>
-                        <p className="text-sm text-gray-600 mb-4">Please try again</p>
-                        <button onClick={() => setPaymentFailed(false)} className="text-blue-600 text-sm font-semibold">Try Again</button>
-                      </div>
-                    </div>
-                  </div>
-                )}
 
                 {/* Footer */}
                 <div className="mt-4 pt-4 border-t border-gray-200">
