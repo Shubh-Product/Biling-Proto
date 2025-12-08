@@ -3753,53 +3753,49 @@ const Dashboard = () => {
             </button>
           </div>
           
-          <div className="p-8">
-            <div className="space-y-8">
+          <div className="p-6">
+            <div className="space-y-4">
               {/* Billing Information Section */}
               <div>
                 {/* Billing Information Fields */}
                 <div>
-                  {/* Row 1: Mobile, Email, Name */}
-                  <div className="grid grid-cols-3 gap-8 mb-6">
+                  {/* Row 1: Mobile, Email, Name, GSTIN */}
+                  <div className="grid grid-cols-4 gap-6 mb-4">
                     <div>
-                      <label className="block text-lg text-gray-700 mb-3">Mobile*</label>
+                      <label className="block text-sm text-gray-700 mb-2">Mobile*</label>
                       <input 
                         type="text" 
                         placeholder="Mobile*" 
                         value={billingData.mobile}
                         onChange={(e) => setBillingData(prev => ({ ...prev, mobile: e.target.value }))}
-                        className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-900" 
+                        className="w-full px-0 py-1.5 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-900 text-sm" 
                       />
-                      {errors.mobile && <p className="text-xs text-red-500 mt-2">{errors.mobile}</p>}
+                      {errors.mobile && <p className="text-xs text-red-500 mt-1">{errors.mobile}</p>}
                     </div>
                     <div>
-                      <label className="block text-lg text-gray-700 mb-3">Email*</label>
+                      <label className="block text-sm text-gray-700 mb-2">Email*</label>
                       <input 
                         type="email" 
                         placeholder="Email*" 
                         value={billingData.email}
                         onChange={(e) => setBillingData(prev => ({ ...prev, email: e.target.value }))}
-                        className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-900" 
+                        className="w-full px-0 py-1.5 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-900 text-sm" 
                       />
-                      {errors.email && <p className="text-xs text-red-500 mt-2">{errors.email}</p>}
+                      {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
                     </div>
                     <div>
-                      <label className="block text-lg text-gray-700 mb-3">Name*</label>
+                      <label className="block text-sm text-gray-700 mb-2">Name*</label>
                       <input 
                         type="text" 
                         placeholder="Name" 
                         value={billingData.name}
                         onChange={(e) => setBillingData(prev => ({ ...prev, name: e.target.value }))}
-                        className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-900" 
+                        className="w-full px-0 py-1.5 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-900 text-sm" 
                       />
-                      {errors.name && <p className="text-xs text-red-500 mt-2">{errors.name}</p>}
+                      {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name}</p>}
                     </div>
-                  </div>
-
-                  {/* Row 2: GSTIN, Company Name */}
-                  <div className="grid grid-cols-2 gap-8 mb-6">
                     <div>
-                      <label className="block text-lg text-gray-700 mb-3">GSTIN (with auto fetch)</label>
+                      <label className="block text-sm text-gray-700 mb-2">GSTIN (with auto fetch)</label>
                       <div className="relative">
                         <input 
                           type="text" 
@@ -3807,62 +3803,62 @@ const Dashboard = () => {
                           value={billingData.gstin}
                           onChange={(e) => handleGstinChange(e.target.value)}
                           maxLength={15}
-                          className="w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-900" 
+                          className="w-full px-0 py-1.5 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-900 text-sm" 
                         />
                         {gstinFetching && (
-                          <div className="absolute right-0 top-2">
-                            <svg className="animate-spin h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <div className="absolute right-0 top-1.5">
+                            <svg className="animate-spin h-4 w-4 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                             </svg>
                           </div>
                         )}
                       </div>
-                      {errors.gstin && <p className="text-xs text-red-500 mt-2">{errors.gstin}</p>}
-                      {isGstinFilled && <p className="text-xs text-green-600 mt-2">✓ GSTIN details auto-filled</p>}
+                      {errors.gstin && <p className="text-xs text-red-500 mt-1">{errors.gstin}</p>}
+                      {isGstinFilled && <p className="text-xs text-green-600 mt-1">✓ GSTIN details auto-filled</p>}
                     </div>
+                  </div>
+
+                  {/* Row 2: Company Name, Address, City, Pincode */}
+                  <div className="grid grid-cols-4 gap-6 mb-4">
                     <div>
-                      <label className="block text-lg text-gray-700 mb-3">Company Name*</label>
+                      <label className="block text-sm text-gray-700 mb-2">Company Name*</label>
                       <input 
                         type="text" 
                         placeholder="Company Name" 
                         value={billingData.companyName}
                         onChange={(e) => setBillingData(prev => ({ ...prev, companyName: e.target.value }))}
                         disabled={isGstinFilled}
-                        className={`w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent ${isGstinFilled ? 'text-gray-500 cursor-not-allowed' : 'text-gray-900'}`}
+                        className={`w-full px-0 py-1.5 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-sm ${isGstinFilled ? 'text-gray-500 cursor-not-allowed' : 'text-gray-900'}`}
                       />
-                      {errors.companyName && <p className="text-xs text-red-500 mt-2">{errors.companyName}</p>}
+                      {errors.companyName && <p className="text-xs text-red-500 mt-1">{errors.companyName}</p>}
                     </div>
-                  </div>
-
-                  {/* Row 3: Address, City, Pincode */}
-                  <div className="grid grid-cols-3 gap-8 mb-6">
                     <div>
-                      <label className="block text-lg text-gray-700 mb-3">Address*</label>
+                      <label className="block text-sm text-gray-700 mb-2">Address*</label>
                       <input 
                         type="text" 
                         placeholder="Address" 
                         value={billingData.address}
                         onChange={(e) => setBillingData(prev => ({ ...prev, address: e.target.value }))}
                         disabled={isGstinFilled}
-                        className={`w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent ${isGstinFilled ? 'text-gray-500 cursor-not-allowed' : 'text-gray-900'}`}
+                        className={`w-full px-0 py-1.5 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-sm ${isGstinFilled ? 'text-gray-500 cursor-not-allowed' : 'text-gray-900'}`}
                       />
-                      {errors.address && <p className="text-xs text-red-500 mt-2">{errors.address}</p>}
+                      {errors.address && <p className="text-xs text-red-500 mt-1">{errors.address}</p>}
                     </div>
                     <div>
-                      <label className="block text-lg text-gray-700 mb-3">City*</label>
+                      <label className="block text-sm text-gray-700 mb-2">City*</label>
                       <input 
                         type="text" 
                         placeholder="City" 
                         value={billingData.city}
                         onChange={(e) => setBillingData(prev => ({ ...prev, city: e.target.value }))}
                         disabled={isGstinFilled}
-                        className={`w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent ${isGstinFilled ? 'text-gray-500 cursor-not-allowed' : 'text-gray-900'}`}
+                        className={`w-full px-0 py-1.5 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-sm ${isGstinFilled ? 'text-gray-500 cursor-not-allowed' : 'text-gray-900'}`}
                       />
-                      {errors.city && <p className="text-xs text-red-500 mt-2">{errors.city}</p>}
+                      {errors.city && <p className="text-xs text-red-500 mt-1">{errors.city}</p>}
                     </div>
                     <div>
-                      <label className="block text-lg text-gray-700 mb-3">Pincode*</label>
+                      <label className="block text-sm text-gray-700 mb-2">Pincode*</label>
                       <input 
                         type="text" 
                         placeholder="Pincode" 
@@ -3870,25 +3866,25 @@ const Dashboard = () => {
                         onChange={(e) => setBillingData(prev => ({ ...prev, pincode: e.target.value }))}
                         disabled={isGstinFilled}
                         maxLength={6}
-                        className={`w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent ${isGstinFilled ? 'text-gray-500 cursor-not-allowed' : 'text-gray-900'}`}
+                        className={`w-full px-0 py-1.5 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-sm ${isGstinFilled ? 'text-gray-500 cursor-not-allowed' : 'text-gray-900'}`}
                       />
-                      {errors.pincode && <p className="text-xs text-red-500 mt-2">{errors.pincode}</p>}
+                      {errors.pincode && <p className="text-xs text-red-500 mt-1">{errors.pincode}</p>}
                     </div>
                   </div>
 
-                  {/* Row 4: State */}
-                  <div className="grid grid-cols-3 gap-8">
+                  {/* Row 3: State (alone in row) */}
+                  <div className="grid grid-cols-4 gap-6">
                     <div>
-                      <label className="block text-lg text-gray-700 mb-3">State*</label>
+                      <label className="block text-sm text-gray-700 mb-2">State*</label>
                       <input 
                         type="text" 
                         placeholder="State" 
                         value={billingData.state}
                         onChange={(e) => setBillingData(prev => ({ ...prev, state: e.target.value }))}
                         disabled={isGstinFilled}
-                        className={`w-full px-0 py-2 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent ${isGstinFilled ? 'text-gray-500 cursor-not-allowed' : 'text-gray-900'}`}
+                        className={`w-full px-0 py-1.5 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-sm ${isGstinFilled ? 'text-gray-500 cursor-not-allowed' : 'text-gray-900'}`}
                       />
-                      {errors.state && <p className="text-xs text-red-500 mt-2">{errors.state}</p>}
+                      {errors.state && <p className="text-xs text-red-500 mt-1">{errors.state}</p>}
                     </div>
                   </div>
                 </div>
