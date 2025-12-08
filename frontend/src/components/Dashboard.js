@@ -4232,6 +4232,83 @@ const Dashboard = () => {
           </div>
         </div>
         )}
+        
+        {/* Payment Acknowledgement Page */}
+        {showAcknowledgement && (
+          <div className="fixed inset-0 bg-gradient-to-br from-green-400 via-green-500 to-green-600 flex items-center justify-center z-[70]">
+            <div className="max-w-md w-full mx-4">
+              {/* Redirection Notice */}
+              <div className="text-center mb-6">
+                <p className="text-white text-sm">You will be redirected in {redirectCountdown} seconds</p>
+              </div>
+              
+              {/* Success Message */}
+              <div className="text-center mb-8">
+                <h1 className="text-white text-4xl font-bold mb-6">Payment Successful</h1>
+                
+                {/* Success Icon */}
+                <div className="flex justify-center mb-6">
+                  <div className="relative">
+                    <div className="w-24 h-24 bg-gradient-to-br from-yellow-400 to-green-400 rounded-full flex items-center justify-center animate-pulse">
+                      <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div className="absolute inset-0 w-24 h-24 bg-green-300 rounded-full opacity-30 animate-ping"></div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Transaction Details Card */}
+              <div className="bg-white rounded-2xl p-6 shadow-2xl">
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900">Acme Corp</h3>
+                    <p className="text-sm text-gray-500">
+                      {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}, {new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-2xl font-bold text-gray-900">₹22,300</p>
+                  </div>
+                </div>
+                
+                <div className="border-t border-gray-200 pt-4 mb-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm text-gray-600">UPI</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-gray-500">razorpay_payment_id</span>
+                      <button className="text-gray-400 hover:text-gray-600">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-blue-50 rounded-lg p-3 flex items-start gap-2">
+                  <svg className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <p className="text-xs text-gray-700">
+                    Visit <span className="text-blue-600 font-medium">razorpay.com/support</span> for queries
+                  </p>
+                </div>
+              </div>
+              
+              {/* Secured by Razorpay */}
+              <div className="text-center mt-6">
+                <p className="text-white text-xs flex items-center justify-center gap-2">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+                  </svg>
+                  Secured by Razorpay
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   };
