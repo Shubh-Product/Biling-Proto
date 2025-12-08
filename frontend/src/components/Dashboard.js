@@ -4047,7 +4047,8 @@ const Dashboard = () => {
               </div>
 
               {/* Right Section - Payment Options */}
-              <div className="w-2/3 p-4 max-h-[90vh] overflow-y-auto">
+              <div className="w-2/3 p-4 flex flex-col max-h-[90vh]">
+                <div className="flex-1 overflow-y-auto">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-bold text-gray-900">Payment Options</h2>
