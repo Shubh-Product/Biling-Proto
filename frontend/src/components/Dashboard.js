@@ -3701,6 +3701,7 @@ const Dashboard = () => {
     
     const [gstinFetching, setGstinFetching] = React.useState(false);
     const [errors, setErrors] = React.useState({});
+    const [showPaymentGateway, setShowPaymentGateway] = React.useState(false);
 
     // Handle GSTIN auto-fetch
     const handleGstinChange = async (value) => {
