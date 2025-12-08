@@ -3748,7 +3748,18 @@ const Dashboard = () => {
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setShowMakePaymentPage(false)}>
         <div className="bg-gray-50 rounded-lg max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
           <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-2 flex items-center justify-between">
-            <h2 className="text-lg font-bold text-gray-900">Make Payment</h2>
+            <div className="flex items-center gap-2">
+              <h2 className="text-lg font-bold text-gray-900">Billing Details</h2>
+              <div className="relative group">
+                <svg className="w-4 h-4 text-gray-400 cursor-help" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div className="absolute left-0 top-6 w-64 bg-gray-900 text-white text-xs rounded-lg p-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  Your Invoice will be generated on below mentioned details. Make sure it correct to claim the GST Input Credit
+                  <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-900 transform rotate-45"></div>
+                </div>
+              </div>
+            </div>
             <button onClick={() => setShowMakePaymentPage(false)} className="text-gray-400 hover:text-gray-600">
               <X className="w-5 h-5" />
             </button>
