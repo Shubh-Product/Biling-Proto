@@ -3743,29 +3743,6 @@ const Dashboard = () => {
 
     // Check if GSTIN is filled to disable certain fields
     const isGstinFilled = billingData.gstin.length === 15;
-    
-    // Payment processing function
-    const processPayment = () => {
-      setPaymentProcessing(true);
-      // Simulate payment processing
-      setTimeout(() => {
-        setPaymentProcessing(false);
-        // 90% success rate for demo
-        if (Math.random() > 0.1) {
-          setPaymentSuccess(true);
-          setTimeout(() => {
-            setPaymentSuccess(false);
-            setShowPaymentGateway(false);
-            setSelectedPaymentMethod(null);
-          }, 3000);
-        } else {
-          setPaymentFailed(true);
-          setTimeout(() => {
-            setPaymentFailed(false);
-          }, 3000);
-        }
-      }, 2000);
-    };
 
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setShowMakePaymentPage(false)}>
