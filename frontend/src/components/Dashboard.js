@@ -3765,7 +3765,6 @@ const Dashboard = () => {
                       <label className="block text-sm text-gray-700 mb-2">Mobile*</label>
                       <input 
                         type="text" 
-                        placeholder="Mobile*" 
                         value={billingData.mobile}
                         onChange={(e) => setBillingData(prev => ({ ...prev, mobile: e.target.value }))}
                         className="w-full px-0 py-1.5 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-900 text-sm" 
@@ -3776,7 +3775,6 @@ const Dashboard = () => {
                       <label className="block text-sm text-gray-700 mb-2">Email*</label>
                       <input 
                         type="email" 
-                        placeholder="Email*" 
                         value={billingData.email}
                         onChange={(e) => setBillingData(prev => ({ ...prev, email: e.target.value }))}
                         className="w-full px-0 py-1.5 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-900 text-sm" 
@@ -3787,7 +3785,6 @@ const Dashboard = () => {
                       <label className="block text-sm text-gray-700 mb-2">Name*</label>
                       <input 
                         type="text" 
-                        placeholder="Name" 
                         value={billingData.name}
                         onChange={(e) => setBillingData(prev => ({ ...prev, name: e.target.value }))}
                         className="w-full px-0 py-1.5 border-0 border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-gray-900 text-sm" 
@@ -3799,7 +3796,6 @@ const Dashboard = () => {
                       <div className="relative">
                         <input 
                           type="text" 
-                          placeholder="GSTIN" 
                           value={billingData.gstin}
                           onChange={(e) => handleGstinChange(e.target.value)}
                           maxLength={15}
@@ -3825,7 +3821,6 @@ const Dashboard = () => {
                       <label className="block text-sm text-gray-700 mb-2">Company Name*</label>
                       <input 
                         type="text" 
-                        placeholder="Company Name" 
                         value={billingData.companyName}
                         onChange={(e) => setBillingData(prev => ({ ...prev, companyName: e.target.value }))}
                         disabled={isGstinFilled}
@@ -3837,7 +3832,6 @@ const Dashboard = () => {
                       <label className="block text-sm text-gray-700 mb-2">Address*</label>
                       <input 
                         type="text" 
-                        placeholder="Address" 
                         value={billingData.address}
                         onChange={(e) => setBillingData(prev => ({ ...prev, address: e.target.value }))}
                         disabled={isGstinFilled}
@@ -3849,7 +3843,6 @@ const Dashboard = () => {
                       <label className="block text-sm text-gray-700 mb-2">City*</label>
                       <input 
                         type="text" 
-                        placeholder="City" 
                         value={billingData.city}
                         onChange={(e) => setBillingData(prev => ({ ...prev, city: e.target.value }))}
                         disabled={isGstinFilled}
@@ -3861,7 +3854,6 @@ const Dashboard = () => {
                       <label className="block text-sm text-gray-700 mb-2">Pincode*</label>
                       <input 
                         type="text" 
-                        placeholder="Pincode" 
                         value={billingData.pincode}
                         onChange={(e) => setBillingData(prev => ({ ...prev, pincode: e.target.value }))}
                         disabled={isGstinFilled}
@@ -3878,7 +3870,6 @@ const Dashboard = () => {
                       <label className="block text-sm text-gray-700 mb-2">State*</label>
                       <input 
                         type="text" 
-                        placeholder="State" 
                         value={billingData.state}
                         onChange={(e) => setBillingData(prev => ({ ...prev, state: e.target.value }))}
                         disabled={isGstinFilled}
