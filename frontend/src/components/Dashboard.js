@@ -4235,7 +4235,7 @@ const Dashboard = () => {
         {/* Payment Acknowledgement Page */}
         {showAcknowledgement && (
           <div className="fixed inset-0 bg-gradient-to-br from-green-400 via-green-500 to-green-600 flex items-center justify-center z-[70]">
-            <div className="max-w-md w-full mx-4">
+            <div className="max-w-6xl w-full mx-4">
               {/* Redirection Notice */}
               <div className="text-center mb-6">
                 <p className="text-white text-sm">You will be redirected in {redirectCountdown} seconds</p>
