@@ -3886,58 +3886,63 @@ const Dashboard = () => {
                 <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-indigo-100 rounded-2xl p-5 shadow-xl border-2 border-blue-200">
                   <h3 className="text-2xl font-bold text-blue-900 mb-4 pb-3 border-b-2 border-blue-300" style={{ fontFamily: 'Georgia, serif' }}>Product Details</h3>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {/* Product Name */}
-                    <div>
-                      <div className="flex items-center gap-2 mb-2">
-                        <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                        </svg>
-                        <p className="text-xs text-gray-600">Product Name</p>
-                      </div>
-                      <p className="text-lg font-bold text-gray-900">Standard - Client Server</p>
-                      <div className="bg-green-100 rounded-lg px-2 py-1.5 mt-2">
-                        <p className="text-xs font-medium text-green-800">Free Mobile App, Enhanced Features</p>
-                      </div>
-                    </div>
+                  {/* Product Table */}
+                  <div className="bg-white rounded-lg overflow-hidden mb-4">
+                    <table className="w-full text-sm">
+                      <thead className="bg-gray-100 border-b border-gray-200">
+                        <tr>
+                          <th className="text-left py-2 px-3 font-semibold text-gray-700">S.No</th>
+                          <th className="text-left py-2 px-3 font-semibold text-gray-700">Product</th>
+                          <th className="text-left py-2 px-3 font-semibold text-gray-700">Duration</th>
+                          <th className="text-left py-2 px-3 font-semibold text-gray-700">Quantity</th>
+                          <th className="text-right py-2 px-3 font-semibold text-gray-700">Rate</th>
+                          <th className="text-right py-2 px-3 font-semibold text-gray-700">Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="border-b border-gray-100">
+                          <td className="py-3 px-3 text-gray-800">1</td>
+                          <td className="py-3 px-3 text-gray-800">Desktop Subscription</td>
+                          <td className="py-3 px-3 text-gray-800">360 Days</td>
+                          <td className="py-3 px-3 text-gray-800">1</td>
+                          <td className="py-3 px-3 text-right text-gray-800">₹12,000</td>
+                          <td className="py-3 px-3 text-right font-semibold text-gray-900">₹12,000</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
 
-                    {/* Validity */}
-                    <div>
-                      <div className="flex items-center gap-2 mb-2">
-                        <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <p className="text-xs text-gray-600">Validity</p>
-                      </div>
-                      <p className="text-2xl font-bold text-gray-900">360 days</p>
+                  {/* Pricing Summary */}
+                  <div className="bg-white rounded-lg p-4 space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-700">Total:</span>
+                      <span className="font-semibold text-gray-900">₹12,000</span>
                     </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-700">TDS Deduction:</span>
+                      <span className="font-semibold text-gray-900">₹0</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-700">GST (18%):</span>
+                      <span className="font-semibold text-gray-900">₹2,160</span>
+                    </div>
+                    <div className="flex justify-between text-base pt-2 border-t border-gray-200">
+                      <span className="font-bold text-gray-900">Grand Total:</span>
+                      <span className="font-bold text-blue-900 text-lg">₹14,160</span>
+                    </div>
+                  </div>
 
-                    {/* Price */}
-                    <div>
-                      <div className="flex items-center gap-2 mb-2">
-                        <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <p className="text-xs text-gray-600">Price</p>
-                      </div>
-                      <div>
-                        <p className="text-2xl font-bold text-gray-900">₹14,160</p>
-                        <p className="text-xs text-gray-600 mt-1">excluding GST</p>
-                      </div>
-                    </div>
-
-                    {/* Proceed to Pay Button - Moved here */}
-                    <div className="flex items-center">
-                      <button 
-                        onClick={() => alert('Processing payment...')}
-                        className="bg-red-400 hover:bg-red-500 text-white text-base font-semibold px-8 py-3 rounded-xl shadow-md flex items-center gap-2 transition-colors w-full justify-center"
-                      >
-                        Proceed to Pay
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </button>
-                    </div>
+                  {/* Proceed to Pay Button */}
+                  <div className="mt-4">
+                    <button 
+                      onClick={() => alert('Processing payment...')}
+                      className="bg-red-400 hover:bg-red-500 text-white text-base font-semibold px-8 py-3 rounded-xl shadow-md flex items-center gap-2 transition-colors w-full justify-center"
+                    >
+                      Proceed to Pay
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
                   </div>
                 </div>
               </div>
