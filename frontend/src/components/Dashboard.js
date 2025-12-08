@@ -3893,10 +3893,10 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              {/* Product Details Section - Below Billing Information */}
+              {/* Order Details Section - Below Billing Information */}
               <div>
                 <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-indigo-100 rounded-xl p-3 shadow-xl border-2 border-blue-200">
-                  <h3 className="text-lg font-bold text-blue-900 mb-2 pb-2 border-b-2 border-blue-300" style={{ fontFamily: 'Georgia, serif' }}>Product Details</h3>
+                  <h3 className="text-lg font-bold text-blue-900 mb-2 pb-2 border-b-2 border-blue-300" style={{ fontFamily: 'Georgia, serif' }}>Order Details</h3>
                   
                   {/* Product Table */}
                   <div className="bg-white rounded-lg overflow-hidden mb-2">
