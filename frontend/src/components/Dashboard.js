@@ -3688,15 +3688,15 @@ const Dashboard = () => {
   // Make Payment Page Component
   const MakePaymentPage = () => {
     const [billingData, setBillingData] = React.useState({
-      mobile: '',
-      email: '',
-      name: '',
-      gstin: '',
-      companyName: '',
-      address: '',
-      city: '',
-      pincode: '',
-      state: ''
+      mobile: '9876543210',
+      email: 'john.doe@example.com',
+      name: 'John Doe',
+      gstin: '27AAACB1234C1Z5',
+      companyName: 'BUSY INFOTECH PRIVATE LIMITED',
+      address: '456 Business Park, Tech Hub',
+      city: 'Mumbai',
+      pincode: '400001',
+      state: 'Maharashtra'
     });
     
     const [gstinFetching, setGstinFetching] = React.useState(false);
