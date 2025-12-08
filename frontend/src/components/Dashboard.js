@@ -7269,10 +7269,21 @@ const Dashboard = () => {
                     <div className="flex items-center space-x-3">
                       <h3 className="text-lg font-semibold text-gray-900">Prospect Details</h3>
                       {isProspectDetailsSaved && (
-                        <span className="flex items-center space-x-1 text-sm text-green-600">
-                          <CheckCircle className="w-4 h-4" />
-                          <span>Saved</span>
-                        </span>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setIsProspectDetailsSaved(false);
+                            setCustomerValidated(false);
+                            setIsProspectDetailsOpen(true);
+                          }}
+                          className="flex items-center space-x-1 text-blue-600 hover:text-blue-700 transition-colors"
+                          title="Edit Prospect Details"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                          </svg>
+                        </button>
                       )}
                     </div>
                     {isProspectDetailsSaved && (
