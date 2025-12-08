@@ -3967,6 +3967,234 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      
+      {/* Payment Gateway Popup */}
+      {showPaymentGateway && (
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[60]" onClick={() => setShowPaymentGateway(false)}>
+          <div className="bg-white rounded-lg max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="flex h-full">
+              {/* Left Sidebar - Blue Background */}
+              <div className="w-1/3 bg-gradient-to-br from-blue-600 to-blue-700 p-6 rounded-l-lg relative">
+                {/* Company Name */}
+                <div className="mb-6">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-blue-600 font-bold">
+                      B
+                    </div>
+                    <span className="text-white font-semibold text-sm">BUSY INFOTECH PRIVA...</span>
+                  </div>
+                </div>
+
+                {/* Price Summary */}
+                <div className="bg-white rounded-lg p-4 mb-4">
+                  <p className="text-gray-600 text-xs mb-2">Price Summary</p>
+                  <p className="text-3xl font-bold text-gray-900">₹22,300</p>
+                </div>
+
+                {/* Using As */}
+                <div className="bg-white rounded-lg p-3 mb-4 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span className="text-gray-700 text-xs">Using as +91 82828 28282</span>
+                  </div>
+                  <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+
+                {/* Offers */}
+                <div className="bg-white rounded-lg p-3 mb-4 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                    </svg>
+                    <span className="text-gray-700 text-xs">Offers on UPI and Axis</span>
+                  </div>
+                  <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+
+                {/* Illustration */}
+                <div className="mt-8 mb-6">
+                  <svg className="w-32 h-32 mx-auto opacity-20" fill="white" viewBox="0 0 24 24">
+                    <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                  </svg>
+                </div>
+
+                {/* Secured by Razorpay */}
+                <div className="absolute bottom-4 left-6 right-6">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+                    </svg>
+                    <span className="text-white text-xs">Secured by Razorpay</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Section - Payment Options */}
+              <div className="w-2/3 p-4 max-h-[90vh] overflow-y-auto">
+                {/* Header */}
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-lg font-bold text-gray-900">Payment Options</h2>
+                  <div className="flex items-center gap-2">
+                    <button className="text-gray-400 hover:text-gray-600">
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                      </svg>
+                    </button>
+                    <button onClick={() => setShowPaymentGateway(false)} className="text-gray-400 hover:text-gray-600">
+                      <X className="w-5 h-5" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Available Offers */}
+                <div className="bg-green-50 border border-green-200 rounded-lg p-3 mb-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-semibold text-green-700">Available Offers</span>
+                    </div>
+                    <button className="text-xs text-blue-600 font-semibold">View all</button>
+                  </div>
+                  <p className="text-xs text-gray-700 mt-1">Win up to ₹300 cashback via CRED UPI</p>
+                </div>
+
+                {/* Payment Methods Tabs */}
+                <div className="border-b border-gray-200 mb-4">
+                  <div className="flex gap-4">
+                    <button className="pb-2 px-1 text-sm font-semibold text-blue-600 border-b-2 border-blue-600">Recommended</button>
+                    <button className="pb-2 px-1 text-sm font-medium text-gray-500">Available Offers</button>
+                  </div>
+                </div>
+
+                {/* UPI QR Section */}
+                <div className="bg-gray-50 rounded-lg p-4 mb-3">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-1">
+                      <h3 className="text-sm font-semibold text-gray-900 mb-2">UPI QR</h3>
+                      <p className="text-xs text-gray-600 mb-3">Scan the QR using any UPI App</p>
+                      <div className="flex gap-2 mb-3">
+                        <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                          <span className="text-xs font-bold">G</span>
+                        </div>
+                        <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                          <span className="text-xs font-bold">P</span>
+                        </div>
+                        <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                          <span className="text-xs font-bold">C</span>
+                        </div>
+                        <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                          <span className="text-xs font-bold">पे</span>
+                        </div>
+                      </div>
+                      <div className="bg-green-100 rounded p-2">
+                        <p className="text-xs text-green-800 font-medium">Win up to ₹300 cashback via CRED UPI</p>
+                      </div>
+                    </div>
+                    <div className="bg-white p-3 rounded-lg">
+                      <div className="w-24 h-24 bg-gray-200 flex items-center justify-center">
+                        <svg className="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+                        </svg>
+                      </div>
+                      <p className="text-xs text-center text-gray-500 mt-2">11:46</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* UPI */}
+                <div className="border border-gray-200 rounded-lg p-3 mb-3 hover:border-blue-500 cursor-pointer">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                        <span className="text-sm font-bold text-purple-600">UPI</span>
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-gray-900">UPI</p>
+                        <p className="text-xs text-gray-500">Win up to ₹300 ca...</p>
+                      </div>
+                    </div>
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Cards */}
+                <div className="border border-gray-200 rounded-lg p-3 mb-3 hover:border-blue-500 cursor-pointer">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                        <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-gray-900">Cards</p>
+                        <p className="text-xs text-gray-500">Also enjoy compli...</p>
+                      </div>
+                    </div>
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Netbanking */}
+                <div className="border border-gray-200 rounded-lg p-3 mb-3 hover:border-blue-500 cursor-pointer">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                        <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-gray-900">Netbanking</p>
+                        <p className="text-xs text-gray-500">All major banks</p>
+                      </div>
+                    </div>
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Wallet */}
+                <div className="border border-gray-200 rounded-lg p-3 mb-3 hover:border-blue-500 cursor-pointer">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                        <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-gray-900">Wallet</p>
+                        <p className="text-xs text-gray-500">Paytm, MobiKwik</p>
+                      </div>
+                    </div>
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Footer */}
+                <div className="mt-4 pt-4 border-t border-gray-200">
+                  <p className="text-xs text-gray-500 text-center">
+                    By proceeding, I agree to Razorpay's <span className="text-blue-600 cursor-pointer">Privacy Notice</span> · <span className="text-blue-600 cursor-pointer">Edit Preferences</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     );
   };
 
