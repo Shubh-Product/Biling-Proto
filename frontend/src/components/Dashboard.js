@@ -3702,6 +3702,19 @@ const Dashboard = () => {
     const [gstinFetching, setGstinFetching] = React.useState(false);
     const [errors, setErrors] = React.useState({});
     const [showPaymentGateway, setShowPaymentGateway] = React.useState(false);
+    const [selectedPaymentMethod, setSelectedPaymentMethod] = React.useState(null);
+    const [paymentProcessing, setPaymentProcessing] = React.useState(false);
+    const [paymentSuccess, setPaymentSuccess] = React.useState(false);
+    const [paymentFailed, setPaymentFailed] = React.useState(false);
+    
+    // Payment form states
+    const [upiId, setUpiId] = React.useState('');
+    const [cardNumber, setCardNumber] = React.useState('');
+    const [cardName, setCardName] = React.useState('');
+    const [cardExpiry, setCardExpiry] = React.useState('');
+    const [cardCvv, setCardCvv] = React.useState('');
+    const [selectedBank, setSelectedBank] = React.useState('');
+    const [selectedWallet, setSelectedWallet] = React.useState('');
 
     // Handle GSTIN auto-fetch
     const handleGstinChange = async (value) => {
