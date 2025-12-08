@@ -3952,7 +3952,7 @@ const Dashboard = () => {
                   {/* Proceed to Pay Button */}
                   <div className="mt-2">
                     <button 
-                      onClick={() => alert('Processing payment...')}
+                      onClick={() => setShowPaymentGateway(true)}
                       className="bg-red-400 hover:bg-red-500 text-white text-sm font-semibold px-6 py-2 rounded-lg shadow-md flex items-center gap-2 transition-colors w-full justify-center"
                     >
                       Proceed to Pay
