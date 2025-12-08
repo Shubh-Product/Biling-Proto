@@ -3746,15 +3746,15 @@ const Dashboard = () => {
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setShowMakePaymentPage(false)}>
         <div className="bg-gray-50 rounded-lg max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-          <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-            <h2 className="text-xl font-bold text-gray-900">Make Payment</h2>
+          <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-2 flex items-center justify-between">
+            <h2 className="text-lg font-bold text-gray-900">Make Payment</h2>
             <button onClick={() => setShowMakePaymentPage(false)} className="text-gray-400 hover:text-gray-600">
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5" />
             </button>
           </div>
           
-          <div className="p-6">
-            <div className="space-y-4">
+          <div className="p-4">
+            <div className="space-y-3">
               {/* Billing Information Section */}
               <div>
                 {/* Billing Information Fields */}
