@@ -3883,63 +3883,63 @@ const Dashboard = () => {
 
               {/* Product Details Section - Below Billing Information */}
               <div>
-                <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-indigo-100 rounded-2xl p-5 shadow-xl border-2 border-blue-200">
-                  <h3 className="text-2xl font-bold text-blue-900 mb-4 pb-3 border-b-2 border-blue-300" style={{ fontFamily: 'Georgia, serif' }}>Product Details</h3>
+                <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-indigo-100 rounded-xl p-3 shadow-xl border-2 border-blue-200">
+                  <h3 className="text-lg font-bold text-blue-900 mb-2 pb-2 border-b-2 border-blue-300" style={{ fontFamily: 'Georgia, serif' }}>Product Details</h3>
                   
                   {/* Product Table */}
-                  <div className="bg-white rounded-lg overflow-hidden mb-4">
-                    <table className="w-full text-sm">
+                  <div className="bg-white rounded-lg overflow-hidden mb-2">
+                    <table className="w-full text-xs">
                       <thead className="bg-gray-100 border-b border-gray-200">
                         <tr>
-                          <th className="text-left py-2 px-3 font-semibold text-gray-700">S.No</th>
-                          <th className="text-left py-2 px-3 font-semibold text-gray-700">Product</th>
-                          <th className="text-left py-2 px-3 font-semibold text-gray-700">Duration</th>
-                          <th className="text-left py-2 px-3 font-semibold text-gray-700">Quantity</th>
-                          <th className="text-right py-2 px-3 font-semibold text-gray-700">Rate</th>
-                          <th className="text-right py-2 px-3 font-semibold text-gray-700">Amount</th>
+                          <th className="text-left py-1 px-2 font-semibold text-gray-700">S.No</th>
+                          <th className="text-left py-1 px-2 font-semibold text-gray-700">Product</th>
+                          <th className="text-left py-1 px-2 font-semibold text-gray-700">Duration</th>
+                          <th className="text-left py-1 px-2 font-semibold text-gray-700">Qty</th>
+                          <th className="text-right py-1 px-2 font-semibold text-gray-700">Rate</th>
+                          <th className="text-right py-1 px-2 font-semibold text-gray-700">Amount</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr className="border-b border-gray-100">
-                          <td className="py-3 px-3 text-gray-800">1</td>
-                          <td className="py-3 px-3 text-gray-800">Desktop Subscription</td>
-                          <td className="py-3 px-3 text-gray-800">360 Days</td>
-                          <td className="py-3 px-3 text-gray-800">1</td>
-                          <td className="py-3 px-3 text-right text-gray-800">₹12,000</td>
-                          <td className="py-3 px-3 text-right font-semibold text-gray-900">₹12,000</td>
+                          <td className="py-1.5 px-2 text-gray-800">1</td>
+                          <td className="py-1.5 px-2 text-gray-800">Desktop Subscription</td>
+                          <td className="py-1.5 px-2 text-gray-800">360 Days</td>
+                          <td className="py-1.5 px-2 text-gray-800">1</td>
+                          <td className="py-1.5 px-2 text-right text-gray-800">₹12,000</td>
+                          <td className="py-1.5 px-2 text-right font-semibold text-gray-900">₹12,000</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
 
                   {/* Pricing Summary */}
-                  <div className="bg-white rounded-lg p-4 space-y-2">
-                    <div className="flex justify-between text-sm">
+                  <div className="bg-white rounded-lg p-2 space-y-1">
+                    <div className="flex justify-between text-xs">
                       <span className="text-gray-700">Total:</span>
                       <span className="font-semibold text-gray-900">₹12,000</span>
                     </div>
-                    <div className="flex justify-between text-sm">
+                    <div className="flex justify-between text-xs">
                       <span className="text-gray-700">TDS Deduction:</span>
                       <span className="font-semibold text-gray-900">₹0</span>
                     </div>
-                    <div className="flex justify-between text-sm">
+                    <div className="flex justify-between text-xs">
                       <span className="text-gray-700">GST (18%):</span>
                       <span className="font-semibold text-gray-900">₹2,160</span>
                     </div>
-                    <div className="flex justify-between text-base pt-2 border-t border-gray-200">
+                    <div className="flex justify-between text-sm pt-1 border-t border-gray-200">
                       <span className="font-bold text-gray-900">Grand Total:</span>
-                      <span className="font-bold text-blue-900 text-lg">₹14,160</span>
+                      <span className="font-bold text-blue-900">₹14,160</span>
                     </div>
                   </div>
 
                   {/* Proceed to Pay Button */}
-                  <div className="mt-4">
+                  <div className="mt-2">
                     <button 
                       onClick={() => alert('Processing payment...')}
-                      className="bg-red-400 hover:bg-red-500 text-white text-base font-semibold px-8 py-3 rounded-xl shadow-md flex items-center gap-2 transition-colors w-full justify-center"
+                      className="bg-red-400 hover:bg-red-500 text-white text-sm font-semibold px-6 py-2 rounded-lg shadow-md flex items-center gap-2 transition-colors w-full justify-center"
                     >
                       Proceed to Pay
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
                       </svg>
                     </button>
