@@ -4195,6 +4195,32 @@ const Dashboard = () => {
                   </div>
                 </div>
 
+                {/* Continue Button */}
+                <div className="mt-4">
+                  <button
+                    onClick={() => {
+                      setShowAcknowledgement(true);
+                      setRedirectCountdown(3);
+                      // Start countdown
+                      const timer = setInterval(() => {
+                        setRedirectCountdown(prev => {
+                          if (prev <= 1) {
+                            clearInterval(timer);
+                            setShowAcknowledgement(false);
+                            setShowPaymentGateway(false);
+                            setShowMakePaymentPage(false);
+                            return 3;
+                          }
+                          return prev - 1;
+                        });
+                      }, 1000);
+                    }}
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg text-sm font-semibold transition-colors"
+                  >
+                    Continue
+                  </button>
+                </div>
+                
                 {/* Footer */}
                 <div className="mt-4 pt-4 border-t border-gray-200">
                   <p className="text-xs text-gray-500 text-center">
