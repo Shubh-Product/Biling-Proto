@@ -9154,16 +9154,16 @@ const Dashboard = () => {
                                       <span>Send Invoice</span>
                                     </button>
                                     
-                                    {/* Cancel */}
+                                    {/* Cancel Link */}
                                     <button
                                       onClick={() => {
-                                        console.log('Cancel transaction:', transaction.id);
+                                        console.log('Cancel Link for transaction:', transaction.id);
                                         setOpenMenuId(null);
                                       }}
                                       className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center space-x-2"
                                     >
                                       <X className="w-4 h-4" />
-                                      <span>Cancel</span>
+                                      <span>Cancel Link</span>
                                     </button>
                                   </div>
                                 </div>
