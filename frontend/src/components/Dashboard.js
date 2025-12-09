@@ -9622,6 +9622,23 @@ const Dashboard = () => {
                     <option value="Without Offer">Without Offer</option>
                   </select>
                 </div>
+
+                {/* 11. PO Status */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    PO Status
+                  </label>
+                  <select
+                    value={advancedFilters.poStatus}
+                    onChange={(e) => setAdvancedFilters({...advancedFilters, poStatus: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="">All</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Pending">Pending</option>
+                  </select>
+                </div>
               </div>
             </div>
 
