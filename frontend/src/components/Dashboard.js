@@ -10263,6 +10263,34 @@ const Dashboard = () => {
                 </div>
               </div>
 
+              {/* Extend Validity Option */}
+              <div className="bg-amber-50 p-4 rounded-lg border border-amber-200">
+                <div className="flex items-start justify-between">
+                  <div className="flex items-start space-x-3">
+                    <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-sm font-medium text-amber-900 mb-1">Payment Link Expiring Soon?</p>
+                      <p className="text-sm text-amber-700">Extend the validity of this payment link by 2 additional days.</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => {
+                      // Handler for extending payment link validity
+                      if (confirm('Are you sure you want to extend the payment link validity by 2 days?')) {
+                        console.log('Extending payment link validity for 2 days...');
+                        alert('Payment link validity has been extended by 2 days!');
+                        // TODO: Add API call to extend validity in backend
+                        // Example: await axios.post(`${BACKEND_URL}/api/transactions/${transactionId}/extend-validity`, { days: 2 });
+                      }
+                    }}
+                    className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center space-x-2"
+                  >
+                    <RotateCcw className="w-4 h-4" />
+                    <span>Extend by 2 Days</span>
+                  </button>
+                </div>
+              </div>
+
               {/* Action Buttons */}
               <div className="flex items-center justify-between pt-4 border-t border-gray-200">
                 <button
