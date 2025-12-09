@@ -1675,6 +1675,8 @@ const Dashboard = () => {
         return getDateFilteredTransactions().filter(t => t.status === 'Pending');
       case 'received':
         return getDateFilteredTransactions().filter(t => t.status === 'Success');
+      case 'failed':
+        return getDateFilteredTransactions().filter(t => t.status === 'Failed');
       case 'expired':
         return getDateFilteredTransactions().filter(t => t.status === 'Expired');
       case 'cancelled':
