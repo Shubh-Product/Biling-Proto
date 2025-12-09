@@ -4234,78 +4234,127 @@ const Dashboard = () => {
         
         {/* Payment Acknowledgement Page */}
         {showAcknowledgement && (
-          <div className="fixed inset-0 bg-gradient-to-br from-green-400 via-green-500 to-green-600 flex items-center justify-center z-[70]">
-            <div className="max-w-6xl w-full mx-4">
-              <div className="flex items-center justify-center min-h-[80vh]">
-                <div className="max-w-lg w-full">
-                  {/* Redirection Notice */}
-                  <div className="text-center mb-6">
-                    <p className="text-white text-sm">You will be redirected in {redirectCountdown} seconds</p>
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[70]" onClick={() => {
+            setShowAcknowledgement(false);
+            setShowPaymentGateway(false);
+            setShowMakePaymentPage(false);
+          }}>
+            <div className="bg-white rounded-lg max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+              {/* Header */}
+              <div className="sticky top-0 bg-gradient-to-r from-green-500 to-green-600 border-b border-green-600 px-4 py-3 flex items-center justify-between rounded-t-lg">
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center">
+                    <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
                   </div>
-                  
-                  {/* Success Message */}
+                  <h2 className="text-lg font-bold text-white">Payment Successful</h2>
+                </div>
+                <button 
+                  onClick={() => {
+                    setShowAcknowledgement(false);
+                    setShowPaymentGateway(false);
+                    setShowMakePaymentPage(false);
+                  }} 
+                  className="text-white hover:text-gray-100"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Content */}
+              <div className="p-8">
+                {/* Redirection Notice */}
+                <div className="text-center mb-6">
+                  <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm">
+                    <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    <span>You will be redirected in {redirectCountdown} seconds</span>
+                  </div>
+                </div>
+                
+                <div className="max-w-3xl mx-auto">
+                  {/* Success Icon & Message */}
                   <div className="text-center mb-8">
-                    <h1 className="text-white text-5xl font-bold mb-6">Payment Successful</h1>
-                    
-                    {/* Success Icon */}
                     <div className="flex justify-center mb-6">
                       <div className="relative">
-                        <div className="w-28 h-28 bg-gradient-to-br from-yellow-400 to-green-400 rounded-full flex items-center justify-center animate-pulse">
-                          <svg className="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="w-24 h-24 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center animate-pulse shadow-lg">
+                          <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                           </svg>
                         </div>
-                        <div className="absolute inset-0 w-28 h-28 bg-green-300 rounded-full opacity-30 animate-ping"></div>
+                        <div className="absolute inset-0 w-24 h-24 bg-green-300 rounded-full opacity-30 animate-ping"></div>
                       </div>
                     </div>
+                    <h1 className="text-3xl font-bold text-gray-900 mb-2">Payment Completed Successfully!</h1>
+                    <p className="text-gray-600">Thank you for your payment</p>
                   </div>
                   
                   {/* Transaction Details Card */}
-                  <div className="bg-white rounded-2xl p-8 shadow-2xl">
-                    <div className="flex items-start justify-between mb-6">
+                  <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6 border border-gray-200 shadow-sm">
+                    <div className="flex items-start justify-between mb-6 pb-6 border-b border-gray-300">
                       <div>
+                        <p className="text-xs text-gray-500 mb-1">Merchant</p>
                         <h3 className="text-xl font-bold text-gray-900">Acme Corp</h3>
-                        <p className="text-sm text-gray-500 mt-1">
+                        <p className="text-sm text-gray-600 mt-1">
                           {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}, {new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
                         </p>
                       </div>
                       <div className="text-right">
-                        <p className="text-3xl font-bold text-gray-900">₹22,300</p>
+                        <p className="text-xs text-gray-500 mb-1">Amount Paid</p>
+                        <p className="text-3xl font-bold text-green-600">₹22,300</p>
                       </div>
                     </div>
                     
-                    <div className="border-t border-gray-200 pt-5 mb-5">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm text-gray-600">UPI</span>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between py-2">
+                        <span className="text-sm text-gray-600">Payment Method</span>
+                        <span className="text-sm font-semibold text-gray-900">UPI</span>
+                      </div>
+                      <div className="flex items-center justify-between py-2 bg-white rounded-lg px-3">
+                        <span className="text-sm text-gray-600">Transaction ID</span>
                         <div className="flex items-center gap-2">
-                          <span className="text-sm text-gray-500">razorpay_payment_id</span>
-                          <button className="text-gray-400 hover:text-gray-600">
+                          <span className="text-sm font-mono text-gray-900">razorpay_payment_id</span>
+                          <button className="text-blue-600 hover:text-blue-700 transition-colors">
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                             </svg>
                           </button>
                         </div>
                       </div>
+                      <div className="flex items-center justify-between py-2">
+                        <span className="text-sm text-gray-600">Status</span>
+                        <span className="inline-flex items-center gap-1 text-sm font-semibold text-green-600">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          Completed
+                        </span>
+                      </div>
                     </div>
                     
-                    <div className="bg-blue-50 rounded-lg p-4 flex items-start gap-2">
+                    <div className="mt-6 bg-blue-50 rounded-lg p-4 flex items-start gap-3 border border-blue-200">
                       <svg className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      <p className="text-sm text-gray-700">
-                        Visit <span className="text-blue-600 font-medium">razorpay.com/support</span> for queries
-                      </p>
+                      <div>
+                        <p className="text-sm font-semibold text-blue-900 mb-1">Need help?</p>
+                        <p className="text-sm text-blue-800">
+                          Visit <a href="#" className="text-blue-600 font-semibold hover:underline">razorpay.com/support</a> for queries
+                        </p>
+                      </div>
                     </div>
                   </div>
                   
                   {/* Secured by Razorpay */}
-                  <div className="text-center mt-8">
-                    <p className="text-white text-sm flex items-center justify-center gap-2">
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <div className="text-center mt-6">
+                    <div className="inline-flex items-center gap-2 text-gray-500 text-sm">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
                       </svg>
-                      Secured by Razorpay
-                    </p>
+                      <span>Secured by Razorpay</span>
+                    </div>
                   </div>
                 </div>
               </div>
