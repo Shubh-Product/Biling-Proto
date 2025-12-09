@@ -4514,7 +4514,7 @@ const Dashboard = () => {
                     { id: 'received', label: 'Received', count: transactions.filter(t => t.status === 'Success').length, color: 'green' },
                     { id: 'failed', label: 'Failed', count: transactions.filter(t => t.status === 'Failed').length, color: 'red' },
                     { id: 'expired', label: 'Expired', count: transactions.filter(t => t.status === 'Expired').length, color: 'red' },
-                    { id: 'cancelled', label: 'Cancelled', count: transactions.filter(t => t.status === 'Cancelled').length, color: 'gray' },
+                    { id: 'cancelled', label: 'PO Approval Pending', count: transactions.filter(t => t.status === 'Cancelled').length, color: 'gray' },
                     { id: 'draft', label: 'Draft', count: transactions.filter(t => t.status === 'Draft').length, color: 'purple' }
                   ].map((filter) => (
                     <button
