@@ -9097,6 +9097,35 @@ const Dashboard = () => {
                                   onClick={(e) => e.stopPropagation()}
                                 >
                                   <div className="py-1">
+                                    {/* Approve PO */}
+                                    <button
+                                      onClick={() => {
+                                        console.log('Approve PO for:', transaction.id);
+                                        alert('PO Approved for transaction: ' + transaction.id);
+                                        setOpenMenuId(null);
+                                      }}
+                                      className="w-full text-left px-4 py-2 text-sm text-green-600 hover:bg-green-50 flex items-center space-x-2"
+                                    >
+                                      <CheckCircle className="w-4 h-4" />
+                                      <span>Approve PO</span>
+                                    </button>
+                                    
+                                    {/* Reject PO */}
+                                    <button
+                                      onClick={() => {
+                                        console.log('Reject PO for:', transaction.id);
+                                        alert('PO Rejected for transaction: ' + transaction.id);
+                                        setOpenMenuId(null);
+                                      }}
+                                      className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center space-x-2"
+                                    >
+                                      <X className="w-4 h-4" />
+                                      <span>Reject PO</span>
+                                    </button>
+                                    
+                                    {/* Divider */}
+                                    <div className="border-t border-gray-200 my-1"></div>
+                                    
                                     {/* Download Invoice */}
                                     <button
                                       onClick={() => {
