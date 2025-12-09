@@ -9390,17 +9390,17 @@ const Dashboard = () => {
                               </button>
                               <button 
                                 onClick={() => {
-                                  if (confirm('Are you sure you want to extend the payment link validity by 2 days?')) {
+                                  if (confirm('Are you sure you want to extend the payment link validity by 3 days?')) {
                                     console.log('Extending payment link validity for transaction:', selectedTransaction.id);
-                                    alert('Payment link validity has been extended by 2 days!');
+                                    alert('Payment link validity has been extended by 3 days!');
                                     // TODO: Add API call to extend validity in backend
-                                    // Example: await axios.post(`${BACKEND_URL}/api/transactions/${selectedTransaction.id}/extend-validity`, { days: 2 });
+                                    // Example: await axios.post(`${BACKEND_URL}/api/transactions/${selectedTransaction.id}/extend-validity`, { days: 3 });
                                   }
                                 }}
                                 className="px-4 py-2 bg-amber-600 text-white text-sm rounded-lg hover:bg-amber-700 flex items-center gap-2"
                               >
                                 <RotateCcw className="w-4 h-4" />
-                                Extend by 2 Days
+                                Extend by 3 days
                               </button>
                             </div>
                           </>
