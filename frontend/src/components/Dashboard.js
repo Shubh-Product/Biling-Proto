@@ -9657,7 +9657,8 @@ const Dashboard = () => {
                     linkValidityFrom: '',
                     linkValidityTo: '',
                     subscriptionId: '',
-                    offers: ''
+                    offers: '',
+                    poStatus: ''
                   });
                 }}
                 variant="outline"
