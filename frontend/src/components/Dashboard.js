@@ -4505,9 +4505,9 @@ const Dashboard = () => {
           {/* Filter Buttons Row with Generate Payment Link - Only show on payments dashboard */}
           {activeMenu === 'payments' && !showCreateForm && (
             <div className="px-6 pb-4">
-              <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center justify-between gap-2">
                 {/* Status Filter Buttons */}
-                <div className="flex items-center space-x-2 overflow-x-auto pb-1 flex-1">
+                <div className="flex items-center space-x-1.5 flex-1">
                   {[
                     { id: 'all', label: 'All', count: transactions.length, color: 'blue' },
                     { id: 'pending', label: 'Pending', count: transactions.filter(t => t.status === 'Pending').length, color: 'yellow' },
@@ -4520,14 +4520,14 @@ const Dashboard = () => {
                     <button
                       key={filter.id}
                       onClick={() => setSelectedQuickFilter(filter.id)}
-                      className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                      className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
                         selectedQuickFilter === filter.id
                           ? 'bg-gray-900 text-white shadow-sm'
                           : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
                       }`}
                     >
                       {filter.label}
-                      <span className={`ml-2 px-2 py-0.5 rounded-full text-xs font-bold ${
+                      <span className={`ml-1.5 px-1.5 py-0.5 rounded-full text-xs font-bold ${
                         selectedQuickFilter === filter.id
                           ? 'bg-white text-gray-900'
                           : 'bg-gray-100 text-gray-700'
@@ -4541,7 +4541,7 @@ const Dashboard = () => {
                 {/* Make Payment Button */}
                 <Button 
                   onClick={() => setShowMakePaymentPage(true)}
-                  className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2 whitespace-nowrap flex-shrink-0"
+                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-1.5 rounded-lg flex items-center space-x-1.5 whitespace-nowrap flex-shrink-0 text-sm"
                 >
                   <CreditCard className="w-4 h-4" />
                   <span>Make Payment</span>
@@ -4550,7 +4550,7 @@ const Dashboard = () => {
                 {/* Generate Payment Link Button */}
                 <Button 
                   onClick={() => handleNavigationAttempt(() => setShowCreateForm(!showCreateForm))}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2 whitespace-nowrap flex-shrink-0"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-lg flex items-center space-x-1.5 whitespace-nowrap flex-shrink-0 text-sm"
                 >
                   <Plus className="w-4 h-4" />
                   <span>Generate Payment Link</span>
