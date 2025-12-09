@@ -4239,7 +4239,7 @@ const Dashboard = () => {
             setShowPaymentGateway(false);
             setShowMakePaymentPage(false);
           }}>
-            <div className="bg-white rounded-lg max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="bg-white rounded-lg max-w-6xl w-full mx-4" onClick={(e) => e.stopPropagation()}>
               {/* Header */}
               <div className="sticky top-0 bg-gradient-to-r from-green-500 to-green-600 border-b border-green-600 px-4 py-3 flex items-center justify-between rounded-t-lg">
                 <div className="flex items-center gap-2">
