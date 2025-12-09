@@ -9374,19 +9374,35 @@ const Dashboard = () => {
                             <span className="text-sm text-green-600 font-medium">
                               Valid Till: {validTillDate.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })} ({daysRemaining} days left)
                             </span>
-                            <button 
-                              onClick={() => {
-                                const paymentLink = `https://payment.example.com/pay/${selectedTransaction.id}`;
-                                navigator.clipboard.writeText(paymentLink);
-                                alert('Payment link copied to clipboard!');
-                              }}
-                              className="ml-4 px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 flex items-center gap-2"
-                            >
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                              </svg>
-                              Copy Payment Link
-                            </button>
+                            <div className="ml-4 flex items-center gap-2">
+                              <button 
+                                onClick={() => {
+                                  const paymentLink = `https://payment.example.com/pay/${selectedTransaction.id}`;
+                                  navigator.clipboard.writeText(paymentLink);
+                                  alert('Payment link copied to clipboard!');
+                                }}
+                                className="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 flex items-center gap-2"
+                              >
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Payment Link
+                              </button>
+                              <button 
+                                onClick={() => {
+                                  if (confirm('Are you sure you want to extend the payment link validity by 2 days?')) {
+                                    console.log('Extending payment link validity for transaction:', selectedTransaction.id);
+                                    alert('Payment link validity has been extended by 2 days!');
+                                    // TODO: Add API call to extend validity in backend
+                                    // Example: await axios.post(`${BACKEND_URL}/api/transactions/${selectedTransaction.id}/extend-validity`, { days: 2 });
+                                  }
+                                }}
+                                className="px-4 py-2 bg-amber-600 text-white text-sm rounded-lg hover:bg-amber-700 flex items-center gap-2"
+                              >
+                                <RotateCcw className="w-4 h-4" />
+                                Extend by 2 Days
+                              </button>
+                            </div>
                           </>
                         );
                       }
