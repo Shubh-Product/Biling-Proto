@@ -258,7 +258,8 @@ const Dashboard = () => {
     linkValidityFrom: '',
     linkValidityTo: '',
     subscriptionId: '',
-    offers: ''
+    offers: '',
+    poStatus: ''
   });
 
   // Make Payment Page state
