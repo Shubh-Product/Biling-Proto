@@ -4677,7 +4677,7 @@ const Dashboard = () => {
                               setErrors(prev => ({ ...prev, serialNumber: "" }));
                               setSerialValidated(false);
                             }}
-                            placeholder="Enter existing license serial number"
+                            placeholder="Enter Subscription Number"
                             className={`w-64 ${errors.serialNumber ? "border-red-500" : ""}`}
                             disabled={fetchingSerialDetails || serialValidated}
                             onKeyDown={(e) => {
@@ -4703,8 +4703,44 @@ const Dashboard = () => {
                                 Validated
                               </>
                             ) : (
-                              'Fetch Details'
+                              'Renew'
                             )}
+                          </Button>
+                          
+                          <Button 
+                            type="button"
+                            onClick={() => {
+                              console.log('Upgrade clicked');
+                              // TODO: Add upgrade functionality
+                            }}
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2"
+                            disabled={!serialNumber || fetchingSerialDetails}
+                          >
+                            Upgrade
+                          </Button>
+                          
+                          <Button 
+                            type="button"
+                            onClick={() => {
+                              console.log('Add/Reduce Count clicked');
+                              // TODO: Add add/reduce count functionality
+                            }}
+                            className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2"
+                            disabled={!serialNumber || fetchingSerialDetails}
+                          >
+                            Add/Reduce Count
+                          </Button>
+                          
+                          <Button 
+                            type="button"
+                            onClick={() => {
+                              console.log('Upgrade to Online clicked');
+                              // TODO: Add upgrade to online functionality
+                            }}
+                            className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2"
+                            disabled={!serialNumber || fetchingSerialDetails}
+                          >
+                            Upgrade to Online
                           </Button>
                           
                           {/* Reset button hidden as per requirement */}
