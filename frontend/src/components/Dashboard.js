@@ -4766,7 +4766,26 @@ const Dashboard = () => {
                         {/* Customer Details */}
                         <Card>
                           <CardHeader>
-                            <CardTitle className="text-green-600">Customer Details</CardTitle>
+                            <div className="flex items-center justify-between">
+                              <CardTitle className="text-green-600">Details</CardTitle>
+                              <div className="flex items-center space-x-3">
+                                <div className="px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-lg">
+                                  <span className="text-xs font-medium text-blue-700">{currentProductInfo.type}</span>
+                                </div>
+                                <div className="px-3 py-1.5 bg-purple-50 border border-purple-200 rounded-lg">
+                                  <span className="text-xs font-medium text-purple-700">{currentProductInfo.licenseModel}</span>
+                                </div>
+                                <div className="px-3 py-1.5 bg-indigo-50 border border-indigo-200 rounded-lg">
+                                  <span className="text-xs font-medium text-indigo-700">{currentProductInfo.planName}</span>
+                                </div>
+                                <div className="px-3 py-1.5 bg-orange-50 border border-orange-200 rounded-lg">
+                                  <span className="text-xs font-medium text-orange-700">Valid Till: {currentProductInfo.expiryDate}</span>
+                                </div>
+                                <div className="px-3 py-1.5 bg-green-100 border border-green-200 rounded-lg">
+                                  <span className="text-xs font-medium text-green-800">{currentProductInfo.status}</span>
+                                </div>
+                              </div>
+                            </div>
                           </CardHeader>
                           <CardContent>
                             <div className="grid grid-cols-4 gap-6">
