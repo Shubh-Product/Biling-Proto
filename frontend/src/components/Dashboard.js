@@ -4761,75 +4761,81 @@ const Dashboard = () => {
 
                     {/* Step 2: Customer & Product Details (Show after successful validation) */}
                     {serialValidated && currentCustomerInfo && currentProductInfo && (
-                      <div className="bg-white border border-gray-200 rounded-lg p-6">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-4">Customer & Product Details</h3>
-                        <div className="grid grid-cols-4 gap-6">
-                          {/* Column 1 */}
-                          <div className="space-y-3">
-                            <div>
-                              <span className="text-xs text-gray-500 block mb-1">Name</span>
-                              <span className="font-medium text-gray-900">{currentCustomerInfo.name}</span>
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        
+                        {/* Customer Details */}
+                        <Card>
+                          <CardHeader>
+                            <CardTitle className="text-green-600">Customer Details</CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="space-y-3">
+                              <div className="flex justify-between">
+                                <span className="text-gray-600">Name:</span>
+                                <span className="font-medium">{currentCustomerInfo.name}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-600">Email:</span>
+                                <span className="font-medium">{currentCustomerInfo.email}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-600">Mobile:</span>
+                                <span className="font-medium">{currentCustomerInfo.mobile}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-600">Company:</span>
+                                <span className="font-medium">{currentCustomerInfo.company}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-600">GSTIN:</span>
+                                <span className="font-medium">{currentCustomerInfo.gstin}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-600">City:</span>
+                                <span className="font-medium">{currentCustomerInfo.city}, {currentCustomerInfo.state}</span>
+                              </div>
                             </div>
-                            <div>
-                              <span className="text-xs text-gray-500 block mb-1">Email</span>
-                              <span className="font-medium text-gray-900">{currentCustomerInfo.email}</span>
+                          </CardContent>
+                        </Card>
+
+                        {/* Current Product Details */}
+                        <Card>
+                          <CardHeader>
+                            <CardTitle className="text-blue-600">Current Product Details</CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="space-y-3">
+                              <div className="flex justify-between">
+                                <span className="text-gray-600">Product Type:</span>
+                                <span className="font-medium">{currentProductInfo.type}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-600">Plan Name:</span>
+                                <span className="font-medium">{currentProductInfo.planName}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-600">License Model:</span>
+                                <span className="font-medium">{currentProductInfo.licenseModel}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-600">Duration:</span>
+                                <span className="font-medium">{currentProductInfo.duration}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-600">Expiry Date:</span>
+                                <span className="font-medium text-orange-600">{currentProductInfo.expiryDate}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-600">Status:</span>
+                                <span className="font-medium">
+                                  <span className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">
+                                    {currentProductInfo.status}
+                                  </span>
+                                </span>
+                              </div>
                             </div>
-                            <div>
-                              <span className="text-xs text-gray-500 block mb-1">Mobile</span>
-                              <span className="font-medium text-gray-900">{currentCustomerInfo.mobile}</span>
-                            </div>
-                          </div>
-                          
-                          {/* Column 2 */}
-                          <div className="space-y-3">
-                            <div>
-                              <span className="text-xs text-gray-500 block mb-1">Company</span>
-                              <span className="font-medium text-gray-900">{currentCustomerInfo.company}</span>
-                            </div>
-                            <div>
-                              <span className="text-xs text-gray-500 block mb-1">GSTIN</span>
-                              <span className="font-medium text-gray-900">{currentCustomerInfo.gstin}</span>
-                            </div>
-                            <div>
-                              <span className="text-xs text-gray-500 block mb-1">City</span>
-                              <span className="font-medium text-gray-900">{currentCustomerInfo.city}, {currentCustomerInfo.state}</span>
-                            </div>
-                          </div>
-                          
-                          {/* Column 3 */}
-                          <div className="space-y-3">
-                            <div>
-                              <span className="text-xs text-gray-500 block mb-1">Product Type</span>
-                              <span className="font-medium text-gray-900">{currentProductInfo.type}</span>
-                            </div>
-                            <div>
-                              <span className="text-xs text-gray-500 block mb-1">Plan Name</span>
-                              <span className="font-medium text-gray-900">{currentProductInfo.planName}</span>
-                            </div>
-                            <div>
-                              <span className="text-xs text-gray-500 block mb-1">License Model</span>
-                              <span className="font-medium text-gray-900">{currentProductInfo.licenseModel}</span>
-                            </div>
-                          </div>
-                          
-                          {/* Column 4 */}
-                          <div className="space-y-3">
-                            <div>
-                              <span className="text-xs text-gray-500 block mb-1">Duration</span>
-                              <span className="font-medium text-gray-900">{currentProductInfo.duration}</span>
-                            </div>
-                            <div>
-                              <span className="text-xs text-gray-500 block mb-1">Expiry Date</span>
-                              <span className="font-medium text-orange-600">{currentProductInfo.expiryDate}</span>
-                            </div>
-                            <div>
-                              <span className="text-xs text-gray-500 block mb-1">Status</span>
-                              <span className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">
-                                {currentProductInfo.status}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
+                          </CardContent>
+                        </Card>
                       </div>
                     )}
 
