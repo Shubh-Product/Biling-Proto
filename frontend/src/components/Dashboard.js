@@ -4844,6 +4844,27 @@ const Dashboard = () => {
                               </div>
                             </div>
                           </CardContent>
+                          <div className="px-6 pb-6">
+                            <div className="flex justify-end">
+                              <Button
+                                type="button"
+                                onClick={() => {
+                                  // Set customer validated to true to trigger next sections
+                                  setCustomerValidated(true);
+                                  // Auto-scroll to next section
+                                  setTimeout(() => {
+                                    const nextSection = document.getElementById('product-selection-section');
+                                    if (nextSection) {
+                                      nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    }
+                                  }, 100);
+                                }}
+                                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-lg"
+                              >
+                                Save and Continue
+                              </Button>
+                            </div>
+                          </div>
                         </Card>
                       </div>
                     )}
