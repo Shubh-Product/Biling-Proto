@@ -4667,10 +4667,8 @@ const Dashboard = () => {
 
                     {/* Step 1: Serial Number Input & Validation */}
                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">Enter License Details</h3>
                       
                       <div className="flex items-center space-x-4">
-                        <Label className="text-base font-semibold whitespace-nowrap">Serial Number <span className="text-red-500">*</span>:</Label>
                         <div className="flex items-center space-x-3">
                           <Input
                             value={serialNumber}
@@ -4709,16 +4707,7 @@ const Dashboard = () => {
                             )}
                           </Button>
                           
-                          {serialValidated && (
-                            <Button
-                              type="button"
-                              variant="outline"
-                              onClick={resetRenewalFlow}
-                              className="text-gray-600"
-                            >
-                              Reset
-                            </Button>
-                          )}
+                          {/* Reset button hidden as per requirement */}
                         </div>
                       </div>
                       
