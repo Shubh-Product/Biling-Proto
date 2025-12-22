@@ -4664,9 +4664,75 @@ const Dashboard = () => {
                 {/* Renewal/Upgrade Flow (For Renewal/Upgrade transaction type) */}
                 {formData.transactionType === "Renewal/Upgrade" && (
                   <div className="space-y-6">
-                    
-                    {/* Step 1: Serial Number Input & Validation - HIDDEN as per requirement */}
-                    {/* User requested to remove this section */}
+
+                    {/* Step 1: Serial Number Input & Validation */}
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4">Enter License Details</h3>
+                      
+                      <div className="flex items-center space-x-4">
+                        <Label className="text-base font-semibold whitespace-nowrap">Serial Number <span className="text-red-500">*</span>:</Label>
+                        <div className="flex items-center space-x-3">
+                          <Input
+                            value={serialNumber}
+                            onChange={(e) => {
+                              setSerialNumber(e.target.value);
+                              setErrors(prev => ({ ...prev, serialNumber: "" }));
+                              setSerialValidated(false);
+                            }}
+                            placeholder="Enter existing license serial number"
+                            className={`w-64 ${errors.serialNumber ? "border-red-500" : ""}`}
+                            disabled={fetchingSerialDetails || serialValidated}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter' && !fetchingSerialDetails && !serialValidated) {
+                                validateSerialNumber();
+                              }
+                            }}
+                          />
+                          <Button 
+                            type="button"
+                            onClick={validateSerialNumber}
+                            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2"
+                            disabled={!serialNumber || fetchingSerialDetails || serialValidated}
+                          >
+                            {fetchingSerialDetails ? (
+                              <>
+                                <div className="loading-spinner mr-2"></div>
+                                Fetching...
+                              </>
+                            ) : serialValidated ? (
+                              <>
+                                <CheckCircle className="w-4 h-4 mr-2 text-green-600" />
+                                Validated
+                              </>
+                            ) : (
+                              'Fetch Details'
+                            )}
+                          </Button>
+                          
+                          {serialValidated && (
+                            <Button
+                              type="button"
+                              variant="outline"
+                              onClick={resetRenewalFlow}
+                              className="text-gray-600"
+                            >
+                              Reset
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+                      
+                      {errors.serialNumber && (
+                        <p className="text-red-500 text-sm mt-2">{errors.serialNumber}</p>
+                      )}
+                      
+                      <p className="text-sm text-blue-700 mt-2">
+                        Enter the serial number to fetch customer and current product details for renewal or upgrade.
+                      </p>
+                      <p className="text-xs text-gray-600 mt-1 font-medium">
+                        💡 <strong>Testing:</strong> Enter <code className="bg-gray-100 px-1 rounded">SER123456</code> for testing
+                      </p>
+                    </div>
 
                     {/* Step 2: Customer & Product Details (Show after successful validation) */}
                     {serialValidated && currentCustomerInfo && currentProductInfo && (
