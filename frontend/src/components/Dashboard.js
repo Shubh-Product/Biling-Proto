@@ -4773,7 +4773,9 @@ const Dashboard = () => {
                                   <span className="text-xs font-medium text-blue-700">{currentProductInfo.type}</span>
                                 </div>
                                 <div className="px-3 py-1.5 bg-purple-50 border border-purple-200 rounded-lg">
-                                  <span className="text-xs font-medium text-purple-700">{currentProductInfo.licenseModel}</span>
+                                  <span className="text-xs font-medium text-purple-700">
+                                    {currentProductInfo.licenseModel === 'Perpetual' ? 'PERP M' : currentProductInfo.licenseModel}
+                                  </span>
                                 </div>
                                 <div className="px-3 py-1.5 bg-indigo-50 border border-indigo-200 rounded-lg">
                                   <span className="text-xs font-medium text-indigo-700">{currentProductInfo.planName}</span>
