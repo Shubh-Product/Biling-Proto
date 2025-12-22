@@ -4771,30 +4771,55 @@ const Dashboard = () => {
                           <CardContent>
                             <div className="grid grid-cols-4 gap-6">
                               <div>
-                                <span className="text-xs text-gray-500 block mb-1">Name</span>
-                                <span className="font-medium text-gray-900">{currentCustomerInfo.name}</span>
+                                <Label className="text-xs text-gray-500 mb-1">Name</Label>
+                                <Input
+                                  value={currentCustomerInfo.name}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, name: e.target.value})}
+                                  className="mt-1"
+                                />
                               </div>
                               <div>
-                                <span className="text-xs text-gray-500 block mb-1">Email</span>
-                                <span className="font-medium text-gray-900">{currentCustomerInfo.email}</span>
+                                <Label className="text-xs text-gray-500 mb-1">Email</Label>
+                                <Input
+                                  type="email"
+                                  value={currentCustomerInfo.email}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, email: e.target.value})}
+                                  className="mt-1"
+                                />
                               </div>
                               <div>
-                                <span className="text-xs text-gray-500 block mb-1">Mobile</span>
-                                <span className="font-medium text-gray-900">{currentCustomerInfo.mobile}</span>
+                                <Label className="text-xs text-gray-500 mb-1">Mobile</Label>
+                                <Input
+                                  value={currentCustomerInfo.mobile}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, mobile: e.target.value})}
+                                  className="mt-1"
+                                />
                               </div>
                               <div>
-                                <span className="text-xs text-gray-500 block mb-1">Company</span>
-                                <span className="font-medium text-gray-900">{currentCustomerInfo.company}</span>
+                                <Label className="text-xs text-gray-500 mb-1">Company</Label>
+                                <Input
+                                  value={currentCustomerInfo.company}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, company: e.target.value})}
+                                  className="mt-1"
+                                />
                               </div>
                             </div>
                             <div className="grid grid-cols-4 gap-6 mt-4">
                               <div>
-                                <span className="text-xs text-gray-500 block mb-1">GSTIN</span>
-                                <span className="font-medium text-gray-900">{currentCustomerInfo.gstin}</span>
+                                <Label className="text-xs text-gray-500 mb-1">GSTIN</Label>
+                                <Input
+                                  value={currentCustomerInfo.gstin}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, gstin: e.target.value})}
+                                  className="mt-1"
+                                />
                               </div>
                               <div>
-                                <span className="text-xs text-gray-500 block mb-1">City</span>
-                                <span className="font-medium text-gray-900">{currentCustomerInfo.city}, {currentCustomerInfo.state}</span>
+                                <Label className="text-xs text-gray-500 mb-1">City</Label>
+                                <Input
+                                  value={currentCustomerInfo.city}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, city: e.target.value})}
+                                  className="mt-1"
+                                />
                               </div>
                             </div>
                           </CardContent>
