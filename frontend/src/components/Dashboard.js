@@ -4911,13 +4911,19 @@ const Dashboard = () => {
                         </div>
 
                         {/* Continue with the rest of the flow after duration selection */}
+                        {console.log('Duration selected:', formData.duration, 'License Model:', currentProductInfo?.licenseModel)}
                         {formData.duration && (
                           <div className="space-y-6">
+                            {console.log('About to render plans. Calling getDesktopPlans with:', currentProductInfo?.licenseModel || "Perpetual", formData.duration)}
                             {/* Desktop Plans Display - 4 Column Grid with Quantity Controls */}
                             <div data-scroll-target="desktop-plans" className="space-y-2">
                               <Label className="text-base font-semibold">Plans <span className="text-red-500">*</span>:</Label>
-                              <div className="grid grid-cols-4 gap-3">
-                                {getDesktopPlans(currentProductInfo?.licenseModel || "Perpetual", formData.duration).map((plan, index) => {
+                              {(() => {
+                                const plans = getDesktopPlans(currentProductInfo?.licenseModel || "Perpetual", formData.duration);
+                                console.log('getDesktopPlans returned:', plans, 'Number of plans:', plans?.length);
+                                return (
+                                  <div className="grid grid-cols-4 gap-3">
+                                    {plans && plans.length > 0 ? plans.map((plan, index) => {
                                   const quantity = planQuantities[plan.name] || 0;
                                   return (
                                     <div 
