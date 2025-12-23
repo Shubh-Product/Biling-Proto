@@ -4851,6 +4851,11 @@ const Dashboard = () => {
                                 onClick={() => {
                                   // Set customer validated to true to trigger next sections
                                   setCustomerValidated(true);
+                                  // Set product type from current product info
+                                  setFormData(prev => ({
+                                    ...prev,
+                                    productType: currentProductInfo?.type || "Desktop"
+                                  }));
                                   // Auto-scroll to next section
                                   setTimeout(() => {
                                     const nextSection = document.getElementById('product-selection-section');
