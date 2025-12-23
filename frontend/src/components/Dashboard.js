@@ -4982,8 +4982,14 @@ const Dashboard = () => {
                                       </div>
                                     </div>
                                   );
-                                })}
-                              </div>
+                                }) : (
+                                  <div className="text-center text-red-600 p-4">
+                                    No plans available. getDesktopPlans returned: {JSON.stringify(plans)}
+                                  </div>
+                                )}
+                                  </div>
+                                );
+                              })()}
                             </div>
                           </div>
                         )}
