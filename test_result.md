@@ -1225,6 +1225,9 @@ frontend:
         - working: "NA"
           agent: "main"
           comment: "✅ RENAMED DETAILS TO CUSTOMER DETAILS - Updated the card title in Renewal flow from 'Details' to 'Customer Details' for better clarity. Changed CardTitle text at line 4855 from 'Details' to 'Customer Details' in the renewal customer details card (actionType === 'renew'). The title now clearly indicates that the card contains customer information, improving user understanding of the form section. Upgrade flow still shows 'Details' title (can be updated separately if needed). Frontend compiled successfully."
+        - working: "NA"
+          agent: "main"
+          comment: "✅ REMOVED EMAIL FIELD FROM CUSTOMER DETAILS - Removed the email input field from both Renewal and Upgrade flow customer details cards. Changes: 1) Removed Email field with label and input from customer information grid, 2) Updated grid layout from 4 columns (grid-cols-4) to 3 columns (grid-cols-3), 3) Remaining fields now displayed: Name, Mobile, Company in first row; GSTIN, City in second row, 4) Applied consistently to both Renewal flow (actionType === 'renew' at line 4878) and Upgrade flow (actionType === 'upgrade' at line 4981). Customer details form now streamlined with essential fields only. Frontend compiled successfully."
 
   - task: "Implement Three Dots Dropdown Menu in Actions Column"
     implemented: true
