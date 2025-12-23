@@ -4919,7 +4919,7 @@ const Dashboard = () => {
                             <div data-scroll-target="desktop-plans" className="space-y-2">
                               <Label className="text-base font-semibold">Plans <span className="text-red-500">*</span>:</Label>
                               {(() => {
-                                const plans = getDesktopPlans(currentProductInfo?.licenseModel || "Perpetual", formData.duration);
+                                const plans = getDesktopPlans("Subscription", formData.duration);
                                 console.log('getDesktopPlans returned:', plans, 'Number of plans:', plans?.length);
                                 return (
                                   <div className="grid grid-cols-4 gap-3">
