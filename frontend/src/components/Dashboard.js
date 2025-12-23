@@ -4852,7 +4852,7 @@ const Dashboard = () => {
                         <Card>
                           <CardHeader>
                             <div className="flex items-center justify-between">
-                              <CardTitle className="text-green-600">Details</CardTitle>
+                              <CardTitle className="text-green-600">Customer Details</CardTitle>
                               <div className="flex items-center space-x-3">
                                 <div className="px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-lg">
                                   <span className="text-xs font-medium text-blue-700">{currentProductInfo.type}</span>
