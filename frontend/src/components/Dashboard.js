@@ -1048,8 +1048,8 @@ const Dashboard = () => {
     setShowPaymentLinkModal(true);
   };
 
-  // Serial Number Validation for Renewal/Upgrade
-  const validateSerialNumber = async () => {
+  // Serial Number Validation for Renewal
+  const validateSerialNumberForRenewal = async () => {
     if (!serialNumber.trim()) {
       setErrors(prev => ({ ...prev, serialNumber: "Please enter a serial number" }));
       return;
@@ -1057,6 +1057,7 @@ const Dashboard = () => {
 
     setFetchingSerialDetails(true);
     setErrors(prev => ({ ...prev, serialNumber: "" }));
+    setActionType('renew'); // Set action type to renewal
 
     try {
       // Simulate API call to validate serial number and fetch details
@@ -1101,15 +1102,89 @@ const Dashboard = () => {
       if (!serialData || !serialData.valid) {
         setErrors(prev => ({ ...prev, serialNumber: "Invalid Serial Number" }));
         setSerialValidated(false);
+        setActionType('');
         return;
       }
 
       if (!serialData.eligible) {
         setErrors(prev => ({ 
           ...prev, 
-          serialNumber: serialData.reason || "Not eligible for renewal or upgrade" 
+          serialNumber: serialData.reason || "Not eligible for renewal" 
         }));
         setSerialValidated(false);
+        setActionType('');
+        return;
+      }
+
+      // Success - set customer and product info
+      setCurrentCustomerInfo(serialData.customer);
+      setCurrentProductInfo(serialData.currentProduct);
+      setSerialValidated(true);
+    } catch (error) {
+      setErrors(prev => ({ ...prev, serialNumber: "Error validating serial number. Please try again." }));
+      setSerialValidated(false);
+      setActionType('');
+    } finally {
+      setFetchingSerialDetails(false);
+    }
+  };
+
+  // Serial Number Validation for Upgrade - Separate function
+  const validateSerialNumberForUpgrade = async () => {
+    if (!serialNumber.trim()) {
+      setErrors(prev => ({ ...prev, serialNumber: "Please enter a serial number" }));
+      return;
+    }
+
+    setFetchingSerialDetails(true);
+    setErrors(prev => ({ ...prev, serialNumber: "" }));
+    setActionType('upgrade'); // Set action type to upgrade
+
+    try {
+      // Simulate API call to validate serial number and fetch details
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      // Same mock data but for upgrade flow
+      const mockSerialData = {
+        "SER123456": {
+          valid: true,
+          eligible: true,
+          customer: {
+            name: "Rajesh Kumar",
+            email: "rajesh.kumar@example.com",
+            mobile: "9876543210",
+            company: "Kumar Enterprises",
+            gstin: "27KUMAR123456Z",
+            city: "Mumbai",
+            state: "Maharashtra"
+          },
+          currentProduct: {
+            type: "Desktop",
+            planName: "Desktop Standard Multi User",
+            licenseModel: "Perpetual",
+            duration: "360 Days",
+            expiryDate: "2024-12-31",
+            status: "Active"
+          }
+        }
+      };
+
+      const serialData = mockSerialData[serialNumber.toUpperCase()];
+
+      if (!serialData || !serialData.valid) {
+        setErrors(prev => ({ ...prev, serialNumber: "Invalid Serial Number" }));
+        setSerialValidated(false);
+        setActionType('');
+        return;
+      }
+
+      if (!serialData.eligible) {
+        setErrors(prev => ({ 
+          ...prev, 
+          serialNumber: serialData.reason || "Not eligible for upgrade" 
+        }));
+        setSerialValidated(false);
+        setActionType('');
         return;
       }
 
