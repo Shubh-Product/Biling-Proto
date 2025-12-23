@@ -5564,7 +5564,8 @@ const Dashboard = () => {
                     )}
 
                     {/* Order Summary for Upgrade - Show when plans are selected (Upgrade flow ONLY) */}
-                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'upgrade' && formData.duration && Object.values(planQuantities).some(qty => qty > 0) && (
+                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'upgrade' && 
+                     formData.productType === "Desktop" && formData.licenseModel && formData.duration && Object.values(planQuantities).some(qty => qty > 0) && (
                       <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-lg border border-indigo-200">
                         <h4 id="upgrade-order-summary-section" className="text-xl font-bold text-indigo-900 mb-4">Upgrade Order Summary</h4>
                         
