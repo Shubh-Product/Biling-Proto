@@ -1249,6 +1249,9 @@ frontend:
         - working: "NA"
           agent: "main"
           comment: "✅ REMOVED BLUE HIGHLIGHTED CONTAINER FROM RENEWAL SECTION - Removed the blue highlighted background and border from the serial number input container in Renewal/Upgrade flow. Changes: 1) **Background Color**: Changed from bg-blue-50 (light blue) to bg-white (white) for cleaner appearance, 2) **Border Color**: Changed from border-blue-200 (blue border) to border-gray-200 (gray border) for neutral styling, 3) **Maintained Structure**: Kept rounded-lg and p-6 padding intact, only changed colors, 4) **Location**: Updated container at line 4749 that wraps serial number input, validation buttons, and descriptive text. The renewal section now has a clean white background with subtle gray border instead of blue highlighted appearance, matching standard form styling patterns. Frontend compiled successfully."
+        - working: "NA"
+          agent: "main"
+          comment: "✅ REMOVED ALL BORDERS FROM RENEWAL CONTAINER - Completely removed border styling from the serial number input container for a borderless, clean appearance. Changes: 1) **Border Removed**: Removed 'border border-gray-200' classes completely from container div at line 4749, 2) **Clean Layout**: Container now has only bg-white (white background), rounded-lg (rounded corners), and p-6 (padding), 3) **No Visual Boundaries**: Elimination of border creates seamless integration with page background, 4) **Minimalist Design**: Borderless container provides cleaner, more modern aesthetic. Serial number input section now appears borderless with just white background and rounded corners, creating subtle visual separation through background color only. Frontend compiled successfully."
 
   - task: "Implement Three Dots Dropdown Menu in Actions Column"
     implemented: true
