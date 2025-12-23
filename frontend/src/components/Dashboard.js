@@ -5129,7 +5129,7 @@ const Dashboard = () => {
                             {["360", "180", "90"].map((duration) => (
                               <label key={duration} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all ${
                                 formData.duration === duration 
-                                  ? "border-blue-500 bg-blue-50" 
+                                  ? "border-green-500 bg-green-50" 
                                   : "border-gray-200"
                               }`}>
                                 <input
@@ -5138,7 +5138,7 @@ const Dashboard = () => {
                                   value={duration}
                                   checked={formData.duration === duration}
                                   onChange={(e) => setFormData(prev => ({ ...prev, duration: e.target.value }))}
-                                  className="w-4 h-4 text-blue-600 mr-3"
+                                  className="w-4 h-4 text-green-600 mr-3"
                                 />
                                 <span className="text-gray-700 font-medium">{duration} Days</span>
                               </label>
