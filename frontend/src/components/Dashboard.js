@@ -4875,7 +4875,6 @@ const Dashboard = () => {
                         
                         {/* Product Selection */}
                         <div id="product-selection-section" className="flex items-center space-x-6">
-                          <Label className="text-base font-semibold whitespace-nowrap">Product <span className="text-red-500">*</span>:</Label>
                           <div className="flex space-x-3">
                             {[
                               { value: "Desktop", label: "Desktop" },
