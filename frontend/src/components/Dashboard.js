@@ -4979,53 +4979,72 @@ const Dashboard = () => {
                       </div>
                     )}
 
-                    {/* Step 2b: Customer & Product Details (Show after Upgrade button validation) */}
+                    {/* Step 2b: Customer & Product Details (Show after Upgrade button validation) - Accordion */}
                     {serialValidated && actionType === 'upgrade' && currentCustomerInfo && currentProductInfo && (
-                      <div className="space-y-6">
+                      <div className="border border-gray-300 rounded-lg overflow-hidden">
                         
-                        {/* Customer Details for Upgrade */}
-                        <Card>
-                          <CardHeader>
-                            <div className="flex items-center justify-between">
-                              <CardTitle className="text-blue-600 flex items-center">
-                                Customer Details 
-                                <span className="mx-3 text-gray-400">|</span>
-                                <span className="text-gray-700 font-normal text-base">
-                                  {currentCustomerInfo.mobile ? 
-                                    `${currentCustomerInfo.mobile.substring(0, 3)}XXXX${currentCustomerInfo.mobile.substring(currentCustomerInfo.mobile.length - 3)}` 
-                                    : 'No Mobile'}
-                                </span>
-                              </CardTitle>
-                              <div className="flex items-center space-x-3">
-                                <div className="px-4 py-2 bg-white border border-gray-300 rounded-xl">
-                                  <span className="text-sm font-medium text-gray-800">{currentProductInfo.type}</span>
-                                </div>
-                                <div className="px-4 py-2 bg-white border border-gray-300 rounded-xl">
-                                  <span className="text-sm font-medium text-gray-800">
-                                    {currentProductInfo.licenseModel === 'Perpetual' ? 'PERP M' : currentProductInfo.licenseModel}
-                                  </span>
-                                </div>
-                                <div className="px-4 py-2 bg-white border border-gray-300 rounded-xl">
-                                  <span className="text-sm font-medium text-gray-800">{currentProductInfo.planName}</span>
-                                </div>
-                                <div className="px-4 py-2 bg-white border border-gray-300 rounded-xl">
-                                  <span className="text-sm font-medium text-gray-800">Valid Till: {currentProductInfo.expiryDate}</span>
-                                </div>
-                                <div className={`px-4 py-2 border rounded-xl ${
-                                  currentProductInfo.status === 'Active' 
-                                    ? 'bg-green-50 border-green-300' 
-                                    : 'bg-white border-gray-300'
-                                }`}>
-                                  <span className={`text-sm font-medium ${
-                                    currentProductInfo.status === 'Active' 
-                                      ? 'text-green-700' 
-                                      : 'text-gray-800'
-                                  }`}>{currentProductInfo.status}</span>
-                                </div>
-                              </div>
+                        {/* Accordion Header - Always Visible */}
+                        <div 
+                          className={`flex items-center justify-between px-6 py-4 cursor-pointer transition-colors ${
+                            isUpgradeCustomerDetailsOpen ? 'bg-blue-50 border-b border-gray-300' : 'bg-gray-50 hover:bg-gray-100'
+                          }`}
+                          onClick={() => {
+                            if (customerValidated) {
+                              setIsUpgradeCustomerDetailsOpen(!isUpgradeCustomerDetailsOpen);
+                            }
+                          }}
+                        >
+                          <div className="flex items-center space-x-4">
+                            <CardTitle className="text-blue-600 flex items-center text-lg">
+                              Customer Details 
+                              <span className="mx-3 text-gray-400">|</span>
+                              <span className="text-gray-700 font-normal text-base">
+                                {currentCustomerInfo.mobile ? 
+                                  `${currentCustomerInfo.mobile.substring(0, 3)}XXXX${currentCustomerInfo.mobile.substring(currentCustomerInfo.mobile.length - 3)}` 
+                                  : 'No Mobile'}
+                              </span>
+                            </CardTitle>
+                          </div>
+                          <div className="flex items-center space-x-3">
+                            <div className="px-4 py-2 bg-white border border-gray-300 rounded-xl">
+                              <span className="text-sm font-medium text-gray-800">{currentProductInfo.type}</span>
                             </div>
-                          </CardHeader>
-                          <CardContent>
+                            <div className="px-4 py-2 bg-white border border-gray-300 rounded-xl">
+                              <span className="text-sm font-medium text-gray-800">
+                                {currentProductInfo.licenseModel === 'Perpetual' ? 'PERP M' : currentProductInfo.licenseModel}
+                              </span>
+                            </div>
+                            <div className="px-4 py-2 bg-white border border-gray-300 rounded-xl">
+                              <span className="text-sm font-medium text-gray-800">{currentProductInfo.planName}</span>
+                            </div>
+                            <div className="px-4 py-2 bg-white border border-gray-300 rounded-xl">
+                              <span className="text-sm font-medium text-gray-800">Valid Till: {currentProductInfo.expiryDate}</span>
+                            </div>
+                            <div className={`px-4 py-2 border rounded-xl ${
+                              currentProductInfo.status === 'Active' 
+                                ? 'bg-green-50 border-green-300' 
+                                : 'bg-white border-gray-300'
+                            }`}>
+                              <span className={`text-sm font-medium ${
+                                currentProductInfo.status === 'Active' 
+                                  ? 'text-green-700' 
+                                  : 'text-gray-800'
+                              }`}>{currentProductInfo.status}</span>
+                            </div>
+                            {customerValidated && (
+                              <button
+                                type="button"
+                                className="text-gray-600 hover:text-gray-900 ml-2"
+                              >
+                                {isUpgradeCustomerDetailsOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                        
+                        {/* Accordion Content - Collapsible */}
+                        {isUpgradeCustomerDetailsOpen && (
+                          <div className="p-6 bg-white">
                             <div className="grid grid-cols-4 gap-6">
                               <div>
                                 <Label className="text-xs text-gray-500 mb-1">Name</Label>
@@ -5060,14 +5079,14 @@ const Dashboard = () => {
                                 />
                               </div>
                             </div>
-                          </CardContent>
-                          <div className="px-6 pb-6">
-                            <div className="flex justify-end">
+                            <div className="flex justify-end mt-6">
                               <Button
                                 type="button"
                                 onClick={() => {
                                   // Set customer validated to true to trigger next sections for UPGRADE
                                   setCustomerValidated(true);
+                                  // Collapse the accordion
+                                  setIsUpgradeCustomerDetailsOpen(false);
                                   // Set product type from current product info
                                   setFormData(prev => ({
                                     ...prev,
@@ -5081,13 +5100,13 @@ const Dashboard = () => {
                                     }
                                   }, 100);
                                 }}
-                                className="bg-green-600 hover:bg-green-700 text-white px-8 py-2 rounded-lg"
+                                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-lg"
                               >
                                 Save and Continue
                               </Button>
                             </div>
                           </div>
-                        </Card>
+                        )}
                       </div>
                     )}
 
