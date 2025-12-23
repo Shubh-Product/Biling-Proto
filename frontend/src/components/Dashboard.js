@@ -4969,7 +4969,7 @@ const Dashboard = () => {
                                     }
                                   }, 100);
                                 }}
-                                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-lg"
+                                className="bg-green-600 hover:bg-green-700 text-white px-8 py-2 rounded-lg"
                               >
                                 Save and Continue
                               </Button>
@@ -5081,7 +5081,7 @@ const Dashboard = () => {
                                     }
                                   }, 100);
                                 }}
-                                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-lg"
+                                className="bg-green-600 hover:bg-green-700 text-white px-8 py-2 rounded-lg"
                               >
                                 Save and Continue
                               </Button>
