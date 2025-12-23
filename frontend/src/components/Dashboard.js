@@ -5059,37 +5059,48 @@ const Dashboard = () => {
                             
                             {/* Summary Section */}
                             {(() => {
-                              const pricingData = calculateDesktopPricing();
-                              if (!pricingData) return null;
+                              // Calculate pricing based on planQuantities
+                              let totalBasePrice = 0;
+                              
+                              if (formData.duration) {
+                                const plans = getDesktopPlans("Subscription", formData.duration);
+                                plans.forEach(plan => {
+                                  const quantity = planQuantities[plan.name] || 0;
+                                  if (quantity > 0) {
+                                    totalBasePrice += plan.price * quantity;
+                                  }
+                                });
+                              }
+                              
+                              if (totalBasePrice === 0) return null;
+
+                              // Calculate TDS, GST, and final amount
+                              const tdsAmount = formData.deductTds ? Math.round(totalBasePrice * 0.10) : 0;
+                              const afterTds = totalBasePrice - tdsAmount;
+                              const gstAmount = Math.round(afterTds * 0.18);
+                              const finalAmount = afterTds + gstAmount;
 
                               return (
                                 <div className="border-t border-gray-300 bg-gray-50 p-4">
                                   <div className="space-y-2">
                                     <div className="flex justify-between items-center">
                                       <span className="text-sm font-semibold text-gray-700">Total:</span>
-                                      <span className="text-sm font-semibold text-gray-900">₹{pricingData.basePrice.toLocaleString('en-IN')}</span>
+                                      <span className="text-sm font-semibold text-gray-900">₹{totalBasePrice.toLocaleString('en-IN')}</span>
                                     </div>
-
-                                    {pricingData.licenseDiscount > 0 && (
-                                      <div className="flex justify-between items-center">
-                                        <span className="text-sm text-gray-600">License Type Discount:</span>
-                                        <span className="text-sm font-medium text-green-600">- ₹{pricingData.discountAmount.toLocaleString('en-IN')}</span>
-                                      </div>
-                                    )}
 
                                     <div className="flex justify-between items-center">
                                       <span className="text-sm text-gray-600">TDS Deduction:</span>
-                                      <span className="text-sm font-medium text-orange-600">₹{pricingData.tdsAmount.toLocaleString('en-IN')}</span>
+                                      <span className="text-sm font-medium text-orange-600">₹{tdsAmount.toLocaleString('en-IN')}</span>
                                     </div>
 
                                     <div className="flex justify-between items-center">
                                       <span className="text-sm text-gray-600">GST (18%):</span>
-                                      <span className="text-sm font-medium text-gray-900">₹{pricingData.gstAmount.toLocaleString('en-IN')}</span>
+                                      <span className="text-sm font-medium text-gray-900">₹{gstAmount.toLocaleString('en-IN')}</span>
                                     </div>
 
                                     <div className="flex justify-between items-center pt-2 border-t border-gray-300">
                                       <span className="text-base font-bold text-gray-900">Grand Total:</span>
-                                      <span className="text-base font-bold text-blue-600">₹{pricingData.finalAmount.toLocaleString('en-IN')}</span>
+                                      <span className="text-base font-bold text-blue-600">₹{finalAmount.toLocaleString('en-IN')}</span>
                                     </div>
                                   </div>
                                 </div>
