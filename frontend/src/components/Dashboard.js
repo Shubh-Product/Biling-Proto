@@ -5151,7 +5151,7 @@ const Dashboard = () => {
                         {formData.duration && (
                           <div className="space-y-6">
                             {console.log('About to render plans. Calling getDesktopPlans with:', currentProductInfo?.licenseModel || "Perpetual", formData.duration)}
-                            {/* Desktop Plans Display - 4 Column Grid with Quantity Controls */}
+                            {/* Desktop Plans Display - 4 Column Grid WITHOUT Quantity Controls (Renewal Flow) */}
                             <div data-scroll-target="desktop-plans" className="space-y-2">
                               <Label className="text-base font-semibold">Plans <span className="text-red-500">*</span>:</Label>
                               {(() => {
@@ -5160,61 +5160,37 @@ const Dashboard = () => {
                                 return (
                                   <div className="grid grid-cols-4 gap-2">
                                     {plans && plans.length > 0 ? plans.map((plan, index) => {
-                                      const quantity = planQuantities[plan.name] || 0;
+                                      const isFirstPlan = index === 0; // First plan is the "Same Plan"
                                       return (
                                         <div 
                                           key={plan.name} 
                                           className={`relative border-2 rounded-lg p-2 transition-all ${
-                                            quantity > 0
-                                              ? "border-blue-500 bg-blue-50 shadow-md" 
+                                            isFirstPlan
+                                              ? "border-green-500 bg-green-50 shadow-md" 
                                               : "border-gray-200 hover:border-gray-300"
                                           }`}
                                         >
+                                          {/* Same Plan Indicator - Only for First Plan */}
+                                          {isFirstPlan && (
+                                            <div className="absolute -top-2 -right-2 bg-green-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md">
+                                              Same Plan
+                                            </div>
+                                          )}
+                                          
                                           {/* Plan Name */}
-                                          <div className="text-xs font-medium text-gray-900 mb-1 pr-8">
+                                          <div className={`text-xs font-medium mb-1 ${
+                                            isFirstPlan ? "text-green-900" : "text-gray-900"
+                                          }`}>
                                             {plan.name}
                                           </div>
                                           
                                           {/* Price */}
                                           <div className="flex flex-col mb-1">
-                                            <span className="text-xs font-bold text-blue-600">
+                                            <span className={`text-xs font-bold ${
+                                              isFirstPlan ? "text-green-700" : "text-blue-600"
+                                            }`}>
                                               ₹{plan.price?.toLocaleString('en-IN') || 'Contact'}
                                             </span>
-                                          </div>
-
-                                          {/* Quantity Counter - Bottom Right */}
-                                          <div className="absolute bottom-1.5 right-1.5 flex items-center bg-white rounded border border-gray-300 px-1 py-0.5">
-                                            <button
-                                              type="button"
-                                              onClick={() => {
-                                                if (quantity > 0) {
-                                                  const newQuantities = { ...planQuantities, [plan.name]: quantity - 1 };
-                                                  setPlanQuantities(newQuantities);
-                                                  if (quantity - 1 === 0 && formData.planName === plan.name) {
-                                                    setFormData(prev => ({ ...prev, planName: "" }));
-                                                  }
-                                                }
-                                              }}
-                                              className="text-gray-600 hover:text-red-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
-                                            >
-                                              -
-                                            </button>
-                                            <span className="text-xs font-semibold text-gray-900 min-w-[12px] text-center px-1">
-                                              {quantity}
-                                            </span>
-                                            <button
-                                              type="button"
-                                              onClick={() => {
-                                                const newQuantities = { ...planQuantities, [plan.name]: quantity + 1 };
-                                                setPlanQuantities(newQuantities);
-                                                if (quantity === 0) {
-                                                  setFormData(prev => ({ ...prev, planName: plan.name }));
-                                                }
-                                              }}
-                                              className="text-gray-600 hover:text-green-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
-                                            >
-                                              +
-                                            </button>
                                           </div>
                                         </div>
                                       );
