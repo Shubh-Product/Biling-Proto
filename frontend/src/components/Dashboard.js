@@ -201,6 +201,7 @@ const Dashboard = () => {
   const [renewalOption, setRenewalOption] = useState(''); // 'renew' or 'upgrade'
   const [selectedUpgradePlan, setSelectedUpgradePlan] = useState(null);
   const [eligibleUpgradePlans, setEligibleUpgradePlans] = useState([]);
+  const [actionType, setActionType] = useState(''); // 'renew' or 'upgrade' - tracks which button was clicked
   
   // Mobile App flow state
   const [mobileAppSerialNumber, setMobileAppSerialNumber] = useState('');
