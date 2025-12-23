@@ -1222,6 +1222,9 @@ frontend:
         - working: "NA"
           agent: "main"
           comment: "✅ ENHANCED UPGRADE FLOW - Updated Upgrade button flow to mirror the complete renewalOption upgrade experience. Replaced simple duration/plan selector with comprehensive product selection matching the renewalOption flow: 1) **Product Selection**: Now includes all 5 product types (Desktop, Mandi, Online, App, Recom) with radio buttons, not just Desktop, 2) **Desktop Configuration**: Complete License Model (Perpetual/Subscription) and Duration (360/1080 Days with 20% OFF tag) selection on same line, 3) **Plan Grid**: 4-column grid with quantity controls (+/- buttons) for all 16 desktop plans, responsive to license model and duration changes, 4) **Visual Theme**: Consistent indigo/purple theme throughout upgrade flow (borders, highlights, buttons), 5) **Order Summary Condition**: Updated to show only when productType, licenseModel, duration, and plans are selected (not just duration), 6) **Placeholder**: Added notification for non-Desktop products (Mandi, Online, App, Recom) configuration coming soon. Upgrade button now triggers the EXACT same comprehensive flow as clicking upgrade option within renewal tab. Frontend compiled successfully."
+        - working: "NA"
+          agent: "main"
+          comment: "✅ RENAMED DETAILS TO CUSTOMER DETAILS - Updated the card title in Renewal flow from 'Details' to 'Customer Details' for better clarity. Changed CardTitle text at line 4855 from 'Details' to 'Customer Details' in the renewal customer details card (actionType === 'renew'). The title now clearly indicates that the card contains customer information, improving user understanding of the form section. Upgrade flow still shows 'Details' title (can be updated separately if needed). Frontend compiled successfully."
 
   - task: "Implement Three Dots Dropdown Menu in Actions Column"
     implemented: true
