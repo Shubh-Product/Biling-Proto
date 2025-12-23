@@ -5343,6 +5343,255 @@ const Dashboard = () => {
                       </div>
                     )}
 
+                    {/* Upgrade Flow - Product & Plan Selection (Show after customer validation for Upgrade button ONLY) */}
+                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'upgrade' && (
+                      <div className="space-y-6">
+                        
+                        {/* Duration Selection for Upgrade */}
+                        <div id="upgrade-product-selection-section" className="flex items-center space-x-6">
+                          <Label className="text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                          <div className="flex space-x-3">
+                            {["360", "180", "90"].map((duration) => (
+                              <label key={duration} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all ${
+                                formData.duration === duration 
+                                  ? "border-blue-500 bg-blue-50" 
+                                  : "border-gray-200"
+                              }`}>
+                                <input
+                                  type="radio"
+                                  name="duration"
+                                  value={duration}
+                                  checked={formData.duration === duration}
+                                  onChange={(e) => setFormData(prev => ({ ...prev, duration: e.target.value }))}
+                                  className="w-4 h-4 text-blue-600 mr-3"
+                                />
+                                <span className="text-gray-700 font-medium">{duration} Days</span>
+                              </label>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Continue with the rest of the upgrade flow after duration selection */}
+                        {formData.duration && (
+                          <div className="space-y-6">
+                            {/* Desktop Plans Display - 4 Column Grid with Quantity Controls for Upgrade */}
+                            <div data-scroll-target="upgrade-desktop-plans" className="space-y-2">
+                              <Label className="text-base font-semibold">Plans <span className="text-red-500">*</span>:</Label>
+                              {(() => {
+                                const plans = getDesktopPlans("Subscription", formData.duration);
+                                return (
+                                  <div className="grid grid-cols-4 gap-2">
+                                    {plans && plans.length > 0 ? plans.map((plan, index) => {
+                                      const quantity = planQuantities[plan.name] || 0;
+                                      return (
+                                        <div 
+                                          key={plan.name} 
+                                          className={`relative border-2 rounded-lg p-2 transition-all ${
+                                            quantity > 0
+                                              ? "border-blue-500 bg-blue-50 shadow-md" 
+                                              : "border-gray-200 hover:border-gray-300"
+                                          }`}
+                                        >
+                                          {/* Plan Name */}
+                                          <div className="text-xs font-medium text-gray-900 mb-1 pr-8">
+                                            {plan.name}
+                                          </div>
+                                          
+                                          {/* Price */}
+                                          <div className="flex flex-col mb-1">
+                                            <span className="text-xs font-bold text-blue-600">
+                                              ₹{plan.price?.toLocaleString('en-IN') || 'Contact'}
+                                            </span>
+                                          </div>
+
+                                          {/* Quantity Counter - Bottom Right */}
+                                          <div className="absolute bottom-1.5 right-1.5 flex items-center bg-white rounded border border-gray-300 px-1 py-0.5">
+                                            <button
+                                              type="button"
+                                              onClick={() => {
+                                                if (quantity > 0) {
+                                                  const newQuantities = { ...planQuantities, [plan.name]: quantity - 1 };
+                                                  setPlanQuantities(newQuantities);
+                                                  if (quantity - 1 === 0 && formData.planName === plan.name) {
+                                                    setFormData(prev => ({ ...prev, planName: "" }));
+                                                  }
+                                                }
+                                              }}
+                                              className="text-gray-600 hover:text-red-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
+                                            >
+                                              -
+                                            </button>
+                                            <span className="text-xs font-semibold text-gray-900 min-w-[12px] text-center px-1">
+                                              {quantity}
+                                            </span>
+                                            <button
+                                              type="button"
+                                              onClick={() => {
+                                                const newQuantities = { ...planQuantities, [plan.name]: quantity + 1 };
+                                                setPlanQuantities(newQuantities);
+                                                if (quantity === 0) {
+                                                  setFormData(prev => ({ ...prev, planName: plan.name }));
+                                                }
+                                              }}
+                                              className="text-gray-600 hover:text-green-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
+                                            >
+                                              +
+                                            </button>
+                                          </div>
+                                        </div>
+                                      );
+                                    }) : (
+                                      <div className="text-center text-red-600 p-4">
+                                        No plans available for upgrade.
+                                      </div>
+                                    )}
+                                  </div>
+                                );
+                              })()}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Order Summary for Upgrade - Show when plans are selected (Upgrade flow ONLY) */}
+                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'upgrade' && formData.duration && Object.values(planQuantities).some(qty => qty > 0) && (
+                      <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-lg border border-indigo-200">
+                        <h4 id="upgrade-order-summary-section" className="text-xl font-bold text-indigo-900 mb-4">Upgrade Order Summary</h4>
+                        
+                        <div>
+                          {/* Invoice-Style Table for Upgrade */}
+                          <div className="bg-white rounded-lg border border-gray-300 overflow-hidden">
+                            <table className="w-full">
+                              <thead className="bg-gray-100 border-b border-gray-300">
+                                <tr>
+                                  <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">S.No</th>
+                                  <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">Product</th>
+                                  <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">Duration</th>
+                                  <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">Quantity</th>
+                                  <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Rate</th>
+                                  <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Amount</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {(() => {
+                                  const selectedPlans = Object.entries(planQuantities)
+                                    .filter(([name, qty]) => qty > 0)
+                                    .map(([name, qty]) => {
+                                      const plans = getDesktopPlans("Subscription", formData.duration);
+                                      const plan = plans?.find(p => p.name === name);
+                                      return { name, quantity: qty, rate: plan?.price || 0 };
+                                    });
+                                  
+                                  return selectedPlans.length > 0 ? selectedPlans.map((item, index) => (
+                                    <tr key={index} className="border-b hover:bg-gray-50">
+                                      <td className="px-3 py-2 text-left text-xs">{index + 1}</td>
+                                      <td className="px-3 py-2 text-left text-xs font-medium">{item.name}</td>
+                                      <td className="px-3 py-2 text-center text-xs">{formData.duration} Days</td>
+                                      <td className="px-3 py-2 text-center text-xs">{item.quantity}</td>
+                                      <td className="px-3 py-2 text-right text-xs">₹{item.rate.toLocaleString('en-IN')}</td>
+                                      <td className="px-3 py-2 text-right text-xs font-semibold">₹{(item.rate * item.quantity).toLocaleString('en-IN')}</td>
+                                    </tr>
+                                  )) : (
+                                    <tr>
+                                      <td colSpan="6" className="px-3 py-4 text-center text-sm text-gray-500">
+                                        No items selected
+                                      </td>
+                                    </tr>
+                                  );
+                                })()}
+                              </tbody>
+                            </table>
+                          </div>
+
+                          {/* Summary Section for Upgrade */}
+                          <div className="mt-4 space-y-2 bg-gray-50 p-4 rounded-lg">
+                            {(() => {
+                              // Calculate totals for upgrade
+                              const selectedPlans = Object.entries(planQuantities)
+                                .filter(([name, qty]) => qty > 0)
+                                .map(([name, qty]) => {
+                                  const plans = getDesktopPlans("Subscription", formData.duration);
+                                  const plan = plans?.find(p => p.name === name);
+                                  return { quantity: qty, rate: plan?.price || 0 };
+                                });
+                              
+                              const subtotal = selectedPlans.reduce((sum, item) => sum + (item.rate * item.quantity), 0);
+                              const licenseDiscount = formData.licenseType && formData.licenseDiscount 
+                                ? Math.round(subtotal * formData.licenseDiscount / 100)
+                                : 0;
+                              const afterDiscount = subtotal - licenseDiscount;
+                              const tdsAmount = formData.deductTds ? Math.round(afterDiscount * 0.10) : 0;
+                              const afterTds = afterDiscount - tdsAmount;
+                              const gstAmount = Math.round(afterTds * 0.18);
+                              const grandTotal = afterTds + gstAmount;
+
+                              return (
+                                <>
+                                  <div className="flex justify-between text-sm">
+                                    <span className="text-gray-600">Total:</span>
+                                    <span className="font-semibold">₹{subtotal.toLocaleString('en-IN')}</span>
+                                  </div>
+                                  
+                                  {licenseDiscount > 0 && (
+                                    <div className="flex justify-between text-sm">
+                                      <span className="text-gray-600">License Discount ({formData.licenseDiscount}%):</span>
+                                      <span className="font-semibold text-green-600">-₹{licenseDiscount.toLocaleString('en-IN')}</span>
+                                    </div>
+                                  )}
+
+                                  {/* TDS Toggle for Upgrade */}
+                                  <div className="flex justify-between items-center border-t pt-2">
+                                    <span className="text-gray-600 text-sm font-medium">Deduct TDS:</span>
+                                    <label className="relative inline-flex items-center cursor-pointer">
+                                      <input
+                                        type="checkbox"
+                                        checked={formData.deductTds}
+                                        onChange={(e) => handleTdsToggle(e.target.checked)}
+                                        className="sr-only peer"
+                                      />
+                                      <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600 pointer-events-none"></div>
+                                      <span className="ml-2 text-xs font-medium text-gray-700">
+                                        {formData.deductTds ? 'ON' : 'OFF'}
+                                      </span>
+                                    </label>
+                                  </div>
+
+                                  {tdsAmount > 0 && (
+                                    <div className="flex justify-between text-sm">
+                                      <span className="text-gray-600">TDS Deduction (10%):</span>
+                                      <span className="font-semibold text-red-600">-₹{tdsAmount.toLocaleString('en-IN')}</span>
+                                    </div>
+                                  )}
+
+                                  <div className="flex justify-between text-sm">
+                                    <span className="text-gray-600">GST (18%):</span>
+                                    <span className="font-semibold">₹{gstAmount.toLocaleString('en-IN')}</span>
+                                  </div>
+
+                                  <div className="flex justify-between text-base font-bold border-t pt-2">
+                                    <span className="text-gray-900">Grand Total:</span>
+                                    <span className="text-indigo-600">₹{grandTotal.toLocaleString('en-IN')}</span>
+                                  </div>
+                                </>
+                              );
+                            })()}
+                          </div>
+
+                          {/* Send Payment Link Button for Upgrade */}
+                          <div className="mt-6 flex justify-center">
+                            <Button
+                              type="button"
+                              onClick={handleSendPaymentLink}
+                              className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-lg text-lg font-semibold"
+                            >
+                              Send Payment Link for Upgrade
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
                     {/* Step 4a: Renew Same Plan Flow */}
                     {serialValidated && renewalOption === 'renew' && (
                       <div className="space-y-6">
