@@ -4746,7 +4746,7 @@ const Dashboard = () => {
                   <div className="space-y-6">
 
                     {/* Step 1: Serial Number Input & Validation */}
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                    <div className="bg-white border border-gray-200 rounded-lg p-6">
                       
                       <div className="flex items-center space-x-4">
                         <div className="flex items-center space-x-3">
