@@ -4967,8 +4967,8 @@ const Dashboard = () => {
                       shouldShowDuration: formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated
                     })}
 
-                    {/* Product & Plan Selection - Show after customer validation in Renewal flow */}
-                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && (
+                    {/* Product & Plan Selection - Show after customer validation in Renewal flow ONLY */}
+                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'renew' && (
                       <div className="space-y-6">
                         
                         {/* Duration Selection - Show directly without Product selection */}
