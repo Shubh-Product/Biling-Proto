@@ -5162,6 +5162,20 @@ const Dashboard = () => {
                                     {plans && plans.length > 0 ? plans.map((plan, index) => {
                                       const isFirstPlan = index === 0; // First plan is the "Same Plan"
                                       const isSelected = formData.planName === plan.name;
+                                      
+                                      // Determine styling based on selection state
+                                      let cellStyle = "";
+                                      if (isSelected) {
+                                        // Selected plan always gets blue styling
+                                        cellStyle = "border-blue-500 bg-blue-50 shadow-lg ring-2 ring-blue-300";
+                                      } else if (isFirstPlan) {
+                                        // First plan (when NOT selected) gets green styling
+                                        cellStyle = "border-green-500 bg-green-50 shadow-md hover:shadow-lg";
+                                      } else {
+                                        // Other plans get gray styling
+                                        cellStyle = "border-gray-200 hover:border-blue-300 hover:shadow-md";
+                                      }
+                                      
                                       return (
                                         <div 
                                           key={plan.name}
@@ -5178,13 +5192,7 @@ const Dashboard = () => {
                                               }
                                             }, 100);
                                           }}
-                                          className={`relative border-2 rounded-lg p-2 transition-all cursor-pointer ${
-                                            isSelected
-                                              ? "border-blue-500 bg-blue-50 shadow-lg ring-2 ring-blue-300" 
-                                              : isFirstPlan
-                                              ? "border-green-500 bg-green-50 shadow-md hover:shadow-lg" 
-                                              : "border-gray-200 hover:border-blue-300 hover:shadow-md"
-                                          }`}
+                                          className={`relative border-2 rounded-lg p-2 transition-all cursor-pointer ${cellStyle}`}
                                         >
                                           {/* Same Plan Indicator - ALWAYS visible on first plan */}
                                           {isFirstPlan && (
