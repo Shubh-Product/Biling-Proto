@@ -148,6 +148,10 @@ const Dashboard = () => {
   const [isProspectDetailsOpen, setIsProspectDetailsOpen] = useState(true);
   const [isProspectDetailsSaved, setIsProspectDetailsSaved] = useState(false);
   
+  // Renewal/Upgrade Customer Details Accordion State
+  const [isRenewalCustomerDetailsOpen, setIsRenewalCustomerDetailsOpen] = useState(true);
+  const [isUpgradeCustomerDetailsOpen, setIsUpgradeCustomerDetailsOpen] = useState(true);
+  
   // Payment Link Modal State
   const [showPaymentLinkModal, setShowPaymentLinkModal] = useState(false);
 
