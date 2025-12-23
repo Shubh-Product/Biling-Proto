@@ -4922,71 +4922,71 @@ const Dashboard = () => {
                                 const plans = getDesktopPlans("Subscription", formData.duration);
                                 console.log('getDesktopPlans returned:', plans, 'Number of plans:', plans?.length);
                                 return (
-                                  <div className="grid grid-cols-4 gap-3">
+                                  <div className="grid grid-cols-4 gap-2">
                                     {plans && plans.length > 0 ? plans.map((plan, index) => {
-                                  const quantity = planQuantities[plan.name] || 0;
-                                  return (
-                                    <div 
-                                      key={plan.name} 
-                                      className={`relative border rounded-lg p-3 transition-all bg-white ${
-                                        quantity > 0
-                                          ? "border-blue-500 shadow-md" 
-                                          : "border-gray-300"
-                                      }`}
-                                    >
-                                      {/* Plan Name */}
-                                      <div className="text-sm font-medium text-gray-900 mb-2">
-                                        {plan.name}
-                                      </div>
-                                      
-                                      {/* Price */}
-                                      <div className="mb-8">
-                                        <span className="text-sm font-semibold text-blue-600">
-                                          ₹{plan.price?.toLocaleString('en-IN')}
-                                        </span>
-                                      </div>
+                                      const quantity = planQuantities[plan.name] || 0;
+                                      return (
+                                        <div 
+                                          key={plan.name} 
+                                          className={`relative border-2 rounded-lg p-2 transition-all ${
+                                            quantity > 0
+                                              ? "border-blue-500 bg-blue-50 shadow-md" 
+                                              : "border-gray-200 hover:border-gray-300"
+                                          }`}
+                                        >
+                                          {/* Plan Name */}
+                                          <div className="text-xs font-medium text-gray-900 mb-1 pr-8">
+                                            {plan.name}
+                                          </div>
+                                          
+                                          {/* Price */}
+                                          <div className="flex flex-col mb-1">
+                                            <span className="text-xs font-bold text-blue-600">
+                                              ₹{plan.price?.toLocaleString('en-IN') || 'Contact'}
+                                            </span>
+                                          </div>
 
-                                      {/* Quantity Counter - Bottom Right */}
-                                      <div className="absolute bottom-2 right-2 flex items-center border border-gray-300 rounded">
-                                        <button
-                                          type="button"
-                                          onClick={() => {
-                                            if (quantity > 0) {
-                                              const newQuantities = { ...planQuantities, [plan.name]: quantity - 1 };
-                                              setPlanQuantities(newQuantities);
-                                              if (quantity - 1 === 0 && formData.planName === plan.name) {
-                                                setFormData(prev => ({ ...prev, planName: "" }));
-                                              }
-                                            }
-                                          }}
-                                          className="px-2 py-1 text-gray-700 hover:bg-gray-100 text-sm font-bold"
-                                        >
-                                          -
-                                        </button>
-                                        <span className="px-2 py-1 text-sm font-medium text-gray-900 min-w-[24px] text-center border-x border-gray-300">
-                                          {quantity}
-                                        </span>
-                                        <button
-                                          type="button"
-                                          onClick={() => {
-                                            const newQuantities = { ...planQuantities, [plan.name]: quantity + 1 };
-                                            setPlanQuantities(newQuantities);
-                                            if (quantity === 0) {
-                                              setFormData(prev => ({ ...prev, planName: plan.name }));
-                                            }
-                                          }}
-                                          className="px-2 py-1 text-gray-700 hover:bg-gray-100 text-sm font-bold"
-                                        >
-                                          +
-                                        </button>
+                                          {/* Quantity Counter - Bottom Right */}
+                                          <div className="absolute bottom-1.5 right-1.5 flex items-center bg-white rounded border border-gray-300 px-1 py-0.5">
+                                            <button
+                                              type="button"
+                                              onClick={() => {
+                                                if (quantity > 0) {
+                                                  const newQuantities = { ...planQuantities, [plan.name]: quantity - 1 };
+                                                  setPlanQuantities(newQuantities);
+                                                  if (quantity - 1 === 0 && formData.planName === plan.name) {
+                                                    setFormData(prev => ({ ...prev, planName: "" }));
+                                                  }
+                                                }
+                                              }}
+                                              className="text-gray-600 hover:text-red-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
+                                            >
+                                              -
+                                            </button>
+                                            <span className="text-xs font-semibold text-gray-900 min-w-[12px] text-center px-1">
+                                              {quantity}
+                                            </span>
+                                            <button
+                                              type="button"
+                                              onClick={() => {
+                                                const newQuantities = { ...planQuantities, [plan.name]: quantity + 1 };
+                                                setPlanQuantities(newQuantities);
+                                                if (quantity === 0) {
+                                                  setFormData(prev => ({ ...prev, planName: plan.name }));
+                                                }
+                                              }}
+                                              className="text-gray-600 hover:text-green-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
+                                            >
+                                              +
+                                            </button>
+                                          </div>
+                                        </div>
+                                      );
+                                    }) : (
+                                      <div className="text-center text-red-600 p-4">
+                                        No plans available. getDesktopPlans returned: {JSON.stringify(plans)}
                                       </div>
-                                    </div>
-                                  );
-                                }) : (
-                                  <div className="text-center text-red-600 p-4">
-                                    No plans available. getDesktopPlans returned: {JSON.stringify(plans)}
-                                  </div>
-                                )}
+                                    )}
                                   </div>
                                 );
                               })()}
