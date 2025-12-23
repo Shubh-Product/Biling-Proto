@@ -5088,14 +5088,35 @@ const Dashboard = () => {
                                       <span className="text-sm font-semibold text-gray-900">₹{totalBasePrice.toLocaleString('en-IN')}</span>
                                     </div>
 
-                                    <div className="flex justify-between items-center">
-                                      <span className="text-sm text-gray-600">TDS Deduction:</span>
-                                      <span className="text-sm font-medium text-orange-600">₹{tdsAmount.toLocaleString('en-IN')}</span>
+                                    {/* TDS Toggle */}
+                                    <div className="flex justify-between items-center border-t pt-2">
+                                      <span className="text-sm font-medium text-gray-700">Deduct TDS:</span>
+                                      <label className="relative inline-flex items-center cursor-pointer">
+                                        <input
+                                          type="checkbox"
+                                          checked={formData.deductTds}
+                                          onChange={(e) => setFormData(prev => ({ ...prev, deductTds: e.target.checked }))}
+                                          className="sr-only peer"
+                                        />
+                                        <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+                                        <span className="ml-2 text-xs font-medium text-gray-700">
+                                          {formData.deductTds ? 'ON' : 'OFF'}
+                                        </span>
+                                      </label>
                                     </div>
 
+                                    {/* TDS Deduction */}
+                                    {formData.deductTds && (
+                                      <div className="flex justify-between items-center">
+                                        <span className="text-sm font-medium text-gray-700">TDS (10%):</span>
+                                        <span className="text-sm font-semibold text-red-600">-₹{tdsAmount.toLocaleString('en-IN')}</span>
+                                      </div>
+                                    )}
+
+                                    {/* GST */}
                                     <div className="flex justify-between items-center">
-                                      <span className="text-sm text-gray-600">GST (18%):</span>
-                                      <span className="text-sm font-medium text-gray-900">₹{gstAmount.toLocaleString('en-IN')}</span>
+                                      <span className="text-sm font-medium text-gray-700">GST (18%):</span>
+                                      <span className="text-sm font-semibold text-gray-900">₹{gstAmount.toLocaleString('en-IN')}</span>
                                     </div>
 
                                     <div className="flex justify-between items-center pt-2 border-t border-gray-300">
