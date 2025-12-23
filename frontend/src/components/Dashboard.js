@@ -4875,21 +4875,12 @@ const Dashboard = () => {
                             </div>
                           </CardHeader>
                           <CardContent>
-                            <div className="grid grid-cols-4 gap-6">
+                            <div className="grid grid-cols-3 gap-6">
                               <div>
                                 <Label className="text-xs text-gray-500 mb-1">Name</Label>
                                 <Input
                                   value={currentCustomerInfo.name}
                                   onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, name: e.target.value})}
-                                  className="mt-1"
-                                />
-                              </div>
-                              <div>
-                                <Label className="text-xs text-gray-500 mb-1">Email</Label>
-                                <Input
-                                  type="email"
-                                  value={currentCustomerInfo.email}
-                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, email: e.target.value})}
                                   className="mt-1"
                                 />
                               </div>
@@ -4990,21 +4981,12 @@ const Dashboard = () => {
                             </div>
                           </CardHeader>
                           <CardContent>
-                            <div className="grid grid-cols-4 gap-6">
+                            <div className="grid grid-cols-3 gap-6">
                               <div>
                                 <Label className="text-xs text-gray-500 mb-1">Name</Label>
                                 <Input
                                   value={currentCustomerInfo.name}
                                   onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, name: e.target.value})}
-                                  className="mt-1"
-                                />
-                              </div>
-                              <div>
-                                <Label className="text-xs text-gray-500 mb-1">Email</Label>
-                                <Input
-                                  type="email"
-                                  value={currentCustomerInfo.email}
-                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, email: e.target.value})}
                                   className="mt-1"
                                 />
                               </div>
