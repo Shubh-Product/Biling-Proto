@@ -4874,6 +4874,14 @@ const Dashboard = () => {
                       </div>
                     )}
 
+                    {/* Debug logging for troubleshooting */}
+                    {console.log('Renewal Debug:', {
+                      transactionType: formData.transactionType,
+                      serialValidated,
+                      customerValidated,
+                      shouldShowDuration: formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated
+                    })}
+
                     {/* Product & Plan Selection - Show after customer validation in Renewal flow */}
                     {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && (
                       <div className="space-y-6">
