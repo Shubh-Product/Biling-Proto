@@ -4709,14 +4709,23 @@ const Dashboard = () => {
                           
                           <Button 
                             type="button"
-                            onClick={() => {
-                              console.log('Upgrade clicked');
-                              // TODO: Add upgrade functionality
-                            }}
+                            onClick={validateSerialNumber}
                             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2"
-                            disabled={!serialNumber || fetchingSerialDetails}
+                            disabled={!serialNumber || fetchingSerialDetails || serialValidated}
                           >
-                            Upgrade
+                            {fetchingSerialDetails ? (
+                              <>
+                                <div className="loading-spinner mr-2"></div>
+                                Fetching...
+                              </>
+                            ) : serialValidated ? (
+                              <>
+                                <CheckCircle className="w-4 h-4 mr-2 text-green-600" />
+                                Validated
+                              </>
+                            ) : (
+                              'Upgrade'
+                            )}
                           </Button>
                           
                           <Button 
