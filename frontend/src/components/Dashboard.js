@@ -4959,6 +4959,121 @@ const Dashboard = () => {
                       </div>
                     )}
 
+                    {/* Step 2b: Customer & Product Details (Show after Upgrade button validation) */}
+                    {serialValidated && actionType === 'upgrade' && currentCustomerInfo && currentProductInfo && (
+                      <div className="space-y-6">
+                        
+                        {/* Customer Details for Upgrade */}
+                        <Card>
+                          <CardHeader>
+                            <div className="flex items-center justify-between">
+                              <CardTitle className="text-blue-600">Details</CardTitle>
+                              <div className="flex items-center space-x-3">
+                                <div className="px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-lg">
+                                  <span className="text-xs font-medium text-blue-700">{currentProductInfo.type}</span>
+                                </div>
+                                <div className="px-3 py-1.5 bg-purple-50 border border-purple-200 rounded-lg">
+                                  <span className="text-xs font-medium text-purple-700">
+                                    {currentProductInfo.licenseModel === 'Perpetual' ? 'PERP M' : currentProductInfo.licenseModel}
+                                  </span>
+                                </div>
+                                <div className="px-3 py-1.5 bg-indigo-50 border border-indigo-200 rounded-lg">
+                                  <span className="text-xs font-medium text-indigo-700">{currentProductInfo.planName}</span>
+                                </div>
+                                <div className="px-3 py-1.5 bg-orange-50 border border-orange-200 rounded-lg">
+                                  <span className="text-xs font-medium text-orange-700">Valid Till: {currentProductInfo.expiryDate}</span>
+                                </div>
+                                <div className="px-3 py-1.5 bg-green-100 border border-green-200 rounded-lg">
+                                  <span className="text-xs font-medium text-green-800">{currentProductInfo.status}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="grid grid-cols-4 gap-6">
+                              <div>
+                                <Label className="text-xs text-gray-500 mb-1">Name</Label>
+                                <Input
+                                  value={currentCustomerInfo.name}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, name: e.target.value})}
+                                  className="mt-1"
+                                />
+                              </div>
+                              <div>
+                                <Label className="text-xs text-gray-500 mb-1">Email</Label>
+                                <Input
+                                  type="email"
+                                  value={currentCustomerInfo.email}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, email: e.target.value})}
+                                  className="mt-1"
+                                />
+                              </div>
+                              <div>
+                                <Label className="text-xs text-gray-500 mb-1">Mobile</Label>
+                                <Input
+                                  value={currentCustomerInfo.mobile}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, mobile: e.target.value})}
+                                  className="mt-1"
+                                />
+                              </div>
+                              <div>
+                                <Label className="text-xs text-gray-500 mb-1">Company</Label>
+                                <Input
+                                  value={currentCustomerInfo.company}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, company: e.target.value})}
+                                  className="mt-1"
+                                />
+                              </div>
+                            </div>
+                            <div className="grid grid-cols-4 gap-6 mt-4">
+                              <div>
+                                <Label className="text-xs text-gray-500 mb-1">GSTIN</Label>
+                                <Input
+                                  value={currentCustomerInfo.gstin}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, gstin: e.target.value})}
+                                  className="mt-1"
+                                />
+                              </div>
+                              <div>
+                                <Label className="text-xs text-gray-500 mb-1">City</Label>
+                                <Input
+                                  value={currentCustomerInfo.city}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, city: e.target.value})}
+                                  className="mt-1"
+                                />
+                              </div>
+                            </div>
+                          </CardContent>
+                          <div className="px-6 pb-6">
+                            <div className="flex justify-end">
+                              <Button
+                                type="button"
+                                onClick={() => {
+                                  // Set customer validated to true to trigger next sections for UPGRADE
+                                  setCustomerValidated(true);
+                                  // Set product type from current product info
+                                  setFormData(prev => ({
+                                    ...prev,
+                                    productType: currentProductInfo?.type || "Desktop"
+                                  }));
+                                  // Auto-scroll to upgrade product selection section
+                                  setTimeout(() => {
+                                    const nextSection = document.getElementById('upgrade-product-selection-section');
+                                    if (nextSection) {
+                                      nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    }
+                                  }, 100);
+                                }}
+                                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-lg"
+                              >
+                                Save and Continue
+                              </Button>
+                            </div>
+                          </div>
+                        </Card>
+                      </div>
+                    )}
+
                     {/* Debug logging for troubleshooting */}
                     {console.log('Renewal Debug:', {
                       transactionType: formData.transactionType,
