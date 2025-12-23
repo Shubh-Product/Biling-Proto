@@ -1228,6 +1228,9 @@ frontend:
         - working: "NA"
           agent: "main"
           comment: "✅ REMOVED EMAIL FIELD FROM CUSTOMER DETAILS - Removed the email input field from both Renewal and Upgrade flow customer details cards. Changes: 1) Removed Email field with label and input from customer information grid, 2) Updated grid layout from 4 columns (grid-cols-4) to 3 columns (grid-cols-3), 3) Remaining fields now displayed: Name, Mobile, Company in first row; GSTIN, City in second row, 4) Applied consistently to both Renewal flow (actionType === 'renew' at line 4878) and Upgrade flow (actionType === 'upgrade' at line 4981). Customer details form now streamlined with essential fields only. Frontend compiled successfully."
+        - working: "NA"
+          agent: "main"
+          comment: "✅ REMOVED MOBILE FIELD AND DISPLAYED IN HEADER - Moved mobile number from form field to card header with masked format. Changes: 1) **Removed Mobile Field**: Removed Mobile label and input field from customer details form in both Renewal and Upgrade flows, 2) **Updated Grid Layout**: Changed from 3 columns (grid-cols-3) to 2 columns (grid-cols-2) - now showing Name and Company in first row, 3) **Added Mobile to Header**: Displayed masked mobile number next to 'Customer Details' title in format 'Customer Details | 882XXXX941' (shows first 3 and last 3 digits, masks middle with XXXX), 4) **Applied to Both Flows**: Renewal flow (green title, line 4855) and Upgrade flow (blue title, line 4961), 5) **Styling**: Mobile number displayed with gray separator pipe and gray text, maintains visual hierarchy. Mobile number is now prominently displayed in header while form fields are reduced to essential editable fields only. Frontend compiled successfully."
 
   - task: "Implement Three Dots Dropdown Menu in Actions Column"
     implemented: true
