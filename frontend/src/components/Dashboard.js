@@ -4996,6 +4996,121 @@ const Dashboard = () => {
                       </div>
                     )}
 
+                    {/* Order Summary for Renewal - Show when plans are selected */}
+                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && formData.duration && formData.planName && calculateDesktopPricing() && (
+                      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
+                        <h4 id="order-summary-section" className="text-xl font-bold text-blue-900 mb-4">Order Summary</h4>
+                        
+                        <div>
+                          {/* Invoice-Style Table */}
+                          <div className="bg-white rounded-lg border border-gray-300 overflow-hidden">
+                            <table className="w-full">
+                              <thead className="bg-gray-100 border-b border-gray-300">
+                                <tr>
+                                  <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">S.No</th>
+                                  <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">Product</th>
+                                  <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">Duration</th>
+                                  <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">Quantity</th>
+                                  <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Rate</th>
+                                  <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Amount</th>
+                                </tr>
+                              </thead>
+                              <tbody className="divide-y divide-gray-200">
+                                {(() => {
+                                  const lineItems = [];
+                                  let serialNo = 1;
+                                  
+                                  // Generate line items from planQuantities
+                                  if (formData.duration) {
+                                    const plans = getDesktopPlans("Subscription", formData.duration);
+                                    plans.forEach(plan => {
+                                      const quantity = planQuantities[plan.name] || 0;
+                                      if (quantity > 0) {
+                                        const rate = plan.price;
+                                        const amount = rate * quantity;
+                                        lineItems.push(
+                                          <tr key={plan.name} className="hover:bg-gray-50">
+                                            <td className="px-3 py-2 text-sm text-gray-700">{serialNo++}</td>
+                                            <td className="px-3 py-2 text-sm text-gray-900">{plan.name}</td>
+                                            <td className="px-3 py-2 text-sm text-center text-gray-700">{formData.duration} Days</td>
+                                            <td className="px-3 py-2 text-sm text-center text-gray-700">{quantity}</td>
+                                            <td className="px-3 py-2 text-sm text-right text-gray-700">₹{rate.toLocaleString('en-IN')}</td>
+                                            <td className="px-3 py-2 text-sm text-right font-medium text-gray-900">₹{amount.toLocaleString('en-IN')}</td>
+                                          </tr>
+                                        );
+                                      }
+                                    });
+                                  }
+                                  
+                                  if (lineItems.length === 0) {
+                                    return (
+                                      <tr>
+                                        <td colSpan="6" className="px-3 py-4 text-sm text-center text-gray-500 italic">
+                                          Select plans and add quantities to see line items
+                                        </td>
+                                      </tr>
+                                    );
+                                  }
+                                  
+                                  return lineItems;
+                                })()}
+                              </tbody>
+                            </table>
+                            
+                            {/* Summary Section */}
+                            {(() => {
+                              const pricingData = calculateDesktopPricing();
+                              if (!pricingData) return null;
+
+                              return (
+                                <div className="border-t border-gray-300 bg-gray-50 p-4">
+                                  <div className="space-y-2">
+                                    <div className="flex justify-between items-center">
+                                      <span className="text-sm font-semibold text-gray-700">Total:</span>
+                                      <span className="text-sm font-semibold text-gray-900">₹{pricingData.basePrice.toLocaleString('en-IN')}</span>
+                                    </div>
+
+                                    {pricingData.licenseDiscount > 0 && (
+                                      <div className="flex justify-between items-center">
+                                        <span className="text-sm text-gray-600">License Type Discount:</span>
+                                        <span className="text-sm font-medium text-green-600">- ₹{pricingData.discountAmount.toLocaleString('en-IN')}</span>
+                                      </div>
+                                    )}
+
+                                    <div className="flex justify-between items-center">
+                                      <span className="text-sm text-gray-600">TDS Deduction:</span>
+                                      <span className="text-sm font-medium text-orange-600">₹{pricingData.tdsAmount.toLocaleString('en-IN')}</span>
+                                    </div>
+
+                                    <div className="flex justify-between items-center">
+                                      <span className="text-sm text-gray-600">GST (18%):</span>
+                                      <span className="text-sm font-medium text-gray-900">₹{pricingData.gstAmount.toLocaleString('en-IN')}</span>
+                                    </div>
+
+                                    <div className="flex justify-between items-center pt-2 border-t border-gray-300">
+                                      <span className="text-base font-bold text-gray-900">Grand Total:</span>
+                                      <span className="text-base font-bold text-blue-600">₹{pricingData.finalAmount.toLocaleString('en-IN')}</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            })()}
+                          </div>
+                        </div>
+
+                        {/* Send Payment Link Button */}
+                        <div className="flex justify-end mt-6">
+                          <Button
+                            type="button"
+                            onClick={handleSendPaymentLink}
+                            className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg text-lg font-semibold"
+                          >
+                            Send Payment Link
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+
                     {/* Step 4a: Renew Same Plan Flow */}
                     {serialValidated && renewalOption === 'renew' && (
                       <div className="space-y-6">
