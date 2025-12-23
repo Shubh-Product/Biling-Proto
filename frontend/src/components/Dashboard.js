@@ -5343,114 +5343,223 @@ const Dashboard = () => {
                       </div>
                     )}
 
-                    {/* Upgrade Flow - Product & Plan Selection (Show after customer validation for Upgrade button ONLY) */}
+                    {/* Upgrade Flow - Complete Product Selection (Show after customer validation for Upgrade button ONLY) */}
+                    {/* This mirrors the exact same flow as renewalOption === 'upgrade' */}
                     {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'upgrade' && (
                       <div className="space-y-6">
                         
-                        {/* Duration Selection for Upgrade */}
-                        <div id="upgrade-product-selection-section" className="flex items-center space-x-6">
-                          <Label className="text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
-                          <div className="flex space-x-3">
-                            {["360", "180", "90"].map((duration) => (
-                              <label key={duration} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all ${
-                                formData.duration === duration 
-                                  ? "border-blue-500 bg-blue-50" 
-                                  : "border-gray-200"
-                              }`}>
-                                <input
-                                  type="radio"
-                                  name="duration"
-                                  value={duration}
-                                  checked={formData.duration === duration}
-                                  onChange={(e) => setFormData(prev => ({ ...prev, duration: e.target.value }))}
-                                  className="w-4 h-4 text-blue-600 mr-3"
-                                />
-                                <span className="text-gray-700 font-medium">{duration} Days</span>
-                              </label>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Continue with the rest of the upgrade flow after duration selection */}
-                        {formData.duration && (
-                          <div className="space-y-6">
-                            {/* Desktop Plans Display - 4 Column Grid with Quantity Controls for Upgrade */}
-                            <div data-scroll-target="upgrade-desktop-plans" className="space-y-2">
-                              <Label className="text-base font-semibold">Plans <span className="text-red-500">*</span>:</Label>
-                              {(() => {
-                                const plans = getDesktopPlans("Subscription", formData.duration);
-                                return (
-                                  <div className="grid grid-cols-4 gap-2">
-                                    {plans && plans.length > 0 ? plans.map((plan, index) => {
-                                      const quantity = planQuantities[plan.name] || 0;
-                                      return (
-                                        <div 
-                                          key={plan.name} 
-                                          className={`relative border-2 rounded-lg p-2 transition-all ${
-                                            quantity > 0
-                                              ? "border-blue-500 bg-blue-50 shadow-md" 
-                                              : "border-gray-200 hover:border-gray-300"
-                                          }`}
-                                        >
-                                          {/* Plan Name */}
-                                          <div className="text-xs font-medium text-gray-900 mb-1 pr-8">
-                                            {plan.name}
-                                          </div>
-                                          
-                                          {/* Price */}
-                                          <div className="flex flex-col mb-1">
-                                            <span className="text-xs font-bold text-blue-600">
-                                              ₹{plan.price?.toLocaleString('en-IN') || 'Contact'}
-                                            </span>
-                                          </div>
-
-                                          {/* Quantity Counter - Bottom Right */}
-                                          <div className="absolute bottom-1.5 right-1.5 flex items-center bg-white rounded border border-gray-300 px-1 py-0.5">
-                                            <button
-                                              type="button"
-                                              onClick={() => {
-                                                if (quantity > 0) {
-                                                  const newQuantities = { ...planQuantities, [plan.name]: quantity - 1 };
-                                                  setPlanQuantities(newQuantities);
-                                                  if (quantity - 1 === 0 && formData.planName === plan.name) {
-                                                    setFormData(prev => ({ ...prev, planName: "" }));
-                                                  }
-                                                }
-                                              }}
-                                              className="text-gray-600 hover:text-red-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
-                                            >
-                                              -
-                                            </button>
-                                            <span className="text-xs font-semibold text-gray-900 min-w-[12px] text-center px-1">
-                                              {quantity}
-                                            </span>
-                                            <button
-                                              type="button"
-                                              onClick={() => {
-                                                const newQuantities = { ...planQuantities, [plan.name]: quantity + 1 };
-                                                setPlanQuantities(newQuantities);
-                                                if (quantity === 0) {
-                                                  setFormData(prev => ({ ...prev, planName: plan.name }));
-                                                }
-                                              }}
-                                              className="text-gray-600 hover:text-green-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
-                                            >
-                                              +
-                                            </button>
-                                          </div>
-                                        </div>
-                                      );
-                                    }) : (
-                                      <div className="text-center text-red-600 p-4">
-                                        No plans available for upgrade.
-                                      </div>
-                                    )}
-                                  </div>
-                                );
-                              })()}
+                        {/* Product Selection - Exactly Same as renewalOption Upgrade Flow */}
+                        <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-6">
+                          <h3 id="upgrade-product-selection-section" className="text-lg font-semibold text-indigo-900 mb-4">Choose Upgrade Product & Plan</h3>
+                          
+                          {/* Product Selection - Desktop, Mandi, Online, App, Recom */}
+                          <div className="flex items-center space-x-6">
+                            <Label className="text-base font-semibold whitespace-nowrap">Product <span className="text-red-500">*</span>:</Label>
+                            <div className="flex space-x-3">
+                              {[
+                                { value: "Desktop", label: "Desktop" },
+                                { value: "Mandi", label: "Mandi" },
+                                { value: "Online", label: "Online" },
+                                { value: "App", label: "App" },
+                                { value: "Recom", label: "Recom" }
+                              ].map((product) => (
+                                <label key={product.value} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all w-32 ${
+                                  formData.productType === product.value 
+                                    ? "border-indigo-500 bg-indigo-50" 
+                                    : "border-gray-200"
+                                }`}>
+                                  <input
+                                    type="radio"
+                                    name="productType"
+                                    value={product.value}
+                                    checked={formData.productType === product.value}
+                                    onChange={(e) => setFormData(prev => ({ 
+                                      ...prev, 
+                                      productType: e.target.value,
+                                      licenseModel: "",
+                                      duration: "",
+                                      accessType: "",
+                                      userCount: "",
+                                      companyCount: "",
+                                      planName: ""
+                                    }))}
+                                    className="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500 mr-3"
+                                  />
+                                  <span className="text-gray-700 font-medium text-sm">{product.label}</span>
+                                </label>
+                              ))}
                             </div>
                           </div>
-                        )}
+
+                          {/* Desktop Product Configuration */}
+                          {formData.productType === "Desktop" && (
+                            <div className="space-y-4 mt-4">
+                              {/* License Model and Duration Selection - Combined in same line */}
+                              <div className="flex items-center space-x-8">
+                                <div className="flex items-center space-x-3">
+                                  <Label className="text-base font-semibold whitespace-nowrap">License Model <span className="text-red-500">*</span>:</Label>
+                                  <div className="flex space-x-2">
+                                    {[
+                                      { value: "Perpetual", label: "Perpetual" },
+                                      { value: "Subscription", label: "Subscription" }
+                                    ].map((model) => (
+                                      <label key={model.value} className={`flex items-center cursor-pointer p-2 border-2 rounded-lg hover:shadow-md transition-all w-28 ${
+                                        formData.licenseModel === model.value 
+                                          ? "border-green-500 bg-green-50" 
+                                          : "border-gray-200"
+                                      }`}>
+                                        <input
+                                          type="checkbox"
+                                          name="licenseModel"
+                                          value={model.value}
+                                          checked={formData.licenseModel === model.value}
+                                          onChange={(e) => setFormData(prev => ({ 
+                                            ...prev, 
+                                            licenseModel: e.target.checked ? model.value : "",
+                                            duration: "",
+                                            planName: ""
+                                          }))}
+                                          className="w-4 h-4 text-green-600 border-gray-300 focus:ring-green-500 mr-2"
+                                        />
+                                        <span className="text-gray-700 font-medium text-xs">{model.label}</span>
+                                      </label>
+                                    ))}
+                                  </div>
+                                </div>
+
+                                {/* Duration Selection for Desktop */}
+                                {formData.licenseModel && (
+                                  <div className="flex items-center space-x-3">
+                                    <Label className="text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                                    <div className="flex space-x-2">
+                                      {[
+                                        { value: "360 Days", label: "360 Days" },
+                                        { value: "1080 Days", label: "1080 Days" }
+                                      ].map((duration) => (
+                                        <label key={duration.value} className={`flex items-center cursor-pointer p-2 border-2 rounded-lg hover:shadow-md transition-all w-32 ${
+                                          formData.duration === duration.value.split(' ')[0] 
+                                            ? "border-orange-500 bg-orange-50" 
+                                            : "border-gray-200"
+                                        }`}>
+                                          <input
+                                            type="checkbox"
+                                            name="duration"
+                                            value={duration.value.split(' ')[0]}
+                                            checked={formData.duration === duration.value.split(' ')[0]}
+                                            onChange={(e) => {
+                                              const newDuration = e.target.checked ? duration.value.split(' ')[0] : "";
+                                              setFormData(prev => ({ 
+                                                ...prev, 
+                                                duration: newDuration,
+                                                planName: ""
+                                              }));
+                                              // Reset plan quantities when duration changes
+                                              if (newDuration !== formData.duration) {
+                                                setPlanQuantities({});
+                                              }
+                                            }}
+                                            className="w-4 h-4 text-orange-600 border-gray-300 focus:ring-orange-500 mr-2"
+                                          />
+                                          <div className="flex flex-col">
+                                            <span className="text-gray-700 font-medium text-xs">{duration.label}</span>
+                                            {duration.value === "1080 Days" && (
+                                              <span className="text-xs text-green-600 font-semibold">
+                                                20% OFF
+                                              </span>
+                                            )}
+                                          </div>
+                                        </label>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+
+                              {/* Desktop Plan Selection - 4 Column Grid with Quantity */}
+                              {formData.licenseModel && formData.duration && (
+                                <div className="space-y-2">
+                                  <Label className="text-base font-semibold">Plans <span className="text-red-500">*</span>:</Label>
+                                  {(() => {
+                                    const plans = getDesktopPlans(formData.licenseModel, formData.duration);
+                                    return (
+                                      <div className="grid grid-cols-4 gap-2">
+                                        {plans && plans.length > 0 ? plans.map((plan) => {
+                                          const quantity = planQuantities[plan.name] || 0;
+                                          return (
+                                            <div 
+                                              key={plan.name} 
+                                              className={`relative border-2 rounded-lg p-2 transition-all ${
+                                                quantity > 0
+                                                  ? "border-indigo-500 bg-indigo-50 shadow-md" 
+                                                  : "border-gray-200 hover:border-gray-300"
+                                              }`}
+                                            >
+                                              <div className="text-xs font-medium text-gray-900 mb-1 pr-8">
+                                                {plan.name}
+                                              </div>
+                                              <div className="flex flex-col mb-1">
+                                                <span className="text-xs font-bold text-indigo-600">
+                                                  ₹{plan.price?.toLocaleString('en-IN') || 'Contact'}
+                                                </span>
+                                              </div>
+                                              <div className="absolute bottom-1.5 right-1.5 flex items-center bg-white rounded border border-gray-300 px-1 py-0.5">
+                                                <button
+                                                  type="button"
+                                                  onClick={() => {
+                                                    if (quantity > 0) {
+                                                      const newQuantities = { ...planQuantities, [plan.name]: quantity - 1 };
+                                                      setPlanQuantities(newQuantities);
+                                                      if (quantity - 1 === 0 && formData.planName === plan.name) {
+                                                        setFormData(prev => ({ ...prev, planName: "" }));
+                                                      }
+                                                    }
+                                                  }}
+                                                  className="text-gray-600 hover:text-red-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
+                                                >
+                                                  -
+                                                </button>
+                                                <span className="text-xs font-semibold text-gray-900 min-w-[12px] text-center px-1">
+                                                  {quantity}
+                                                </span>
+                                                <button
+                                                  type="button"
+                                                  onClick={() => {
+                                                    const newQuantities = { ...planQuantities, [plan.name]: quantity + 1 };
+                                                    setPlanQuantities(newQuantities);
+                                                    if (quantity === 0) {
+                                                      setFormData(prev => ({ ...prev, planName: plan.name }));
+                                                    }
+                                                  }}
+                                                  className="text-gray-600 hover:text-green-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
+                                                >
+                                                  +
+                                                </button>
+                                              </div>
+                                            </div>
+                                          );
+                                        }) : (
+                                          <div className="col-span-4 text-center text-red-600 p-4">
+                                            No plans available for upgrade.
+                                          </div>
+                                        )}
+                                      </div>
+                                    );
+                                  })()}
+                                </div>
+                              )}
+                            </div>
+                          )}
+
+                          {/* Add other product types (Mandi, Online, App, Recom) configurations as needed */}
+                          {/* For now, showing placeholder for non-Desktop products */}
+                          {formData.productType && formData.productType !== "Desktop" && (
+                            <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                              <p className="text-yellow-800 text-sm">
+                                {formData.productType} product configuration coming soon. Please select Desktop for now.
+                              </p>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     )}
 
