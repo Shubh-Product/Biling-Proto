@@ -4958,7 +4958,15 @@ const Dashboard = () => {
                         <Card>
                           <CardHeader>
                             <div className="flex items-center justify-between">
-                              <CardTitle className="text-blue-600">Details</CardTitle>
+                              <CardTitle className="text-blue-600 flex items-center">
+                                Customer Details 
+                                <span className="mx-3 text-gray-400">|</span>
+                                <span className="text-gray-700 font-normal text-base">
+                                  {currentCustomerInfo.mobile ? 
+                                    `${currentCustomerInfo.mobile.substring(0, 3)}XXXX${currentCustomerInfo.mobile.substring(currentCustomerInfo.mobile.length - 3)}` 
+                                    : 'No Mobile'}
+                                </span>
+                              </CardTitle>
                               <div className="flex items-center space-x-3">
                                 <div className="px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-lg">
                                   <span className="text-xs font-medium text-blue-700">{currentProductInfo.type}</span>
@@ -4981,20 +4989,12 @@ const Dashboard = () => {
                             </div>
                           </CardHeader>
                           <CardContent>
-                            <div className="grid grid-cols-3 gap-6">
+                            <div className="grid grid-cols-2 gap-6">
                               <div>
                                 <Label className="text-xs text-gray-500 mb-1">Name</Label>
                                 <Input
                                   value={currentCustomerInfo.name}
                                   onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, name: e.target.value})}
-                                  className="mt-1"
-                                />
-                              </div>
-                              <div>
-                                <Label className="text-xs text-gray-500 mb-1">Mobile</Label>
-                                <Input
-                                  value={currentCustomerInfo.mobile}
-                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, mobile: e.target.value})}
                                   className="mt-1"
                                 />
                               </div>
