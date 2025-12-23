@@ -4883,7 +4883,7 @@ const Dashboard = () => {
                             </div>
                           </CardHeader>
                           <CardContent>
-                            <div className="grid grid-cols-2 gap-6">
+                            <div className="grid grid-cols-4 gap-6">
                               <div>
                                 <Label className="text-xs text-gray-500 mb-1">Name</Label>
                                 <Input
@@ -4900,8 +4900,6 @@ const Dashboard = () => {
                                   className="mt-1"
                                 />
                               </div>
-                            </div>
-                            <div className="grid grid-cols-4 gap-6 mt-4">
                               <div>
                                 <Label className="text-xs text-gray-500 mb-1">GSTIN</Label>
                                 <Input
@@ -4989,7 +4987,7 @@ const Dashboard = () => {
                             </div>
                           </CardHeader>
                           <CardContent>
-                            <div className="grid grid-cols-2 gap-6">
+                            <div className="grid grid-cols-4 gap-6">
                               <div>
                                 <Label className="text-xs text-gray-500 mb-1">Name</Label>
                                 <Input
@@ -5006,8 +5004,6 @@ const Dashboard = () => {
                                   className="mt-1"
                                 />
                               </div>
-                            </div>
-                            <div className="grid grid-cols-4 gap-6 mt-4">
                               <div>
                                 <Label className="text-xs text-gray-500 mb-1">GSTIN</Label>
                                 <Input
