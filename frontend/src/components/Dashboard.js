@@ -5081,8 +5081,8 @@ const Dashboard = () => {
                       </div>
                     )}
 
-                    {/* Order Summary for Renewal - Show when plans are selected */}
-                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && formData.duration && Object.values(planQuantities).some(qty => qty > 0) && (
+                    {/* Order Summary for Renewal - Show when plans are selected (Renewal flow ONLY) */}
+                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'renew' && formData.duration && Object.values(planQuantities).some(qty => qty > 0) && (
                       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
                         <h4 id="order-summary-section" className="text-xl font-bold text-blue-900 mb-4">Order Summary</h4>
                         
