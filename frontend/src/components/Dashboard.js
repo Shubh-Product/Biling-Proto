@@ -4764,16 +4764,16 @@ const Dashboard = () => {
                           />
                           <Button 
                             type="button"
-                            onClick={validateSerialNumber}
+                            onClick={validateSerialNumberForRenewal}
                             className="bg-green-600 hover:bg-green-700 text-white px-4 py-2"
                             disabled={!serialNumber || fetchingSerialDetails || serialValidated}
                           >
-                            {fetchingSerialDetails ? (
+                            {fetchingSerialDetails && actionType === 'renew' ? (
                               <>
                                 <div className="loading-spinner mr-2"></div>
                                 Fetching...
                               </>
-                            ) : serialValidated ? (
+                            ) : (serialValidated && actionType === 'renew') ? (
                               <>
                                 <CheckCircle className="w-4 h-4 mr-2 text-green-600" />
                                 Validated
@@ -4785,16 +4785,16 @@ const Dashboard = () => {
                           
                           <Button 
                             type="button"
-                            onClick={validateSerialNumber}
+                            onClick={validateSerialNumberForUpgrade}
                             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2"
                             disabled={!serialNumber || fetchingSerialDetails || serialValidated}
                           >
-                            {fetchingSerialDetails ? (
+                            {fetchingSerialDetails && actionType === 'upgrade' ? (
                               <>
                                 <div className="loading-spinner mr-2"></div>
                                 Fetching...
                               </>
-                            ) : serialValidated ? (
+                            ) : (serialValidated && actionType === 'upgrade') ? (
                               <>
                                 <CheckCircle className="w-4 h-4 mr-2 text-green-600" />
                                 Validated
