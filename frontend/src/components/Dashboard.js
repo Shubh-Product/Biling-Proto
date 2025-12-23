@@ -4845,7 +4845,7 @@ const Dashboard = () => {
                     </div>
 
                     {/* Step 2: Customer & Product Details (Show after successful validation) */}
-                    {serialValidated && currentCustomerInfo && currentProductInfo && (
+                    {serialValidated && actionType === 'renew' && currentCustomerInfo && currentProductInfo && (
                       <div className="space-y-6">
                         
                         {/* Customer Details */}
