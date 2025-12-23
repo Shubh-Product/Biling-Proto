@@ -5151,7 +5151,7 @@ const Dashboard = () => {
                         {formData.duration && (
                           <div className="space-y-6">
                             {console.log('About to render plans. Calling getDesktopPlans with:', currentProductInfo?.licenseModel || "Perpetual", formData.duration)}
-                            {/* Desktop Plans Display - 4 Column Grid WITHOUT Quantity Controls (Renewal Flow) */}
+                            {/* Desktop Plans Display - 4 Column Grid WITHOUT Quantity Controls (Renewal Flow) - Clickable */}
                             <div data-scroll-target="desktop-plans" className="space-y-2">
                               <Label className="text-base font-semibold">Plans <span className="text-red-500">*</span>:</Label>
                               {(() => {
@@ -5161,25 +5161,48 @@ const Dashboard = () => {
                                   <div className="grid grid-cols-4 gap-2">
                                     {plans && plans.length > 0 ? plans.map((plan, index) => {
                                       const isFirstPlan = index === 0; // First plan is the "Same Plan"
+                                      const isSelected = formData.planName === plan.name;
                                       return (
                                         <div 
-                                          key={plan.name} 
-                                          className={`relative border-2 rounded-lg p-2 transition-all ${
-                                            isFirstPlan
-                                              ? "border-green-500 bg-green-50 shadow-md" 
-                                              : "border-gray-200 hover:border-gray-300"
+                                          key={plan.name}
+                                          onClick={() => {
+                                            // Set the selected plan
+                                            setFormData(prev => ({ ...prev, planName: plan.name }));
+                                            // Set quantity to 1 for the selected plan
+                                            setPlanQuantities({ [plan.name]: 1 });
+                                            // Auto-scroll to order summary
+                                            setTimeout(() => {
+                                              const orderSummary = document.getElementById('renewal-order-summary-section');
+                                              if (orderSummary) {
+                                                orderSummary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                              }
+                                            }, 100);
+                                          }}
+                                          className={`relative border-2 rounded-lg p-2 transition-all cursor-pointer ${
+                                            isSelected
+                                              ? "border-blue-500 bg-blue-50 shadow-lg ring-2 ring-blue-300" 
+                                              : isFirstPlan
+                                              ? "border-green-500 bg-green-50 shadow-md hover:shadow-lg" 
+                                              : "border-gray-200 hover:border-blue-300 hover:shadow-md"
                                           }`}
                                         >
                                           {/* Same Plan Indicator - Only for First Plan */}
-                                          {isFirstPlan && (
+                                          {isFirstPlan && !isSelected && (
                                             <div className="absolute -top-2 -right-2 bg-green-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md">
                                               Same Plan
                                             </div>
                                           )}
                                           
+                                          {/* Selected Indicator */}
+                                          {isSelected && (
+                                            <div className="absolute -top-2 -right-2 bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md">
+                                              Selected
+                                            </div>
+                                          )}
+                                          
                                           {/* Plan Name */}
                                           <div className={`text-xs font-medium mb-1 ${
-                                            isFirstPlan ? "text-green-900" : "text-gray-900"
+                                            isSelected ? "text-blue-900" : isFirstPlan ? "text-green-900" : "text-gray-900"
                                           }`}>
                                             {plan.name}
                                           </div>
@@ -5187,7 +5210,7 @@ const Dashboard = () => {
                                           {/* Price */}
                                           <div className="flex flex-col mb-1">
                                             <span className={`text-xs font-bold ${
-                                              isFirstPlan ? "text-green-700" : "text-blue-600"
+                                              isSelected ? "text-blue-700" : isFirstPlan ? "text-green-700" : "text-blue-600"
                                             }`}>
                                               ₹{plan.price?.toLocaleString('en-IN') || 'Contact'}
                                             </span>
