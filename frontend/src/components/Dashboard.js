@@ -5186,16 +5186,16 @@ const Dashboard = () => {
                                               : "border-gray-200 hover:border-blue-300 hover:shadow-md"
                                           }`}
                                         >
-                                          {/* Same Plan Indicator - Only for First Plan */}
-                                          {isFirstPlan && !isSelected && (
-                                            <div className="absolute -top-2 -right-2 bg-green-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md">
+                                          {/* Same Plan Indicator - ALWAYS visible on first plan */}
+                                          {isFirstPlan && (
+                                            <div className="absolute -top-2 -right-2 bg-green-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md z-10">
                                               Same Plan
                                             </div>
                                           )}
                                           
-                                          {/* Selected Indicator */}
-                                          {isSelected && (
-                                            <div className="absolute -top-2 -right-2 bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md">
+                                          {/* Selected Indicator - Shows on selected plan if NOT first plan */}
+                                          {isSelected && !isFirstPlan && (
+                                            <div className="absolute -top-2 -left-2 bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md z-10">
                                               Selected
                                             </div>
                                           )}
