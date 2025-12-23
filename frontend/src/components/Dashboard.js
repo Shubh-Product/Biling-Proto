@@ -4873,80 +4873,34 @@ const Dashboard = () => {
                     {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && (
                       <div className="space-y-6">
                         
-                        {/* Product Selection */}
+                        {/* Duration Selection - Show directly without Product selection */}
                         <div id="product-selection-section" className="flex items-center space-x-6">
+                          <Label className="text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
                           <div className="flex space-x-3">
-                            {[
-                              { value: "Desktop", label: "Desktop" },
-                              { value: "Mandi", label: "Mandi" },
-                              { value: "Online", label: "Online" },
-                              { value: "App", label: "App" },
-                              { value: "Recom", label: "Recom" }
-                            ].map((product) => (
-                              <label key={product.value} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all w-32 ${
-                                formData.productType === product.value 
+                            {["360", "180", "90"].map((duration) => (
+                              <label key={duration} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all ${
+                                formData.duration === duration 
                                   ? "border-blue-500 bg-blue-50" 
                                   : "border-gray-200"
                               }`}>
                                 <input
                                   type="radio"
-                                  name="productType"
-                                  value={product.value}
-                                  checked={formData.productType === product.value}
-                                  onChange={(e) => {
-                                    setFormData(prev => ({ 
-                                      ...prev, 
-                                      productType: e.target.value,
-                                      licenseModel: "",
-                                      duration: "",
-                                      accessType: "",
-                                      userCount: "",
-                                      companyCount: "",
-                                      planName: ""
-                                    }));
-                                    setPlanQuantities({});
-                                  }}
-                                  className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 mr-3"
+                                  name="duration"
+                                  value={duration}
+                                  checked={formData.duration === duration}
+                                  onChange={(e) => setFormData(prev => ({ ...prev, duration: e.target.value }))}
+                                  className="w-4 h-4 text-blue-600 mr-3"
                                 />
-                                <span className="text-gray-700 font-medium text-sm">{product.label}</span>
+                                <span className="text-gray-700 font-medium">{duration} Days</span>
                               </label>
                             ))}
                           </div>
                         </div>
 
-                        {/* Rest of product configuration - Duration, License Type, Plans etc. */}
-                        {formData.productType && (
-                          <div className="space-y-6">
-                            {/* Duration Selection */}
-                            <div className="flex items-center space-x-6">
-                              <Label className="text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
-                              <div className="flex space-x-3">
-                                {["360", "180", "90"].map((duration) => (
-                                  <label key={duration} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all ${
-                                    formData.duration === duration 
-                                      ? "border-blue-500 bg-blue-50" 
-                                      : "border-gray-200"
-                                  }`}>
-                                    <input
-                                      type="radio"
-                                      name="duration"
-                                      value={duration}
-                                      checked={formData.duration === duration}
-                                      onChange={(e) => setFormData(prev => ({ ...prev, duration: e.target.value }))}
-                                      className="w-4 h-4 text-blue-600 mr-3"
-                                    />
-                                    <span className="text-gray-700 font-medium">{duration} Days</span>
-                                  </label>
-                                ))}
-                              </div>
-                            </div>
-
-                            {/* Continue with the rest of the New Sales flow sections */}
-                            {formData.duration && (
-                              <div className="text-center text-gray-600 text-sm">
-                                Select plan options below...
-                              </div>
-                            )}
+                        {/* Continue with the rest of the flow after duration selection */}
+                        {formData.duration && (
+                          <div className="text-center text-gray-600 text-sm">
+                            Select plan options below...
                           </div>
                         )}
                       </div>
