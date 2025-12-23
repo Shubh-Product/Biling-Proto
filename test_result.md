@@ -1208,6 +1208,18 @@ agent_communication:
       message: "✅ DISTINCT ACTION HANDLING FOR RENEWAL AND UPGRADE BUTTONS COMPLETED - Ensured complete separation between Renewal and Upgrade flows. Key changes: 1) Added `actionType === 'renew'` check to Product & Plan Selection section (line 4971) - now only shows for Renewal flow, 2) Added `actionType === 'renew'` check to Order Summary section (line 5085) - now only shows for Renewal flow, 3) Created separate Customer Details card for Upgrade flow (after line 4960) with actionType === 'upgrade' check, 4) Created separate Product Selection section for Upgrade flow with actionType === 'upgrade' check including duration selection and plan grid, 5) Created separate Order Summary for Upgrade flow with distinct styling (indigo/purple theme vs blue for renewal), 6) Each flow now has completely independent execution paths with no overlap or shared sections. Renewal button triggers ONLY renewal-specific flow sections, Upgrade button triggers ONLY upgrade-specific flow sections. Validated complete separation with proper state management using actionType variable."
 
 frontend:
+  - task: "Distinct Action Handling for Renewal and Upgrade Buttons"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "✅ Successfully ensured distinct action handling for Renewal and Upgrade buttons with complete flow separation. Renewal button: Added actionType === 'renew' checks to Product & Plan Selection (line 4971) and Order Summary (line 5085) sections to ensure they ONLY show for renewal flow. Upgrade button: Created completely separate flow including dedicated Customer Details card with actionType === 'upgrade' check, separate Product Selection section with duration and plan grid, and separate Order Summary with distinct indigo/purple theme. Each button now has independent execution path with no overlap. Renewal flow uses blue theme and shows renewal-specific pricing/benefits. Upgrade flow uses indigo/purple theme and shows upgrade-specific product selection. Validated complete separation - clicking Renewal button will NOT trigger any upgrade flow sections, clicking Upgrade button will NOT trigger any renewal flow sections. Frontend compiled successfully."
+
   - task: "Implement Three Dots Dropdown Menu in Actions Column"
     implemented: true
     working: "YES"
