@@ -9923,7 +9923,9 @@ const Dashboard = () => {
                         {(() => {
                           // Calculate totals
                           let subtotal = 0;
-                          if (formData.productType === "Desktop" && formData.duration) {
+                          if ((formData.productType === "Desktop" || formData.productType === "Mandi" || 
+                               formData.productType === "Online" || formData.productType === "App" || 
+                               formData.productType === "Recom") && formData.duration) {
                             const plans = getDesktopPlans(formData.licenseModel, formData.duration);
                             plans.forEach(plan => {
                               const quantity = planQuantities[plan.name] || 0;
