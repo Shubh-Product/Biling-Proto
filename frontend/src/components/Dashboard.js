@@ -9182,13 +9182,20 @@ const Dashboard = () => {
                           </div>
                         </div>
 
-                        {/* Mandi Plans Display - Only Saffron and Emerald */}
+                        {/* Mandi Plans Display - Only Saffron and Emerald with User Types */}
                         {formData.duration && (
                           <div data-scroll-target="mandi-plans" className="space-y-2">
                             <Label className="text-base font-semibold">Plans <span className="text-red-500">*</span>:</Label>
-                            <div className="grid grid-cols-4 gap-2">
+                            <div className="grid grid-cols-3 gap-2">
                               {getDesktopPlans(formData.licenseModel, formData.duration)
-                                .filter(plan => plan.name === "Saffron" || plan.name === "Emerald")
+                                .filter(plan => {
+                                  const planName = plan.name.toLowerCase();
+                                  const isSaffronOrEmerald = planName.includes('saffron') || planName.includes('emerald');
+                                  const hasUserType = planName.includes('single user') || 
+                                                     planName.includes('multi user') || 
+                                                     planName.includes('client server');
+                                  return isSaffronOrEmerald && hasUserType;
+                                })
                                 .map((plan, index) => {
                                 const quantity = planQuantities[plan.name] || 0;
                                 return (
