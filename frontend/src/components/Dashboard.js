@@ -9399,18 +9399,18 @@ const Dashboard = () => {
                       <div className="space-y-4">
                         {/* All fields in single row */}
                         <div className="flex items-center space-x-6">
-                          {/* User Count (Mandatory) - Text box with numeric input only */}
+                          {/* User Count (Mandatory) - Simple text box */}
                           <div className="flex items-center space-x-2">
                             <Label className="text-base font-semibold whitespace-nowrap">User Count <span className="text-red-500">*</span>:</Label>
                             <Input
-                              type="number"
-                              min="1"
+                              type="text"
                               value={onlineUserCount}
                               onChange={(e) => {
-                                const value = parseInt(e.target.value) || 1;
-                                setOnlineUserCount(value);
+                                const value = e.target.value.replace(/\D/g, ''); // Only allow digits
+                                const numValue = parseInt(value) || 1;
+                                setOnlineUserCount(numValue);
                                 // Auto-update company count to match user count
-                                setOnlineCompanyCount(value);
+                                setOnlineCompanyCount(numValue);
                               }}
                               className="w-20 px-3 py-2 border-2 border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             />
