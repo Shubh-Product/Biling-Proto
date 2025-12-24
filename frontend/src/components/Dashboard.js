@@ -10090,9 +10090,25 @@ const Dashboard = () => {
                         {(() => {
                           // Calculate totals
                           let subtotal = 0;
-                          if ((formData.productType === "Desktop" || formData.productType === "Mandi" || 
-                               formData.productType === "Online" || formData.productType === "App" || 
-                               formData.productType === "Recom") && formData.duration) {
+                          let discountAmount = 0;
+                          let tdsAmount = 0;
+                          let gstAmount = 0;
+                          let grandTotal = 0;
+                          
+                          // For Online product, use calculateOnlinePricing
+                          if (formData.productType === "Online" && onlineDatabaseType && formData.duration) {
+                            const pricing = calculateOnlinePricing();
+                            if (pricing) {
+                              subtotal = pricing.basePrice;
+                              discountAmount = pricing.discountAmount;
+                              tdsAmount = pricing.tdsAmount;
+                              gstAmount = pricing.taxAmount;
+                              grandTotal = pricing.finalAmount;
+                            }
+                          }
+                          // For Desktop, Mandi, App, Recom with plan quantities
+                          else if ((formData.productType === "Desktop" || formData.productType === "Mandi" || 
+                               formData.productType === "App" || formData.productType === "Recom") && formData.duration) {
                             const plans = getDesktopPlans(formData.licenseModel, formData.duration);
                             plans.forEach(plan => {
                               const quantity = planQuantities[plan.name] || 0;
@@ -10100,20 +10116,20 @@ const Dashboard = () => {
                                 subtotal += plan.price * quantity;
                               }
                             });
+                            
+                            // Calculate discount if applicable
+                            const licenseDiscount = getDiscountByLicenseType(formData.licenseType);
+                            discountAmount = Math.round((subtotal * licenseDiscount) / 100);
+                            const afterDiscount = subtotal - discountAmount;
+                            
+                            // Calculate TDS if enabled
+                            tdsAmount = formData.deductTds ? Math.round(afterDiscount * 0.1) : 0;
+                            const afterTds = afterDiscount - tdsAmount;
+                            
+                            // Calculate GST
+                            gstAmount = Math.round(afterTds * 0.18);
+                            grandTotal = afterTds + gstAmount;
                           }
-                          
-                          // Calculate discount if applicable
-                          const licenseDiscount = getDiscountByLicenseType(formData.licenseType);
-                          const discountAmount = Math.round((subtotal * licenseDiscount) / 100);
-                          const afterDiscount = subtotal - discountAmount;
-                          
-                          // Calculate TDS if enabled
-                          const tdsAmount = formData.deductTds ? Math.round(afterDiscount * 0.1) : 0;
-                          const afterTds = afterDiscount - tdsAmount;
-                          
-                          // Calculate GST
-                          const gstAmount = Math.round(afterTds * 0.18);
-                          const grandTotal = afterTds + gstAmount;
                           
                           // Only show summary if there are line items
                           if (subtotal === 0) return null;
