@@ -10302,8 +10302,20 @@ const Dashboard = () => {
                       type="submit" 
                       disabled={submitting || (() => {
                         // Check if final amount is 0 to disable Send Payment Link
-                        if (formData.productType === "Desktop" || formData.productType === "RDP") {
-                          const pricing = formData.productType === "Desktop" ? calculateDesktopPricing() : calculateRDPPricing();
+                        if (formData.productType === "Desktop" || formData.productType === "Mandi" || 
+                            formData.productType === "App" || formData.productType === "Recom") {
+                          // For Desktop, Mandi, App, Recom - check if any plan has quantity > 0
+                          const hasValidPlans = Object.values(planQuantities).some(qty => qty > 0);
+                          if (!hasValidPlans) return true;
+                          return false; // Enable button if plans are selected
+                        } else if (formData.productType === "Online") {
+                          // For Online - check if all required fields are filled
+                          if (!onlineDatabaseType || !formData.duration || onlineUserCount < 1 || onlineCompanyCount < 1) {
+                            return true;
+                          }
+                          return false;
+                        } else if (formData.productType === "RDP") {
+                          const pricing = calculateRDPPricing();
                           return pricing?.finalAmount === 0;
                         } else if (formData.productType === "Busy Online" && formData.duration && formData.accessType) {
                           const validation = validateBusyOnlineCounts();
