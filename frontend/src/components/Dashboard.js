@@ -9412,14 +9412,14 @@ const Dashboard = () => {
                                 // Auto-update company count to match user count
                                 setOnlineCompanyCount(numValue);
                               }}
-                              className="w-20 px-3 py-2 border-2 border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                              className="w-20 px-3 py-2 border-0 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                           </div>
 
                           {/* Company Count (Mandatory) - Add/Reduce control prefilled with User Count */}
                           <div className="flex items-center space-x-2">
                             <Label className="text-base font-semibold whitespace-nowrap">Company Count <span className="text-red-500">*</span>:</Label>
-                            <div className="flex items-center bg-white rounded border-2 border-gray-300 px-2 py-1">
+                            <div className="flex items-center bg-white rounded border-0 px-2 py-1">
                               <button
                                 type="button"
                                 onClick={() => {
@@ -9454,10 +9454,10 @@ const Dashboard = () => {
                                 { value: "Access", label: "Access" },
                                 { value: "Client Server", label: "Client Server" }
                               ].map((dbType) => (
-                                <label key={dbType.value} className={`flex items-center cursor-pointer px-3 py-2 border-2 rounded-lg hover:shadow-md transition-all ${
+                                <label key={dbType.value} className={`flex items-center cursor-pointer px-3 py-2 border-0 rounded-lg hover:shadow-md transition-all ${
                                   onlineDatabaseType === dbType.value
-                                    ? "border-blue-500 bg-blue-50" 
-                                    : "border-gray-200"
+                                    ? "bg-blue-50" 
+                                    : "bg-gray-50"
                                 }`}>
                                   <input
                                     type="radio"
@@ -9485,10 +9485,10 @@ const Dashboard = () => {
                                 { value: "360", label: "360 Days" },
                                 { value: "1080", label: "1080 Days" }
                               ].map((duration) => (
-                                <label key={duration.value} className={`flex items-center cursor-pointer px-2 py-1.5 border-2 rounded-lg hover:shadow-md transition-all ${
+                                <label key={duration.value} className={`flex items-center cursor-pointer px-2 py-1.5 border-0 rounded-lg hover:shadow-md transition-all ${
                                   formData.duration === duration.value
-                                    ? "border-orange-500 bg-orange-50" 
-                                    : "border-gray-200"
+                                    ? "bg-orange-50" 
+                                    : "bg-gray-50"
                                 }`}>
                                   <input
                                     type="radio"
