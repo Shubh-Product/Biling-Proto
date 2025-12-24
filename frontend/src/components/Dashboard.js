@@ -10157,6 +10157,18 @@ const Dashboard = () => {
                             gstAmount = Math.round(afterTds * 0.18);
                             grandTotal = afterTds + gstAmount;
                           }
+                          // For Busy Online product with custom fields
+                          else if (formData.productType === "Busy Online" && formData.duration && formData.accessType) {
+                            const pricing = calculateBusyOnlinePricing();
+                            if (pricing) {
+                              subtotal = pricing.basePrice;
+                              discountAmount = pricing.discountAmount;
+                              tdsAmount = pricing.tdsAmount;
+                              gstAmount = pricing.taxAmount;
+                              grandTotal = pricing.finalAmount;
+                              licenseDiscount = pricing.discountPercent || 0;
+                            }
+                          }
                           
                           // Only show summary if there are line items
                           if (subtotal === 0) return null;
