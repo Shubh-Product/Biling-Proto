@@ -1001,7 +1001,8 @@ const Dashboard = () => {
 
   // Helper function to calculate pricing for Desktop plans
   const calculateDesktopPricing = () => {
-    if (formData.productType !== "Desktop" || !formData.planName) {
+    // Support both Desktop and Mandi products
+    if ((formData.productType !== "Desktop" && formData.productType !== "Mandi") || !formData.planName) {
       return null;
     }
 
