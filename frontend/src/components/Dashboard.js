@@ -10123,17 +10123,34 @@ const Dashboard = () => {
                           let grandTotal = 0;
                           let licenseDiscount = 0; // Define licenseDiscount here
                           
-                          // For Online product, use calculateOnlinePricing
+                          // For Online product - Calculate similar to Desktop
                           if (formData.productType === "Online" && onlineDatabaseType && formData.duration) {
-                            const pricing = calculateOnlinePricing();
-                            if (pricing) {
-                              subtotal = pricing.basePrice;
-                              discountAmount = pricing.discountAmount;
-                              tdsAmount = pricing.tdsAmount;
-                              gstAmount = pricing.taxAmount;
-                              grandTotal = pricing.finalAmount;
-                              licenseDiscount = pricing.discountPercent || 0;
-                            }
+                            // Sample pricing structure for Online product
+                            const basePricing = {
+                              "360_Access": 5000,
+                              "360_Client Server": 10000,
+                              "1080_Access": 12000,
+                              "1080_Client Server": 24000
+                            };
+                            
+                            const priceKey = `${formData.duration}_${onlineDatabaseType}`;
+                            const basePrice = basePricing[priceKey] || 0;
+                            
+                            // Calculate total base price with user and company count multiplication
+                            subtotal = basePrice * onlineUserCount * onlineCompanyCount;
+                            
+                            // Calculate discount if applicable (same as Desktop)
+                            licenseDiscount = getDiscountByLicenseType(formData.licenseType);
+                            discountAmount = Math.round((subtotal * licenseDiscount) / 100);
+                            const afterDiscount = subtotal - discountAmount;
+                            
+                            // Calculate TDS if enabled (same as Desktop)
+                            tdsAmount = formData.deductTds ? Math.round(afterDiscount * 0.1) : 0;
+                            const afterTds = afterDiscount - tdsAmount;
+                            
+                            // Calculate GST (same as Desktop)
+                            gstAmount = Math.round(afterTds * 0.18);
+                            grandTotal = afterTds + gstAmount;
                           }
                           // For Desktop, Mandi, App, Recom with plan quantities
                           else if ((formData.productType === "Desktop" || formData.productType === "Mandi" || 
@@ -10159,17 +10176,37 @@ const Dashboard = () => {
                             gstAmount = Math.round(afterTds * 0.18);
                             grandTotal = afterTds + gstAmount;
                           }
-                          // For Busy Online product with custom fields
+                          // For Busy Online product - Calculate similar to Desktop
                           else if (formData.productType === "Busy Online" && formData.duration && formData.accessType) {
-                            const pricing = calculateBusyOnlinePricing();
-                            if (pricing) {
-                              subtotal = pricing.basePrice;
-                              discountAmount = pricing.discountAmount;
-                              tdsAmount = pricing.tdsAmount;
-                              gstAmount = pricing.taxAmount;
-                              grandTotal = pricing.finalAmount;
-                              licenseDiscount = pricing.discountPercent || 0;
-                            }
+                            // Sample pricing structure for Busy Online
+                            const basePricing = {
+                              "360_Access": 3999,
+                              "360_Client Server": 7999,
+                              "90_Access": 1199,
+                              "90_Client Server": 2399
+                            };
+                            
+                            const priceKey = `${formData.duration}_${formData.accessType}`;
+                            const basePrice = basePricing[priceKey] || 0;
+                            
+                            const userCount = Math.max(parseInt(formData.userCount) || 0, 0);
+                            const companyCount = Math.max(parseInt(formData.companyCount) || 0, 0);
+                            
+                            // Calculate total base price
+                            subtotal = basePrice * userCount * companyCount;
+                            
+                            // Calculate discount if applicable (same as Desktop)
+                            licenseDiscount = getDiscountByLicenseType(formData.licenseType);
+                            discountAmount = Math.round((subtotal * licenseDiscount) / 100);
+                            const afterDiscount = subtotal - discountAmount;
+                            
+                            // Calculate TDS if enabled (same as Desktop)
+                            tdsAmount = formData.deductTds ? Math.round(afterDiscount * 0.1) : 0;
+                            const afterTds = afterDiscount - tdsAmount;
+                            
+                            // Calculate GST (same as Desktop)
+                            gstAmount = Math.round(afterTds * 0.18);
+                            grandTotal = afterTds + gstAmount;
                           }
                           
                           // Only show summary if there are line items
