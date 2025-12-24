@@ -9044,22 +9044,24 @@ const Dashboard = () => {
                         ))}
                       </div>
 
-                      {/* Region Dropdown in Same Row */}
-                      <div className="flex items-center space-x-3 ml-8">
-                        <Label className="text-base font-semibold whitespace-nowrap">Region <span className="text-red-500">*</span>:</Label>
-                        <select
-                          value={formData.region}
-                          onChange={(e) => setFormData(prev => ({ 
-                            ...prev, 
-                            region: e.target.value
-                          }))}
-                          className="px-4 py-2 border-2 border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-white hover:border-green-400 transition-all min-w-[200px]"
-                        >
-                          <option value="India">India</option>
-                          <option value="Indian Subcontinent">Indian Subcontinent</option>
-                          <option value="Global">Global</option>
-                        </select>
-                      </div>
+                      {/* Region Dropdown in Same Row - Only show for Desktop and Mandi */}
+                      {(formData.productType === "Desktop" || formData.productType === "Mandi") && (
+                        <div className="flex items-center space-x-3 ml-8">
+                          <Label className="text-base font-semibold whitespace-nowrap">Region <span className="text-red-500">*</span>:</Label>
+                          <select
+                            value={formData.region}
+                            onChange={(e) => setFormData(prev => ({ 
+                              ...prev, 
+                              region: e.target.value
+                            }))}
+                            className="px-4 py-2 border-2 border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-white hover:border-green-400 transition-all min-w-[200px]"
+                          >
+                            <option value="India">India</option>
+                            <option value="Indian Subcontinent">Indian Subcontinent</option>
+                            <option value="Global">Global</option>
+                          </select>
+                        </div>
+                      )}
                     </div>
 
                     {/* Desktop Product Configuration */}
