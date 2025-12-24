@@ -9641,22 +9641,6 @@ const Dashboard = () => {
                         )}
                       </div>
                     )}
-                                            setFormData(prev => ({ ...prev, planName: plan.name }));
-                                          }
-                                        }}
-                                        className="text-gray-600 hover:text-green-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
-                                      >
-                                        +
-                                      </button>
-                                    </div>
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    )}
 
                     {/* Recom Product Configuration - Same as Desktop */}
                     {formData.productType === "Recom" && (
