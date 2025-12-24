@@ -9397,120 +9397,123 @@ const Dashboard = () => {
                     {/* Online Product Configuration */}
                     {formData.productType === "Online" && (
                       <div className="space-y-4">
-                        {/* User Count (Mandatory) - Text box with numeric input only */}
-                        <div className="flex items-center space-x-3">
-                          <Label className="text-base font-semibold whitespace-nowrap">User Count <span className="text-red-500">*</span>:</Label>
-                          <Input
-                            type="number"
-                            min="1"
-                            value={onlineUserCount}
-                            onChange={(e) => {
-                              const value = parseInt(e.target.value) || 1;
-                              setOnlineUserCount(value);
-                              // Auto-update company count to match user count
-                              setOnlineCompanyCount(value);
-                            }}
-                            className="w-32 px-3 py-2 border-2 border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                          />
-                        </div>
-
-                        {/* Company Count (Mandatory) - Add/Reduce control prefilled with User Count */}
-                        <div className="flex items-center space-x-3">
-                          <Label className="text-base font-semibold whitespace-nowrap">Company Count <span className="text-red-500">*</span>:</Label>
-                          <div className="flex items-center bg-white rounded border-2 border-gray-300 px-2 py-1">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                if (onlineCompanyCount > 1) {
-                                  setOnlineCompanyCount(onlineCompanyCount - 1);
-                                }
+                        {/* All fields in single row */}
+                        <div className="flex items-center space-x-6">
+                          {/* User Count (Mandatory) - Text box with numeric input only */}
+                          <div className="flex items-center space-x-2">
+                            <Label className="text-base font-semibold whitespace-nowrap">User Count <span className="text-red-500">*</span>:</Label>
+                            <Input
+                              type="number"
+                              min="1"
+                              value={onlineUserCount}
+                              onChange={(e) => {
+                                const value = parseInt(e.target.value) || 1;
+                                setOnlineUserCount(value);
+                                // Auto-update company count to match user count
+                                setOnlineCompanyCount(value);
                               }}
-                              className="text-gray-600 hover:text-red-600 font-bold text-lg w-8 h-8 flex items-center justify-center"
-                            >
-                              -
-                            </button>
-                            <span className="text-base font-semibold text-gray-900 min-w-[40px] text-center px-2">
-                              {onlineCompanyCount}
-                            </span>
-                            <button
-                              type="button"
-                              onClick={() => {
-                                setOnlineCompanyCount(onlineCompanyCount + 1);
-                              }}
-                              className="text-gray-600 hover:text-green-600 font-bold text-lg w-8 h-8 flex items-center justify-center"
-                            >
-                              +
-                            </button>
+                              className="w-20 px-3 py-2 border-2 border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            />
                           </div>
-                        </div>
 
-                        {/* Database Type - Radio buttons */}
-                        <div className="flex items-center space-x-3">
-                          <Label className="text-base font-semibold whitespace-nowrap">Database Type <span className="text-red-500">*</span>:</Label>
-                          <div className="flex space-x-3">
-                            {[
-                              { value: "Access", label: "Access" },
-                              { value: "Client Server", label: "Client Server" }
-                            ].map((dbType) => (
-                              <label key={dbType.value} className={`flex items-center cursor-pointer px-3 py-2 border-2 rounded-lg hover:shadow-md transition-all w-40 ${
-                                onlineDatabaseType === dbType.value
-                                  ? "border-blue-500 bg-blue-50" 
-                                  : "border-gray-200"
-                              }`}>
-                                <input
-                                  type="radio"
-                                  name="onlineDatabaseType"
-                                  value={dbType.value}
-                                  checked={onlineDatabaseType === dbType.value}
-                                  onChange={(e) => {
-                                    setOnlineDatabaseType(e.target.value);
-                                    // Set planName to trigger order summary
-                                    setFormData(prev => ({ ...prev, planName: `Online ${e.target.value}` }));
-                                  }}
-                                  className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 mr-2"
-                                />
-                                <span className="text-gray-700 font-medium text-sm">{dbType.label}</span>
-                              </label>
-                            ))}
+                          {/* Company Count (Mandatory) - Add/Reduce control prefilled with User Count */}
+                          <div className="flex items-center space-x-2">
+                            <Label className="text-base font-semibold whitespace-nowrap">Company Count <span className="text-red-500">*</span>:</Label>
+                            <div className="flex items-center bg-white rounded border-2 border-gray-300 px-2 py-1">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  if (onlineCompanyCount > 1) {
+                                    setOnlineCompanyCount(onlineCompanyCount - 1);
+                                  }
+                                }}
+                                className="text-gray-600 hover:text-red-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                              >
+                                -
+                              </button>
+                              <span className="text-base font-semibold text-gray-900 min-w-[30px] text-center px-2">
+                                {onlineCompanyCount}
+                              </span>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setOnlineCompanyCount(onlineCompanyCount + 1);
+                                }}
+                                className="text-gray-600 hover:text-green-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                              >
+                                +
+                              </button>
+                            </div>
                           </div>
-                        </div>
 
-                        {/* Duration Selection for Online - Same as Desktop */}
-                        <div className="flex items-center space-x-3">
-                          <Label className="text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
-                          <div className="flex space-x-2">
-                            {[
-                              { value: "360", label: "360 Days" },
-                              { value: "1080", label: "1080 Days" }
-                            ].map((duration) => (
-                              <label key={duration.value} className={`flex items-center cursor-pointer px-2 py-1.5 border-2 rounded-lg hover:shadow-md transition-all w-28 ${
-                                formData.duration === duration.value
-                                  ? "border-orange-500 bg-orange-50" 
-                                  : "border-gray-200"
-                              }`}>
-                                <input
-                                  type="radio"
-                                  name="onlineDuration"
-                                  value={duration.value}
-                                  checked={formData.duration === duration.value}
-                                  onChange={(e) => {
-                                    setFormData(prev => ({ 
-                                      ...prev, 
-                                      duration: e.target.value
-                                    }));
-                                  }}
-                                  className="w-3.5 h-3.5 text-orange-600 border-gray-300 focus:ring-orange-500 mr-2"
-                                />
-                                <div className="flex flex-col">
-                                  <span className="text-gray-700 font-medium text-xs">{duration.label}</span>
-                                  {duration.value === "1080" && (
-                                    <span className="text-[10px] text-green-600 font-semibold">
-                                      20% OFF
-                                    </span>
-                                  )}
-                                </div>
-                              </label>
-                            ))}
+                          {/* Database Type - Radio buttons */}
+                          <div className="flex items-center space-x-2">
+                            <Label className="text-base font-semibold whitespace-nowrap">Database Type <span className="text-red-500">*</span>:</Label>
+                            <div className="flex space-x-2">
+                              {[
+                                { value: "Access", label: "Access" },
+                                { value: "Client Server", label: "Client Server" }
+                              ].map((dbType) => (
+                                <label key={dbType.value} className={`flex items-center cursor-pointer px-3 py-2 border-2 rounded-lg hover:shadow-md transition-all ${
+                                  onlineDatabaseType === dbType.value
+                                    ? "border-blue-500 bg-blue-50" 
+                                    : "border-gray-200"
+                                }`}>
+                                  <input
+                                    type="radio"
+                                    name="onlineDatabaseType"
+                                    value={dbType.value}
+                                    checked={onlineDatabaseType === dbType.value}
+                                    onChange={(e) => {
+                                      setOnlineDatabaseType(e.target.value);
+                                      // Set planName to trigger order summary
+                                      setFormData(prev => ({ ...prev, planName: `Online ${e.target.value}` }));
+                                    }}
+                                    className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 mr-2"
+                                  />
+                                  <span className="text-gray-700 font-medium text-sm whitespace-nowrap">{dbType.label}</span>
+                                </label>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Duration Selection for Online - Same as Desktop */}
+                          <div className="flex items-center space-x-2">
+                            <Label className="text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                            <div className="flex space-x-2">
+                              {[
+                                { value: "360", label: "360 Days" },
+                                { value: "1080", label: "1080 Days" }
+                              ].map((duration) => (
+                                <label key={duration.value} className={`flex items-center cursor-pointer px-2 py-1.5 border-2 rounded-lg hover:shadow-md transition-all ${
+                                  formData.duration === duration.value
+                                    ? "border-orange-500 bg-orange-50" 
+                                    : "border-gray-200"
+                                }`}>
+                                  <input
+                                    type="radio"
+                                    name="onlineDuration"
+                                    value={duration.value}
+                                    checked={formData.duration === duration.value}
+                                    onChange={(e) => {
+                                      setFormData(prev => ({ 
+                                        ...prev, 
+                                        duration: e.target.value
+                                      }));
+                                    }}
+                                    className="w-3.5 h-3.5 text-orange-600 border-gray-300 focus:ring-orange-500 mr-2"
+                                  />
+                                  <div className="flex flex-col">
+                                    <span className="text-gray-700 font-medium text-xs whitespace-nowrap">{duration.label}</span>
+                                    {duration.value === "1080" && (
+                                      <span className="text-[10px] text-green-600 font-semibold">
+                                        20% OFF
+                                      </span>
+                                    )}
+                                  </div>
+                                </label>
+                              ))}
+                            </div>
                           </div>
                         </div>
                       </div>
