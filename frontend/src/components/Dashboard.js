@@ -10025,10 +10025,9 @@ const Dashboard = () => {
                               const lineItems = [];
                               let serialNo = 1;
                               
-                              // For Desktop, Mandi, Online, App, Recom products with plan quantities
+                              // For Desktop, Mandi, App, Recom products with plan quantities
                               if ((formData.productType === "Desktop" || formData.productType === "Mandi" || 
-                                   formData.productType === "Online" || formData.productType === "App" || 
-                                   formData.productType === "Recom") && formData.duration) {
+                                   formData.productType === "App" || formData.productType === "Recom") && formData.duration) {
                                 const plans = getDesktopPlans(formData.licenseModel, formData.duration);
                                 plans.forEach(plan => {
                                   const quantity = planQuantities[plan.name] || 0;
@@ -10047,6 +10046,28 @@ const Dashboard = () => {
                                     );
                                   }
                                 });
+                              }
+                              
+                              // For Online product with custom fields
+                              if (formData.productType === "Online" && onlineDatabaseType && formData.duration) {
+                                const pricing = calculateOnlinePricing();
+                                if (pricing) {
+                                  const productName = `Online - ${onlineDatabaseType}`;
+                                  const details = `User Count: ${onlineUserCount}, Company Count: ${onlineCompanyCount}`;
+                                  lineItems.push(
+                                    <tr key="online-product" className="hover:bg-gray-50">
+                                      <td className="px-3 py-2 text-sm text-gray-700">{serialNo++}</td>
+                                      <td className="px-3 py-2 text-sm text-gray-900">
+                                        <div>{productName}</div>
+                                        <div className="text-xs text-gray-600">{details}</div>
+                                      </td>
+                                      <td className="px-3 py-2 text-sm text-center text-gray-700">{formData.duration} Days</td>
+                                      <td className="px-3 py-2 text-sm text-center text-gray-700">1</td>
+                                      <td className="px-3 py-2 text-sm text-right text-gray-700">₹{pricing.basePrice.toLocaleString('en-IN')}</td>
+                                      <td className="px-3 py-2 text-sm text-right font-medium text-gray-900">₹{pricing.basePrice.toLocaleString('en-IN')}</td>
+                                    </tr>
+                                  );
+                                }
                               }
                               
                               // Show "No items" message if no line items
