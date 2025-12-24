@@ -2176,6 +2176,26 @@ const Dashboard = () => {
           if (desktopPlansElement) {
             desktopPlansElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
+        } else if (formData.productType === "Mandi") {
+          const mandiPlansElement = document.querySelector('[data-scroll-target="mandi-plans"]');
+          if (mandiPlansElement) {
+            mandiPlansElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        } else if (formData.productType === "Online") {
+          const onlinePlansElement = document.querySelector('[data-scroll-target="online-plans"]');
+          if (onlinePlansElement) {
+            onlinePlansElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        } else if (formData.productType === "App") {
+          const appPlansElement = document.querySelector('[data-scroll-target="app-plans"]');
+          if (appPlansElement) {
+            appPlansElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        } else if (formData.productType === "Recom") {
+          const recomPlansElement = document.querySelector('[data-scroll-target="recom-plans"]');
+          if (recomPlansElement) {
+            recomPlansElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         } else if (formData.productType === "Busy Online") {
           const busyOnlinePlansElement = document.querySelector('[data-scroll-target="busy-online-plans"]');
           if (busyOnlinePlansElement) {
