@@ -10097,6 +10097,7 @@ const Dashboard = () => {
                           let tdsAmount = 0;
                           let gstAmount = 0;
                           let grandTotal = 0;
+                          let licenseDiscount = 0; // Define licenseDiscount here
                           
                           // For Online product, use calculateOnlinePricing
                           if (formData.productType === "Online" && onlineDatabaseType && formData.duration) {
@@ -10107,6 +10108,7 @@ const Dashboard = () => {
                               tdsAmount = pricing.tdsAmount;
                               gstAmount = pricing.taxAmount;
                               grandTotal = pricing.finalAmount;
+                              licenseDiscount = pricing.discountPercent || 0;
                             }
                           }
                           // For Desktop, Mandi, App, Recom with plan quantities
@@ -10121,7 +10123,7 @@ const Dashboard = () => {
                             });
                             
                             // Calculate discount if applicable
-                            const licenseDiscount = getDiscountByLicenseType(formData.licenseType);
+                            licenseDiscount = getDiscountByLicenseType(formData.licenseType);
                             discountAmount = Math.round((subtotal * licenseDiscount) / 100);
                             const afterDiscount = subtotal - discountAmount;
                             
