@@ -9525,107 +9525,122 @@ const Dashboard = () => {
                       </div>
                     )}
 
-                    {/* App Product Configuration - Same as Desktop */}
+                    {/* App Product Configuration - Subscription ID Validation Flow */}
                     {formData.productType === "App" && (
                       <div className="space-y-4">
-                        {/* Duration Selection for App */}
-                        <div className="flex items-center space-x-8">
-                          <div className="flex items-center space-x-3">
-                            <Label className="text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
-                            <div className="flex space-x-2">
-                              {[
-                                { value: "360", label: "360 Days" },
-                                { value: "1080", label: "1080 Days" }
-                              ].map((duration) => (
-                                <label key={duration.value} className={`flex items-center cursor-pointer px-2 py-1.5 border-2 rounded-lg hover:shadow-md transition-all w-28 ${
-                                  formData.duration === duration.value
-                                    ? "border-orange-500 bg-orange-50" 
-                                    : "border-gray-200"
-                                }`}>
-                                  <input
-                                    type="radio"
-                                    name="duration"
-                                    value={duration.value}
-                                    checked={formData.duration === duration.value}
-                                    onChange={(e) => {
-                                      setFormData(prev => ({ 
-                                        ...prev, 
-                                        licenseModel: "Subscription",
-                                        duration: e.target.value,
-                                        planName: ""
-                                      }));
-                                      setPlanQuantities({});
-                                    }}
-                                    className="w-3.5 h-3.5 text-orange-600 border-gray-300 focus:ring-orange-500 mr-2"
-                                  />
-                                  <div className="flex flex-col">
-                                    <span className="text-gray-700 font-medium text-xs">{duration.label}</span>
-                                    {duration.value === "1080" && (
-                                      <span className="text-[10px] text-green-600 font-semibold">
-                                        20% OFF
-                                      </span>
-                                    )}
-                                  </div>
-                                </label>
-                              ))}
-                            </div>
-                          </div>
+                        {/* Step 1: Subscription ID Entry and Validation */}
+                        <div className="flex items-center space-x-3">
+                          <Input
+                            type="text"
+                            placeholder="Enter Subscription ID"
+                            value={appSubscriptionId}
+                            onChange={(e) => setAppSubscriptionId(e.target.value)}
+                            className="w-64 px-3 py-2 border-2 border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            disabled={appSubscriptionValidated}
+                          />
+                          <Button
+                            type="button"
+                            onClick={() => {
+                              // Validate subscription ID (SER123456 is valid for testing)
+                              if (appSubscriptionId.trim() === "SER123456") {
+                                setAppSubscriptionValidated(true);
+                                toast({
+                                  title: "Success",
+                                  description: "Subscription ID validated successfully!",
+                                  variant: "default"
+                                });
+                              } else {
+                                setAppSubscriptionValidated(false);
+                                toast({
+                                  title: "Invalid Subscription ID",
+                                  description: "Please enter a valid Subscription ID (e.g., SER123456)",
+                                  variant: "destructive"
+                                });
+                              }
+                            }}
+                            disabled={appSubscriptionValidated || !appSubscriptionId.trim()}
+                            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 disabled:bg-gray-400"
+                          >
+                            {appSubscriptionValidated ? "Validated ✓" : "New"}
+                          </Button>
+                          {appSubscriptionValidated && (
+                            <Button
+                              type="button"
+                              variant="outline"
+                              onClick={() => {
+                                setAppSubscriptionValidated(false);
+                                setAppSubscriptionId("");
+                                setAppSubscriptionCount(1);
+                                setFormData(prev => ({ ...prev, duration: "" }));
+                              }}
+                              className="text-sm"
+                            >
+                              Reset
+                            </Button>
+                          )}
                         </div>
 
-                        {/* App Plans Display - 4 Column Grid with Quantity Controls */}
-                        {formData.duration && (
-                          <div data-scroll-target="app-plans" className="space-y-2">
-                            <Label className="text-base font-semibold">Plans <span className="text-red-500">*</span>:</Label>
-                            <div className="grid grid-cols-4 gap-2">
-                              {getDesktopPlans(formData.licenseModel, formData.duration).map((plan, index) => {
-                                const quantity = planQuantities[plan.name] || 0;
-                                return (
-                                  <div 
-                                    key={plan.name} 
-                                    className={`relative border-2 rounded-lg p-2 transition-all ${
-                                      quantity > 0
-                                        ? "border-blue-500 bg-blue-50 shadow-md" 
-                                        : "border-gray-200 hover:border-gray-300"
-                                    }`}
-                                  >
-                                    <div className="text-xs font-medium text-gray-900 mb-1 pr-8">
-                                      {plan.name}
-                                    </div>
-                                    <div className="flex flex-col mb-1">
-                                      <span className="text-xs font-bold text-blue-600">
-                                        ₹{plan.price?.toLocaleString('en-IN') || 'Contact'}
-                                      </span>
-                                      {formData.duration === "1080" && plan.discount > 0 && (
-                                        <span className="text-[10px] text-gray-500 line-through">
-                                          ₹{(plan.basePrice * 3)?.toLocaleString('en-IN')}
+                        {/* Step 2: Show fields only after validation */}
+                        {appSubscriptionValidated && (
+                          <>
+                            {/* Subscription Count (Mandatory) - Text box */}
+                            <div className="flex items-center space-x-3">
+                              <Label className="text-base font-semibold whitespace-nowrap">Subscription Count <span className="text-red-500">*</span>:</Label>
+                              <Input
+                                type="text"
+                                value={appSubscriptionCount}
+                                onChange={(e) => {
+                                  const value = e.target.value.replace(/\D/g, ''); // Only allow digits
+                                  const numValue = parseInt(value) || 1;
+                                  setAppSubscriptionCount(numValue);
+                                }}
+                                className="w-20 px-3 py-2 border-2 border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              />
+                            </div>
+
+                            {/* Duration Selection - Same as Desktop */}
+                            <div className="flex items-center space-x-3">
+                              <Label className="text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                              <div className="flex space-x-2">
+                                {[
+                                  { value: "360", label: "360 Days" },
+                                  { value: "1080", label: "1080 Days" }
+                                ].map((duration) => (
+                                  <label key={duration.value} className={`flex items-center cursor-pointer px-2 py-1.5 border-2 rounded-lg hover:shadow-md transition-all w-28 ${
+                                    formData.duration === duration.value
+                                      ? "border-orange-500 bg-orange-50" 
+                                      : "border-gray-200"
+                                  }`}>
+                                    <input
+                                      type="radio"
+                                      name="appDuration"
+                                      value={duration.value}
+                                      checked={formData.duration === duration.value}
+                                      onChange={(e) => {
+                                        setFormData(prev => ({ 
+                                          ...prev, 
+                                          duration: e.target.value,
+                                          planName: `App Subscription ${e.target.value} Days` // Set planName for order summary
+                                        }));
+                                      }}
+                                      className="w-3.5 h-3.5 text-orange-600 border-gray-300 focus:ring-orange-500 mr-2"
+                                    />
+                                    <div className="flex flex-col">
+                                      <span className="text-gray-700 font-medium text-xs">{duration.label}</span>
+                                      {duration.value === "1080" && (
+                                        <span className="text-[10px] text-green-600 font-semibold">
+                                          20% OFF
                                         </span>
                                       )}
                                     </div>
-                                    <div className="absolute bottom-1.5 right-1.5 flex items-center bg-white rounded border border-gray-300 px-1 py-0.5">
-                                      <button
-                                        type="button"
-                                        onClick={() => {
-                                          if (quantity > 0) {
-                                            const newQuantities = { ...planQuantities, [plan.name]: quantity - 1 };
-                                            setPlanQuantities(newQuantities);
-                                            if (quantity - 1 === 0 && formData.planName === plan.name) {
-                                              setFormData(prev => ({ ...prev, planName: "" }));
-                                            }
-                                          }
-                                        }}
-                                        className="text-gray-600 hover:text-red-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
-                                      >
-                                        -
-                                      </button>
-                                      <span className="text-xs font-semibold text-gray-900 min-w-[12px] text-center px-1">
-                                        {quantity}
-                                      </span>
-                                      <button
-                                        type="button"
-                                        onClick={() => {
-                                          const newQuantities = { ...planQuantities, [plan.name]: quantity + 1 };
-                                          setPlanQuantities(newQuantities);
-                                          if (quantity === 0) {
+                                  </label>
+                                ))}
+                              </div>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    )}
                                             setFormData(prev => ({ ...prev, planName: plan.name }));
                                           }
                                         }}
