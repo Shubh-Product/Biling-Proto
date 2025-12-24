@@ -10187,9 +10187,34 @@ const Dashboard = () => {
                             gstAmount = Math.round(afterTds * 0.18);
                             grandTotal = afterTds + gstAmount;
                           }
-                          // For Desktop, Mandi, App, Recom with plan quantities
+                          // For App product - Calculate similar to Desktop
+                          else if (formData.productType === "App" && appSubscriptionValidated && formData.duration) {
+                            // Sample pricing for App subscriptions
+                            const appPricing = {
+                              "360": 8000,  // Base price for 360 days
+                              "1080": 19200 // Base price for 1080 days (3 years with 20% discount)
+                            };
+                            const basePrice = appPricing[formData.duration] || 0;
+                            
+                            // Calculate total base price with subscription count
+                            subtotal = basePrice * appSubscriptionCount;
+                            
+                            // Calculate discount if applicable (same as Desktop)
+                            licenseDiscount = getDiscountByLicenseType(formData.licenseType);
+                            discountAmount = Math.round((subtotal * licenseDiscount) / 100);
+                            const afterDiscount = subtotal - discountAmount;
+                            
+                            // Calculate TDS if enabled (same as Desktop)
+                            tdsAmount = formData.deductTds ? Math.round(afterDiscount * 0.1) : 0;
+                            const afterTds = afterDiscount - tdsAmount;
+                            
+                            // Calculate GST (same as Desktop)
+                            gstAmount = Math.round(afterTds * 0.18);
+                            grandTotal = afterTds + gstAmount;
+                          }
+                          // For Desktop, Mandi, Recom with plan quantities
                           else if ((formData.productType === "Desktop" || formData.productType === "Mandi" || 
-                               formData.productType === "App" || formData.productType === "Recom") && formData.duration) {
+                               formData.productType === "Recom") && formData.duration) {
                             const plans = getDesktopPlans(formData.licenseModel, formData.duration);
                             plans.forEach(plan => {
                               const quantity = planQuantities[plan.name] || 0;
