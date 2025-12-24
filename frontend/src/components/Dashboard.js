@@ -9879,8 +9879,10 @@ const Dashboard = () => {
                               const lineItems = [];
                               let serialNo = 1;
                               
-                              // For Desktop product with plan quantities
-                              if (formData.productType === "Desktop" && formData.duration) {
+                              // For Desktop, Mandi, Online, App, Recom products with plan quantities
+                              if ((formData.productType === "Desktop" || formData.productType === "Mandi" || 
+                                   formData.productType === "Online" || formData.productType === "App" || 
+                                   formData.productType === "Recom") && formData.duration) {
                                 const plans = getDesktopPlans(formData.licenseModel, formData.duration);
                                 plans.forEach(plan => {
                                   const quantity = planQuantities[plan.name] || 0;
