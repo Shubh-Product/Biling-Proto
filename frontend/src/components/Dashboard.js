@@ -10073,6 +10073,28 @@ const Dashboard = () => {
                                 }
                               }
                               
+                              // For Busy Online product with custom fields
+                              if (formData.productType === "Busy Online" && formData.duration && formData.accessType) {
+                                const pricing = calculateBusyOnlinePricing();
+                                if (pricing) {
+                                  const productName = `Busy Online - ${formData.accessType}`;
+                                  const details = `User Count: ${formData.userCount || 0}, Company Count: ${formData.companyCount || 0}`;
+                                  lineItems.push(
+                                    <tr key="busy-online-product" className="hover:bg-gray-50">
+                                      <td className="px-3 py-2 text-sm text-gray-700">{serialNo++}</td>
+                                      <td className="px-3 py-2 text-sm text-gray-900">
+                                        <div>{productName}</div>
+                                        <div className="text-xs text-gray-600">{details}</div>
+                                      </td>
+                                      <td className="px-3 py-2 text-sm text-center text-gray-700">{formData.duration} Days</td>
+                                      <td className="px-3 py-2 text-sm text-center text-gray-700">1</td>
+                                      <td className="px-3 py-2 text-sm text-right text-gray-700">₹{pricing.basePrice.toLocaleString('en-IN')}</td>
+                                      <td className="px-3 py-2 text-sm text-right font-medium text-gray-900">₹{pricing.basePrice.toLocaleString('en-IN')}</td>
+                                    </tr>
+                                  );
+                                }
+                              }
+                              
                               // Show "No items" message if no line items
                               if (lineItems.length === 0) {
                                 return (
