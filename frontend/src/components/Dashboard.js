@@ -9533,54 +9533,66 @@ const Dashboard = () => {
                     {formData.productType === "App" && (
                       <div className="space-y-4">
                         {/* Step 1: Subscription ID Entry and Validation */}
-                        <div className="flex items-center space-x-3">
-                          <Input
-                            type="text"
-                            placeholder="Enter Subscription ID"
-                            value={appSubscriptionId}
-                            onChange={(e) => setAppSubscriptionId(e.target.value)}
-                            className="w-64 px-3 py-2 border-2 border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            disabled={appSubscriptionValidated}
-                          />
-                          <Button
-                            type="button"
-                            onClick={() => {
-                              // Validate subscription ID (SER123456 is valid for testing)
-                              if (appSubscriptionId.trim() === "SER123456") {
-                                setAppSubscriptionValidated(true);
-                                toast({
-                                  title: "Success",
-                                  description: "Subscription ID validated successfully!",
-                                  variant: "default"
-                                });
-                              } else {
-                                setAppSubscriptionValidated(false);
-                                toast({
-                                  title: "Invalid Subscription ID",
-                                  description: "Please enter a valid Subscription ID (e.g., SER123456)",
-                                  variant: "destructive"
-                                });
-                              }
-                            }}
-                            disabled={appSubscriptionValidated || !appSubscriptionId.trim()}
-                            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 disabled:bg-gray-400"
-                          >
-                            {appSubscriptionValidated ? "Validated ✓" : "New"}
-                          </Button>
-                          {appSubscriptionValidated && (
+                        <div className="space-y-2">
+                          <div className="flex items-center space-x-3">
+                            <Input
+                              type="text"
+                              placeholder="Enter Subscription ID"
+                              value={appSubscriptionId}
+                              onChange={(e) => {
+                                setAppSubscriptionId(e.target.value);
+                                setAppValidationMessage(""); // Clear message on input change
+                              }}
+                              className="w-64 px-3 py-2 border-2 border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              disabled={appSubscriptionValidated}
+                            />
                             <Button
                               type="button"
-                              variant="outline"
                               onClick={() => {
-                                setAppSubscriptionValidated(false);
-                                setAppSubscriptionId("");
-                                setAppSubscriptionCount(1);
-                                setFormData(prev => ({ ...prev, duration: "" }));
+                                // Validate subscription ID (SER123456 is valid for testing)
+                                if (appSubscriptionId.trim() === "SER123456") {
+                                  setAppSubscriptionValidated(true);
+                                  setAppValidationMessage("success");
+                                } else {
+                                  setAppSubscriptionValidated(false);
+                                  setAppValidationMessage("error");
+                                }
                               }}
-                              className="text-sm"
+                              disabled={appSubscriptionValidated || !appSubscriptionId.trim()}
+                              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 disabled:bg-gray-400"
                             >
-                              Reset
+                              {appSubscriptionValidated ? "Validated ✓" : "New"}
                             </Button>
+                            {appSubscriptionValidated && (
+                              <Button
+                                type="button"
+                                variant="outline"
+                                onClick={() => {
+                                  setAppSubscriptionValidated(false);
+                                  setAppSubscriptionId("");
+                                  setAppSubscriptionCount(1);
+                                  setAppValidationMessage("");
+                                  setFormData(prev => ({ ...prev, duration: "" }));
+                                }}
+                                className="text-sm"
+                              >
+                                Reset
+                              </Button>
+                            )}
+                          </div>
+                          
+                          {/* Validation Messages */}
+                          {appValidationMessage === "success" && (
+                            <div className="flex items-center space-x-2 text-green-600 text-sm">
+                              <CheckCircle className="w-4 h-4" />
+                              <span>Subscription ID validated successfully!</span>
+                            </div>
+                          )}
+                          {appValidationMessage === "error" && (
+                            <div className="flex items-center space-x-2 text-red-600 text-sm">
+                              <AlertTriangle className="w-4 h-4" />
+                              <span>Invalid Subscription ID. Please enter a valid ID (e.g., SER123456)</span>
+                            </div>
                           )}
                         </div>
 
