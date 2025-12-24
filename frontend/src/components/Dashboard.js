@@ -9094,7 +9094,7 @@ const Dashboard = () => {
                                     </div>
 
                                     {/* Controls Row at Bottom */}
-                                    <div className="flex items-center justify-between mt-2 pt-1 border-t border-gray-200">
+                                    <div className="flex items-center justify-between mt-2 pt-1">
                                       {/* Count Control - Show only for Client Server plans when quantity >= 1 */}
                                       {isClientServer && quantity >= 1 ? (
                                         <div className="flex items-center">
