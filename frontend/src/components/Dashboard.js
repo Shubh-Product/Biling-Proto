@@ -9942,9 +9942,10 @@ const Dashboard = () => {
                 {/* Order Summary */}
                 {(() => {
                   const busyOnlineValid = formData.productType === "Busy Online" && formData.duration && formData.accessType && validateBusyOnlineCounts().isValid;
+                  const onlineValid = formData.productType === "Online" && onlineUserCount >= 1 && onlineCompanyCount >= 1 && onlineDatabaseType && formData.duration;
                   const showOrderSummary = ((formData.productType === "Desktop" && formData.planName && calculateDesktopPricing()) || 
                                            (formData.productType === "Mandi" && formData.planName && calculateDesktopPricing()) ||
-                                           (formData.productType === "Online" && formData.planName && calculateDesktopPricing()) ||
+                                           onlineValid ||
                                            (formData.productType === "App" && formData.planName && calculateDesktopPricing()) ||
                                            (formData.productType === "Recom" && formData.planName && calculateDesktopPricing()) ||
                                            (formData.productType === "RDP" && formData.planName && calculateRDPPricing()) ||
