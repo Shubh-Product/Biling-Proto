@@ -10279,7 +10279,13 @@ const Dashboard = () => {
                 {(() => {
                   // Same condition as Order Summary visibility
                   const busyOnlineValid = formData.productType === "Busy Online" && formData.duration && formData.accessType && validateBusyOnlineCounts().isValid;
+                  const onlineValid = formData.productType === "Online" && onlineUserCount >= 1 && onlineCompanyCount >= 1 && onlineDatabaseType && formData.duration;
+                  const mandiValid = formData.productType === "Mandi" && formData.duration && Object.values(planQuantities).some(qty => qty > 0);
                   const showOrderSummary = (((formData.productType === "Desktop" && formData.planName && calculateDesktopPricing()) || 
+                                           mandiValid ||
+                                           onlineValid ||
+                                           (formData.productType === "App" && formData.planName && calculateDesktopPricing()) ||
+                                           (formData.productType === "Recom" && formData.planName && calculateDesktopPricing()) ||
                                            (formData.productType === "RDP" && formData.planName && calculateRDPPricing()) ||
                                            busyOnlineValid) && customerValidated);
                   
