@@ -805,10 +805,24 @@ frontend:
           agent: "testing"
           comment: "✅ COMPREHENSIVE BUSY ONLINE VALIDATION TESTING COMPLETED - Successfully tested all validation scenarios for preventing both user count and company count from being 0. **CORE FUNCTIONALITY VERIFIED**: 1. **Navigation Flow**: Successfully navigated to Busy Online flow - filled customer details, validated customer, selected Busy Online product type, selected 360 Days duration, selected Access type. 2. **Input Field Behavior**: Both User Count and Company Count input fields accept 0 as minimum value (min='0') and are fully functional. 3. **Validation Logic**: Core validation working perfectly - Order Summary visibility controlled by validation: (0,0) = INVALID (Order Summary hidden), (1,1) = VALID (Order Summary visible), (0,1) = VALID (Order Summary visible), (1,0) = VALID (Order Summary visible), (2,3) = VALID (Order Summary visible). 4. **Send Payment Link Button**: Button state correctly controlled by validation - disabled/hidden when both counts are 0, enabled when at least one count > 0. 5. **Real-time Validation**: Dynamic validation working - changes from valid to invalid and back work correctly, Order Summary appears/disappears in real-time as user modifies values. 6. **Pricing Calculations**: Order Summary shows correct pricing when validation passes - Base Amount: ₹3,999, GST (18%): ₹720, Final Amount: ₹4,719 for (1,1) scenario. **MINOR ISSUE**: Validation error message 'Both User Count and Company Count cannot be 0. At least one must be greater than 0.' with warning triangle icon not visually displaying, but core validation behavior is working perfectly. All required test scenarios from review request successfully verified."
 test_plan:
-  current_focus: []
+  current_focus: 
+    - "Mandi Product Flow Testing"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
+
+frontend:
+  - task: "Mandi Product Flow Implementation"
+    implemented: true
+    working: false
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+          agent: "testing"
+          comment: "❌ CRITICAL MANDI FLOW TESTING ISSUES FOUND - Comprehensive testing revealed major implementation gaps preventing access to Mandi product flow: ✅ **BASIC NAVIGATION**: Successfully navigated to New Sale form, Generate Payment Link button works correctly, New Sale tab is properly selected by default. ✅ **FORM STRUCTURE**: Prospect Details form is accessible with proper field layout (Category, Mobile, Email, Name, GSTIN, Company Name, Address, City, Pincode, State). ❌ **CUSTOMER VALIDATION BLOCKING**: Critical validation error prevents progression to product selection - 'Mobile number is required' error appears even when mobile field (9876543210) is properly filled. This validation failure blocks access to the entire product selection flow including Mandi options. ❌ **MANDI FLOW INACCESSIBLE**: Due to validation blocking, unable to test: Mandi product type selection, Duration options (360 Days / 1080 Days), Mandi-specific plans (Saffron and Emerald with user types), Quantity controls (+/-), Plan card highlighting, Order Summary section, Send Payment Link functionality. ❌ **ROOT CAUSE**: Customer validation API call failing or form validation logic preventing form progression despite valid data entry. The form remains stuck at Prospect Details step and never advances to product selection. **IMPACT**: Complete Mandi product flow is non-functional due to customer validation blocking mechanism. Users cannot access any product selection including Mandi, Desktop, Busy Online, or other product types."
 
 agent_communication:
   - agent: "main"
