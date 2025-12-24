@@ -99,6 +99,7 @@ const Dashboard = () => {
   const [showPaymentLinkPage, setShowPaymentLinkPage] = useState(false); // New state for payment link page
   const [paymentLinkData, setPaymentLinkData] = useState(null); // Store payment link data
   const [planQuantities, setPlanQuantities] = useState({}); // Track quantity for each plan
+  const [planCounts, setPlanCounts] = useState({}); // Track count for Client Server plans
   const [showWarningModal, setShowWarningModal] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [pendingNavigation, setPendingNavigation] = useState(null);
