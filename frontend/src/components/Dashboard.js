@@ -106,6 +106,7 @@ const Dashboard = () => {
   const [appSubscriptionId, setAppSubscriptionId] = useState(""); // Track subscription ID for App product
   const [appSubscriptionValidated, setAppSubscriptionValidated] = useState(false); // Track if App subscription is validated
   const [appSubscriptionCount, setAppSubscriptionCount] = useState(1); // Track subscription count for App product
+  const [appValidationMessage, setAppValidationMessage] = useState(""); // Track validation message for App product
   const [showWarningModal, setShowWarningModal] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [pendingNavigation, setPendingNavigation] = useState(null);
