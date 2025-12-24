@@ -100,6 +100,9 @@ const Dashboard = () => {
   const [paymentLinkData, setPaymentLinkData] = useState(null); // Store payment link data
   const [planQuantities, setPlanQuantities] = useState({}); // Track quantity for each plan
   const [planCounts, setPlanCounts] = useState({}); // Track count for Client Server plans
+  const [onlineUserCount, setOnlineUserCount] = useState(1); // Track user count for Online product
+  const [onlineCompanyCount, setOnlineCompanyCount] = useState(1); // Track company count for Online product
+  const [onlineDatabaseType, setOnlineDatabaseType] = useState(""); // Track database type for Online product
   const [showWarningModal, setShowWarningModal] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [pendingNavigation, setPendingNavigation] = useState(null);
