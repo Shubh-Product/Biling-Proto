@@ -103,6 +103,9 @@ const Dashboard = () => {
   const [onlineUserCount, setOnlineUserCount] = useState(1); // Track user count for Online product
   const [onlineCompanyCount, setOnlineCompanyCount] = useState(1); // Track company count for Online product
   const [onlineDatabaseType, setOnlineDatabaseType] = useState(""); // Track database type for Online product
+  const [appSubscriptionId, setAppSubscriptionId] = useState(""); // Track subscription ID for App product
+  const [appSubscriptionValidated, setAppSubscriptionValidated] = useState(false); // Track if App subscription is validated
+  const [appSubscriptionCount, setAppSubscriptionCount] = useState(1); // Track subscription count for App product
   const [showWarningModal, setShowWarningModal] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [pendingNavigation, setPendingNavigation] = useState(null);
