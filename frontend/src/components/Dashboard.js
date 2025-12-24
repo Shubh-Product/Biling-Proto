@@ -903,6 +903,56 @@ const Dashboard = () => {
     return basePrice * userCount * companyCount;
   };
 
+  // Helper function to calculate pricing for Online product
+  const calculateOnlinePricing = () => {
+    if (formData.productType !== "Online" || !formData.duration || !onlineDatabaseType) {
+      return null;
+    }
+
+    // Sample pricing structure for Online product
+    const basePricing = {
+      "360_Access": 5000,           // Base price for 360 days Access
+      "360_Client Server": 10000,   // Base price for 360 days Client Server
+      "1080_Access": 12000,         // Base price for 1080 days Access (3 years with 20% discount)
+      "1080_Client Server": 24000   // Base price for 1080 days Client Server (3 years with 20% discount)
+    };
+
+    const priceKey = `${formData.duration}_${onlineDatabaseType}`;
+    const basePrice = basePricing[priceKey] || 0;
+    
+    // Total base price with user and company count multiplication
+    const totalBasePrice = basePrice * onlineUserCount * onlineCompanyCount;
+    
+    // Apply license and transaction discounts
+    const licenseDiscountPercent = getDiscountByLicenseType(formData.licenseType);
+    const transactionDiscountPercent = getAdditionalDiscountByTransactionType(formData.transactionType);
+    const totalDiscountPercent = licenseDiscountPercent + transactionDiscountPercent;
+    let discountAmount = Math.round(totalBasePrice * (totalDiscountPercent / 100));
+    
+    // Add Recom Bundle offer discount if applied
+    const recomOfferDiscount = addRecomOffer ? 3000 : 0;
+    discountAmount += recomOfferDiscount;
+    
+    const discountedPrice = totalBasePrice - discountAmount;
+    
+    // Calculate TDS deduction if enabled (10% of base price)
+    const tdsAmount = formData.deductTds ? Math.round(totalBasePrice * 0.10) : 0;
+    const priceAfterTds = discountedPrice - tdsAmount;
+    
+    const taxAmount = Math.round(priceAfterTds * 0.18); // 18% GST on amount after TDS
+    const finalAmount = priceAfterTds + taxAmount;
+
+    return {
+      basePrice: totalBasePrice,
+      discountPercent: totalDiscountPercent,
+      discountAmount,
+      recomOfferDiscount,
+      tdsAmount,
+      taxAmount,
+      finalAmount
+    };
+  };
+
   // Helper function to calculate pricing for RDP plans
   const calculateRDPPricing = () => {
     if (formData.productType !== "RDP" || !formData.planName) {
