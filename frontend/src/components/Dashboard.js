@@ -2154,6 +2154,10 @@ const Dashboard = () => {
   React.useEffect(() => {
     const busyOnlineValid = formData.productType === "Busy Online" && formData.duration && formData.accessType && validateBusyOnlineCounts().isValid;
     const orderSummaryVisible = (((formData.productType === "Desktop" && formData.planName && calculateDesktopPricing()) || 
+                                 (formData.productType === "Mandi" && formData.planName && calculateDesktopPricing()) ||
+                                 (formData.productType === "Online" && formData.planName && calculateDesktopPricing()) ||
+                                 (formData.productType === "App" && formData.planName && calculateDesktopPricing()) ||
+                                 (formData.productType === "Recom" && formData.planName && calculateDesktopPricing()) ||
                                  (formData.productType === "RDP" && formData.planName && calculateRDPPricing()) ||
                                  busyOnlineValid) && customerValidated);
     
