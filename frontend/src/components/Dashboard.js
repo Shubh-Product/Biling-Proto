@@ -9611,7 +9611,7 @@ const Dashboard = () => {
                           <>
                             {/* Subscription Count (Mandatory) - Text box */}
                             <div className="flex items-center space-x-3">
-                              <Label className="text-sm font-medium whitespace-nowrap">Subscription Count <span className="text-red-500">*</span>:</Label>
+                              <Label className="text-sm font-medium whitespace-nowrap">Subscription Count:</Label>
                               <Input
                                 type="text"
                                 value={appSubscriptionCount}
