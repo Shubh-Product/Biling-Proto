@@ -4744,26 +4744,23 @@ const Dashboard = () => {
               
         {/* Create Transaction Form */}
         {showCreateForm && (
-          <Card>
-            <CardContent className="pt-6">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* License Type */}
-                {/* Transaction Type Tabs - Step 1 */}
-                <div className="mb-6">
-                  <div className="flex space-x-3">
-                    {[
-                      { value: "New Sales", label: "New Sale", icon: "📝" },
-                      { value: "Renewal/Upgrade", label: "Renewal", icon: "🔄" },
-                      { value: "Mobile App", label: "Upgrade", icon: "📱" },
-                      { value: "Recom", label: "Offers", icon: "🎁" }
-                    ].map((tab) => {
-                      const isActive = formData.transactionType === tab.value;
-                      return (
-                        <button
-                          key={tab.value}
-                          type="button"
-                          onClick={() => {
-                            const newTransactionType = tab.value;
+          <div>
+            {/* Transaction Type Tabs - Step 1 - Outside Card */}
+            <div className="mb-0">
+              <div className="flex space-x-1">
+                {[
+                  { value: "New Sales", label: "New Sale", icon: "📝" },
+                  { value: "Renewal/Upgrade", label: "Renewal", icon: "🔄" },
+                  { value: "Mobile App", label: "Upgrade", icon: "📱" },
+                  { value: "Recom", label: "Offers", icon: "🎁" }
+                ].map((tab) => {
+                  const isActive = formData.transactionType === tab.value;
+                  return (
+                    <button
+                      key={tab.value}
+                      type="button"
+                      onClick={() => {
+                        const newTransactionType = tab.value;
                             
                             // Reset journey for specific transaction types
                             if (['Renewal/Upgrade', 'Mobile App', 'Recom', 'Bundle Offer'].includes(newTransactionType)) {
