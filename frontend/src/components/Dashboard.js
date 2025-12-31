@@ -6080,7 +6080,7 @@ const Dashboard = () => {
                               {/* Desktop Plan Selection */}
                               {formData.licenseModel && formData.duration && (
                                 <div className="flex items-start space-x-6">
-                                  <Label className="text-sm font-medium whitespace-nowrap pt-3">Plan <span className="text-red-500">*</span>:</Label>
+                                  <Label className="text-sm font-medium whitespace-nowrap pt-3">Plan:</Label>
                                   <div className="flex-1 grid grid-cols-2 gap-4">
                                     {getDesktopPlans(formData.licenseModel, formData.duration).map((plan, index) => (
                                       <label key={plan.name} className={`flex items-start space-x-2 cursor-pointer p-3 border-2 rounded-lg hover:bg-gray-50 transition-all ${
@@ -6274,7 +6274,7 @@ const Dashboard = () => {
                           {formData.productType === "RDP" && (
                             <div className="space-y-6">
                               <div className="flex items-start space-x-6">
-                                <Label className="text-sm font-medium whitespace-nowrap pt-3">Plan <span className="text-red-500">*</span>:</Label>
+                                <Label className="text-sm font-medium whitespace-nowrap pt-3">Plan:</Label>
                                 <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
                                   {[
                                     {
