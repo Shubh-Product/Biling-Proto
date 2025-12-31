@@ -10491,8 +10491,9 @@ const Dashboard = () => {
                           }
                           return false;
                         } else if (formData.productType === "RDP") {
-                          const pricing = calculateRDPPricing();
-                          return pricing?.finalAmount === 0;
+                          // For RDP - check if count is at least 1
+                          if (rdpCount < 1) return true;
+                          return false;
                         } else if (formData.productType === "Busy Online" && formData.duration && formData.accessType) {
                           const validation = validateBusyOnlineCounts();
                           if (!validation.isValid) return true; // Disable if validation fails
