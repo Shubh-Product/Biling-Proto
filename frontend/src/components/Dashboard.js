@@ -10288,9 +10288,37 @@ const Dashboard = () => {
                             gstAmount = Math.round(afterTds * 0.18);
                             grandTotal = afterTds + gstAmount;
                           }
-                          // For Desktop, Mandi, Recom with plan quantities
-                          else if ((formData.productType === "Desktop" || formData.productType === "Mandi" || 
-                               formData.productType === "Recom") && (formData.duration || recomMarketPlace)) {
+                          // For Recom product - Calculate similar to Desktop
+                          else if (formData.productType === "Recom" && formData.planName && recomMarketPlace) {
+                            // Sample pricing for Recom plans
+                            const recomPricing = {
+                              "Recom A": 10000,
+                              "Recom B": 20000,
+                              "Recom C": 40000,
+                              "Recom D": 70000,
+                              "Recom E": 120000,
+                              "Recom F": 0, // FOC
+                              "Recom G": 0, // FOC
+                              "Recom H": 30000
+                            };
+                            
+                            subtotal = recomPricing[formData.planName] || 0;
+                            
+                            // Calculate discount if applicable (same as Desktop)
+                            licenseDiscount = getDiscountByLicenseType(formData.licenseType);
+                            discountAmount = Math.round((subtotal * licenseDiscount) / 100);
+                            const afterDiscount = subtotal - discountAmount;
+                            
+                            // Calculate TDS if enabled (same as Desktop)
+                            tdsAmount = formData.deductTds ? Math.round(afterDiscount * 0.1) : 0;
+                            const afterTds = afterDiscount - tdsAmount;
+                            
+                            // Calculate GST (same as Desktop)
+                            gstAmount = Math.round(afterTds * 0.18);
+                            grandTotal = afterTds + gstAmount;
+                          }
+                          // For Desktop, Mandi with plan quantities
+                          else if ((formData.productType === "Desktop" || formData.productType === "Mandi") && formData.duration) {
                             const plans = getDesktopPlans(formData.licenseModel, formData.duration);
                             plans.forEach(plan => {
                               const quantity = planQuantities[plan.name] || 0;
