@@ -10169,6 +10169,27 @@ const Dashboard = () => {
                                 }
                               }
                               
+                              // For RDP product with count-based model
+                              if (formData.productType === "RDP" && rdpCount >= 1) {
+                                // Sample pricing for RDP
+                                const rdpBasePrice = 15000; // Base price per RDP
+                                const totalPrice = rdpBasePrice * rdpCount;
+                                
+                                lineItems.push(
+                                  <tr key="rdp-product" className="hover:bg-gray-50">
+                                    <td className="px-3 py-2 text-sm text-gray-700">{serialNo++}</td>
+                                    <td className="px-3 py-2 text-sm text-gray-900">
+                                      <div>RDP Service</div>
+                                      <div className="text-xs text-gray-600">Remote Desktop Protocol</div>
+                                    </td>
+                                    <td className="px-3 py-2 text-sm text-center text-gray-700">365 Days</td>
+                                    <td className="px-3 py-2 text-sm text-center text-gray-700">{rdpCount}</td>
+                                    <td className="px-3 py-2 text-sm text-right text-gray-700">₹{rdpBasePrice.toLocaleString('en-IN')}</td>
+                                    <td className="px-3 py-2 text-sm text-right font-medium text-gray-900">₹{totalPrice.toLocaleString('en-IN')}</td>
+                                  </tr>
+                                );
+                              }
+                              
                               // Show "No items" message if no line items
                               if (lineItems.length === 0) {
                                 return (
