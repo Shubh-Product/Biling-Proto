@@ -9700,7 +9700,7 @@ const Dashboard = () => {
                             
                             {/* Single Market Place Plans */}
                             {recomMarketPlace === "Single" && (
-                              <div className="grid grid-cols-5 gap-3">
+                              <div className="grid grid-cols-5 gap-2">
                                 {[
                                   { name: "A", orders: "6,000", days: "360" },
                                   { name: "B", orders: "12,000", days: "360" },
@@ -9708,17 +9708,25 @@ const Dashboard = () => {
                                   { name: "D", orders: "60,000", days: "360" },
                                   { name: "E", orders: "120,000", days: "360" }
                                 ].map((plan) => {
+                                  const isSelected = formData.planName === `Recom ${plan.name}`;
                                   return (
                                     <div 
-                                      key={plan.name} 
-                                      className="border-2 rounded-lg p-3 border-gray-200 hover:border-gray-300 transition-all"
+                                      key={plan.name}
+                                      onClick={() => {
+                                        setFormData(prev => ({ ...prev, planName: `Recom ${plan.name}` }));
+                                      }}
+                                      className={`relative border-2 rounded-lg p-2 cursor-pointer transition-all ${
+                                        isSelected
+                                          ? "border-blue-500 bg-blue-50 shadow-md" 
+                                          : "border-gray-200 hover:border-blue-300 hover:shadow-sm"
+                                      }`}
                                     >
-                                      <div className="absolute top-2 left-2 w-6 h-6 bg-gray-300 text-gray-700 font-bold text-xs flex items-center justify-center rounded">
+                                      <div className="absolute top-1 left-1 w-5 h-5 bg-gray-300 text-gray-700 font-bold text-[10px] flex items-center justify-center rounded">
                                         {plan.name}
                                       </div>
-                                      <div className="text-center mt-6">
-                                        <div className="text-sm font-semibold text-gray-900">{plan.orders}</div>
-                                        <div className="text-xs text-gray-600">({plan.days} days)</div>
+                                      <div className="text-center mt-5">
+                                        <div className="text-xs font-semibold text-gray-900">{plan.orders}</div>
+                                        <div className="text-[10px] text-gray-600">({plan.days} days)</div>
                                       </div>
                                     </div>
                                   );
@@ -9728,9 +9736,9 @@ const Dashboard = () => {
 
                             {/* Multiple Market Place Plans */}
                             {recomMarketPlace === "Multiple" && (
-                              <div className="space-y-3">
+                              <div className="space-y-2">
                                 {/* First Row - 5 plans */}
-                                <div className="grid grid-cols-5 gap-3">
+                                <div className="grid grid-cols-5 gap-2">
                                   {[
                                     { name: "A", orders: "300", days: "21" },
                                     { name: "B", orders: "12,000", days: "360" },
@@ -9738,17 +9746,25 @@ const Dashboard = () => {
                                     { name: "D", orders: "60,000", days: "360" },
                                     { name: "E", orders: "120,000", days: "360" }
                                   ].map((plan) => {
+                                    const isSelected = formData.planName === `Recom ${plan.name}`;
                                     return (
                                       <div 
-                                        key={plan.name} 
-                                        className="border-2 rounded-lg p-3 border-gray-200 hover:border-gray-300 transition-all"
+                                        key={plan.name}
+                                        onClick={() => {
+                                          setFormData(prev => ({ ...prev, planName: `Recom ${plan.name}` }));
+                                        }}
+                                        className={`relative border-2 rounded-lg p-2 cursor-pointer transition-all ${
+                                          isSelected
+                                            ? "border-blue-500 bg-blue-50 shadow-md" 
+                                            : "border-gray-200 hover:border-blue-300 hover:shadow-sm"
+                                        }`}
                                       >
-                                        <div className="absolute top-2 left-2 w-6 h-6 bg-gray-300 text-gray-700 font-bold text-xs flex items-center justify-center rounded">
+                                        <div className="absolute top-1 left-1 w-5 h-5 bg-gray-300 text-gray-700 font-bold text-[10px] flex items-center justify-center rounded">
                                           {plan.name}
                                         </div>
-                                        <div className="text-center mt-6">
-                                          <div className="text-sm font-semibold text-gray-900">{plan.orders}</div>
-                                          <div className="text-xs text-gray-600">({plan.days} days)</div>
+                                        <div className="text-center mt-5">
+                                          <div className="text-xs font-semibold text-gray-900">{plan.orders}</div>
+                                          <div className="text-[10px] text-gray-600">({plan.days} days)</div>
                                         </div>
                                       </div>
                                     );
@@ -9756,23 +9772,31 @@ const Dashboard = () => {
                                 </div>
 
                                 {/* Second Row - 3 plans */}
-                                <div className="grid grid-cols-5 gap-3">
+                                <div className="grid grid-cols-5 gap-2">
                                   {[
                                     { name: "F", orders: "FOC - 300", days: "21", isFOC: true },
                                     { name: "G", orders: "FOC - 12,000", days: "360", isFOC: true },
                                     { name: "H", orders: "12,000", days: "720", isFOC: false }
                                   ].map((plan) => {
+                                    const isSelected = formData.planName === `Recom ${plan.name}`;
                                     return (
                                       <div 
-                                        key={plan.name} 
-                                        className="border-2 rounded-lg p-3 border-gray-200 hover:border-gray-300 transition-all"
+                                        key={plan.name}
+                                        onClick={() => {
+                                          setFormData(prev => ({ ...prev, planName: `Recom ${plan.name}` }));
+                                        }}
+                                        className={`relative border-2 rounded-lg p-2 cursor-pointer transition-all ${
+                                          isSelected
+                                            ? "border-blue-500 bg-blue-50 shadow-md" 
+                                            : "border-gray-200 hover:border-blue-300 hover:shadow-sm"
+                                        }`}
                                       >
-                                        <div className="absolute top-2 left-2 w-6 h-6 bg-gray-300 text-gray-700 font-bold text-xs flex items-center justify-center rounded">
+                                        <div className="absolute top-1 left-1 w-5 h-5 bg-gray-300 text-gray-700 font-bold text-[10px] flex items-center justify-center rounded">
                                           {plan.name}
                                         </div>
-                                        <div className="text-center mt-6">
-                                          <div className="text-sm font-semibold text-gray-900">{plan.orders}</div>
-                                          <div className="text-xs text-gray-600">({plan.days} days)</div>
+                                        <div className="text-center mt-5">
+                                          <div className="text-xs font-semibold text-gray-900">{plan.orders}</div>
+                                          <div className="text-[10px] text-gray-600">({plan.days} days)</div>
                                         </div>
                                       </div>
                                     );
