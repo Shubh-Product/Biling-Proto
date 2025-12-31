@@ -9649,19 +9649,34 @@ const Dashboard = () => {
                         {/* Step 2: Show fields only after validation */}
                         {appSubscriptionValidated && (
                           <>
-                            {/* Subscription Count (Mandatory) - Text box */}
+                            {/* Subscription Count (Mandatory) - Add/Reduce control */}
                             <div className="flex items-center space-x-3">
                               <Label className="text-sm font-medium whitespace-nowrap">Subscription Count:</Label>
-                              <Input
-                                type="text"
-                                value={appSubscriptionCount}
-                                onChange={(e) => {
-                                  const value = e.target.value.replace(/\D/g, ''); // Only allow digits
-                                  const numValue = parseInt(value) || 1;
-                                  setAppSubscriptionCount(numValue);
-                                }}
-                                className="w-20 px-3 py-2 border-2 border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                              />
+                              <div className="flex items-center bg-white rounded border-0 px-2 py-1">
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    if (appSubscriptionCount > 1) {
+                                      setAppSubscriptionCount(appSubscriptionCount - 1);
+                                    }
+                                  }}
+                                  className="text-gray-600 hover:text-red-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                                >
+                                  -
+                                </button>
+                                <span className="text-base font-semibold text-gray-900 min-w-[30px] text-center px-2">
+                                  {appSubscriptionCount}
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setAppSubscriptionCount(appSubscriptionCount + 1);
+                                  }}
+                                  className="text-gray-600 hover:text-green-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                                >
+                                  +
+                                </button>
+                              </div>
                             </div>
 
                             {/* Duration Selection - Same as Desktop */}
