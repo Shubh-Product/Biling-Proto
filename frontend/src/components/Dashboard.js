@@ -5248,7 +5248,7 @@ const Dashboard = () => {
                             {console.log('About to render plans. Calling getDesktopPlans with:', currentProductInfo?.licenseModel || "Perpetual", formData.duration)}
                             {/* Desktop Plans Display - 4 Column Grid WITHOUT Quantity Controls (Renewal Flow) - Clickable */}
                             <div data-scroll-target="desktop-plans" className="space-y-2">
-                              <Label className="text-base font-semibold">Plans <span className="text-red-500">*</span>:</Label>
+                              <Label className="text-sm font-medium">Plans <span className="text-red-500">*</span>:</Label>
                               {(() => {
                                 const plans = getDesktopPlans("Subscription", formData.duration);
                                 console.log('getDesktopPlans returned:', plans, 'Number of plans:', plans?.length);
@@ -5608,7 +5608,7 @@ const Dashboard = () => {
                               {/* Desktop Plan Selection - 4 Column Grid with Quantity */}
                               {formData.licenseModel && formData.duration && (
                                 <div className="space-y-2">
-                                  <Label className="text-base font-semibold">Plans <span className="text-red-500">*</span>:</Label>
+                                  <Label className="text-sm font-medium">Plans <span className="text-red-500">*</span>:</Label>
                                   {(() => {
                                     const plans = getDesktopPlans(formData.licenseModel, formData.duration);
                                     return (
@@ -6080,7 +6080,7 @@ const Dashboard = () => {
                               {/* Desktop Plan Selection */}
                               {formData.licenseModel && formData.duration && (
                                 <div className="flex items-start space-x-6">
-                                  <Label className="text-base font-semibold whitespace-nowrap pt-3">Plan <span className="text-red-500">*</span>:</Label>
+                                  <Label className="text-sm font-medium whitespace-nowrap pt-3">Plan <span className="text-red-500">*</span>:</Label>
                                   <div className="flex-1 grid grid-cols-2 gap-4">
                                     {getDesktopPlans(formData.licenseModel, formData.duration).map((plan, index) => (
                                       <label key={plan.name} className={`flex items-start space-x-2 cursor-pointer p-3 border-2 rounded-lg hover:bg-gray-50 transition-all ${
@@ -6241,7 +6241,7 @@ const Dashboard = () => {
                               {/* TDS Deduction Toggle for Busy Online */}
                               {formData.productType === "Busy Online" && (
                                 <div className="flex items-center space-x-3 mt-4">
-                                  <Label className="text-base font-semibold whitespace-nowrap">Deduct TDS:</Label>
+                                  <Label className="text-sm font-medium whitespace-nowrap">Deduct TDS:</Label>
                                   <div className="flex items-center space-x-2">
                                     <label className="relative inline-flex items-center cursor-pointer">
                                       <input
@@ -6274,7 +6274,7 @@ const Dashboard = () => {
                           {formData.productType === "RDP" && (
                             <div className="space-y-6">
                               <div className="flex items-start space-x-6">
-                                <Label className="text-base font-semibold whitespace-nowrap pt-3">Plan <span className="text-red-500">*</span>:</Label>
+                                <Label className="text-sm font-medium whitespace-nowrap pt-3">Plan <span className="text-red-500">*</span>:</Label>
                                 <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
                                   {[
                                     {
@@ -6350,7 +6350,7 @@ const Dashboard = () => {
                               {/* TDS Deduction Toggle for RDP */}
                               {formData.productType === "RDP" && (
                                 <div className="flex items-center space-x-3 mt-4">
-                                  <Label className="text-base font-semibold whitespace-nowrap">Deduct TDS:</Label>
+                                  <Label className="text-sm font-medium whitespace-nowrap">Deduct TDS:</Label>
                                   <div className="flex items-center space-x-2">
                                     <label className="relative inline-flex items-center cursor-pointer">
                                       <input
@@ -9133,7 +9133,7 @@ const Dashboard = () => {
                         {/* Desktop Plans Display - 4 Column Grid with Quantity Controls */}
                         {formData.duration && (
                           <div data-scroll-target="desktop-plans" className="space-y-2">
-                            <Label className="text-base font-semibold">Plans <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium">Plans <span className="text-red-500">*</span>:</Label>
                             <div className="grid grid-cols-4 gap-2">
                               {getDesktopPlans(formData.licenseModel, formData.duration).map((plan, index) => {
                                 const quantity = planQuantities[plan.name] || 0;
@@ -9300,7 +9300,7 @@ const Dashboard = () => {
                         {/* Mandi Plans Display - Only Saffron and Emerald with User Types */}
                         {formData.duration && (
                           <div data-scroll-target="mandi-plans" className="space-y-2">
-                            <Label className="text-base font-semibold">Plans <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium">Plans <span className="text-red-500">*</span>:</Label>
                             <div className="grid grid-cols-3 gap-2">
                               {getDesktopPlans(formData.licenseModel, formData.duration)
                                 .filter(plan => {
@@ -9772,7 +9772,7 @@ const Dashboard = () => {
                             {/* Recom Plans Display - Based on Market Place Selection */}
                             {recomMarketPlace && (
                               <div data-scroll-target="recom-plans" className="space-y-2">
-                                <Label className="text-base font-semibold">Number of Orders <span className="text-red-500">*</span>:</Label>
+                                <Label className="text-sm font-medium">Number of Orders <span className="text-red-500">*</span>:</Label>
                             
                             {/* Single Market Place Plans */}
                             {recomMarketPlace === "Single" && (
@@ -9962,7 +9962,7 @@ const Dashboard = () => {
                           {/* Step 3: User and Company Count - Show after access type is selected */}
                           {formData.accessType && (
                             <div className="flex items-center space-x-4">
-                              <Label className="text-base font-semibold whitespace-nowrap">Customize:</Label>
+                              <Label className="text-sm font-medium whitespace-nowrap">Customize:</Label>
                               
                               {/* User Count Field */}
                               <div className="flex items-center space-x-2">
