@@ -1200,6 +1200,19 @@ agent_communication:
       message: "✅ SEARCH BOX REPLACEMENT COMPLETED - Converted single wide search box into four compact input fields. New structure: 4 separate inputs (Mobile, Email, GSTIN, Payment ID) each with w-32 width arranged horizontally with gap-2 spacing. Removed search and filter icons. Each field has same styling (gray background, border, rounded, blue focus ring). Total width reduced from max-w-2xl (672px) to ~544px. More organized search with dedicated fields for each search type. First field (Mobile) maintains searchTerm state connection for search functionality. Ready for use."
 
 frontend:
+  - task: "App Product Subscription Count +/- Buttons Testing"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "App product type with subscription count +/- buttons implementation found in Dashboard.js. Subscription Count field implemented at lines 9652-9680 with proper +/- button controls, minimum value enforcement (cannot go below 1), and consistent styling with other count fields. Ready for comprehensive testing to verify functionality as requested in review."
+
+frontend:
   - task: "Revert Four Separate Search Fields Back to Single Search Box"
     implemented: true
     working: "YES"
