@@ -9020,7 +9020,8 @@ const Dashboard = () => {
                           { value: "Mandi", label: "Mandi" },
                           { value: "Online", label: "Online" },
                           { value: "App", label: "App" },
-                          { value: "Recom", label: "Recom" }
+                          { value: "Recom", label: "Recom" },
+                          { value: "RDP", label: "RDP" }
                         ].map((product) => (
                           <label key={product.value} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all w-32 ${
                             formData.productType === product.value 
