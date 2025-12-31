@@ -10176,7 +10176,7 @@ const Dashboard = () => {
                               
                               // For Desktop, Mandi, Recom products with plan quantities
                               if ((formData.productType === "Desktop" || formData.productType === "Mandi" || 
-                                   formData.productType === "Recom") && formData.duration) {
+                                   formData.productType === "Recom") && (formData.duration || recomMarketPlace)) {
                                 const plans = getDesktopPlans(formData.licenseModel, formData.duration);
                                 plans.forEach(plan => {
                                   const quantity = planQuantities[plan.name] || 0;
