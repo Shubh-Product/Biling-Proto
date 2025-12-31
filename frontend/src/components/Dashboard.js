@@ -10114,6 +10114,8 @@ const Dashboard = () => {
                         )}
                       </div>
                     )}
+                  </div>
+                )}
 
                 {/* Order Summary */}
                 {(() => {
