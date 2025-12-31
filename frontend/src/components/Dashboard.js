@@ -9064,7 +9064,7 @@ const Dashboard = () => {
                       {/* Region Dropdown in Same Row - Only show for Desktop and Mandi */}
                       {(formData.productType === "Desktop" || formData.productType === "Mandi") && (
                         <div className="flex items-center space-x-3 ml-8">
-                          <Label className="text-sm font-medium whitespace-nowrap">Region <span className="text-red-500">*</span>:</Label>
+                          <Label className="text-sm font-medium whitespace-nowrap">Region:</Label>
                           <select
                             value={formData.region}
                             onChange={(e) => setFormData(prev => ({ 
