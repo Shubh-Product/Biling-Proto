@@ -10156,8 +10156,8 @@ const Dashboard = () => {
                   const onlineValid = formData.productType === "Online" && onlineUserCount >= 1 && onlineCompanyCount >= 1 && onlineDatabaseType && formData.duration;
                   const mandiValid = formData.productType === "Mandi" && formData.duration && Object.values(planQuantities).some(qty => qty > 0);
                   const appValid = formData.productType === "App" && appSubscriptionValidated && appSubscriptionCount >= 1 && formData.duration;
-                  const recomValid = formData.productType === "Recom" && recomMarketPlace && formData.planName;
-                  const rdpValid = formData.productType === "RDP" && rdpCount >= 1;
+                  const recomValid = formData.productType === "Recom" && recomSubscriptionValidated && recomMarketPlace && formData.planName;
+                  const rdpValid = formData.productType === "RDP" && rdpSubscriptionValidated && rdpCount >= 1;
                   const showOrderSummary = (((formData.productType === "Desktop" && formData.planName && calculateDesktopPricing()) || 
                                            mandiValid ||
                                            onlineValid ||
@@ -10593,8 +10593,8 @@ const Dashboard = () => {
                   const onlineValid = formData.productType === "Online" && onlineUserCount >= 1 && onlineCompanyCount >= 1 && onlineDatabaseType && formData.duration;
                   const mandiValid = formData.productType === "Mandi" && formData.duration && Object.values(planQuantities).some(qty => qty > 0);
                   const appValid = formData.productType === "App" && appSubscriptionValidated && appSubscriptionCount >= 1 && formData.duration;
-                  const recomValid = formData.productType === "Recom" && recomMarketPlace && formData.planName;
-                  const rdpValid = formData.productType === "RDP" && rdpCount >= 1;
+                  const recomValid = formData.productType === "Recom" && recomSubscriptionValidated && recomMarketPlace && formData.planName;
+                  const rdpValid = formData.productType === "RDP" && rdpSubscriptionValidated && rdpCount >= 1;
                   const showOrderSummary = (((formData.productType === "Desktop" && formData.planName && calculateDesktopPricing()) || 
                                            mandiValid ||
                                            onlineValid ||
