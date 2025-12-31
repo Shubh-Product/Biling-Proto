@@ -4749,8 +4749,8 @@ const Dashboard = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* License Type */}
                 {/* Transaction Type Tabs - Step 1 */}
-                <div className="border-b border-gray-200">
-                  <div className="flex space-x-1">
+                <div className="mb-6">
+                  <div className="flex space-x-3">
                     {[
                       { value: "New Sales", label: "New Sale", icon: "📝" },
                       { value: "Renewal/Upgrade", label: "Renewal", icon: "🔄" },
@@ -4820,13 +4820,13 @@ const Dashboard = () => {
                               setFormData(prev => ({ ...prev, transactionType: newTransactionType }));
                             }
                           }}
-                          className={`px-6 py-3 text-sm font-semibold transition-all ${
+                          className={`flex items-center px-6 py-3 text-sm font-semibold rounded-lg transition-all ${
                             isActive
-                              ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50'
-                              : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50 border-b-2 border-transparent'
+                              ? 'bg-blue-600 text-white shadow-md'
+                              : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-gray-300 hover:shadow-sm'
                           }`}
                         >
-                          <span className="mr-2">{tab.icon}</span>
+                          <span className="mr-2 text-lg">{tab.icon}</span>
                           {tab.label}
                         </button>
                       );
