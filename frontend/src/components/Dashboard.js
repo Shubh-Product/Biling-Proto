@@ -9468,7 +9468,7 @@ const Dashboard = () => {
 
                           {/* Database Type - Radio buttons */}
                           <div className="flex items-center space-x-2">
-                            <Label className="text-sm font-medium whitespace-nowrap">Database Type <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium whitespace-nowrap">Database Type:</Label>
                             <div className="flex space-x-2">
                               {[
                                 { value: "Access", label: "Access" },
