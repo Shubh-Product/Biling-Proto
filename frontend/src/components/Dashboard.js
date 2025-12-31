@@ -10364,7 +10364,7 @@ const Dashboard = () => {
                   const onlineValid = formData.productType === "Online" && onlineUserCount >= 1 && onlineCompanyCount >= 1 && onlineDatabaseType && formData.duration;
                   const mandiValid = formData.productType === "Mandi" && formData.duration && Object.values(planQuantities).some(qty => qty > 0);
                   const appValid = formData.productType === "App" && appSubscriptionValidated && appSubscriptionCount >= 1 && formData.duration;
-                  const recomValid = formData.productType === "Recom" && recomMarketPlace && Object.values(planQuantities).some(qty => qty > 0);
+                  const recomValid = formData.productType === "Recom" && recomMarketPlace;
                   const showOrderSummary = (((formData.productType === "Desktop" && formData.planName && calculateDesktopPricing()) || 
                                            mandiValid ||
                                            onlineValid ||
