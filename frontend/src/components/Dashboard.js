@@ -107,6 +107,7 @@ const Dashboard = () => {
   const [appSubscriptionValidated, setAppSubscriptionValidated] = useState(false); // Track if App subscription is validated
   const [appSubscriptionCount, setAppSubscriptionCount] = useState(1); // Track subscription count for App product
   const [appValidationMessage, setAppValidationMessage] = useState(""); // Track validation message for App product
+  const [recomMarketPlace, setRecomMarketPlace] = useState(""); // Track market place selection for Recom product (Single/Multiple)
   const [showWarningModal, setShowWarningModal] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [pendingNavigation, setPendingNavigation] = useState(null);
