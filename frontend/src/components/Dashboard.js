@@ -2217,12 +2217,13 @@ const Dashboard = () => {
     const onlineValid = formData.productType === "Online" && onlineUserCount >= 1 && onlineCompanyCount >= 1 && onlineDatabaseType && formData.duration;
     const mandiValid = formData.productType === "Mandi" && formData.duration && Object.values(planQuantities).some(qty => qty > 0);
     const appValid = formData.productType === "App" && appSubscriptionValidated && appSubscriptionCount >= 1 && formData.duration;
+    const rdpValid = formData.productType === "RDP" && rdpCount >= 1;
     const orderSummaryVisible = (((formData.productType === "Desktop" && formData.planName && calculateDesktopPricing()) || 
                                  mandiValid ||
                                  onlineValid ||
                                  appValid ||
                                  (formData.productType === "Recom" && formData.planName && calculateDesktopPricing()) ||
-                                 (formData.productType === "RDP" && formData.planName && calculateRDPPricing()) ||
+                                 rdpValid ||
                                  busyOnlineValid) && customerValidated);
     
     if (orderSummaryVisible) {
