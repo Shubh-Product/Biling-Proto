@@ -5484,7 +5484,7 @@ const Dashboard = () => {
                           
                           {/* Product Selection - Desktop, Mandi, Online, App, Recom */}
                           <div className="flex items-center space-x-6">
-                            <Label className="text-sm font-medium whitespace-nowrap">Product <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium whitespace-nowrap">Product:</Label>
                             <div className="flex space-x-3">
                               {[
                                 { value: "Desktop", label: "Desktop" },
@@ -5963,7 +5963,7 @@ const Dashboard = () => {
                           
                           {/* Product Selection - Desktop, Mandi, Online, App, Recom */}
                           <div className="flex items-center space-x-6">
-                            <Label className="text-sm font-medium whitespace-nowrap">Product <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium whitespace-nowrap">Product:</Label>
                             <div className="flex space-x-3">
                               {[
                                 { value: "Desktop", label: "Desktop" },
@@ -9021,7 +9021,7 @@ const Dashboard = () => {
                     
                     {/* Product Selection with Region Dropdown in Same Row */}
                     <div id="product-type-section" className="flex items-center space-x-6">
-                      <Label className="text-sm font-medium whitespace-nowrap">Product <span className="text-red-500">*</span>:</Label>
+                      <Label className="text-sm font-medium whitespace-nowrap">Product:</Label>
                       <div className="flex space-x-3">
                         {[
                           { value: "Desktop", label: "Desktop" },
