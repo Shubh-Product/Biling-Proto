@@ -10052,13 +10052,14 @@ const Dashboard = () => {
                   const onlineValid = formData.productType === "Online" && onlineUserCount >= 1 && onlineCompanyCount >= 1 && onlineDatabaseType && formData.duration;
                   const mandiValid = formData.productType === "Mandi" && formData.duration && Object.values(planQuantities).some(qty => qty > 0);
                   const appValid = formData.productType === "App" && appSubscriptionValidated && appSubscriptionCount >= 1 && formData.duration;
-                  const showOrderSummary = ((formData.productType === "Desktop" && formData.planName && calculateDesktopPricing()) || 
+                  const recomValid = formData.productType === "Recom" && recomMarketPlace && formData.planName;
+                  const showOrderSummary = (((formData.productType === "Desktop" && formData.planName && calculateDesktopPricing()) || 
                                            mandiValid ||
                                            onlineValid ||
                                            appValid ||
-                                           (formData.productType === "Recom" && formData.planName && calculateDesktopPricing()) ||
+                                           recomValid ||
                                            (formData.productType === "RDP" && formData.planName && calculateRDPPricing()) ||
-                                           busyOnlineValid) && customerValidated;
+                                           busyOnlineValid) && customerValidated);
                   return showOrderSummary;
                 })() && (
                   <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
