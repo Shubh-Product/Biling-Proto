@@ -9671,41 +9671,108 @@ const Dashboard = () => {
                     {/* Recom Product Configuration - Market Place Based */}
                     {formData.productType === "Recom" && (
                       <div className="space-y-4">
-                        {/* Market Place Selection */}
-                        <div className="flex items-center space-x-3">
-                          <Label className="text-base font-semibold whitespace-nowrap">Market Place <span className="text-red-500">*</span>:</Label>
-                          <div className="flex space-x-2">
-                            {[
-                              { value: "Single", label: "Single" },
-                              { value: "Multiple", label: "Multiple" }
-                            ].map((marketplace) => (
-                              <label key={marketplace.value} className={`flex items-center cursor-pointer px-3 py-2 border-2 rounded-lg hover:shadow-md transition-all w-28 ${
-                                recomMarketPlace === marketplace.value
-                                  ? "border-blue-500 bg-blue-50" 
-                                  : "border-gray-200"
-                              }`}>
-                                <input
-                                  type="radio"
-                                  name="recomMarketPlace"
-                                  value={marketplace.value}
-                                  checked={recomMarketPlace === marketplace.value}
-                                  onChange={(e) => {
-                                    setRecomMarketPlace(e.target.value);
-                                    setPlanQuantities({}); // Reset plan quantities
-                                    setFormData(prev => ({ ...prev, planName: "" }));
-                                  }}
-                                  className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 mr-2"
-                                />
-                                <span className="text-gray-700 font-medium text-sm">{marketplace.label}</span>
-                              </label>
-                            ))}
+                        {/* Step 1: Subscription ID Entry and Validation */}
+                        <div className="space-y-2">
+                          <div className="flex items-center space-x-3">
+                            <Input
+                              type="text"
+                              placeholder="Enter Subscription ID"
+                              value={recomSubscriptionId}
+                              onChange={(e) => {
+                                setRecomSubscriptionId(e.target.value);
+                                setRecomValidationMessage(""); // Clear message on input change
+                              }}
+                              className="w-64 px-3 py-2 border-2 border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              disabled={recomSubscriptionValidated}
+                            />
+                            <Button
+                              type="button"
+                              onClick={() => {
+                                // Validate subscription ID (SER123456 is valid for testing)
+                                if (recomSubscriptionId.trim() === "SER123456") {
+                                  setRecomSubscriptionValidated(true);
+                                  setRecomValidationMessage("success");
+                                } else {
+                                  setRecomSubscriptionValidated(false);
+                                  setRecomValidationMessage("error");
+                                }
+                              }}
+                              disabled={recomSubscriptionValidated || !recomSubscriptionId.trim()}
+                              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 disabled:bg-gray-400"
+                            >
+                              {recomSubscriptionValidated ? "Validated ✓" : "Validate"}
+                            </Button>
+                            {recomSubscriptionValidated && (
+                              <Button
+                                type="button"
+                                variant="outline"
+                                onClick={() => {
+                                  setRecomSubscriptionValidated(false);
+                                  setRecomSubscriptionId("");
+                                  setRecomValidationMessage("");
+                                  setRecomMarketPlace("");
+                                  setFormData(prev => ({ ...prev, planName: "" }));
+                                }}
+                                className="text-sm"
+                              >
+                                Reset
+                              </Button>
+                            )}
                           </div>
+                          
+                          {/* Validation Messages */}
+                          {recomValidationMessage === "success" && (
+                            <div className="flex items-center space-x-2 text-green-600 text-sm">
+                              <CheckCircle className="w-4 h-4" />
+                              <span>Subscription ID validated successfully!</span>
+                            </div>
+                          )}
+                          {recomValidationMessage === "error" && (
+                            <div className="flex items-center space-x-2 text-red-600 text-sm">
+                              <AlertTriangle className="w-4 h-4" />
+                              <span>Invalid Subscription ID. Please enter a valid ID (e.g., SER123456)</span>
+                            </div>
+                          )}
                         </div>
 
-                        {/* Recom Plans Display - Based on Market Place Selection */}
-                        {recomMarketPlace && (
-                          <div data-scroll-target="recom-plans" className="space-y-2">
-                            <Label className="text-base font-semibold">Number of Orders <span className="text-red-500">*</span>:</Label>
+                        {/* Step 2: Show Market Place and Plans only after validation */}
+                        {recomSubscriptionValidated && (
+                          <>
+                            {/* Market Place Selection */}
+                            <div className="flex items-center space-x-3">
+                              <Label className="text-base font-semibold whitespace-nowrap">Market Place <span className="text-red-500">*</span>:</Label>
+                              <div className="flex space-x-2">
+                                {[
+                                  { value: "Single", label: "Single" },
+                                  { value: "Multiple", label: "Multiple" }
+                                ].map((marketplace) => (
+                                  <label key={marketplace.value} className={`flex items-center cursor-pointer px-3 py-2 border-2 rounded-lg hover:shadow-md transition-all w-28 ${
+                                    recomMarketPlace === marketplace.value
+                                      ? "border-blue-500 bg-blue-50" 
+                                      : "border-gray-200"
+                                  }`}>
+                                    <input
+                                      type="radio"
+                                      name="recomMarketPlace"
+                                      value={marketplace.value}
+                                      checked={recomMarketPlace === marketplace.value}
+                                      onChange={(e) => {
+                                        setRecomMarketPlace(e.target.value);
+                                        setPlanQuantities({}); // Reset plan quantities
+                                        setFormData(prev => ({ ...prev, planName: "" }));
+                                      }}
+                                      className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 mr-2"
+                                    />
+                                    <span className="text-gray-700 font-medium text-sm">{marketplace.label}</span>
+                                  </label>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Recom Plans Display - Based on Market Place Selection */}
+                            {recomMarketPlace && (
+                              <div data-scroll-target="recom-plans" className="space-y-2">
+                                <Label className="text-base font-semibold">Number of Orders <span className="text-red-500">*</span>:</Label>
                             
                             {/* Single Market Place Plans */}
                             {recomMarketPlace === "Single" && (
