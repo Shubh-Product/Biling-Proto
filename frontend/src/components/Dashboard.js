@@ -10115,41 +10115,6 @@ const Dashboard = () => {
                       </div>
                     )}
 
-                    {/* Promotional Offers - Moved to End */}
-                    {formData.productType && !["Mazu", "RDP"].includes(formData.productType) && (
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {/* Mobile App Promotion */}
-                        <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-                          <div className="flex items-center space-x-2 mb-1">
-                            <Smartphone className="w-4 h-4 text-green-600" />
-                            <h3 className="font-semibold text-green-800 text-sm">Special Promotion</h3>
-                          </div>
-                          <p className="text-green-700 text-xs">
-                            <strong>Mobile App worth ₹2,499 Free for 1 Year</strong>
-                          </p>
-                          <p className="text-green-600 text-xs mt-1">
-                            Included with all purchases
-                          </p>
-                        </div>
-
-                        {/* Recom Bundle Offer - Informational Only */}
-                        <div className="bg-orange-50 border border-orange-200 rounded-lg p-3">
-                          <div className="flex items-center space-x-2 mb-1">
-                            <AlertTriangle className="w-4 h-4 text-orange-600" />
-                            <h3 className="font-semibold text-orange-800 text-sm">Recom Bundle Offer</h3>
-                          </div>
-                          <p className="text-orange-700 text-xs font-medium">
-                            Valid Only Till Tomorrow
-                          </p>
-                          <p className="text-orange-600 text-xs">
-                            Get ₹3,000 off on your Recom Purchase
-                          </p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-
                 {/* Order Summary */}
                 {(() => {
                   const busyOnlineValid = formData.productType === "Busy Online" && formData.duration && formData.accessType && validateBusyOnlineCounts().isValid;
