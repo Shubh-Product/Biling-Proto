@@ -5219,7 +5219,7 @@ const Dashboard = () => {
                         
                         {/* Duration Selection - Show directly without Product selection */}
                         <div id="product-selection-section" className="flex items-center space-x-6">
-                          <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                          <Label className="text-sm font-medium whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
                           <div className="flex space-x-3">
                             {["360", "180", "90"].map((duration) => (
                               <label key={duration} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all ${
@@ -5484,7 +5484,7 @@ const Dashboard = () => {
                           
                           {/* Product Selection - Desktop, Mandi, Online, App, Recom */}
                           <div className="flex items-center space-x-6">
-                            <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Product <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium whitespace-nowrap">Product <span className="text-red-500">*</span>:</Label>
                             <div className="flex space-x-3">
                               {[
                                 { value: "Desktop", label: "Desktop" },
@@ -5527,7 +5527,7 @@ const Dashboard = () => {
                               {/* License Model and Duration Selection - Combined in same line */}
                               <div className="flex items-center space-x-8">
                                 <div className="flex items-center space-x-3">
-                                  <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">License Model <span className="text-red-500">*</span>:</Label>
+                                  <Label className="text-sm font-medium whitespace-nowrap">License Model <span className="text-red-500">*</span>:</Label>
                                   <div className="flex space-x-2">
                                     {[
                                       { value: "Perpetual", label: "Perpetual" },
@@ -5560,7 +5560,7 @@ const Dashboard = () => {
                                 {/* Duration Selection for Desktop */}
                                 {formData.licenseModel && (
                                   <div className="flex items-center space-x-3">
-                                    <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                                    <Label className="text-sm font-medium whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
                                     <div className="flex space-x-2">
                                       {[
                                         { value: "360 Days", label: "360 Days" },
@@ -5963,7 +5963,7 @@ const Dashboard = () => {
                           
                           {/* Product Selection - Desktop, Mandi, Online, App, Recom */}
                           <div className="flex items-center space-x-6">
-                            <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Product <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium whitespace-nowrap">Product <span className="text-red-500">*</span>:</Label>
                             <div className="flex space-x-3">
                               {[
                                 { value: "Desktop", label: "Desktop" },
@@ -6006,7 +6006,7 @@ const Dashboard = () => {
                               {/* License Model and Duration Selection - Combined in same line */}
                               <div className="flex items-center space-x-8">
                                 <div className="flex items-center space-x-3">
-                                  <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">License Model <span className="text-red-500">*</span>:</Label>
+                                  <Label className="text-sm font-medium whitespace-nowrap">License Model <span className="text-red-500">*</span>:</Label>
                                   <div className="flex space-x-2">
                                     {[
                                       { value: "Perpetual", label: "Perpetual" },
@@ -6039,7 +6039,7 @@ const Dashboard = () => {
                                 {/* Duration Selection for Desktop */}
                                 {formData.licenseModel && (
                                   <div className="flex items-center space-x-3">
-                                    <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                                    <Label className="text-sm font-medium whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
                                     <div className="flex space-x-2">
                                       {[
                                         { value: "360 Days", label: "360 Days" },
@@ -6124,7 +6124,7 @@ const Dashboard = () => {
                               {/* Duration and Access Type in same line */}
                               <div className="flex items-center space-x-8">
                                 <div className="flex items-center space-x-3">
-                                  <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                                  <Label className="text-sm font-medium whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
                                   <div className="flex space-x-2">
                                     {[
                                       { value: "360 Days", label: "360 Days" },
@@ -6163,7 +6163,7 @@ const Dashboard = () => {
                                 {/* Access Type Selection */}
                                 {formData.duration && (
                                   <div className="flex items-center space-x-3">
-                                    <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Access Type <span className="text-red-500">*</span>:</Label>
+                                    <Label className="text-sm font-medium whitespace-nowrap">Access Type <span className="text-red-500">*</span>:</Label>
                                     <div className="flex space-x-2">
                                       {[
                                         { value: "Web Access", label: "Web Access" },
@@ -6198,7 +6198,7 @@ const Dashboard = () => {
                                 <div className="space-y-2">
                                   <div className="flex items-center space-x-8">
                                     <div className="flex items-center space-x-3">
-                                      <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">User Count <span className="text-red-500">*</span>:</Label>
+                                      <Label className="text-sm font-medium whitespace-nowrap">User Count <span className="text-red-500">*</span>:</Label>
                                       <Input
                                         type="number"
                                         value={formData.userCount || "1"}
@@ -6210,7 +6210,7 @@ const Dashboard = () => {
                                     </div>
                                     
                                     <div className="flex items-center space-x-3">
-                                      <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Company Count <span className="text-red-500">*</span>:</Label>
+                                      <Label className="text-sm font-medium whitespace-nowrap">Company Count <span className="text-red-500">*</span>:</Label>
                                       <Input
                                         type="number"
                                         value={formData.companyCount || "1"}
@@ -6547,7 +6547,7 @@ const Dashboard = () => {
                       <h3 className="text-lg font-semibold text-purple-900 mb-4">📱 Enter Mobile App License Details</h3>
                       
                       <div className="flex items-center space-x-4">
-                        <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Serial Number <span className="text-red-500">*</span>:</Label>
+                        <Label className="text-sm font-medium whitespace-nowrap">Serial Number <span className="text-red-500">*</span>:</Label>
                         <div className="flex items-center space-x-3">
                           <Input
                             value={mobileAppSerialNumber}
@@ -6783,7 +6783,7 @@ const Dashboard = () => {
                           <div className="flex items-center space-x-8">
                             {/* Number of Apps */}
                             <div className="flex items-center space-x-3">
-                              <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">No. of Apps <span className="text-red-500">*</span>:</Label>
+                              <Label className="text-sm font-medium whitespace-nowrap">No. of Apps <span className="text-red-500">*</span>:</Label>
                               <Input
                                 type="number"
                                 value={mobileAppCount}
@@ -6796,7 +6796,7 @@ const Dashboard = () => {
                             
                             {/* Validity Selection */}
                             <div className="flex items-center space-x-3">
-                              <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Validity <span className="text-red-500">*</span>:</Label>
+                              <Label className="text-sm font-medium whitespace-nowrap">Validity <span className="text-red-500">*</span>:</Label>
                               <div className="flex space-x-2">
                                 <label className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all w-32 ${
                                   mobileAppValidity === '360' 
@@ -7068,7 +7068,7 @@ const Dashboard = () => {
                             <h3 className="text-lg font-semibold text-indigo-900 mb-4">🔄 Select Renewal Validity</h3>
                             
                             <div className="flex items-center space-x-3">
-                              <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Validity <span className="text-red-500">*</span>:</Label>
+                              <Label className="text-sm font-medium whitespace-nowrap">Validity <span className="text-red-500">*</span>:</Label>
                               <div className="flex space-x-2">
                                 <label className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all w-32 ${
                                   renewalValidity === '360' 
@@ -7289,7 +7289,7 @@ const Dashboard = () => {
                       <h3 className="text-lg font-semibold text-emerald-900 mb-4">🎯 Enter Recom License Details</h3>
                       
                       <div className="flex items-center space-x-4">
-                        <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Serial Number <span className="text-red-500">*</span>:</Label>
+                        <Label className="text-sm font-medium whitespace-nowrap">Serial Number <span className="text-red-500">*</span>:</Label>
                         <div className="flex items-center space-x-3">
                           <Input
                             value={recomSerialNumber}
@@ -8250,7 +8250,7 @@ const Dashboard = () => {
                 {formData.transactionType !== "New Sales" && formData.transactionType !== "Renewal/Upgrade" && formData.transactionType !== "Mobile App" && formData.transactionType !== "Recom" && formData.transactionType !== "Cancel Txn" && (
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
                     <div className="flex items-center space-x-4">
-                      <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Serial Number <span className="text-red-500">*</span>:</Label>
+                      <Label className="text-sm font-medium whitespace-nowrap">Serial Number <span className="text-red-500">*</span>:</Label>
                       <div className="flex-1 flex items-center space-x-3">
                         <Input
                           value={formData.serialNumber}
@@ -9021,7 +9021,7 @@ const Dashboard = () => {
                     
                     {/* Product Selection with Region Dropdown in Same Row */}
                     <div id="product-type-section" className="flex items-center space-x-6">
-                      <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Product <span className="text-red-500">*</span>:</Label>
+                      <Label className="text-sm font-medium whitespace-nowrap">Product <span className="text-red-500">*</span>:</Label>
                       <div className="flex space-x-3">
                         {[
                           { value: "Desktop", label: "Desktop" },
@@ -9064,7 +9064,7 @@ const Dashboard = () => {
                       {/* Region Dropdown in Same Row - Only show for Desktop and Mandi */}
                       {(formData.productType === "Desktop" || formData.productType === "Mandi") && (
                         <div className="flex items-center space-x-3 ml-8">
-                          <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Region <span className="text-red-500">*</span>:</Label>
+                          <Label className="text-sm font-medium whitespace-nowrap">Region <span className="text-red-500">*</span>:</Label>
                           <select
                             value={formData.region}
                             onChange={(e) => setFormData(prev => ({ 
@@ -9088,7 +9088,7 @@ const Dashboard = () => {
                         <div className="flex items-center space-x-8">
                           {/* Duration Selection */}
                           <div className="flex items-center space-x-3">
-                            <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
                             <div className="flex space-x-2">
                               {[
                                 { value: "360", label: "360 Days" },
@@ -9256,7 +9256,7 @@ const Dashboard = () => {
                         {/* Duration Selection for Mandi */}
                         <div className="flex items-center space-x-8">
                           <div className="flex items-center space-x-3">
-                            <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
                             <div className="flex space-x-2">
                               {[
                                 { value: "360", label: "360 Days" },
@@ -9421,7 +9421,7 @@ const Dashboard = () => {
                         <div className="flex items-center space-x-6">
                           {/* User Count (Mandatory) - Simple text box */}
                           <div className="flex items-center space-x-2">
-                            <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">User Count <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium whitespace-nowrap">User Count <span className="text-red-500">*</span>:</Label>
                             <Input
                               type="text"
                               value={onlineUserCount}
@@ -9438,7 +9438,7 @@ const Dashboard = () => {
 
                           {/* Company Count (Mandatory) - Add/Reduce control prefilled with User Count */}
                           <div className="flex items-center space-x-2">
-                            <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Company Count <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium whitespace-nowrap">Company Count <span className="text-red-500">*</span>:</Label>
                             <div className="flex items-center bg-white rounded border-0 px-2 py-1">
                               <button
                                 type="button"
@@ -9468,7 +9468,7 @@ const Dashboard = () => {
 
                           {/* Database Type - Radio buttons */}
                           <div className="flex items-center space-x-2">
-                            <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Database Type <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium whitespace-nowrap">Database Type <span className="text-red-500">*</span>:</Label>
                             <div className="flex space-x-2">
                               {[
                                 { value: "Access", label: "Access" },
@@ -9499,7 +9499,7 @@ const Dashboard = () => {
 
                           {/* Duration Selection for Online - Same as Desktop */}
                           <div className="flex items-center space-x-2">
-                            <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
                             <div className="flex space-x-2">
                               {[
                                 { value: "360", label: "360 Days" },
@@ -9611,7 +9611,7 @@ const Dashboard = () => {
                           <>
                             {/* Subscription Count (Mandatory) - Text box */}
                             <div className="flex items-center space-x-3">
-                              <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Subscription Count <span className="text-red-500">*</span>:</Label>
+                              <Label className="text-sm font-medium whitespace-nowrap">Subscription Count <span className="text-red-500">*</span>:</Label>
                               <Input
                                 type="text"
                                 value={appSubscriptionCount}
@@ -9626,7 +9626,7 @@ const Dashboard = () => {
 
                             {/* Duration Selection - Same as Desktop */}
                             <div className="flex items-center space-x-3">
-                              <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                              <Label className="text-sm font-medium whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
                               <div className="flex space-x-2">
                                 {[
                                   { value: "360", label: "360 Days" },
@@ -9740,7 +9740,7 @@ const Dashboard = () => {
                           <>
                             {/* Market Place Selection */}
                             <div className="flex items-center space-x-3">
-                              <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Market Place <span className="text-red-500">*</span>:</Label>
+                              <Label className="text-sm font-medium whitespace-nowrap">Market Place <span className="text-red-500">*</span>:</Label>
                               <div className="flex space-x-2">
                                 {[
                                   { value: "Single", label: "Single" },
@@ -9894,7 +9894,7 @@ const Dashboard = () => {
                         <div className="flex items-center space-x-8">
                           {/* Step 1: Duration Selection */}
                           <div className="flex items-center space-x-3">
-                            <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
                             <div className="flex space-x-2">
                               {[
                                 { value: "360", label: "360 Days" },
@@ -9928,7 +9928,7 @@ const Dashboard = () => {
                           {/* Step 2: Access Type - Show after duration is selected */}
                           {formData.duration && (
                             <div className="flex items-center space-x-3">
-                              <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">Access Type <span className="text-red-500">*</span>:</Label>
+                              <Label className="text-sm font-medium whitespace-nowrap">Access Type <span className="text-red-500">*</span>:</Label>
                               <div className="flex space-x-2">
                                 {[
                                   { value: "Access", label: "Access" },
@@ -10081,7 +10081,7 @@ const Dashboard = () => {
                           <>
                             {/* RDP Count with Add/Reduce Control */}
                             <div className="flex items-center space-x-3">
-                              <Label className="text-sm font-medium whitespace-nowrap">text-base font-semibold whitespace-nowrap">RDP <span className="text-red-500">*</span>:</Label>
+                              <Label className="text-sm font-medium whitespace-nowrap">RDP <span className="text-red-500">*</span>:</Label>
                               <div className="flex items-center bg-white rounded border-2 border-gray-300 px-2 py-1">
                                 <button
                                   type="button"
