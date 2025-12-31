@@ -6198,7 +6198,7 @@ const Dashboard = () => {
                                 <div className="space-y-2">
                                   <div className="flex items-center space-x-8">
                                     <div className="flex items-center space-x-3">
-                                      <Label className="text-sm font-medium whitespace-nowrap">User Count <span className="text-red-500">*</span>:</Label>
+                                      <Label className="text-sm font-medium whitespace-nowrap">User Count:</Label>
                                       <Input
                                         type="number"
                                         value={formData.userCount || "1"}
@@ -9421,7 +9421,7 @@ const Dashboard = () => {
                         <div className="flex items-center space-x-6">
                           {/* User Count (Mandatory) - Simple text box */}
                           <div className="flex items-center space-x-2">
-                            <Label className="text-sm font-medium whitespace-nowrap">User Count <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium whitespace-nowrap">User Count:</Label>
                             <Input
                               type="text"
                               value={onlineUserCount}
