@@ -108,7 +108,13 @@ const Dashboard = () => {
   const [appSubscriptionCount, setAppSubscriptionCount] = useState(1); // Track subscription count for App product
   const [appValidationMessage, setAppValidationMessage] = useState(""); // Track validation message for App product
   const [recomMarketPlace, setRecomMarketPlace] = useState(""); // Track market place selection for Recom product (Single/Multiple)
+  const [recomSubscriptionId, setRecomSubscriptionId] = useState(""); // Track subscription ID for Recom product
+  const [recomSubscriptionValidated, setRecomSubscriptionValidated] = useState(false); // Track if Recom subscription is validated
+  const [recomValidationMessage, setRecomValidationMessage] = useState(""); // Track validation message for Recom product
   const [rdpCount, setRdpCount] = useState(1); // Track RDP count for RDP product
+  const [rdpSubscriptionId, setRdpSubscriptionId] = useState(""); // Track subscription ID for RDP product
+  const [rdpSubscriptionValidated, setRdpSubscriptionValidated] = useState(false); // Track if RDP subscription is validated
+  const [rdpValidationMessage, setRdpValidationMessage] = useState(""); // Track validation message for RDP product
   const [showWarningModal, setShowWarningModal] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [pendingNavigation, setPendingNavigation] = useState(null);
