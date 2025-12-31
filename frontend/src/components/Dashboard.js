@@ -9421,21 +9421,40 @@ const Dashboard = () => {
                       <div className="space-y-4">
                         {/* All fields in single row */}
                         <div className="flex items-center space-x-6">
-                          {/* User Count (Mandatory) - Simple text box */}
+                          {/* User Count (Mandatory) - Add/Reduce control */}
                           <div className="flex items-center space-x-2">
                             <Label className="text-sm font-medium whitespace-nowrap">User Count:</Label>
-                            <Input
-                              type="text"
-                              value={onlineUserCount}
-                              onChange={(e) => {
-                                const value = e.target.value.replace(/\D/g, ''); // Only allow digits
-                                const numValue = parseInt(value) || 1;
-                                setOnlineUserCount(numValue);
-                                // Auto-update company count to match user count
-                                setOnlineCompanyCount(numValue);
-                              }}
-                              className="w-20 px-3 py-2 border-0 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            />
+                            <div className="flex items-center bg-white rounded border-0 px-2 py-1">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  if (onlineUserCount > 1) {
+                                    const newCount = onlineUserCount - 1;
+                                    setOnlineUserCount(newCount);
+                                    // Auto-update company count to match user count
+                                    setOnlineCompanyCount(newCount);
+                                  }
+                                }}
+                                className="text-gray-600 hover:text-red-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                              >
+                                -
+                              </button>
+                              <span className="text-base font-semibold text-gray-900 min-w-[30px] text-center px-2">
+                                {onlineUserCount}
+                              </span>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  const newCount = onlineUserCount + 1;
+                                  setOnlineUserCount(newCount);
+                                  // Auto-update company count to match user count
+                                  setOnlineCompanyCount(newCount);
+                                }}
+                                className="text-gray-600 hover:text-green-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                              >
+                                +
+                              </button>
+                            </div>
                           </div>
 
                           {/* Company Count (Mandatory) - Add/Reduce control prefilled with User Count */}
