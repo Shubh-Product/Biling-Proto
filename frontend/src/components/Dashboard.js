@@ -5219,7 +5219,7 @@ const Dashboard = () => {
                         
                         {/* Duration Selection - Show directly without Product selection */}
                         <div id="product-selection-section" className="flex items-center space-x-6">
-                          <Label className="text-sm font-medium whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                          <Label className="text-sm font-medium whitespace-nowrap">Duration:</Label>
                           <div className="flex space-x-3">
                             {["360", "180", "90"].map((duration) => (
                               <label key={duration} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all ${
@@ -5560,7 +5560,7 @@ const Dashboard = () => {
                                 {/* Duration Selection for Desktop */}
                                 {formData.licenseModel && (
                                   <div className="flex items-center space-x-3">
-                                    <Label className="text-sm font-medium whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                                    <Label className="text-sm font-medium whitespace-nowrap">Duration:</Label>
                                     <div className="flex space-x-2">
                                       {[
                                         { value: "360 Days", label: "360 Days" },
@@ -6039,7 +6039,7 @@ const Dashboard = () => {
                                 {/* Duration Selection for Desktop */}
                                 {formData.licenseModel && (
                                   <div className="flex items-center space-x-3">
-                                    <Label className="text-sm font-medium whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                                    <Label className="text-sm font-medium whitespace-nowrap">Duration:</Label>
                                     <div className="flex space-x-2">
                                       {[
                                         { value: "360 Days", label: "360 Days" },
@@ -6124,7 +6124,7 @@ const Dashboard = () => {
                               {/* Duration and Access Type in same line */}
                               <div className="flex items-center space-x-8">
                                 <div className="flex items-center space-x-3">
-                                  <Label className="text-sm font-medium whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                                  <Label className="text-sm font-medium whitespace-nowrap">Duration:</Label>
                                   <div className="flex space-x-2">
                                     {[
                                       { value: "360 Days", label: "360 Days" },
@@ -9088,7 +9088,7 @@ const Dashboard = () => {
                         <div className="flex items-center space-x-8">
                           {/* Duration Selection */}
                           <div className="flex items-center space-x-3">
-                            <Label className="text-sm font-medium whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium whitespace-nowrap">Duration:</Label>
                             <div className="flex space-x-2">
                               {[
                                 { value: "360", label: "360 Days" },
@@ -9256,7 +9256,7 @@ const Dashboard = () => {
                         {/* Duration Selection for Mandi */}
                         <div className="flex items-center space-x-8">
                           <div className="flex items-center space-x-3">
-                            <Label className="text-sm font-medium whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium whitespace-nowrap">Duration:</Label>
                             <div className="flex space-x-2">
                               {[
                                 { value: "360", label: "360 Days" },
@@ -9499,7 +9499,7 @@ const Dashboard = () => {
 
                           {/* Duration Selection for Online - Same as Desktop */}
                           <div className="flex items-center space-x-2">
-                            <Label className="text-sm font-medium whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium whitespace-nowrap">Duration:</Label>
                             <div className="flex space-x-2">
                               {[
                                 { value: "360", label: "360 Days" },
@@ -9626,7 +9626,7 @@ const Dashboard = () => {
 
                             {/* Duration Selection - Same as Desktop */}
                             <div className="flex items-center space-x-3">
-                              <Label className="text-sm font-medium whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                              <Label className="text-sm font-medium whitespace-nowrap">Duration:</Label>
                               <div className="flex space-x-2">
                                 {[
                                   { value: "360", label: "360 Days" },
@@ -9894,7 +9894,7 @@ const Dashboard = () => {
                         <div className="flex items-center space-x-8">
                           {/* Step 1: Duration Selection */}
                           <div className="flex items-center space-x-3">
-                            <Label className="text-sm font-medium whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium whitespace-nowrap">Duration:</Label>
                             <div className="flex space-x-2">
                               {[
                                 { value: "360", label: "360 Days" },
