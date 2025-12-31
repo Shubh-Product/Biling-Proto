@@ -10019,7 +10019,7 @@ const Dashboard = () => {
                                            onlineValid ||
                                            appValid ||
                                            recomValid ||
-                                           (formData.productType === "RDP" && formData.planName && calculateRDPPricing()) ||
+                                           rdpValid ||
                                            busyOnlineValid) && customerValidated);
                   return showOrderSummary;
                 })() && (
@@ -10413,7 +10413,7 @@ const Dashboard = () => {
                                            onlineValid ||
                                            appValid ||
                                            recomValid ||
-                                           (formData.productType === "RDP" && formData.planName && calculateRDPPricing()) ||
+                                           rdpValid ||
                                            busyOnlineValid) && customerValidated);
                   
                   return showOrderSummary && (
