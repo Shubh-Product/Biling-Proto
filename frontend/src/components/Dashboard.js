@@ -6163,7 +6163,7 @@ const Dashboard = () => {
                                 {/* Access Type Selection */}
                                 {formData.duration && (
                                   <div className="flex items-center space-x-3">
-                                    <Label className="text-sm font-medium whitespace-nowrap">Access Type <span className="text-red-500">*</span>:</Label>
+                                    <Label className="text-sm font-medium whitespace-nowrap">Access Type:</Label>
                                     <div className="flex space-x-2">
                                       {[
                                         { value: "Web Access", label: "Web Access" },
@@ -9928,7 +9928,7 @@ const Dashboard = () => {
                           {/* Step 2: Access Type - Show after duration is selected */}
                           {formData.duration && (
                             <div className="flex items-center space-x-3">
-                              <Label className="text-sm font-medium whitespace-nowrap">Access Type <span className="text-red-500">*</span>:</Label>
+                              <Label className="text-sm font-medium whitespace-nowrap">Access Type:</Label>
                               <div className="flex space-x-2">
                                 {[
                                   { value: "Access", label: "Access" },
