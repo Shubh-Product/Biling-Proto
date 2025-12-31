@@ -10081,7 +10081,7 @@ const Dashboard = () => {
                           <>
                             {/* RDP Count with Add/Reduce Control */}
                             <div className="flex items-center space-x-3">
-                              <Label className="text-sm font-medium whitespace-nowrap">RDP <span className="text-red-500">*</span>:</Label>
+                              <Label className="text-sm font-medium whitespace-nowrap">RDP:</Label>
                               <div className="flex items-center bg-white rounded border-2 border-gray-300 px-2 py-1">
                                 <button
                                   type="button"
