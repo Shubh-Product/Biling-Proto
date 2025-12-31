@@ -4749,9 +4749,9 @@ const Dashboard = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* License Type */}
                 {/* Transaction Type Tabs - Step 1 */}
-                <div className="mb-6 relative">
-                  {/* Gradient background wrapper */}
-                  <div className="bg-gradient-to-br from-blue-500 via-blue-400 to-purple-400 p-1 rounded-xl">
+                <div className="mb-6">
+                  {/* Gradient background wrapper - inline with content */}
+                  <div className="inline-block bg-gradient-to-br from-blue-500 via-blue-400 to-purple-400 p-1 rounded-xl">
                     <div className="flex space-x-1 bg-white rounded-xl p-1">
                       {[
                         { value: "New Sales", label: "New Sale", icon: "📝" },
@@ -4822,7 +4822,7 @@ const Dashboard = () => {
                                 setFormData(prev => ({ ...prev, transactionType: newTransactionType }));
                               }
                             }}
-                            className={`flex-1 flex items-center justify-center px-6 py-4 text-sm font-semibold rounded-lg transition-all ${
+                            className={`flex items-center px-6 py-4 text-sm font-semibold rounded-lg transition-all ${
                               isActive
                                 ? 'bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 text-white shadow-lg'
                                 : 'bg-white text-gray-700 hover:bg-gray-50'
