@@ -9772,7 +9772,7 @@ const Dashboard = () => {
                             {/* Recom Plans Display - Based on Market Place Selection */}
                             {recomMarketPlace && (
                               <div data-scroll-target="recom-plans" className="space-y-2">
-                                <Label className="text-sm font-medium">Number of Orders <span className="text-red-500">*</span>:</Label>
+                                <Label className="text-sm font-medium">Number of Orders:</Label>
                             
                             {/* Single Market Place Plans */}
                             {recomMarketPlace === "Single" && (
