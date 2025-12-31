@@ -9935,79 +9935,36 @@ const Dashboard = () => {
 
                     {/* RDP Product Configuration */}
                     {formData.productType === "RDP" && (
-                      <div className="space-y-6">
-                        {/* RDP Plan Selection */}
-                        <div className="flex items-start space-x-6">
-                          <Label className="text-base font-semibold whitespace-nowrap pt-3">Plan <span className="text-red-500">*</span>:</Label>
-                          <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {[
-                              {
-                                name: "RDP Basic",
-                                price: 4999,
-                                features: ["Single User Access", "Remote Desktop", "Basic Support", "Standard Security"],
-                                recommended: false
-                              },
-                              {
-                                name: "RDP Professional", 
-                                price: 8999,
-                                features: ["Multi-User Access", "Enhanced Security", "Priority Support", "Advanced Features"],
-                                recommended: true
-                              },
-                              {
-                                name: "RDP Enterprise",
-                                price: 14999,
-                                features: ["Unlimited Users", "Enterprise Security", "24/7 Support", "Custom Configuration"],
-                                recommended: false
-                              },
-                              {
-                                name: "RDP Premium",
-                                price: 19999,
-                                features: ["Premium Features", "Dedicated Support", "High Availability", "Advanced Analytics"],
-                                recommended: false
-                              }
-                            ].map((plan) => (
-                              <label key={plan.name} className={`relative flex flex-col cursor-pointer p-4 border-2 rounded-lg hover:bg-gray-50 transition-all ${
-                                formData.planName === plan.name 
-                                  ? "border-blue-500 bg-blue-50 shadow-md" 
-                                  : "border-gray-200"
-                              }`}>
-                                {plan.recommended && (
-                                  <span className="absolute -top-2 left-3 bg-orange-500 text-white text-xs px-2 py-1 rounded-full">
-                                    Recommended
-                                  </span>
-                                )}
-                                
-                                <div className="flex items-center space-x-3 mb-3">
-                                  <input
-                                    type="radio"
-                                    name="planName"
-                                    value={plan.name}
-                                    checked={formData.planName === plan.name}
-                                    onChange={(e) => setFormData(prev => ({ ...prev, planName: e.target.value }))}
-                                    className="w-4 h-4 text-blue-600"
-                                  />
-                                  <div className="flex-1">
-                                    <div className="font-semibold text-gray-900">{plan.name}</div>
-                                  </div>
-                                </div>
-                                
-                                <div className="space-y-2">
-                                  <div className="flex justify-between items-center">
-                                    <span className="text-lg font-bold text-blue-600">₹{plan.price.toLocaleString()}</span>
-                                    <span className="text-sm text-gray-600">per year</span>
-                                  </div>
-                                  
-                                  <div>
-                                    <p className="text-xs text-gray-600 mb-1">Features:</p>
-                                    <ul className="text-xs text-gray-700 space-y-0.5">
-                                      {plan.features.map((feature, index) => (
-                                        <li key={index}>• {feature}</li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                </div>
-                              </label>
-                            ))}
+                      <div className="space-y-4">
+                        {/* RDP Count with Add/Reduce Control */}
+                        <div className="flex items-center space-x-3">
+                          <Label className="text-base font-semibold whitespace-nowrap">RDP <span className="text-red-500">*</span>:</Label>
+                          <div className="flex items-center bg-white rounded border-2 border-gray-300 px-2 py-1">
+                            <button
+                              type="button"
+                              onClick={() => {
+                                if (rdpCount > 1) {
+                                  setRdpCount(rdpCount - 1);
+                                }
+                              }}
+                              className="text-gray-600 hover:text-red-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                            >
+                              -
+                            </button>
+                            <span className="text-base font-semibold text-gray-900 min-w-[30px] text-center px-2">
+                              {rdpCount}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setRdpCount(rdpCount + 1);
+                                // Set planName to trigger order summary
+                                setFormData(prev => ({ ...prev, planName: "RDP Service" }));
+                              }}
+                              className="text-gray-600 hover:text-green-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                            >
+                              +
+                            </button>
                           </div>
                         </div>
                       </div>
