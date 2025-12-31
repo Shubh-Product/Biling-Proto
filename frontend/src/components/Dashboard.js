@@ -10633,6 +10633,7 @@ const Dashboard = () => {
               </form>
             </CardContent>
           </Card>
+          </div>
         )}
 
         {/* Transactions Table - Only show when not creating a new transaction */}
