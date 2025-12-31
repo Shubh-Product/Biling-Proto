@@ -9708,15 +9708,10 @@ const Dashboard = () => {
                                   { name: "D", orders: "60,000", days: "360" },
                                   { name: "E", orders: "120,000", days: "360" }
                                 ].map((plan) => {
-                                  const quantity = planQuantities[`Recom ${plan.name}`] || 0;
                                   return (
                                     <div 
                                       key={plan.name} 
-                                      className={`relative border-2 rounded-lg p-3 transition-all ${
-                                        quantity > 0
-                                          ? "border-blue-500 bg-blue-50 shadow-md" 
-                                          : "border-gray-200 hover:border-gray-300"
-                                      }`}
+                                      className="border-2 rounded-lg p-3 border-gray-200 hover:border-gray-300 transition-all"
                                     >
                                       <div className="absolute top-2 left-2 w-6 h-6 bg-gray-300 text-gray-700 font-bold text-xs flex items-center justify-center rounded">
                                         {plan.name}
@@ -9724,39 +9719,6 @@ const Dashboard = () => {
                                       <div className="text-center mt-6">
                                         <div className="text-sm font-semibold text-gray-900">{plan.orders}</div>
                                         <div className="text-xs text-gray-600">({plan.days} days)</div>
-                                      </div>
-                                      <div className="absolute bottom-1.5 right-1.5 flex items-center bg-white rounded border border-gray-300 px-1 py-0.5">
-                                        <button
-                                          type="button"
-                                          onClick={() => {
-                                            if (quantity > 0) {
-                                              const newQuantities = { ...planQuantities, [`Recom ${plan.name}`]: quantity - 1 };
-                                              setPlanQuantities(newQuantities);
-                                              if (quantity - 1 === 0 && formData.planName === `Recom ${plan.name}`) {
-                                                setFormData(prev => ({ ...prev, planName: "" }));
-                                              }
-                                            }
-                                          }}
-                                          className="text-gray-600 hover:text-red-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
-                                        >
-                                          -
-                                        </button>
-                                        <span className="text-xs font-semibold text-gray-900 min-w-[12px] text-center px-1">
-                                          {quantity}
-                                        </span>
-                                        <button
-                                          type="button"
-                                          onClick={() => {
-                                            const newQuantities = { ...planQuantities, [`Recom ${plan.name}`]: quantity + 1 };
-                                            setPlanQuantities(newQuantities);
-                                            if (quantity === 0) {
-                                              setFormData(prev => ({ ...prev, planName: `Recom ${plan.name}` }));
-                                            }
-                                          }}
-                                          className="text-gray-600 hover:text-green-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
-                                        >
-                                          +
-                                        </button>
                                       </div>
                                     </div>
                                   );
