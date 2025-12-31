@@ -5248,7 +5248,7 @@ const Dashboard = () => {
                             {console.log('About to render plans. Calling getDesktopPlans with:', currentProductInfo?.licenseModel || "Perpetual", formData.duration)}
                             {/* Desktop Plans Display - 4 Column Grid WITHOUT Quantity Controls (Renewal Flow) - Clickable */}
                             <div data-scroll-target="desktop-plans" className="space-y-2">
-                              <Label className="text-sm font-medium">Plans <span className="text-red-500">*</span>:</Label>
+                              <Label className="text-sm font-medium">Plans:</Label>
                               {(() => {
                                 const plans = getDesktopPlans("Subscription", formData.duration);
                                 console.log('getDesktopPlans returned:', plans, 'Number of plans:', plans?.length);
@@ -5608,7 +5608,7 @@ const Dashboard = () => {
                               {/* Desktop Plan Selection - 4 Column Grid with Quantity */}
                               {formData.licenseModel && formData.duration && (
                                 <div className="space-y-2">
-                                  <Label className="text-sm font-medium">Plans <span className="text-red-500">*</span>:</Label>
+                                  <Label className="text-sm font-medium">Plans:</Label>
                                   {(() => {
                                     const plans = getDesktopPlans(formData.licenseModel, formData.duration);
                                     return (
@@ -9133,7 +9133,7 @@ const Dashboard = () => {
                         {/* Desktop Plans Display - 4 Column Grid with Quantity Controls */}
                         {formData.duration && (
                           <div data-scroll-target="desktop-plans" className="space-y-2">
-                            <Label className="text-sm font-medium">Plans <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium">Plans:</Label>
                             <div className="grid grid-cols-4 gap-2">
                               {getDesktopPlans(formData.licenseModel, formData.duration).map((plan, index) => {
                                 const quantity = planQuantities[plan.name] || 0;
@@ -9300,7 +9300,7 @@ const Dashboard = () => {
                         {/* Mandi Plans Display - Only Saffron and Emerald with User Types */}
                         {formData.duration && (
                           <div data-scroll-target="mandi-plans" className="space-y-2">
-                            <Label className="text-sm font-medium">Plans <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium">Plans:</Label>
                             <div className="grid grid-cols-3 gap-2">
                               {getDesktopPlans(formData.licenseModel, formData.duration)
                                 .filter(plan => {
