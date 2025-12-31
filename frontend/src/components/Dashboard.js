@@ -9659,119 +9659,241 @@ const Dashboard = () => {
                       </div>
                     )}
 
-                    {/* Recom Product Configuration - Same as Desktop */}
+                    {/* Recom Product Configuration - Market Place Based */}
                     {formData.productType === "Recom" && (
                       <div className="space-y-4">
-                        {/* Duration Selection for Recom */}
-                        <div className="flex items-center space-x-8">
-                          <div className="flex items-center space-x-3">
-                            <Label className="text-base font-semibold whitespace-nowrap">Duration <span className="text-red-500">*</span>:</Label>
-                            <div className="flex space-x-2">
-                              {[
-                                { value: "360", label: "360 Days" },
-                                { value: "1080", label: "1080 Days" }
-                              ].map((duration) => (
-                                <label key={duration.value} className={`flex items-center cursor-pointer px-2 py-1.5 border-2 rounded-lg hover:shadow-md transition-all w-28 ${
-                                  formData.duration === duration.value
-                                    ? "border-orange-500 bg-orange-50" 
-                                    : "border-gray-200"
-                                }`}>
-                                  <input
-                                    type="radio"
-                                    name="duration"
-                                    value={duration.value}
-                                    checked={formData.duration === duration.value}
-                                    onChange={(e) => {
-                                      setFormData(prev => ({ 
-                                        ...prev, 
-                                        licenseModel: "Subscription",
-                                        duration: e.target.value,
-                                        planName: ""
-                                      }));
-                                      setPlanQuantities({});
-                                    }}
-                                    className="w-3.5 h-3.5 text-orange-600 border-gray-300 focus:ring-orange-500 mr-2"
-                                  />
-                                  <div className="flex flex-col">
-                                    <span className="text-gray-700 font-medium text-xs">{duration.label}</span>
-                                    {duration.value === "1080" && (
-                                      <span className="text-[10px] text-green-600 font-semibold">
-                                        20% OFF
-                                      </span>
-                                    )}
-                                  </div>
-                                </label>
-                              ))}
-                            </div>
+                        {/* Market Place Selection */}
+                        <div className="flex items-center space-x-3">
+                          <Label className="text-base font-semibold whitespace-nowrap">Market Place <span className="text-red-500">*</span>:</Label>
+                          <div className="flex space-x-2">
+                            {[
+                              { value: "Single", label: "Single" },
+                              { value: "Multiple", label: "Multiple" }
+                            ].map((marketplace) => (
+                              <label key={marketplace.value} className={`flex items-center cursor-pointer px-3 py-2 border-2 rounded-lg hover:shadow-md transition-all w-28 ${
+                                recomMarketPlace === marketplace.value
+                                  ? "border-blue-500 bg-blue-50" 
+                                  : "border-gray-200"
+                              }`}>
+                                <input
+                                  type="radio"
+                                  name="recomMarketPlace"
+                                  value={marketplace.value}
+                                  checked={recomMarketPlace === marketplace.value}
+                                  onChange={(e) => {
+                                    setRecomMarketPlace(e.target.value);
+                                    setPlanQuantities({}); // Reset plan quantities
+                                    setFormData(prev => ({ ...prev, planName: "" }));
+                                  }}
+                                  className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 mr-2"
+                                />
+                                <span className="text-gray-700 font-medium text-sm">{marketplace.label}</span>
+                              </label>
+                            ))}
                           </div>
                         </div>
 
-                        {/* Recom Plans Display - 4 Column Grid with Quantity Controls */}
-                        {formData.duration && (
+                        {/* Recom Plans Display - Based on Market Place Selection */}
+                        {recomMarketPlace && (
                           <div data-scroll-target="recom-plans" className="space-y-2">
-                            <Label className="text-base font-semibold">Plans <span className="text-red-500">*</span>:</Label>
-                            <div className="grid grid-cols-4 gap-2">
-                              {getDesktopPlans(formData.licenseModel, formData.duration).map((plan, index) => {
-                                const quantity = planQuantities[plan.name] || 0;
-                                return (
-                                  <div 
-                                    key={plan.name} 
-                                    className={`relative border-2 rounded-lg p-2 transition-all ${
-                                      quantity > 0
-                                        ? "border-blue-500 bg-blue-50 shadow-md" 
-                                        : "border-gray-200 hover:border-gray-300"
-                                    }`}
-                                  >
-                                    <div className="text-xs font-medium text-gray-900 mb-1 pr-8">
-                                      {plan.name}
-                                    </div>
-                                    <div className="flex flex-col mb-1">
-                                      <span className="text-xs font-bold text-blue-600">
-                                        ₹{plan.price?.toLocaleString('en-IN') || 'Contact'}
-                                      </span>
-                                      {formData.duration === "1080" && plan.discount > 0 && (
-                                        <span className="text-[10px] text-gray-500 line-through">
-                                          ₹{(plan.basePrice * 3)?.toLocaleString('en-IN')}
-                                        </span>
-                                      )}
-                                    </div>
-                                    <div className="absolute bottom-1.5 right-1.5 flex items-center bg-white rounded border border-gray-300 px-1 py-0.5">
-                                      <button
-                                        type="button"
-                                        onClick={() => {
-                                          if (quantity > 0) {
-                                            const newQuantities = { ...planQuantities, [plan.name]: quantity - 1 };
-                                            setPlanQuantities(newQuantities);
-                                            if (quantity - 1 === 0 && formData.planName === plan.name) {
-                                              setFormData(prev => ({ ...prev, planName: "" }));
+                            <Label className="text-base font-semibold">Number of Orders <span className="text-red-500">*</span>:</Label>
+                            
+                            {/* Single Market Place Plans */}
+                            {recomMarketPlace === "Single" && (
+                              <div className="grid grid-cols-5 gap-3">
+                                {[
+                                  { name: "A", orders: "6,000", days: "360" },
+                                  { name: "B", orders: "12,000", days: "360" },
+                                  { name: "C", orders: "30,000", days: "360" },
+                                  { name: "D", orders: "60,000", days: "360" },
+                                  { name: "E", orders: "120,000", days: "360" }
+                                ].map((plan) => {
+                                  const quantity = planQuantities[`Recom ${plan.name}`] || 0;
+                                  return (
+                                    <div 
+                                      key={plan.name} 
+                                      className={`relative border-2 rounded-lg p-3 transition-all ${
+                                        quantity > 0
+                                          ? "border-blue-500 bg-blue-50 shadow-md" 
+                                          : "border-gray-200 hover:border-gray-300"
+                                      }`}
+                                    >
+                                      <div className="absolute top-2 left-2 w-6 h-6 bg-gray-300 text-gray-700 font-bold text-xs flex items-center justify-center rounded">
+                                        {plan.name}
+                                      </div>
+                                      <div className="text-center mt-6">
+                                        <div className="text-sm font-semibold text-gray-900">{plan.orders}</div>
+                                        <div className="text-xs text-gray-600">({plan.days} days)</div>
+                                      </div>
+                                      <div className="absolute bottom-1.5 right-1.5 flex items-center bg-white rounded border border-gray-300 px-1 py-0.5">
+                                        <button
+                                          type="button"
+                                          onClick={() => {
+                                            if (quantity > 0) {
+                                              const newQuantities = { ...planQuantities, [`Recom ${plan.name}`]: quantity - 1 };
+                                              setPlanQuantities(newQuantities);
+                                              if (quantity - 1 === 0 && formData.planName === `Recom ${plan.name}`) {
+                                                setFormData(prev => ({ ...prev, planName: "" }));
+                                              }
                                             }
-                                          }
-                                        }}
-                                        className="text-gray-600 hover:text-red-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
-                                      >
-                                        -
-                                      </button>
-                                      <span className="text-xs font-semibold text-gray-900 min-w-[12px] text-center px-1">
-                                        {quantity}
-                                      </span>
-                                      <button
-                                        type="button"
-                                        onClick={() => {
-                                          const newQuantities = { ...planQuantities, [plan.name]: quantity + 1 };
-                                          setPlanQuantities(newQuantities);
-                                          if (quantity === 0) {
-                                            setFormData(prev => ({ ...prev, planName: plan.name }));
-                                          }
-                                        }}
-                                        className="text-gray-600 hover:text-green-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
-                                      >
-                                        +
-                                      </button>
+                                          }}
+                                          className="text-gray-600 hover:text-red-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
+                                        >
+                                          -
+                                        </button>
+                                        <span className="text-xs font-semibold text-gray-900 min-w-[12px] text-center px-1">
+                                          {quantity}
+                                        </span>
+                                        <button
+                                          type="button"
+                                          onClick={() => {
+                                            const newQuantities = { ...planQuantities, [`Recom ${plan.name}`]: quantity + 1 };
+                                            setPlanQuantities(newQuantities);
+                                            if (quantity === 0) {
+                                              setFormData(prev => ({ ...prev, planName: `Recom ${plan.name}` }));
+                                            }
+                                          }}
+                                          className="text-gray-600 hover:text-green-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
+                                        >
+                                          +
+                                        </button>
+                                      </div>
                                     </div>
-                                  </div>
-                                );
-                              })}
-                            </div>
+                                  );
+                                })}
+                              </div>
+                            )}
+
+                            {/* Multiple Market Place Plans */}
+                            {recomMarketPlace === "Multiple" && (
+                              <div className="space-y-3">
+                                {/* First Row - 5 plans */}
+                                <div className="grid grid-cols-5 gap-3">
+                                  {[
+                                    { name: "A", orders: "300", days: "21" },
+                                    { name: "B", orders: "12,000", days: "360" },
+                                    { name: "C", orders: "30,000", days: "360" },
+                                    { name: "D", orders: "60,000", days: "360" },
+                                    { name: "E", orders: "120,000", days: "360" }
+                                  ].map((plan) => {
+                                    const quantity = planQuantities[`Recom ${plan.name}`] || 0;
+                                    return (
+                                      <div 
+                                        key={plan.name} 
+                                        className={`relative border-2 rounded-lg p-3 transition-all ${
+                                          quantity > 0
+                                            ? "border-blue-500 bg-blue-50 shadow-md" 
+                                            : "border-gray-200 hover:border-gray-300"
+                                        }`}
+                                      >
+                                        <div className="absolute top-2 left-2 w-6 h-6 bg-gray-300 text-gray-700 font-bold text-xs flex items-center justify-center rounded">
+                                          {plan.name}
+                                        </div>
+                                        <div className="text-center mt-6">
+                                          <div className="text-sm font-semibold text-gray-900">{plan.orders}</div>
+                                          <div className="text-xs text-gray-600">({plan.days} days)</div>
+                                        </div>
+                                        <div className="absolute bottom-1.5 right-1.5 flex items-center bg-white rounded border border-gray-300 px-1 py-0.5">
+                                          <button
+                                            type="button"
+                                            onClick={() => {
+                                              if (quantity > 0) {
+                                                const newQuantities = { ...planQuantities, [`Recom ${plan.name}`]: quantity - 1 };
+                                                setPlanQuantities(newQuantities);
+                                                if (quantity - 1 === 0 && formData.planName === `Recom ${plan.name}`) {
+                                                  setFormData(prev => ({ ...prev, planName: "" }));
+                                                }
+                                              }
+                                            }}
+                                            className="text-gray-600 hover:text-red-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
+                                          >
+                                            -
+                                          </button>
+                                          <span className="text-xs font-semibold text-gray-900 min-w-[12px] text-center px-1">
+                                            {quantity}
+                                          </span>
+                                          <button
+                                            type="button"
+                                            onClick={() => {
+                                              const newQuantities = { ...planQuantities, [`Recom ${plan.name}`]: quantity + 1 };
+                                              setPlanQuantities(newQuantities);
+                                              if (quantity === 0) {
+                                                setFormData(prev => ({ ...prev, planName: `Recom ${plan.name}` }));
+                                              }
+                                            }}
+                                            className="text-gray-600 hover:text-green-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
+                                          >
+                                            +
+                                          </button>
+                                        </div>
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+
+                                {/* Second Row - 3 plans */}
+                                <div className="grid grid-cols-5 gap-3">
+                                  {[
+                                    { name: "F", orders: "FOC - 300", days: "21", isFOC: true },
+                                    { name: "G", orders: "FOC - 12,000", days: "360", isFOC: true },
+                                    { name: "H", orders: "12,000", days: "720", isFOC: false }
+                                  ].map((plan) => {
+                                    const quantity = planQuantities[`Recom ${plan.name}`] || 0;
+                                    return (
+                                      <div 
+                                        key={plan.name} 
+                                        className={`relative border-2 rounded-lg p-3 transition-all ${
+                                          quantity > 0
+                                            ? "border-blue-500 bg-blue-50 shadow-md" 
+                                            : "border-gray-200 hover:border-gray-300"
+                                        }`}
+                                      >
+                                        <div className="absolute top-2 left-2 w-6 h-6 bg-gray-300 text-gray-700 font-bold text-xs flex items-center justify-center rounded">
+                                          {plan.name}
+                                        </div>
+                                        <div className="text-center mt-6">
+                                          <div className="text-sm font-semibold text-gray-900">{plan.orders}</div>
+                                          <div className="text-xs text-gray-600">({plan.days} days)</div>
+                                        </div>
+                                        <div className="absolute bottom-1.5 right-1.5 flex items-center bg-white rounded border border-gray-300 px-1 py-0.5">
+                                          <button
+                                            type="button"
+                                            onClick={() => {
+                                              if (quantity > 0) {
+                                                const newQuantities = { ...planQuantities, [`Recom ${plan.name}`]: quantity - 1 };
+                                                setPlanQuantities(newQuantities);
+                                                if (quantity - 1 === 0 && formData.planName === `Recom ${plan.name}`) {
+                                                  setFormData(prev => ({ ...prev, planName: "" }));
+                                                }
+                                              }
+                                            }}
+                                            className="text-gray-600 hover:text-red-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
+                                          >
+                                            -
+                                          </button>
+                                          <span className="text-xs font-semibold text-gray-900 min-w-[12px] text-center px-1">
+                                            {quantity}
+                                          </span>
+                                          <button
+                                            type="button"
+                                            onClick={() => {
+                                              const newQuantities = { ...planQuantities, [`Recom ${plan.name}`]: quantity + 1 };
+                                              setPlanQuantities(newQuantities);
+                                              if (quantity === 0) {
+                                                setFormData(prev => ({ ...prev, planName: `Recom ${plan.name}` }));
+                                              }
+                                            }}
+                                            className="text-gray-600 hover:text-green-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
+                                          >
+                                            +
+                                          </button>
+                                        </div>
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            )}
                           </div>
                         )}
                       </div>
