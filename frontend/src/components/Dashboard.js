@@ -6786,14 +6786,33 @@ const Dashboard = () => {
                             {/* Number of Apps */}
                             <div className="flex items-center space-x-3">
                               <Label className="text-sm font-medium whitespace-nowrap">No. of Apps <span className="text-red-500">*</span>:</Label>
-                              <Input
-                                type="number"
-                                value={mobileAppCount}
-                                onChange={(e) => setMobileAppCount(e.target.value)}
-                                min="1"
-                                className="w-20"
-                                placeholder="1"
-                              />
+                              <div className="flex items-center bg-white rounded border-0 px-2 py-1">
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    const currentCount = parseInt(mobileAppCount) || 1;
+                                    if (currentCount > 1) {
+                                      setMobileAppCount((currentCount - 1).toString());
+                                    }
+                                  }}
+                                  className="text-gray-600 hover:text-red-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                                >
+                                  -
+                                </button>
+                                <span className="text-base font-semibold text-gray-900 min-w-[30px] text-center px-2">
+                                  {mobileAppCount || 1}
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    const currentCount = parseInt(mobileAppCount) || 1;
+                                    setMobileAppCount((currentCount + 1).toString());
+                                  }}
+                                  className="text-gray-600 hover:text-green-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                                >
+                                  +
+                                </button>
+                              </div>
                             </div>
                             
                             {/* Validity Selection */}
