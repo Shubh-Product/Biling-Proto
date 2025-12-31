@@ -6210,7 +6210,7 @@ const Dashboard = () => {
                                     </div>
                                     
                                     <div className="flex items-center space-x-3">
-                                      <Label className="text-sm font-medium whitespace-nowrap">Company Count <span className="text-red-500">*</span>:</Label>
+                                      <Label className="text-sm font-medium whitespace-nowrap">Company Count:</Label>
                                       <Input
                                         type="number"
                                         value={formData.companyCount || "1"}
@@ -9438,7 +9438,7 @@ const Dashboard = () => {
 
                           {/* Company Count (Mandatory) - Add/Reduce control prefilled with User Count */}
                           <div className="flex items-center space-x-2">
-                            <Label className="text-sm font-medium whitespace-nowrap">Company Count <span className="text-red-500">*</span>:</Label>
+                            <Label className="text-sm font-medium whitespace-nowrap">Company Count:</Label>
                             <div className="flex items-center bg-white rounded border-0 px-2 py-1">
                               <button
                                 type="button"
