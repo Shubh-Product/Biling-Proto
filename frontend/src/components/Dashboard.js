@@ -5527,7 +5527,7 @@ const Dashboard = () => {
                               {/* License Model and Duration Selection - Combined in same line */}
                               <div className="flex items-center space-x-8">
                                 <div className="flex items-center space-x-3">
-                                  <Label className="text-sm font-medium whitespace-nowrap">License Model <span className="text-red-500">*</span>:</Label>
+                                  <Label className="text-sm font-medium whitespace-nowrap">License Model:</Label>
                                   <div className="flex space-x-2">
                                     {[
                                       { value: "Perpetual", label: "Perpetual" },
@@ -6006,7 +6006,7 @@ const Dashboard = () => {
                               {/* License Model and Duration Selection - Combined in same line */}
                               <div className="flex items-center space-x-8">
                                 <div className="flex items-center space-x-3">
-                                  <Label className="text-sm font-medium whitespace-nowrap">License Model <span className="text-red-500">*</span>:</Label>
+                                  <Label className="text-sm font-medium whitespace-nowrap">License Model:</Label>
                                   <div className="flex space-x-2">
                                     {[
                                       { value: "Perpetual", label: "Perpetual" },
