@@ -10354,6 +10354,27 @@ const Dashboard = () => {
                             gstAmount = Math.round(afterTds * 0.18);
                             grandTotal = afterTds + gstAmount;
                           }
+                          // For RDP product - Calculate similar to Desktop
+                          else if (formData.productType === "RDP" && rdpCount >= 1) {
+                            // Base price for RDP
+                            const rdpBasePrice = 15000; // Base price per RDP
+                            
+                            // Calculate total base price with RDP count
+                            subtotal = rdpBasePrice * rdpCount;
+                            
+                            // Calculate discount if applicable (same as Desktop)
+                            licenseDiscount = getDiscountByLicenseType(formData.licenseType);
+                            discountAmount = Math.round((subtotal * licenseDiscount) / 100);
+                            const afterDiscount = subtotal - discountAmount;
+                            
+                            // Calculate TDS if enabled (same as Desktop)
+                            tdsAmount = formData.deductTds ? Math.round(afterDiscount * 0.1) : 0;
+                            const afterTds = afterDiscount - tdsAmount;
+                            
+                            // Calculate GST (same as Desktop)
+                            gstAmount = Math.round(afterTds * 0.18);
+                            grandTotal = afterTds + gstAmount;
+                          }
                           
                           // Only show summary if there are line items
                           if (subtotal === 0) return null;
