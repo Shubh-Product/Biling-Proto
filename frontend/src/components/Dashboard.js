@@ -9740,7 +9740,7 @@ const Dashboard = () => {
                           <>
                             {/* Market Place Selection */}
                             <div className="flex items-center space-x-3">
-                              <Label className="text-sm font-medium whitespace-nowrap">Market Place <span className="text-red-500">*</span>:</Label>
+                              <Label className="text-sm font-medium whitespace-nowrap">Market Place:</Label>
                               <div className="flex space-x-2">
                                 {[
                                   { value: "Single", label: "Single" },
