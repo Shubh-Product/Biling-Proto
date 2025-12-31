@@ -10085,9 +10085,8 @@ const Dashboard = () => {
                               const lineItems = [];
                               let serialNo = 1;
                               
-                              // For Desktop, Mandi, Recom products with plan quantities
-                              if ((formData.productType === "Desktop" || formData.productType === "Mandi" || 
-                                   formData.productType === "Recom") && (formData.duration || recomMarketPlace)) {
+                              // For Desktop, Mandi products with plan quantities
+                              if ((formData.productType === "Desktop" || formData.productType === "Mandi") && formData.duration) {
                                 const plans = getDesktopPlans(formData.licenseModel, formData.duration);
                                 plans.forEach(plan => {
                                   const quantity = planQuantities[plan.name] || 0;
@@ -10106,6 +10105,36 @@ const Dashboard = () => {
                                     );
                                   }
                                 });
+                              }
+                              
+                              // For Recom product with single plan selection
+                              if (formData.productType === "Recom" && formData.planName && recomMarketPlace) {
+                                // Sample pricing for Recom plans
+                                const recomPricing = {
+                                  "Recom A": 10000,
+                                  "Recom B": 20000,
+                                  "Recom C": 40000,
+                                  "Recom D": 70000,
+                                  "Recom E": 120000,
+                                  "Recom F": 0, // FOC
+                                  "Recom G": 0, // FOC
+                                  "Recom H": 30000
+                                };
+                                const basePrice = recomPricing[formData.planName] || 0;
+                                
+                                lineItems.push(
+                                  <tr key="recom-product" className="hover:bg-gray-50">
+                                    <td className="px-3 py-2 text-sm text-gray-700">{serialNo++}</td>
+                                    <td className="px-3 py-2 text-sm text-gray-900">
+                                      <div>{formData.planName}</div>
+                                      <div className="text-xs text-gray-600">Market Place: {recomMarketPlace}</div>
+                                    </td>
+                                    <td className="px-3 py-2 text-sm text-center text-gray-700">-</td>
+                                    <td className="px-3 py-2 text-sm text-center text-gray-700">1</td>
+                                    <td className="px-3 py-2 text-sm text-right text-gray-700">₹{basePrice.toLocaleString('en-IN')}</td>
+                                    <td className="px-3 py-2 text-sm text-right font-medium text-gray-900">₹{basePrice.toLocaleString('en-IN')}</td>
+                                  </tr>
+                                );
                               }
                               
                               // For App product with subscription-based model
