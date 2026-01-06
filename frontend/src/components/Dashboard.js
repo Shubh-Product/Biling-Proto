@@ -4750,7 +4750,7 @@ const Dashboard = () => {
               <div className="flex space-x-1">
                 {[
                   { value: "New Sales", label: "New Sale", icon: "📝" },
-                  { value: "Renewal/Upgrade", label: "Renewal", icon: "🔄" }
+                  { value: "Renewal/Upgrade", label: "Renew / Upgrade", icon: "🔄" }
                 ].map((tab) => {
                   const isActive = formData.transactionType === tab.value;
                   return (
