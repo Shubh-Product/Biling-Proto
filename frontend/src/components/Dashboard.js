@@ -5084,7 +5084,13 @@ const Dashboard = () => {
                         Enter the serial number to fetch customer and current product details for renewal or upgrade.
                       </p>
                       <p className="text-xs text-gray-600 mt-1 font-medium">
-                        💡 <strong>Testing:</strong> Enter <code className="bg-gray-100 px-1 rounded">SER123456</code> for testing
+                        💡 <strong>Testing IDs:</strong> 
+                        <code className="bg-gray-100 px-1 rounded ml-1">DES12345</code> (Desktop),
+                        <code className="bg-gray-100 px-1 rounded ml-1">MAN12345</code> (Mandi),
+                        <code className="bg-gray-100 px-1 rounded ml-1">ONL12345</code> (Online),
+                        <code className="bg-gray-100 px-1 rounded ml-1">APP12345</code> (App),
+                        <code className="bg-gray-100 px-1 rounded ml-1">REC12345</code> (Recom),
+                        <code className="bg-gray-100 px-1 rounded ml-1">RDP12345</code> (RDP)
                       </p>
                     </div>
 
