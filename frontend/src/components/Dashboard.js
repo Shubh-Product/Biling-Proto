@@ -1191,6 +1191,20 @@ const Dashboard = () => {
       setCurrentCustomerInfo(serialData.customer);
       setCurrentProductInfo(serialData.currentProduct);
       setSerialValidated(true);
+      // Auto-validate customer for renewal flow to skip customer details step
+      setCustomerValidated(true);
+      // Set product type from current product info
+      setFormData(prev => ({
+        ...prev,
+        productType: serialData.currentProduct?.type || "Desktop"
+      }));
+      // Auto-scroll to duration selection after a short delay
+      setTimeout(() => {
+        const durationSection = document.getElementById('product-selection-section');
+        if (durationSection) {
+          durationSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 500);
     } catch (error) {
       setErrors(prev => ({ ...prev, serialNumber: "Error validating serial number. Please try again." }));
       setSerialValidated(false);
