@@ -5499,47 +5499,193 @@ const Dashboard = () => {
                     {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'renew' && (
                       <div className="space-y-6">
                         
-                        {/* Duration Selection - Show directly without Product selection */}
-                        <div id="product-selection-section" className="flex items-center space-x-6">
-                          <Label className="text-sm font-medium whitespace-nowrap">Duration:</Label>
-                          <div className="flex space-x-3">
-                            {["360", "180", "90"].map((duration) => (
-                              <label key={duration} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all ${
-                                formData.duration === duration 
-                                  ? "border-blue-500 bg-blue-50" 
-                                  : "border-gray-200"
-                              }`}>
-                                <input
-                                  type="radio"
-                                  name="duration"
-                                  value={duration}
-                                  checked={formData.duration === duration}
-                                  onChange={(e) => {
-                                    setFormData(prev => ({ ...prev, duration: e.target.value }));
-                                    // Auto-select first plan (same plan) when duration is selected
-                                    setTimeout(() => {
-                                      const plans = getDesktopPlans("Subscription", e.target.value);
-                                      if (plans && plans.length > 0) {
-                                        const firstPlan = plans[0];
-                                        setFormData(prev => ({ ...prev, planName: firstPlan.name }));
-                                        setPlanQuantities({ [firstPlan.name]: 1 });
-                                        // Auto-scroll to order summary
-                                        setTimeout(() => {
-                                          const orderSummary = document.getElementById('order-summary-section');
-                                          if (orderSummary) {
-                                            orderSummary.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                          }
-                                        }, 300);
-                                      }
-                                    }, 100);
-                                  }}
-                                  className="w-4 h-4 text-blue-600 mr-3"
-                                />
-                                <span className="text-gray-700 font-medium">{duration} Days</span>
-                              </label>
-                            ))}
+                        {/* Desktop Product: Show Duration Selection */}
+                        {formData.productType === "Desktop" && (
+                          <div id="product-selection-section" className="flex items-center space-x-6">
+                            <Label className="text-sm font-medium whitespace-nowrap">Duration:</Label>
+                            <div className="flex space-x-3">
+                              {["360", "180", "90"].map((duration) => (
+                                <label key={duration} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all ${
+                                  formData.duration === duration 
+                                    ? "border-blue-500 bg-blue-50" 
+                                    : "border-gray-200"
+                                }`}>
+                                  <input
+                                    type="radio"
+                                    name="duration"
+                                    value={duration}
+                                    checked={formData.duration === duration}
+                                    onChange={(e) => {
+                                      setFormData(prev => ({ ...prev, duration: e.target.value }));
+                                      // Auto-select first plan (same plan) when duration is selected
+                                      setTimeout(() => {
+                                        const plans = getDesktopPlans("Subscription", e.target.value);
+                                        if (plans && plans.length > 0) {
+                                          const firstPlan = plans[0];
+                                          setFormData(prev => ({ ...prev, planName: firstPlan.name }));
+                                          setPlanQuantities({ [firstPlan.name]: 1 });
+                                          // Auto-scroll to order summary
+                                          setTimeout(() => {
+                                            const orderSummary = document.getElementById('order-summary-section');
+                                            if (orderSummary) {
+                                              orderSummary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                            }
+                                          }, 300);
+                                        }
+                                      }, 100);
+                                    }}
+                                    className="w-4 h-4 text-blue-600 mr-3"
+                                  />
+                                  <span className="text-gray-700 font-medium">{duration} Days</span>
+                                </label>
+                              ))}
+                            </div>
                           </div>
-                        </div>
+                        )}
+
+                        {/* Online Product: Show Online-specific configuration */}
+                        {formData.productType === "Online" && (
+                          <div id="product-selection-section" className="space-y-4">
+                            {/* All fields in single row - same as New Sale */}
+                            <div className="flex items-center space-x-6">
+                              {/* User Count (Mandatory) - Add/Reduce control */}
+                              <div className="flex items-center space-x-2">
+                                <Label className="text-sm font-medium whitespace-nowrap">User Count:</Label>
+                                <div className="flex items-center bg-white rounded border-0 px-2 py-1">
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      if (onlineUserCount > 1) {
+                                        const newCount = onlineUserCount - 1;
+                                        setOnlineUserCount(newCount);
+                                        // Auto-update company count to match user count
+                                        setOnlineCompanyCount(newCount);
+                                      }
+                                    }}
+                                    className="text-gray-600 hover:text-red-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                                  >
+                                    -
+                                  </button>
+                                  <span className="text-base font-semibold text-gray-900 min-w-[30px] text-center px-2">
+                                    {onlineUserCount}
+                                  </span>
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      const newCount = onlineUserCount + 1;
+                                      setOnlineUserCount(newCount);
+                                      // Auto-update company count to match user count
+                                      setOnlineCompanyCount(newCount);
+                                    }}
+                                    className="text-gray-600 hover:text-green-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                                  >
+                                    +
+                                  </button>
+                                </div>
+                              </div>
+
+                              {/* Company Count (Mandatory) - Add/Reduce control prefilled with User Count */}
+                              <div className="flex items-center space-x-2">
+                                <Label className="text-sm font-medium whitespace-nowrap">Company Count:</Label>
+                                <div className="flex items-center bg-white rounded border-0 px-2 py-1">
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      if (onlineCompanyCount > 1) {
+                                        setOnlineCompanyCount(onlineCompanyCount - 1);
+                                      }
+                                    }}
+                                    className="text-gray-600 hover:text-red-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                                  >
+                                    -
+                                  </button>
+                                  <span className="text-base font-semibold text-gray-900 min-w-[30px] text-center px-2">
+                                    {onlineCompanyCount}
+                                  </span>
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      setOnlineCompanyCount(onlineCompanyCount + 1);
+                                    }}
+                                    className="text-gray-600 hover:text-green-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                                  >
+                                    +
+                                  </button>
+                                </div>
+                              </div>
+
+                              {/* Database Type - Radio buttons */}
+                              <div className="flex items-center space-x-2">
+                                <Label className="text-sm font-medium whitespace-nowrap">Database Type:</Label>
+                                <div className="flex space-x-2">
+                                  {[
+                                    { value: "Access", label: "Access" },
+                                    { value: "Client Server", label: "Client Server" }
+                                  ].map((dbType) => (
+                                    <label key={dbType.value} className={`flex items-center cursor-pointer px-3 py-2 border-0 rounded-lg hover:shadow-md transition-all ${
+                                      onlineDatabaseType === dbType.value
+                                        ? "bg-blue-50" 
+                                        : "bg-gray-50"
+                                    }`}>
+                                      <input
+                                        type="radio"
+                                        name="onlineDatabaseType"
+                                        value={dbType.value}
+                                        checked={onlineDatabaseType === dbType.value}
+                                        onChange={(e) => {
+                                          setOnlineDatabaseType(e.target.value);
+                                          // Set planName to trigger order summary
+                                          setFormData(prev => ({ ...prev, planName: `Online ${e.target.value}` }));
+                                        }}
+                                        className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 mr-2"
+                                      />
+                                      <span className="text-gray-700 font-medium text-sm whitespace-nowrap">{dbType.label}</span>
+                                    </label>
+                                  ))}
+                                </div>
+                              </div>
+
+                              {/* Duration Selection for Online */}
+                              <div className="flex items-center space-x-2">
+                                <Label className="text-sm font-medium whitespace-nowrap">Duration:</Label>
+                                <div className="flex space-x-2">
+                                  {[
+                                    { value: "360", label: "360 Days" },
+                                    { value: "1080", label: "1080 Days" }
+                                  ].map((duration) => (
+                                    <label key={duration.value} className={`flex items-center cursor-pointer px-2 py-1.5 border-0 rounded-lg hover:shadow-md transition-all ${
+                                      formData.duration === duration.value
+                                        ? "bg-orange-50" 
+                                        : "bg-gray-50"
+                                    }`}>
+                                      <input
+                                        type="radio"
+                                        name="onlineDuration"
+                                        value={duration.value}
+                                        checked={formData.duration === duration.value}
+                                        onChange={(e) => {
+                                          setFormData(prev => ({ 
+                                            ...prev, 
+                                            duration: e.target.value
+                                          }));
+                                        }}
+                                        className="w-3.5 h-3.5 text-orange-600 border-gray-300 focus:ring-orange-500 mr-2"
+                                      />
+                                      <div className="flex flex-col">
+                                        <span className="text-gray-700 font-medium text-xs whitespace-nowrap">{duration.label}</span>
+                                        {duration.value === "1080" && (
+                                          <span className="text-[10px] text-green-600 font-semibold">
+                                            20% OFF
+                                          </span>
+                                        )}
+                                      </div>
+                                    </label>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
 
                         {/* Skip plan selection - it's now auto-selected */}
                       </div>
