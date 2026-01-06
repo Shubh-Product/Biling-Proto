@@ -5670,6 +5670,13 @@ const Dashboard = () => {
                                             duration: e.target.value,
                                             planName: "Online Renewal" // Set planName to trigger order summary
                                           }));
+                                          // Auto-scroll to order summary
+                                          setTimeout(() => {
+                                            const orderSummary = document.getElementById('order-summary-section');
+                                            if (orderSummary) {
+                                              orderSummary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                            }
+                                          }, 300);
                                         }}
                                         className="w-3.5 h-3.5 text-orange-600 border-gray-300 focus:ring-orange-500 mr-2"
                                       />
