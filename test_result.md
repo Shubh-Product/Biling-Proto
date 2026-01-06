@@ -896,6 +896,18 @@ agent_communication:
           agent: "main"
           comment: "✅ Updated Region implementation per user request. Changed from radio buttons to dropdown select element. Moved Region dropdown to the same row as Product selection for better space utilization. Region dropdown now appears on the right side of the Product selection row with proper spacing (ml-8). Dropdown has min-width of 200px for comfortable selection, green focus ring styling, and smooth hover transitions. Maintains same functionality with India as default selection."
 
+  - task: "Product-Specific Subscription IDs in Renew/Upgrade Flow"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "🎉 COMPREHENSIVE PRODUCT-SPECIFIC SUBSCRIPTION ID TESTING COMPLETED - All three test scenarios successfully verified as requested. ✅ **DESKTOP FLOW (DES12345)**: Complete end-to-end testing successful - Navigation to Generate Payment Link ✓, Renew/Upgrade tab selection ✓, DES12345 subscription ID entry ✓, Renew button click ✓, Validation successful with 'Validated' status ✓, Customer details displayed (Rajesh Kumar, Kumar Enterprises, 27KUMAR123456Z, Mumbai) ✓, Product details verified (Desktop, PERP M, Desktop Standard Multi User, Valid Till: 2024-12-31, Active) ✓, Duration options available (360, 180, 90 Days) ✓, 360 Days selection successful ✓, Order Summary appears directly without plan selection ✓ (₹12,000 base, GST ₹2,160, Grand Total ₹14,160). ✅ **ONLINE FLOW (ONL12345)**: Successfully tested - ONL12345 entry ✓, Renew button validation ✓, Customer details displayed (Amit Patel, Patel Enterprises, 24PATEL567890Z, Ahmedabad) ✓, Product type verified (Online, Subscription, Online Access - Annual, Valid Till: 2024-10-31, Active) ✓. ✅ **APP FLOW (APP12345)**: Successfully tested - APP12345 entry ✓, Renew button validation ✓, Product type verified (App) ✓. All product-specific subscription IDs working correctly with proper customer/product data mapping, validation flow, duration selection, and order summary generation as specified in requirements."
+
 frontend:
   - task: "Update Desktop Product Plans with New List"
     implemented: true
