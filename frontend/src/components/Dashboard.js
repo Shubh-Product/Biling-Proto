@@ -1334,8 +1334,13 @@ const Dashboard = () => {
       
       // For Online product, initialize user and company counts from current product
       if (serialData.currentProduct?.type === "Online") {
-        setOnlineUserCount(serialData.currentProduct?.userCount || 1);
-        setOnlineCompanyCount(serialData.currentProduct?.companyCount || 1);
+        const minUserCount = serialData.currentProduct?.userCount || 1;
+        const minCompanyCount = serialData.currentProduct?.companyCount || 1;
+        setOnlineUserCount(minUserCount);
+        setOnlineCompanyCount(minCompanyCount);
+        // Set minimum counts that cannot be reduced below
+        setOnlineMinUserCount(minUserCount);
+        setOnlineMinCompanyCount(minCompanyCount);
       }
       
       // Auto-scroll to duration selection after a short delay
