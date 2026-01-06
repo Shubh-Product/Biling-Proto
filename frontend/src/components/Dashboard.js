@@ -1329,6 +1329,13 @@ const Dashboard = () => {
         ...prev,
         productType: serialData.currentProduct?.type || "Desktop"
       }));
+      
+      // For Online product, initialize user and company counts from current product
+      if (serialData.currentProduct?.type === "Online") {
+        setOnlineUserCount(serialData.currentProduct?.userCount || 1);
+        setOnlineCompanyCount(serialData.currentProduct?.companyCount || 1);
+      }
+      
       // Auto-scroll to duration selection after a short delay
       setTimeout(() => {
         const durationSection = document.getElementById('product-selection-section');
