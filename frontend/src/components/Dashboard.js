@@ -1360,8 +1360,139 @@ const Dashboard = () => {
       // Simulate API call to validate serial number and fetch details
       await new Promise(resolve => setTimeout(resolve, 1500));
 
-      // Same mock data but for upgrade flow
+      // Same mock data as renewal flow but for upgrade
       const mockSerialData = {
+        "DES12345": {
+          valid: true,
+          eligible: true,
+          customer: {
+            name: "Rajesh Kumar",
+            email: "rajesh.kumar@example.com",
+            mobile: "9876543210",
+            company: "Kumar Enterprises",
+            gstin: "27KUMAR123456Z",
+            city: "Mumbai",
+            state: "Maharashtra"
+          },
+          currentProduct: {
+            type: "Desktop",
+            planName: "Desktop Standard Multi User",
+            licenseModel: "Perpetual",
+            duration: "360 Days",
+            expiryDate: "2024-12-31",
+            status: "Active"
+          }
+        },
+        "MAN12345": {
+          valid: true,
+          eligible: true,
+          customer: {
+            name: "Priya Sharma",
+            email: "priya.sharma@example.com",
+            mobile: "9988776655",
+            company: "Sharma Trading Co",
+            gstin: "27SHARMA789012Z",
+            city: "Delhi",
+            state: "Delhi"
+          },
+          currentProduct: {
+            type: "Mandi",
+            planName: "Mandi Premium Plan",
+            licenseModel: "Subscription",
+            duration: "360 Days",
+            expiryDate: "2024-11-30",
+            status: "Active"
+          }
+        },
+        "ONL12345": {
+          valid: true,
+          eligible: true,
+          customer: {
+            name: "Amit Patel",
+            email: "amit.patel@example.com",
+            mobile: "9876512340",
+            company: "Patel Enterprises",
+            gstin: "24PATEL567890Z",
+            city: "Ahmedabad",
+            state: "Gujarat"
+          },
+          currentProduct: {
+            type: "Online",
+            planName: "Online Access - Annual",
+            licenseModel: "Subscription",
+            duration: "360 Days",
+            expiryDate: "2024-10-31",
+            status: "Active",
+            userCount: 5,
+            companyCount: 2
+          }
+        },
+        "APP12345": {
+          valid: true,
+          eligible: true,
+          customer: {
+            name: "Neha Singh",
+            email: "neha.singh@example.com",
+            mobile: "9123456789",
+            company: "Singh Solutions",
+            gstin: "09SINGH123456Z",
+            city: "Bangalore",
+            state: "Karnataka"
+          },
+          currentProduct: {
+            type: "App",
+            planName: "Business Pro Package",
+            licenseModel: "Subscription",
+            duration: "360 Days",
+            expiryDate: "2024-12-15",
+            status: "Active",
+            subscriptionId: "APP12345"
+          }
+        },
+        "REC12345": {
+          valid: true,
+          eligible: true,
+          customer: {
+            name: "Anil Gupta",
+            email: "anil.gupta@example.com",
+            mobile: "9988001122",
+            company: "Gupta Retail",
+            gstin: "27GUPTA234567Z",
+            city: "Pune",
+            state: "Maharashtra"
+          },
+          currentProduct: {
+            type: "Recom",
+            planName: "Recom B - 12K Orders",
+            licenseModel: "Subscription",
+            duration: "360 Days",
+            expiryDate: "2024-09-30",
+            status: "Active",
+            marketPlace: "Single"
+          }
+        },
+        "RDP12345": {
+          valid: true,
+          eligible: true,
+          customer: {
+            name: "Vikram Reddy",
+            email: "vikram.reddy@example.com",
+            mobile: "9876501234",
+            company: "Reddy Systems",
+            gstin: "36REDDY890123Z",
+            city: "Hyderabad",
+            state: "Telangana"
+          },
+          currentProduct: {
+            type: "RDP",
+            planName: "RDP Professional",
+            licenseModel: "Subscription",
+            duration: "365 Days",
+            expiryDate: "2024-08-31",
+            status: "Active",
+            rdpCount: 3
+          }
+        },
         "SER123456": {
           valid: true,
           eligible: true,
