@@ -5560,23 +5560,31 @@ const Dashboard = () => {
                         {/* Online Product: Show Online-specific configuration */}
                         {formData.productType === "Online" && (
                           <div id="product-selection-section" className="space-y-4">
-                            {/* All fields in single row - same as New Sale */}
+                            {/* All fields in single row - without Database Type */}
                             <div className="flex items-center space-x-6">
-                              {/* User Count (Mandatory) - Add/Reduce control */}
+                              {/* User Count (Mandatory) - Add/Reduce control with minimum enforcement */}
                               <div className="flex items-center space-x-2">
                                 <Label className="text-sm font-medium whitespace-nowrap">User Count:</Label>
                                 <div className="flex items-center bg-white rounded border-0 px-2 py-1">
                                   <button
                                     type="button"
                                     onClick={() => {
-                                      if (onlineUserCount > 1) {
+                                      // Can only reduce if above minimum (original subscription count)
+                                      if (onlineUserCount > onlineMinUserCount) {
                                         const newCount = onlineUserCount - 1;
                                         setOnlineUserCount(newCount);
-                                        // Auto-update company count to match user count
-                                        setOnlineCompanyCount(newCount);
+                                        // Auto-update company count to match user count if not below company minimum
+                                        if (newCount >= onlineMinCompanyCount) {
+                                          setOnlineCompanyCount(newCount);
+                                        }
                                       }
                                     }}
-                                    className="text-gray-600 hover:text-red-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                                    disabled={onlineUserCount <= onlineMinUserCount}
+                                    className={`font-bold text-lg w-6 h-6 flex items-center justify-center ${
+                                      onlineUserCount <= onlineMinUserCount 
+                                        ? 'text-gray-300 cursor-not-allowed' 
+                                        : 'text-gray-600 hover:text-red-600'
+                                    }`}
                                   >
                                     -
                                   </button>
@@ -5596,20 +5604,27 @@ const Dashboard = () => {
                                     +
                                   </button>
                                 </div>
+                                <span className="text-xs text-gray-500">(Min: {onlineMinUserCount})</span>
                               </div>
 
-                              {/* Company Count (Mandatory) - Add/Reduce control prefilled with User Count */}
+                              {/* Company Count (Mandatory) - Add/Reduce control with minimum enforcement */}
                               <div className="flex items-center space-x-2">
                                 <Label className="text-sm font-medium whitespace-nowrap">Company Count:</Label>
                                 <div className="flex items-center bg-white rounded border-0 px-2 py-1">
                                   <button
                                     type="button"
                                     onClick={() => {
-                                      if (onlineCompanyCount > 1) {
+                                      // Can only reduce if above minimum (original subscription count)
+                                      if (onlineCompanyCount > onlineMinCompanyCount) {
                                         setOnlineCompanyCount(onlineCompanyCount - 1);
                                       }
                                     }}
-                                    className="text-gray-600 hover:text-red-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                                    disabled={onlineCompanyCount <= onlineMinCompanyCount}
+                                    className={`font-bold text-lg w-6 h-6 flex items-center justify-center ${
+                                      onlineCompanyCount <= onlineMinCompanyCount 
+                                        ? 'text-gray-300 cursor-not-allowed' 
+                                        : 'text-gray-600 hover:text-red-600'
+                                    }`}
                                   >
                                     -
                                   </button>
@@ -5626,38 +5641,10 @@ const Dashboard = () => {
                                     +
                                   </button>
                                 </div>
+                                <span className="text-xs text-gray-500">(Min: {onlineMinCompanyCount})</span>
                               </div>
 
-                              {/* Database Type - Radio buttons */}
-                              <div className="flex items-center space-x-2">
-                                <Label className="text-sm font-medium whitespace-nowrap">Database Type:</Label>
-                                <div className="flex space-x-2">
-                                  {[
-                                    { value: "Access", label: "Access" },
-                                    { value: "Client Server", label: "Client Server" }
-                                  ].map((dbType) => (
-                                    <label key={dbType.value} className={`flex items-center cursor-pointer px-3 py-2 border-0 rounded-lg hover:shadow-md transition-all ${
-                                      onlineDatabaseType === dbType.value
-                                        ? "bg-blue-50" 
-                                        : "bg-gray-50"
-                                    }`}>
-                                      <input
-                                        type="radio"
-                                        name="onlineDatabaseType"
-                                        value={dbType.value}
-                                        checked={onlineDatabaseType === dbType.value}
-                                        onChange={(e) => {
-                                          setOnlineDatabaseType(e.target.value);
-                                          // Set planName to trigger order summary
-                                          setFormData(prev => ({ ...prev, planName: `Online ${e.target.value}` }));
-                                        }}
-                                        className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 mr-2"
-                                      />
-                                      <span className="text-gray-700 font-medium text-sm whitespace-nowrap">{dbType.label}</span>
-                                    </label>
-                                  ))}
-                                </div>
-                              </div>
+                              {/* Database Type - REMOVED from renewal flow */}
 
                               {/* Duration Selection for Online */}
                               <div className="flex items-center space-x-2">
@@ -5680,7 +5667,8 @@ const Dashboard = () => {
                                         onChange={(e) => {
                                           setFormData(prev => ({ 
                                             ...prev, 
-                                            duration: e.target.value
+                                            duration: e.target.value,
+                                            planName: "Online Renewal" // Set planName to trigger order summary
                                           }));
                                         }}
                                         className="w-3.5 h-3.5 text-orange-600 border-gray-300 focus:ring-orange-500 mr-2"
