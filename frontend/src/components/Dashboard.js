@@ -102,6 +102,8 @@ const Dashboard = () => {
   const [planCounts, setPlanCounts] = useState({}); // Track count for Client Server plans
   const [onlineUserCount, setOnlineUserCount] = useState(1); // Track user count for Online product
   const [onlineCompanyCount, setOnlineCompanyCount] = useState(1); // Track company count for Online product
+  const [onlineMinUserCount, setOnlineMinUserCount] = useState(1); // Track minimum user count for Online renewal (cannot reduce below this)
+  const [onlineMinCompanyCount, setOnlineMinCompanyCount] = useState(1); // Track minimum company count for Online renewal (cannot reduce below this)
   const [onlineDatabaseType, setOnlineDatabaseType] = useState(""); // Track database type for Online product
   const [appSubscriptionId, setAppSubscriptionId] = useState(""); // Track subscription ID for App product
   const [appSubscriptionValidated, setAppSubscriptionValidated] = useState(false); // Track if App subscription is validated
