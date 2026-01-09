@@ -5089,49 +5089,51 @@ const Dashboard = () => {
                     <div className="bg-white rounded-lg p-6">
                       
                       <div className="flex items-center space-x-4">
-                        {/* New Button - Visible on all tabs */}
-                        <Button 
-                          type="button"
-                          onClick={() => {
-                            // Switch to New Sales flow for selected product
-                            const currentProductType = formData.productType; // Capture current product type
-                            setFormData(prev => ({
-                              ...prev,
-                              transactionType: "New Sales",
-                              productType: currentProductType, // Explicitly preserve productType
-                              // Reset other fields
-                              serialNumber: "",
-                              duration: "",
-                              licenseModel: "",
-                              planName: "",
-                              customerDetails: {
-                                mobile: "",
-                                name: "",
-                                email: "",
-                                company: "",
-                                gstin: "",
-                                city: "",
-                                pincode: "",
-                                address: "",
-                                state: "",
-                                country: "India",
-                                caPanNo: "",
-                                caLicenseNumber: ""
-                              }
-                            }));
-                            // Reset validation states
-                            setCustomerValidated(false);
-                            setSerialValidated(false);
-                            setSerialNumber('');
-                            setCurrentCustomerInfo(null);
-                            setCurrentProductInfo(null);
-                            setActionType('');
-                            setErrors({});
-                          }}
-                          className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 font-semibold"
-                        >
-                          New
-                        </Button>
+                        {/* New Button - Different placement for App tab */}
+                        {formData.productType !== "App" && (
+                          <Button 
+                            type="button"
+                            onClick={() => {
+                              // Switch to New Sales flow for selected product
+                              const currentProductType = formData.productType; // Capture current product type
+                              setFormData(prev => ({
+                                ...prev,
+                                transactionType: "New Sales",
+                                productType: currentProductType, // Explicitly preserve productType
+                                // Reset other fields
+                                serialNumber: "",
+                                duration: "",
+                                licenseModel: "",
+                                planName: "",
+                                customerDetails: {
+                                  mobile: "",
+                                  name: "",
+                                  email: "",
+                                  company: "",
+                                  gstin: "",
+                                  city: "",
+                                  pincode: "",
+                                  address: "",
+                                  state: "",
+                                  country: "India",
+                                  caPanNo: "",
+                                  caLicenseNumber: ""
+                                }
+                              }));
+                              // Reset validation states
+                              setCustomerValidated(false);
+                              setSerialValidated(false);
+                              setSerialNumber('');
+                              setCurrentCustomerInfo(null);
+                              setCurrentProductInfo(null);
+                              setActionType('');
+                              setErrors({});
+                            }}
+                            className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 font-semibold"
+                          >
+                            New
+                          </Button>
+                        )}
 
                         <div className="flex items-center space-x-3">
                           {/* Subscription Number Input - Always visible */}
@@ -5151,6 +5153,51 @@ const Dashboard = () => {
                               }
                             }}
                           />
+                          
+                          {/* New Button for App tab - Positioned on right, before Renew */}
+                          {formData.productType === "App" && (
+                            <Button 
+                              type="button"
+                              onClick={() => {
+                                // Switch to New Sales flow for App
+                                const currentProductType = formData.productType;
+                                setFormData(prev => ({
+                                  ...prev,
+                                  transactionType: "New Sales",
+                                  productType: currentProductType,
+                                  serialNumber: "",
+                                  duration: "",
+                                  licenseModel: "",
+                                  planName: "",
+                                  customerDetails: {
+                                    mobile: "",
+                                    name: "",
+                                    email: "",
+                                    company: "",
+                                    gstin: "",
+                                    city: "",
+                                    pincode: "",
+                                    address: "",
+                                    state: "",
+                                    country: "India",
+                                    caPanNo: "",
+                                    caLicenseNumber: ""
+                                  }
+                                }));
+                                setCustomerValidated(false);
+                                setSerialValidated(false);
+                                setSerialNumber('');
+                                setCurrentCustomerInfo(null);
+                                setCurrentProductInfo(null);
+                                setActionType('');
+                                setErrors({});
+                              }}
+                              disabled={!serialNumber || serialNumber.toUpperCase() !== "SER12345"}
+                              className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 font-semibold disabled:bg-gray-300 disabled:cursor-not-allowed"
+                            >
+                              New
+                            </Button>
+                          )}
                           
                           {/* Renew Button - Visible on all tabs except RDP */}
                           {formData.productType !== 'RDP' && (
