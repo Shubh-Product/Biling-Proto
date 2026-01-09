@@ -9742,48 +9742,54 @@ const Dashboard = () => {
                   <div className="space-y-6">
                     
                     {/* Product Selection with Region Dropdown in Same Row */}
+                    {/* Hide product selection if productType is already set from tab (shows only region for Desktop/Mandi) */}
                     <div id="product-type-section" className="flex items-center space-x-6">
-                      <Label className="text-sm font-medium whitespace-nowrap">Product:</Label>
-                      <div className="flex space-x-3">
-                        {[
-                          { value: "Desktop", label: "Desktop" },
-                          { value: "Mandi", label: "Mandi" },
-                          { value: "Online", label: "Online" },
-                          { value: "App", label: "App" },
-                          { value: "Recom", label: "Recom" },
-                          { value: "RDP", label: "RDP" }
-                        ].map((product) => (
-                          <label key={product.value} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all w-32 ${
-                            formData.productType === product.value 
-                              ? "border-blue-500 bg-blue-50" 
-                              : "border-gray-200"
-                          }`}>
-                            <input
-                              type="radio"
-                              name="productType"
-                              value={product.value}
-                              checked={formData.productType === product.value}
-                              onChange={(e) => {
-                                setFormData(prev => ({ 
-                                  ...prev, 
-                                  productType: e.target.value,
-                                  licenseModel: "",
-                                  duration: "",
-                                  accessType: "",
-                                  userCount: "",
-                                  companyCount: "",
-                                  planName: ""
-                                }));
-                                setPlanQuantities({}); // Reset plan quantities when product type changes
-                              }}
-                              className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 mr-3"
-                            />
-                            <span className="text-gray-700 font-medium text-sm">{product.label}</span>
-                          </label>
-                        ))}
-                      </div>
+                      {/* Only show product radio buttons if productType is not pre-selected from tabs */}
+                      {!formData.productType && (
+                        <>
+                          <Label className="text-sm font-medium whitespace-nowrap">Product:</Label>
+                          <div className="flex space-x-3">
+                            {[
+                              { value: "Desktop", label: "Desktop" },
+                              { value: "Mandi", label: "Mandi" },
+                              { value: "Online", label: "Online" },
+                              { value: "App", label: "App" },
+                              { value: "Recom", label: "Recom" },
+                              { value: "RDP", label: "RDP" }
+                            ].map((product) => (
+                              <label key={product.value} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all w-32 ${
+                                formData.productType === product.value 
+                                  ? "border-blue-500 bg-blue-50" 
+                                  : "border-gray-200"
+                              }`}>
+                                <input
+                                  type="radio"
+                                  name="productType"
+                                  value={product.value}
+                                  checked={formData.productType === product.value}
+                                  onChange={(e) => {
+                                    setFormData(prev => ({ 
+                                      ...prev, 
+                                      productType: e.target.value,
+                                      licenseModel: "",
+                                      duration: "",
+                                      accessType: "",
+                                      userCount: "",
+                                      companyCount: "",
+                                      planName: ""
+                                    }));
+                                    setPlanQuantities({}); // Reset plan quantities when product type changes
+                                  }}
+                                  className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 mr-3"
+                                />
+                                <span className="text-gray-700 font-medium text-sm">{product.label}</span>
+                              </label>
+                            ))}
+                          </div>
+                        </>
+                      )}
 
-                      {/* Region Dropdown in Same Row - Only show for Desktop and Mandi */}
+                      {/* Region Dropdown - Only show for Desktop and Mandi */}
                       {(formData.productType === "Desktop" || formData.productType === "Mandi") && (
                         <div className="flex items-center space-x-3 ml-8">
                           <Label className="text-sm font-medium whitespace-nowrap">Region:</Label>
