@@ -2512,7 +2512,7 @@ const Dashboard = () => {
     const busyOnlineValid = formData.productType === "Busy Online" && formData.duration && formData.accessType && validateBusyOnlineCounts().isValid;
     const onlineValid = formData.productType === "Online" && onlineUserCount >= 1 && onlineCompanyCount >= 1 && onlineDatabaseType && formData.duration;
     const mandiValid = formData.productType === "Mandi" && formData.duration && Object.values(planQuantities).some(qty => qty > 0);
-    const appValid = formData.productType === "App" && appSubscriptionValidated && appSubscriptionCount >= 1 && formData.duration;
+    const appValid = formData.productType === "App" && appSubscriptionCount >= 1 && formData.duration;
     const rdpValid = formData.productType === "RDP" && rdpCount >= 1;
     const orderSummaryVisible = (((formData.productType === "Desktop" && formData.planName && calculateDesktopPricing()) || 
                                  mandiValid ||
@@ -10894,7 +10894,7 @@ const Dashboard = () => {
                   const busyOnlineValid = formData.productType === "Busy Online" && formData.duration && formData.accessType && validateBusyOnlineCounts().isValid;
                   const onlineValid = formData.productType === "Online" && onlineUserCount >= 1 && onlineCompanyCount >= 1 && onlineDatabaseType && formData.duration;
                   const mandiValid = formData.productType === "Mandi" && formData.duration && Object.values(planQuantities).some(qty => qty > 0);
-                  const appValid = formData.productType === "App" && appSubscriptionValidated && appSubscriptionCount >= 1 && formData.duration;
+                  const appValid = formData.productType === "App" && appSubscriptionCount >= 1 && formData.duration;
                   const recomValid = formData.productType === "Recom" && recomSubscriptionValidated && recomMarketPlace && formData.planName;
                   const rdpValid = formData.productType === "RDP" && rdpSubscriptionValidated && rdpCount >= 1;
                   const showOrderSummary = (((formData.productType === "Desktop" && formData.planName && calculateDesktopPricing()) || 
@@ -11331,7 +11331,7 @@ const Dashboard = () => {
                   const busyOnlineValid = formData.productType === "Busy Online" && formData.duration && formData.accessType && validateBusyOnlineCounts().isValid;
                   const onlineValid = formData.productType === "Online" && onlineUserCount >= 1 && onlineCompanyCount >= 1 && onlineDatabaseType && formData.duration;
                   const mandiValid = formData.productType === "Mandi" && formData.duration && Object.values(planQuantities).some(qty => qty > 0);
-                  const appValid = formData.productType === "App" && appSubscriptionValidated && appSubscriptionCount >= 1 && formData.duration;
+                  const appValid = formData.productType === "App" && appSubscriptionCount >= 1 && formData.duration;
                   const recomValid = formData.productType === "Recom" && recomSubscriptionValidated && recomMarketPlace && formData.planName;
                   const rdpValid = formData.productType === "RDP" && rdpSubscriptionValidated && rdpCount >= 1;
                   const showOrderSummary = (((formData.productType === "Desktop" && formData.planName && calculateDesktopPricing()) || 
