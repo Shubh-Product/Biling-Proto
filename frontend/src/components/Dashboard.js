@@ -9878,20 +9878,18 @@ const Dashboard = () => {
                           {/* Region Selection */}
                           <div className="flex items-center space-x-3">
                             <Label className="text-sm font-medium whitespace-nowrap">Region:</Label>
-                            <Select
+                            <select
                               value={formData.region}
-                              onValueChange={(value) => {
-                                setFormData(prev => ({ ...prev, region: value }));
-                              }}
+                              onChange={(e) => setFormData(prev => ({ 
+                                ...prev, 
+                                region: e.target.value
+                              }))}
+                              className="px-4 py-2 border-2 border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-white hover:border-green-400 transition-all min-w-[200px]"
                             >
-                              <SelectTrigger className="w-32">
-                                <SelectValue placeholder="Select Region" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="India">India</SelectItem>
-                                <SelectItem value="International">International</SelectItem>
-                              </SelectContent>
-                            </Select>
+                              <option value="India">India</option>
+                              <option value="Indian Subcontinent">Indian Subcontinent</option>
+                              <option value="Global">Global</option>
+                            </select>
                           </div>
                         </div>
 
