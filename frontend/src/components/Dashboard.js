@@ -5100,30 +5100,34 @@ const Dashboard = () => {
                           type="button"
                           onClick={() => {
                             // Switch to New Sales flow for selected product
-                            setFormData(prev => ({
-                              ...prev,
-                              transactionType: "New Sales",
-                              // Keep productType from selected tab
-                              // Reset other fields
-                              serialNumber: "",
-                              duration: "",
-                              licenseModel: "",
-                              planName: "",
-                              customerDetails: {
-                                mobile: "",
-                                name: "",
-                                email: "",
-                                company: "",
-                                gstin: "",
-                                city: "",
-                                pincode: "",
-                                address: "",
-                                state: "",
-                                country: "India",
-                                caPanNo: "",
-                                caLicenseNumber: ""
-                              }
-                            }));
+                            setFormData(prev => {
+                              console.log('New button clicked, current productType:', prev.productType);
+                              return {
+                                ...prev,
+                                transactionType: "New Sales",
+                                // Explicitly keep productType from selected tab
+                                productType: prev.productType, // Make this explicit
+                                // Reset other fields
+                                serialNumber: "",
+                                duration: "",
+                                licenseModel: "",
+                                planName: "",
+                                customerDetails: {
+                                  mobile: "",
+                                  name: "",
+                                  email: "",
+                                  company: "",
+                                  gstin: "",
+                                  city: "",
+                                  pincode: "",
+                                  address: "",
+                                  state: "",
+                                  country: "India",
+                                  caPanNo: "",
+                                  caLicenseNumber: ""
+                                }
+                              };
+                            });
                             // Reset validation states
                             setCustomerValidated(false);
                             setSerialValidated(false);
