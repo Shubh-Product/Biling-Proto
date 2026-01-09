@@ -5035,75 +5035,37 @@ const Dashboard = () => {
         {/* Create Transaction Form */}
         {showCreateForm && (
           <div>
-            {/* Transaction Type Tabs - Step 1 - Outside Card */}
+            {/* Product-based Tabs - Outside Card */}
             <div className="mb-0">
               <div className="flex space-x-1">
                 {[
-                  { value: "New Sales", label: "New Sale", icon: "📝" },
-                  { value: "Renewal/Upgrade", label: "Renew / Upgrade", icon: "🔄" }
+                  { value: "Desktop", label: "Desktop", icon: "💻" },
+                  { value: "Mandi", label: "Mandi", icon: "🛒" },
+                  { value: "Online", label: "Online", icon: "☁️" },
+                  { value: "App", label: "App", icon: "📱" },
+                  { value: "Recom", label: "Recom", icon: "🎯" },
+                  { value: "RDP", label: "RDP", icon: "🖥️" }
                 ].map((tab) => {
-                  const isActive = formData.transactionType === tab.value;
+                  const isActive = formData.productType === tab.value;
                   return (
                     <button
                       key={tab.value}
                       type="button"
                       onClick={() => {
-                        const newTransactionType = tab.value;
-                        
-                        // Reset journey for specific transaction types
-                        if (['Renewal/Upgrade', 'Mobile App', 'Recom', 'Bundle Offer'].includes(newTransactionType)) {
-                          // Reset all form data and states
-                          setFormData({
-                            transactionType: newTransactionType,
-                            licenseType: "Retail",
-                            serialNumber: "",
-                            productType: "",
-                            region: "India",
-                            licenseModel: "",
-                            duration: "",
-                            accessType: "",
-                            userCount: "1",
-                            companyCount: "1",
-                            customerDetails: {
-                              mobile: "",
-                              name: "",
-                              email: "",
-                              company: "",
-                              gstin: "",
-                              city: "",
-                              pincode: "",
-                              address: "",
-                              state: "",
-                              country: "India",
-                              caPanNo: "",
-                              caLicenseNumber: ""
-                            },
-                            clientReferences: [
-                              { name: "", email: "", mobile: "", gstin: "", company: "", address: "" },
-                              { name: "", email: "", mobile: "", gstin: "", company: "", address: "" },
-                              { name: "", email: "", mobile: "", gstin: "", company: "", address: "" },
-                              { name: "", email: "", mobile: "", gstin: "", company: "", address: "" },
-                              { name: "", email: "", mobile: "", gstin: "", company: "", address: "" }
-                            ],
-                            poUpload: null,
-                            planName: "",
-                            discountPercent: 0
-                          });
-                          setCustomerValidated(false);
-                          setExistingLicenses([]);
-                          setErrors({});
-                          setVisibleClientReferences(2);
-                          setPlanQuantities({}); // Reset plan quantities
-                          // Reset renewal/upgrade flow states
-                          resetRenewalFlow();
-                          // Reset mobile app flow states
-                          resetMobileAppFlow();
-                          // Reset recom flow states
-                          resetRecomFlow();
-                        } else {
-                          // For "New Sales", just update transaction type
-                          setFormData(prev => ({ ...prev, transactionType: newTransactionType }));
-                        }
+                        // Set product type
+                        setFormData(prev => ({
+                          ...prev,
+                          productType: tab.value,
+                          transactionType: "Renewal/Upgrade" // Keep this for existing logic
+                        }));
+                        // Reset other fields when switching products
+                        setSerialNumber('');
+                        setSerialValidated(false);
+                        setCustomerValidated(false);
+                        setCurrentCustomerInfo(null);
+                        setCurrentProductInfo(null);
+                        setActionType('');
+                        setErrors({});
                       }}
                       className={`flex items-center px-6 py-3 text-sm font-semibold transition-all ${
                         isActive
@@ -5122,7 +5084,6 @@ const Dashboard = () => {
             <Card className="rounded-t-none border-t-0">
               <CardContent className="pt-6">
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* License Type */}
 
                 {/* Universal TDS Toggle removed - now inside Order Summary sections */}
 
