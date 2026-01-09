@@ -52,10 +52,10 @@ const Dashboard = () => {
 
   // Form state
   const [formData, setFormData] = useState({
-    transactionType: "New Sales",
+    transactionType: "Renewal/Upgrade", // Default to Renewal/Upgrade for product-based flow
     licenseType: "Retail",
     serialNumber: "",
-    productType: "",
+    productType: "Desktop", // Default to Desktop tab
     region: "India", // Default region
     licenseModel: "", // Perpetual or Subscription for Desktop
     duration: "", // 360 or 1080 for Desktop, 360 or 90 for Busy Online
