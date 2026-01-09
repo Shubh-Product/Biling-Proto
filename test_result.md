@@ -1512,3 +1512,35 @@ agent_communication:
     - agent: "main"
       message: "✅ APP TAB MODIFICATIONS COMPLETED - Implemented all required changes for App tab as per requirements: 1) Verified 'New' button is already correctly positioned on RIGHT side (before Renew button) with proper disable/enable logic based on SER12345 subscription ID, 2) Removed subscription validation step from New Sales flow - user now proceeds directly from Prospect Details to configuration without intermediate validation, 3) Updated all 6 validation checks to remove appSubscriptionValidated requirement throughout the file, 4) Maintained all existing constraints - no changes to other UI elements, APIs, or business logic, 5) Frontend service restarted and compiled successfully. The App tab New Sales flow now works like Desktop/Mandi/Online products with simplified direct flow. Ready for testing to verify: 1) App tab Renewal/Upgrade flow with 'New' button behavior, 2) App tab New Sales flow without subscription validation, 3) Order Summary generation, 4) Payment link functionality."
 
+
+
+frontend:
+  - task: "RDP Tab Button Placement & New Sales Flow Simplification"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "✅ COMPREHENSIVE RDP TAB CHANGES COMPLETED - Successfully implemented all requested changes for the RDP tab flow following the same pattern as App and Recom tabs. **BUTTON PLACEMENT & BEHAVIOR (Renewal/Upgrade Flow)**: Added 'New' button on the RIGHT side of Subscription text box at lines 5246-5287. RDP tab does not have a Renew button, so 'New' button appears directly after subscription input. Button is disabled by default and enables only when valid Subscription ID 'SER12345' is entered. Implementation: `disabled={!serialNumber || serialNumber.toUpperCase() !== \"SER12345\"}`. Updated LEFT side 'New' button to exclude App, Recom, and RDP tabs (line 5091). **NEW SALES FLOW CHANGES**: Successfully removed subscription validation step after 'Save & Continue' in New Sales flow. Removed entire subscription validation section (Subscription ID input, validation button, success/error messages) from lines 10762-10826. User now proceeds directly from Prospect Details → RDP Count selection → Order Summary without intermediate validation. Flow now matches Desktop/Mandi/App products structure. **VALIDATION LOGIC UPDATES**: Updated all validation checks to remove `rdpSubscriptionValidated` requirement: Line 10876 (Order Summary visibility), Line 11313 (Send Payment Link button). RDP validation now only requires: product type 'RDP' and rdpCount >= 1. **PRODUCT RADIO BUTTONS REMOVAL**: Added RDP to product selection exclusion list at lines 9831-9839, ensuring Product radio buttons don't appear in RDP New Sales flow. User proceeds directly from Prospect Details to RDP-specific configuration. **CHANGES SUMMARY**: 1) Added 'New' button on RIGHT side with SER12345 validation, 2) Removed subscription validation UI completely from New Sales flow, 3) Updated 2 validation checks across the file, 4) Removed Product radio buttons from New Sales flow, 5) Simplified New Sales flow to match other products, 6) Maintained all existing functionality and constraints, 7) No impact on other UI elements or business logic. Frontend compiled successfully with no errors. Ready for testing."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 4
+  run_ui: true
+
+test_plan:
+  current_focus:
+    - "RDP Tab Button Placement & New Sales Flow Simplification"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+    - agent: "main"
+      message: "✅ RDP TAB MODIFICATIONS COMPLETED - Implemented all required changes for RDP tab as per requirements: 1) Added 'New' button on RIGHT side (after subscription input) with proper disable/enable logic based on SER12345 subscription ID, 2) Removed subscription validation step from New Sales flow - user now proceeds directly from Prospect Details to RDP Count selection without intermediate validation, 3) Updated 2 validation checks to remove rdpSubscriptionValidated requirement throughout the file, 4) Removed Product radio buttons from New Sales flow by adding RDP to exclusion list, 5) Maintained all existing constraints - no changes to other UI elements, APIs, or business logic, 6) Frontend service restarted and compiled successfully. The RDP tab New Sales flow now works like Desktop/Mandi/Online/App/Recom products with simplified direct flow. Changes complete the pattern started with App and Recom tabs. Ready for testing to verify: 1) RDP tab Renewal/Upgrade flow with 'New' button behavior, 2) RDP tab New Sales flow without subscription validation, 3) RDP Count selection and adjustment, 4) Order Summary generation, 5) Payment link functionality."
+
