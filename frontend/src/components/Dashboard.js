@@ -5157,27 +5157,29 @@ const Dashboard = () => {
                             }}
                           />
                           
-                          {/* Renew Button - Visible on all tabs */}
-                          <Button 
-                            type="button"
-                            onClick={validateSerialNumberForRenewal}
-                            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2"
-                            disabled={!serialNumber || fetchingSerialDetails || serialValidated}
-                          >
-                            {fetchingSerialDetails && actionType === 'renew' ? (
-                              <>
-                                <div className="loading-spinner mr-2"></div>
-                                Fetching...
-                              </>
-                            ) : (serialValidated && actionType === 'renew') ? (
-                              <>
-                                <CheckCircle className="w-4 h-4 mr-2 text-green-600" />
-                                Validated
-                              </>
-                            ) : (
-                              'Renew'
-                            )}
-                          </Button>
+                          {/* Renew Button - Visible on all tabs except RDP */}
+                          {formData.productType !== 'RDP' && (
+                            <Button 
+                              type="button"
+                              onClick={validateSerialNumberForRenewal}
+                              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2"
+                              disabled={!serialNumber || fetchingSerialDetails || serialValidated}
+                            >
+                              {fetchingSerialDetails && actionType === 'renew' ? (
+                                <>
+                                  <div className="loading-spinner mr-2"></div>
+                                  Fetching...
+                                </>
+                              ) : (serialValidated && actionType === 'renew') ? (
+                                <>
+                                  <CheckCircle className="w-4 h-4 mr-2 text-green-600" />
+                                  Validated
+                                </>
+                              ) : (
+                                'Renew'
+                              )}
+                            </Button>
+                          )}
                           
                           {/* Upgrade Button - Visible on Desktop, Mandi, Online, Recom tabs */}
                           {['Desktop', 'Mandi', 'Online', 'Recom'].includes(formData.productType) && (
