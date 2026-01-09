@@ -11362,8 +11362,8 @@ const Dashboard = () => {
                           if (!hasValidPlans) return true;
                           return false; // Enable button if plans are selected
                         } else if (formData.productType === "App") {
-                          // For App - check if subscription is validated and all fields are filled
-                          if (!appSubscriptionValidated || appSubscriptionCount < 1 || !formData.duration) {
+                          // For App - check if all fields are filled
+                          if (appSubscriptionCount < 1 || !formData.duration) {
                             return true;
                           }
                           return false;
