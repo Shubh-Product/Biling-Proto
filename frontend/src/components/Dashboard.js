@@ -5244,6 +5244,51 @@ const Dashboard = () => {
                             </Button>
                           )}
                           
+                          {/* New Button for RDP tab - Positioned on right */}
+                          {formData.productType === "RDP" && (
+                            <Button 
+                              type="button"
+                              onClick={() => {
+                                // Switch to New Sales flow for RDP
+                                const currentProductType = formData.productType;
+                                setFormData(prev => ({
+                                  ...prev,
+                                  transactionType: "New Sales",
+                                  productType: currentProductType,
+                                  serialNumber: "",
+                                  duration: "",
+                                  licenseModel: "",
+                                  planName: "",
+                                  customerDetails: {
+                                    mobile: "",
+                                    name: "",
+                                    email: "",
+                                    company: "",
+                                    gstin: "",
+                                    city: "",
+                                    pincode: "",
+                                    address: "",
+                                    state: "",
+                                    country: "India",
+                                    caPanNo: "",
+                                    caLicenseNumber: ""
+                                  }
+                                }));
+                                setCustomerValidated(false);
+                                setSerialValidated(false);
+                                setSerialNumber('');
+                                setCurrentCustomerInfo(null);
+                                setCurrentProductInfo(null);
+                                setActionType('');
+                                setErrors({});
+                              }}
+                              disabled={!serialNumber || serialNumber.toUpperCase() !== "SER12345"}
+                              className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 font-semibold disabled:bg-gray-300 disabled:cursor-not-allowed"
+                            >
+                              New
+                            </Button>
+                          )}
+                          
                           {/* Renew Button - Visible on all tabs except RDP */}
                           {formData.productType !== 'RDP' && (
                             <Button 
