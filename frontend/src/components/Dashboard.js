@@ -9741,25 +9741,10 @@ const Dashboard = () => {
                 {formData.transactionType === "New Sales" && customerValidated && areMandatoryClientReferencesComplete() && (
                   <div className="space-y-6">
                     
-                    {/* For Desktop: Show only Region, no product selection, no duration here */}
+                    {/* For Desktop: Skip this section entirely, Region will show with Duration */}
                     {formData.productType === "Desktop" && (
-                      <div id="product-type-section" className="flex items-center space-x-6">
-                        {/* Region Dropdown - Only field shown for Desktop */}
-                        <div className="flex items-center space-x-3">
-                          <Label className="text-sm font-medium whitespace-nowrap">Region:</Label>
-                          <select
-                            value={formData.region}
-                            onChange={(e) => setFormData(prev => ({ 
-                              ...prev, 
-                              region: e.target.value
-                            }))}
-                            className="px-4 py-2 border-2 border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-white hover:border-green-400 transition-all min-w-[200px]"
-                          >
-                            <option value="India">India</option>
-                            <option value="Indian Subcontinent">Indian Subcontinent</option>
-                            <option value="Global">Global</option>
-                          </select>
-                        </div>
+                      <div id="product-type-section" className="hidden">
+                        {/* Intentionally hidden - Region shows with Duration for Desktop */}
                       </div>
                     )}
 
