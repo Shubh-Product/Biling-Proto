@@ -9736,15 +9736,15 @@ const Dashboard = () => {
                 {formData.transactionType === "New Sales" && customerValidated && areMandatoryClientReferencesComplete() && (
                   <div className="space-y-6">
                     
-                    {/* For Desktop, Mandi, and Online: Skip this section entirely */}
-                    {(formData.productType === "Desktop" || formData.productType === "Mandi" || formData.productType === "Online") && (
+                    {/* For Desktop, Mandi, Online, and App: Skip this section entirely */}
+                    {(formData.productType === "Desktop" || formData.productType === "Mandi" || formData.productType === "Online" || formData.productType === "App") && (
                       <div id="product-type-section" className="hidden">
                         {/* Intentionally hidden - these products skip product selection */}
                       </div>
                     )}
 
                     {/* For other products: Show Product Selection with Region */}
-                    {formData.productType !== "Desktop" && formData.productType !== "Mandi" && formData.productType !== "Online" && (
+                    {formData.productType !== "Desktop" && formData.productType !== "Mandi" && formData.productType !== "Online" && formData.productType !== "App" && (
                       <div id="product-type-section" className="flex items-center space-x-6">
                         <Label className="text-sm font-medium whitespace-nowrap">Product:</Label>
                         <div className="flex space-x-3">
