@@ -11309,12 +11309,15 @@ const Dashboard = () => {
                       type="submit" 
                       disabled={submitting || (() => {
                         // Check if final amount is 0 to disable Send Payment Link
-                        if (formData.productType === "Desktop" || formData.productType === "Mandi" || 
-                            formData.productType === "Recom") {
-                          // For Desktop, Mandi, Recom - check if any plan has quantity > 0
+                        if (formData.productType === "Desktop" || formData.productType === "Mandi") {
+                          // For Desktop, Mandi - check if any plan has quantity > 0
                           const hasValidPlans = Object.values(planQuantities).some(qty => qty > 0);
                           if (!hasValidPlans) return true;
                           return false; // Enable button if plans are selected
+                        } else if (formData.productType === "Recom") {
+                          // For Recom - check if a plan is selected
+                          if (!formData.planName || !recomMarketPlace) return true;
+                          return false; // Enable button if plan and marketplace are selected
                         } else if (formData.productType === "App") {
                           // For App - check if all fields are filled
                           if (appSubscriptionCount < 1 || !formData.duration) {
