@@ -9744,7 +9744,7 @@ const Dashboard = () => {
                     )}
 
                     {/* For other products: Show Product Selection with Region */}
-                    {formData.productType !== "Desktop" && (
+                    {formData.productType !== "Desktop" && formData.productType !== "Mandi" && (
                       <div id="product-type-section" className="flex items-center space-x-6">
                         <Label className="text-sm font-medium whitespace-nowrap">Product:</Label>
                         <div className="flex space-x-3">
@@ -9786,7 +9786,7 @@ const Dashboard = () => {
                           ))}
                         </div>
 
-                        {/* Region Dropdown in Same Row - Only show for Mandi */}
+                        {/* Region Dropdown in Same Row - Only show for Mandi (but this section won't show for Mandi anymore) */}
                         {formData.productType === "Mandi" && (
                           <div className="flex items-center space-x-3 ml-8">
                             <Label className="text-sm font-medium whitespace-nowrap">Region:</Label>
