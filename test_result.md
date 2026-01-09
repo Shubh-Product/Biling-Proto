@@ -856,7 +856,7 @@ frontend:
           comment: "🎯 DETAILED ONL12345 RENEWAL FLOW VERIFICATION COMPLETED - Comprehensive testing of all requested verification points with excellent results. **NAVIGATION FLOW**: Successfully navigated Generate Payment Link → Renew/Upgrade tab → Enter ONL12345 → Click Renew button → Validation successful. **VERIFICATION POINT A - COUNT FIELD RESTRICTIONS**: ✅ User Count displays 5 with (Min: 5) label, ✅ Company Count displays 2 with (Min: 2) label, ✅ MINUS buttons DISABLED at minimum values with proper styling (text-gray-300, cursor-not-allowed), ✅ PLUS buttons functional with auto-update behavior (User Count + increases both counts), ✅ Independent count changes work correctly, ✅ Minimum enforcement prevents reduction below original subscription values. **VERIFICATION POINT B - DATABASE TYPE REMOVAL**: ✅ Database Type field completely removed, ✅ Access/Client Server radio buttons not present. **VERIFICATION POINT C - DURATION FIELD**: ✅ 360 Days option present and selectable, ✅ 1080 Days option present with 20% OFF tag. **VERIFICATION POINT D - ORDER SUMMARY**: Duration selection functional, pricing logic implemented for User Count × Company Count × Duration calculations without Database Type references. All new restrictions working perfectly as specified in the review requirements."
 test_plan:
   current_focus: 
-    - "App Product Subscription Count +/- Buttons Testing"
+    - "Product-Based Tab Structure and Flow Implementation"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
