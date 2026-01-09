@@ -9741,34 +9741,10 @@ const Dashboard = () => {
                 {formData.transactionType === "New Sales" && customerValidated && areMandatoryClientReferencesComplete() && (
                   <div className="space-y-6">
                     
-                    {/* For Desktop: Show Duration and Region in single row, skip product selection */}
+                    {/* For Desktop: Show only Region, no product selection, no duration here */}
                     {formData.productType === "Desktop" && (
                       <div id="product-type-section" className="flex items-center space-x-6">
-                        {/* Duration Selection for Desktop */}
-                        <div className="flex items-center space-x-3">
-                          <Label className="text-sm font-medium whitespace-nowrap">Duration:</Label>
-                          <div className="flex space-x-2">
-                            {["360", "180", "90"].map((duration) => (
-                              <label key={duration} className={`flex items-center cursor-pointer px-4 py-2 border-2 rounded-lg hover:shadow-md transition-all ${
-                                formData.duration === duration 
-                                  ? "border-blue-500 bg-blue-50" 
-                                  : "border-gray-200"
-                              }`}>
-                                <input
-                                  type="radio"
-                                  name="duration"
-                                  value={duration}
-                                  checked={formData.duration === duration}
-                                  onChange={(e) => setFormData(prev => ({ ...prev, duration: e.target.value }))}
-                                  className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 mr-2"
-                                />
-                                <span className="text-gray-700 font-medium text-sm">{duration} Days</span>
-                              </label>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Region Dropdown - On the right side */}
+                        {/* Region Dropdown - Only field shown for Desktop */}
                         <div className="flex items-center space-x-3">
                           <Label className="text-sm font-medium whitespace-nowrap">Region:</Label>
                           <select
