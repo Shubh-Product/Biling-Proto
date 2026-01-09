@@ -5095,7 +5095,7 @@ const Dashboard = () => {
                     <div className="bg-white rounded-lg p-6">
                       
                       <div className="flex items-center space-x-4">
-                        {/* New Button - Triggers New Sales flow */}
+                        {/* New Button - Visible on all tabs */}
                         <Button 
                           type="button"
                           onClick={() => {
@@ -5139,6 +5139,7 @@ const Dashboard = () => {
                         </Button>
 
                         <div className="flex items-center space-x-3">
+                          {/* Subscription Number Input - Always visible */}
                           <Input
                             value={serialNumber}
                             onChange={(e) => {
@@ -5155,6 +5156,8 @@ const Dashboard = () => {
                               }
                             }}
                           />
+                          
+                          {/* Renew Button - Visible on all tabs */}
                           <Button 
                             type="button"
                             onClick={validateSerialNumberForRenewal}
@@ -5176,50 +5179,59 @@ const Dashboard = () => {
                             )}
                           </Button>
                           
-                          <Button 
-                            type="button"
-                            onClick={validateSerialNumberForUpgrade}
-                            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2"
-                            disabled={!serialNumber || fetchingSerialDetails || serialValidated}
-                          >
-                            {fetchingSerialDetails && actionType === 'upgrade' ? (
-                              <>
-                                <div className="loading-spinner mr-2"></div>
-                                Fetching...
-                              </>
-                            ) : (serialValidated && actionType === 'upgrade') ? (
-                              <>
-                                <CheckCircle className="w-4 h-4 mr-2 text-green-600" />
-                                Validated
-                              </>
-                            ) : (
-                              'Upgrade'
-                            )}
-                          </Button>
+                          {/* Upgrade Button - Visible on Desktop, Mandi, Online, Recom tabs */}
+                          {['Desktop', 'Mandi', 'Online', 'Recom'].includes(formData.productType) && (
+                            <Button 
+                              type="button"
+                              onClick={validateSerialNumberForUpgrade}
+                              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2"
+                              disabled={!serialNumber || fetchingSerialDetails || serialValidated}
+                            >
+                              {fetchingSerialDetails && actionType === 'upgrade' ? (
+                                <>
+                                  <div className="loading-spinner mr-2"></div>
+                                  Fetching...
+                                </>
+                              ) : (serialValidated && actionType === 'upgrade') ? (
+                                <>
+                                  <CheckCircle className="w-4 h-4 mr-2 text-green-600" />
+                                  Validated
+                                </>
+                              ) : (
+                                'Upgrade'
+                              )}
+                            </Button>
+                          )}
                           
-                          <Button 
-                            type="button"
-                            onClick={() => {
-                              console.log('Add/Reduce Count clicked');
-                              // TODO: Add add/reduce count functionality
-                            }}
-                            className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2"
-                            disabled={!serialNumber || fetchingSerialDetails}
-                          >
-                            Add/Reduce Count
-                          </Button>
+                          {/* Add/Reduce Count Button - Visible only on Desktop and Mandi tabs */}
+                          {['Desktop', 'Mandi'].includes(formData.productType) && (
+                            <Button 
+                              type="button"
+                              onClick={() => {
+                                console.log('Add/Reduce Count clicked');
+                                // TODO: Add add/reduce count functionality
+                              }}
+                              className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2"
+                              disabled={!serialNumber || fetchingSerialDetails}
+                            >
+                              Add/Reduce Count
+                            </Button>
+                          )}
                           
-                          <Button 
-                            type="button"
-                            onClick={() => {
-                              console.log('Upgrade to Online clicked');
-                              // TODO: Add upgrade to online functionality
-                            }}
-                            className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2"
-                            disabled={!serialNumber || fetchingSerialDetails}
-                          >
-                            Upgrade to Online
-                          </Button>
+                          {/* Upgrade to Online Button - Visible only on Desktop and Mandi tabs */}
+                          {['Desktop', 'Mandi'].includes(formData.productType) && (
+                            <Button 
+                              type="button"
+                              onClick={() => {
+                                console.log('Upgrade to Online clicked');
+                                // TODO: Add upgrade to online functionality
+                              }}
+                              className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2"
+                              disabled={!serialNumber || fetchingSerialDetails}
+                            >
+                              Upgrade to Online
+                            </Button>
+                          )}
                           
                           {/* Reset button hidden as per requirement */}
                         </div>
