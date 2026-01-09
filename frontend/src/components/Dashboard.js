@@ -11129,7 +11129,7 @@ const Dashboard = () => {
                             grandTotal = afterTds + gstAmount;
                           }
                           // For App product - Calculate similar to Desktop
-                          else if (formData.productType === "App" && appSubscriptionValidated && formData.duration) {
+                          else if (formData.productType === "App" && formData.duration) {
                             // Sample pricing for App subscriptions
                             const appPricing = {
                               "360": 8000,  // Base price for 360 days
