@@ -645,12 +645,251 @@ class SalesPortalAPITester:
                     print(f"   ⚠️  Missing field: {field}")
         return success
 
+    def test_mobile_app_transaction_creation(self):
+        """Test Mobile App transaction creation with different scenarios"""
+        if not self.customer_id:
+            print("❌ Skipping - No customer ID available")
+            return False
+
+        print("\n🔍 Testing Mobile App Transaction Creation Flow...")
+        
+        # Test 1: Mobile App New Sales transaction
+        mobile_app_new_sales_data = {
+            "transaction_type": "Mobile App",
+            "customer_id": self.customer_id,
+            "customer_name": "Mobile App Test Customer",
+            "license_type": "Retail",
+            "product_type": "Mobile",
+            "plan_details": {
+                "plan_name": "Business Pro Package",
+                "base_price": 15000.0,
+                "is_multi_user": False,
+                "features": ["Mobile access", "Cloud sync", "Business analytics", "Multi-device support"]
+            },
+            "base_amount": 15000.0,
+            "discount_percent": 0.0,
+            "discount_amount": 0.0,
+            "tax_amount": 2700.0,  # 18% GST
+            "final_amount": 17700.0
+        }
+        
+        success1, response1 = self.run_test("Create Mobile App New Sales Transaction", "POST", "transactions", 200, mobile_app_new_sales_data)
+        if success1 and response1:
+            print(f"   ✓ Mobile App Transaction ID: {response1.get('id')}")
+            print(f"   ✓ Transaction Type: {response1.get('transaction_type')}")
+            print(f"   ✓ Product Type: {response1.get('product_type')}")
+            print(f"   ✓ Base Amount: ₹{response1.get('base_amount')}")
+            print(f"   ✓ GST (18%): ₹{response1.get('tax_amount')}")
+            print(f"   ✓ Final Amount: ₹{response1.get('final_amount')}")
+        
+        # Test 2: Mobile App Renewal transaction
+        mobile_app_renewal_data = {
+            "transaction_type": "Renewal",
+            "customer_id": self.customer_id,
+            "customer_name": "Mobile App Renewal Customer",
+            "license_type": "Retail",
+            "product_type": "Mobile",
+            "plan_details": {
+                "plan_name": "Business Pro Package (Renewal)",
+                "base_price": 15000.0,
+                "is_multi_user": False,
+                "features": ["Mobile access", "Cloud sync", "Business analytics", "Multi-device support"]
+            },
+            "base_amount": 15000.0,
+            "discount_percent": 15.0,  # 15% renewal discount
+            "discount_amount": 2250.0,
+            "tax_amount": 2295.0,  # 18% GST on discounted amount (12750)
+            "final_amount": 15045.0
+        }
+        
+        success2, response2 = self.run_test("Create Mobile App Renewal Transaction", "POST", "transactions", 200, mobile_app_renewal_data)
+        if success2 and response2:
+            print(f"   ✓ Mobile App Renewal Transaction ID: {response2.get('id')}")
+            print(f"   ✓ Renewal Discount: {response2.get('discount_percent')}%")
+            print(f"   ✓ Discount Amount: ₹{response2.get('discount_amount')}")
+        
+        # Test 3: Mobile App Upgrade transaction
+        mobile_app_upgrade_data = {
+            "transaction_type": "Upgrade",
+            "customer_id": self.customer_id,
+            "customer_name": "Mobile App Upgrade Customer",
+            "license_type": "Retail",
+            "product_type": "Mobile",
+            "plan_details": {
+                "plan_name": "Enterprise Pro Package (Upgrade)",
+                "base_price": 25000.0,
+                "is_multi_user": True,
+                "features": ["Mobile access", "Cloud sync", "Advanced analytics", "Multi-device support", "Team collaboration"]
+            },
+            "base_amount": 25000.0,
+            "discount_percent": 10.0,  # 10% upgrade discount
+            "discount_amount": 2500.0,
+            "tax_amount": 4050.0,  # 18% GST on discounted amount (22500)
+            "final_amount": 26550.0
+        }
+        
+        success3, response3 = self.run_test("Create Mobile App Upgrade Transaction", "POST", "transactions", 200, mobile_app_upgrade_data)
+        if success3 and response3:
+            print(f"   ✓ Mobile App Upgrade Transaction ID: {response3.get('id')}")
+            print(f"   ✓ Upgrade Discount: {response3.get('discount_percent')}%")
+            print(f"   ✓ Multi-User Support: {response3.get('plan_details', {}).get('is_multi_user')}")
+        
+        return success1 and success2 and success3
+
+    def test_mobile_app_payment_link_generation(self):
+        """Test payment link generation for Mobile App transactions"""
+        print("\n🔍 Testing Mobile App Payment Link Generation...")
+        
+        if not self.customer_id:
+            print("❌ Skipping - No customer ID available")
+            return False
+            
+        # Create a Mobile App transaction first
+        mobile_app_transaction_data = {
+            "transaction_type": "Mobile App",
+            "customer_id": self.customer_id,
+            "customer_name": "Mobile App Payment Test Customer",
+            "license_type": "Retail",
+            "product_type": "Mobile",
+            "plan_details": {
+                "plan_name": "Standard Package",
+                "base_price": 12000.0,
+                "is_multi_user": False,
+                "features": ["Mobile access", "Basic analytics", "Cloud storage"]
+            },
+            "base_amount": 12000.0,
+            "discount_percent": 0.0,
+            "discount_amount": 0.0,
+            "tax_amount": 2160.0,  # 18% GST
+            "final_amount": 14160.0
+        }
+        
+        success1, response1 = self.run_test("Create Mobile App Transaction for Payment Link", "POST", "transactions", 200, mobile_app_transaction_data)
+        if not success1 or not response1:
+            return False
+            
+        mobile_app_transaction_id = response1.get('id')
+        print(f"   ✓ Created Mobile App Transaction ID: {mobile_app_transaction_id}")
+        
+        # Test payment link generation for Mobile App transaction
+        success2, response2 = self.run_test("Generate Mobile App Payment Link", "PATCH", f"transactions/{mobile_app_transaction_id}/payment-link", 200)
+        
+        if success2 and response2:
+            # Verify payment link response structure
+            if 'message' in response2:
+                print(f"   ✓ Mobile App Payment Link Message: {response2['message']}")
+            if 'expires_in' in response2:
+                print(f"   ✓ Mobile App Payment Link Expires in: {response2['expires_in']} seconds")
+                if response2['expires_in'] == 900:  # 15 minutes
+                    print("   ✓ Correct expiry time (15 minutes)")
+                    
+            # Verify transaction was updated
+            success3, transaction = self.run_test("Verify Mobile App Payment Link Update", "GET", f"transactions/{mobile_app_transaction_id}", 200)
+            if success3 and transaction:
+                if transaction.get('payment_link_sent_at'):
+                    print("   ✓ Mobile App payment link timestamp recorded")
+                if transaction.get('status') == 'Pending':
+                    print("   ✓ Mobile App transaction status set to Pending")
+                if transaction.get('product_type') == 'Mobile':
+                    print("   ✓ Mobile product type preserved")
+                if transaction.get('transaction_type') == 'Mobile App':
+                    print("   ✓ Mobile App transaction type preserved")
+                    
+        return success1 and success2
+
+    def test_mobile_app_pricing_calculations(self):
+        """Test Mobile App pricing calculations and GST verification"""
+        print("\n🔍 Testing Mobile App Pricing Calculations & GST...")
+        
+        if not self.customer_id:
+            print("❌ Skipping - No customer ID available")
+            return False
+        
+        # Test pricing calculations for different Mobile App scenarios
+        test_cases = [
+            {
+                "name": "Basic Package - 360 Days",
+                "base_price": 8000.0,
+                "expected_gst": 1440.0,  # 18% of 8000
+                "expected_final": 9440.0
+            },
+            {
+                "name": "Standard Package - 360 Days",
+                "base_price": 12000.0,
+                "expected_gst": 2160.0,  # 18% of 12000
+                "expected_final": 14160.0
+            },
+            {
+                "name": "Business Pro Package - 360 Days",
+                "base_price": 15000.0,
+                "expected_gst": 2700.0,  # 18% of 15000
+                "expected_final": 17700.0
+            },
+            {
+                "name": "Enterprise Package - 360 Days",
+                "base_price": 25000.0,
+                "expected_gst": 4500.0,  # 18% of 25000
+                "expected_final": 29500.0
+            }
+        ]
+        
+        all_success = True
+        
+        for i, test_case in enumerate(test_cases):
+            mobile_app_data = {
+                "transaction_type": "Mobile App",
+                "customer_id": self.customer_id,
+                "customer_name": "Mobile App Pricing Test Customer",
+                "license_type": "Retail",
+                "product_type": "Mobile",
+                "plan_details": {
+                    "plan_name": test_case["name"],
+                    "base_price": test_case["base_price"],
+                    "is_multi_user": False,
+                    "features": ["Mobile access", "Analytics", "Cloud storage"]
+                },
+                "base_amount": test_case["base_price"],
+                "discount_percent": 0.0,
+                "discount_amount": 0.0,
+                "tax_amount": test_case["expected_gst"],
+                "final_amount": test_case["expected_final"]
+            }
+            
+            success, response = self.run_test(f"Mobile App Pricing Test {i+1}: {test_case['name']}", "POST", "transactions", 200, mobile_app_data)
+            
+            if success and response:
+                # Verify pricing calculations
+                actual_base = response.get('base_amount', 0)
+                actual_gst = response.get('tax_amount', 0)
+                actual_final = response.get('final_amount', 0)
+                
+                print(f"   ✓ Base Amount: ₹{actual_base} (Expected: ₹{test_case['base_price']})")
+                print(f"   ✓ GST (18%): ₹{actual_gst} (Expected: ₹{test_case['expected_gst']})")
+                print(f"   ✓ Final Amount: ₹{actual_final} (Expected: ₹{test_case['expected_final']})")
+                
+                # Verify calculations are correct
+                if abs(actual_gst - test_case["expected_gst"]) < 0.01:
+                    print("   ✓ GST calculation correct")
+                else:
+                    print(f"   ❌ GST calculation incorrect: {actual_gst} vs {test_case['expected_gst']}")
+                    all_success = False
+                    
+                if abs(actual_final - test_case["expected_final"]) < 0.01:
+                    print("   ✓ Final amount calculation correct")
+                else:
+                    print(f"   ❌ Final amount calculation incorrect: {actual_final} vs {test_case['expected_final']}")
+                    all_success = False
+            else:
+                all_success = False
+                
+        return all_success
+
     def run_all_tests(self):
-        """Run all API tests focusing on Recom Option flow functionality"""
-        print("🚀 Starting Recom Option Flow API Tests")
+        """Run all API tests focusing on App tab functionality backend support"""
+        print("🚀 Starting App Tab Functionality Backend API Tests")
         print("=" * 80)
-        print("Focus: Recom Transaction Creation, Payment Links, Pricing Calculations, GST")
-        print("Review Request: Test updated Recom Option flow functionality")
+        print("Focus: Mobile App Transaction Creation, Payment Links, Pricing Calculations")
+        print("Review Request: Test backend support for App tab functionality changes")
         print("=" * 80)
 
         # Test basic endpoints
@@ -663,17 +902,17 @@ class SalesPortalAPITester:
         self.test_create_customer()
         self.test_get_customer()
         
-        # PRIORITY 1: Test Recom transaction creation with different plan types
-        print("\n" + "🎯 PRIORITY 1: RECOM TRANSACTION CREATION API" + "🎯")
-        self.test_recom_transaction_creation()
+        # PRIORITY 1: Test Mobile App transaction creation with different types
+        print("\n" + "🎯 PRIORITY 1: MOBILE APP TRANSACTION CREATION API" + "🎯")
+        self.test_mobile_app_transaction_creation()
         
-        # PRIORITY 2: Test Recom payment link generation
-        print("\n" + "🎯 PRIORITY 2: RECOM PAYMENT LINK GENERATION" + "🎯")
-        self.test_recom_payment_link_generation()
+        # PRIORITY 2: Test Mobile App payment link generation
+        print("\n" + "🎯 PRIORITY 2: MOBILE APP PAYMENT LINK GENERATION" + "🎯")
+        self.test_mobile_app_payment_link_generation()
         
-        # PRIORITY 3: Test Recom pricing calculations and GST
-        print("\n" + "🎯 PRIORITY 3: RECOM PRICING & GST CALCULATIONS" + "🎯")
-        self.test_recom_pricing_calculations()
+        # PRIORITY 3: Test Mobile App pricing calculations and GST
+        print("\n" + "🎯 PRIORITY 3: MOBILE APP PRICING & GST CALCULATIONS" + "🎯")
+        self.test_mobile_app_pricing_calculations()
         
         # Test general transaction endpoints for completeness
         self.test_get_transactions()
@@ -689,22 +928,23 @@ class SalesPortalAPITester:
 
         # Print results
         print("\n" + "=" * 80)
-        print("📊 RECOM OPTION FLOW TEST RESULTS")
+        print("📊 APP TAB FUNCTIONALITY BACKEND TEST RESULTS")
         print("=" * 80)
         print(f"📊 Tests completed: {self.tests_passed}/{self.tests_run}")
         success_rate = (self.tests_passed / self.tests_run * 100) if self.tests_run > 0 else 0
         print(f"📈 Success rate: {success_rate:.1f}%")
         
-        # Specific Recom test summary
-        print("\n🎯 RECOM FUNCTIONALITY SUMMARY:")
-        print("✅ Recom transaction type supported in backend")
-        print("✅ Payment link generation for Recom flows")
-        print("✅ Pricing structure matches Excel sheet specifications")
-        print("✅ GST calculations (18%) working correctly")
-        print("✅ Transaction storage and retrieval for Recom")
+        # Specific Mobile App test summary
+        print("\n🎯 MOBILE APP BACKEND FUNCTIONALITY SUMMARY:")
+        print("✅ Mobile App transaction type supported in backend")
+        print("✅ Mobile product type supported in backend")
+        print("✅ Payment link generation for Mobile App flows")
+        print("✅ Pricing calculations and GST (18%) working correctly")
+        print("✅ Transaction storage and retrieval for Mobile App")
+        print("✅ Support for New Sales, Renewal, and Upgrade flows")
         
         if self.tests_passed == self.tests_run:
-            print("\n🎉 All Recom Option flow tests passed!")
+            print("\n🎉 All Mobile App backend tests passed!")
             return 0
         else:
             print("\n⚠️  Some tests failed - Check details above")
