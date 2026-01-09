@@ -9741,10 +9741,10 @@ const Dashboard = () => {
                 {formData.transactionType === "New Sales" && customerValidated && areMandatoryClientReferencesComplete() && (
                   <div className="space-y-6">
                     
-                    {/* For Desktop: Skip this section entirely, Region will show with Duration */}
-                    {formData.productType === "Desktop" && (
+                    {/* For Desktop and Mandi: Skip this section entirely, Region will show with Duration */}
+                    {(formData.productType === "Desktop" || formData.productType === "Mandi") && (
                       <div id="product-type-section" className="hidden">
-                        {/* Intentionally hidden - Region shows with Duration for Desktop */}
+                        {/* Intentionally hidden - Region shows with Duration for Desktop and Mandi */}
                       </div>
                     )}
 
