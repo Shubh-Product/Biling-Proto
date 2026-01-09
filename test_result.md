@@ -1463,6 +1463,38 @@ frontend:
 metadata:
   created_by: "main_agent"
   version: "1.0"
+
+
+frontend:
+  - task: "Recom Tab Button Placement & New Sales Flow Simplification"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "✅ COMPREHENSIVE RECOM TAB CHANGES COMPLETED - Successfully implemented all requested changes for the Recom tab flow matching the App tab pattern. **BUTTON PLACEMENT & BEHAVIOR (Renewal/Upgrade Flow)**: Added 'New' button on the RIGHT side of Subscription text box (before Renew button) at lines 5201-5247. Button is disabled by default and enables only when valid Subscription ID 'SER12345' is entered. Implementation: `disabled={!serialNumber || serialNumber.toUpperCase() !== \"SER12345\"}`. Updated LEFT side 'New' button to exclude both App and Recom tabs (line 5093). **NEW SALES FLOW CHANGES**: Successfully removed subscription validation step after 'Save & Continue' in New Sales flow. Removed entire subscription validation section (Subscription ID input, validation button, success/error messages) from lines 10444-10508. User now proceeds directly from Prospect Details → Market Place selection → Plan selection without intermediate validation. Flow now matches Desktop/Mandi products structure. **VALIDATION LOGIC UPDATES**: Updated all validation checks to remove `recomSubscriptionValidated` requirement: Line 10875 (Order Summary visibility), Line 11312 (Send Payment Link button). Recom validation now only requires: product type 'Recom', market place selection, and plan name. **CHANGES SUMMARY**: 1) Added 'New' button on RIGHT side with SER12345 validation, 2) Removed subscription validation UI completely from New Sales flow, 3) Updated 2 validation checks across the file, 4) Simplified New Sales flow to match other products, 5) Maintained all existing functionality and constraints, 6) No impact on other UI elements or business logic. Frontend compiled successfully with no errors. Ready for testing."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 3
+  run_ui: true
+
+test_plan:
+  current_focus:
+    - "Recom Tab Button Placement & New Sales Flow Simplification"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+    - agent: "main"
+      message: "✅ RECOM TAB MODIFICATIONS COMPLETED - Implemented all required changes for Recom tab as per requirements: 1) Added 'New' button on RIGHT side (after subscription input, before Renew button) with proper disable/enable logic based on SER12345 subscription ID, 2) Removed subscription validation step from New Sales flow - user now proceeds directly from Prospect Details to Market Place and Plan selection without intermediate validation, 3) Updated 2 validation checks to remove recomSubscriptionValidated requirement throughout the file, 4) Maintained all existing constraints - no changes to other UI elements, APIs, or business logic, 5) Frontend service restarted and compiled successfully. The Recom tab New Sales flow now works like Desktop/Mandi products with simplified direct flow. Changes mirror the App tab modifications completed earlier. Ready for testing to verify: 1) Recom tab Renewal/Upgrade flow with 'New' button behavior, 2) Recom tab New Sales flow without subscription validation, 3) Market Place selection and Plan display, 4) Order Summary generation, 5) Payment link functionality."
+
   test_sequence: 2
   run_ui: true
 
