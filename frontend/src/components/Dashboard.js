@@ -9873,15 +9873,15 @@ const Dashboard = () => {
                 {formData.transactionType === "New Sales" && customerValidated && areMandatoryClientReferencesComplete() && (
                   <div className="space-y-6">
                     
-                    {/* For Desktop, Mandi, Online, App, and Recom: Skip this section entirely */}
-                    {(formData.productType === "Desktop" || formData.productType === "Mandi" || formData.productType === "Online" || formData.productType === "App" || formData.productType === "Recom") && (
+                    {/* For Desktop, Mandi, Online, App, Recom, and RDP: Skip this section entirely */}
+                    {(formData.productType === "Desktop" || formData.productType === "Mandi" || formData.productType === "Online" || formData.productType === "App" || formData.productType === "Recom" || formData.productType === "RDP") && (
                       <div id="product-type-section" className="hidden">
                         {/* Intentionally hidden - these products skip product selection */}
                       </div>
                     )}
 
                     {/* For other products: Show Product Selection with Region */}
-                    {formData.productType !== "Desktop" && formData.productType !== "Mandi" && formData.productType !== "Online" && formData.productType !== "App" && formData.productType !== "Recom" && (
+                    {formData.productType !== "Desktop" && formData.productType !== "Mandi" && formData.productType !== "Online" && formData.productType !== "App" && formData.productType !== "Recom" && formData.productType !== "RDP" && (
                       <div id="product-type-section" className="flex items-center space-x-6">
                         <Label className="text-sm font-medium whitespace-nowrap">Product:</Label>
                         <div className="flex space-x-3">
