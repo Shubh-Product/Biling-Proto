@@ -10365,147 +10365,78 @@ const Dashboard = () => {
                       </div>
                     )}
 
-                    {/* App Product Configuration - Subscription ID Validation Flow */}
+                    {/* App Product Configuration - Direct Flow (No Subscription Validation) */}
                     {formData.productType === "App" && (
                       <div className="space-y-4">
-                        {/* Step 1: Subscription ID Entry and Validation */}
-                        <div className="space-y-2">
-                          <div className="flex items-center space-x-3">
-                            <Input
-                              type="text"
-                              placeholder="Enter Subscription ID"
-                              value={appSubscriptionId}
-                              onChange={(e) => {
-                                setAppSubscriptionId(e.target.value);
-                                setAppValidationMessage(""); // Clear message on input change
-                              }}
-                              className="w-64 px-3 py-2 border-2 border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                              disabled={appSubscriptionValidated}
-                            />
-                            <Button
+                        {/* Subscription Count (Mandatory) - Add/Reduce control */}
+                        <div className="flex items-center space-x-3">
+                          <Label className="text-sm font-medium whitespace-nowrap">Subscription Count:</Label>
+                          <div className="flex items-center bg-white rounded border-0 px-2 py-1">
+                            <button
                               type="button"
                               onClick={() => {
-                                // Validate subscription ID (SER123456 is valid for testing)
-                                if (appSubscriptionId.trim() === "SER123456") {
-                                  setAppSubscriptionValidated(true);
-                                  setAppValidationMessage("success");
-                                } else {
-                                  setAppSubscriptionValidated(false);
-                                  setAppValidationMessage("error");
+                                if (appSubscriptionCount > 1) {
+                                  setAppSubscriptionCount(appSubscriptionCount - 1);
                                 }
                               }}
-                              disabled={appSubscriptionValidated || !appSubscriptionId.trim()}
-                              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 disabled:bg-gray-400"
+                              className="text-gray-600 hover:text-red-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
                             >
-                              {appSubscriptionValidated ? "Validated ✓" : "New"}
-                            </Button>
-                            {appSubscriptionValidated && (
-                              <Button
-                                type="button"
-                                variant="outline"
-                                onClick={() => {
-                                  setAppSubscriptionValidated(false);
-                                  setAppSubscriptionId("");
-                                  setAppSubscriptionCount(1);
-                                  setAppValidationMessage("");
-                                  setFormData(prev => ({ ...prev, duration: "" }));
-                                }}
-                                className="text-sm"
-                              >
-                                Reset
-                              </Button>
-                            )}
+                              -
+                            </button>
+                            <span className="text-base font-semibold text-gray-900 min-w-[30px] text-center px-2">
+                              {appSubscriptionCount}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setAppSubscriptionCount(appSubscriptionCount + 1);
+                              }}
+                              className="text-gray-600 hover:text-green-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                            >
+                              +
+                            </button>
                           </div>
-                          
-                          {/* Validation Messages */}
-                          {appValidationMessage === "success" && (
-                            <div className="flex items-center space-x-2 text-green-600 text-sm">
-                              <CheckCircle className="w-4 h-4" />
-                              <span>Subscription ID validated successfully!</span>
-                            </div>
-                          )}
-                          {appValidationMessage === "error" && (
-                            <div className="flex items-center space-x-2 text-red-600 text-sm">
-                              <AlertTriangle className="w-4 h-4" />
-                              <span>Invalid Subscription ID. Please enter a valid ID (e.g., SER123456)</span>
-                            </div>
-                          )}
                         </div>
 
-                        {/* Step 2: Show fields only after validation */}
-                        {appSubscriptionValidated && (
-                          <>
-                            {/* Subscription Count (Mandatory) - Add/Reduce control */}
-                            <div className="flex items-center space-x-3">
-                              <Label className="text-sm font-medium whitespace-nowrap">Subscription Count:</Label>
-                              <div className="flex items-center bg-white rounded border-0 px-2 py-1">
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    if (appSubscriptionCount > 1) {
-                                      setAppSubscriptionCount(appSubscriptionCount - 1);
-                                    }
+                        {/* Duration Selection - Same as Desktop */}
+                        <div className="flex items-center space-x-3">
+                          <Label className="text-sm font-medium whitespace-nowrap">Duration:</Label>
+                          <div className="flex space-x-2">
+                            {[
+                              { value: "360", label: "360 Days" },
+                              { value: "1080", label: "1080 Days" }
+                            ].map((duration) => (
+                              <label key={duration.value} className={`flex items-center cursor-pointer px-2 py-1.5 border-2 rounded-lg hover:shadow-md transition-all w-28 ${
+                                formData.duration === duration.value
+                                  ? "border-orange-500 bg-orange-50" 
+                                  : "border-gray-200"
+                              }`}>
+                                <input
+                                  type="radio"
+                                  name="appDuration"
+                                  value={duration.value}
+                                  checked={formData.duration === duration.value}
+                                  onChange={(e) => {
+                                    setFormData(prev => ({ 
+                                      ...prev, 
+                                      duration: e.target.value,
+                                      planName: `App Subscription ${e.target.value} Days` // Set planName for order summary
+                                    }));
                                   }}
-                                  className="text-gray-600 hover:text-red-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
-                                >
-                                  -
-                                </button>
-                                <span className="text-base font-semibold text-gray-900 min-w-[30px] text-center px-2">
-                                  {appSubscriptionCount}
-                                </span>
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    setAppSubscriptionCount(appSubscriptionCount + 1);
-                                  }}
-                                  className="text-gray-600 hover:text-green-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
-                                >
-                                  +
-                                </button>
-                              </div>
-                            </div>
-
-                            {/* Duration Selection - Same as Desktop */}
-                            <div className="flex items-center space-x-3">
-                              <Label className="text-sm font-medium whitespace-nowrap">Duration:</Label>
-                              <div className="flex space-x-2">
-                                {[
-                                  { value: "360", label: "360 Days" },
-                                  { value: "1080", label: "1080 Days" }
-                                ].map((duration) => (
-                                  <label key={duration.value} className={`flex items-center cursor-pointer px-2 py-1.5 border-2 rounded-lg hover:shadow-md transition-all w-28 ${
-                                    formData.duration === duration.value
-                                      ? "border-orange-500 bg-orange-50" 
-                                      : "border-gray-200"
-                                  }`}>
-                                    <input
-                                      type="radio"
-                                      name="appDuration"
-                                      value={duration.value}
-                                      checked={formData.duration === duration.value}
-                                      onChange={(e) => {
-                                        setFormData(prev => ({ 
-                                          ...prev, 
-                                          duration: e.target.value,
-                                          planName: `App Subscription ${e.target.value} Days` // Set planName for order summary
-                                        }));
-                                      }}
-                                      className="w-3.5 h-3.5 text-orange-600 border-gray-300 focus:ring-orange-500 mr-2"
-                                    />
-                                    <div className="flex flex-col">
-                                      <span className="text-gray-700 font-medium text-xs">{duration.label}</span>
-                                      {duration.value === "1080" && (
-                                        <span className="text-[10px] text-green-600 font-semibold">
-                                          20% OFF
-                                        </span>
-                                      )}
-                                    </div>
-                                  </label>
-                                ))}
-                              </div>
-                            </div>
-                          </>
-                        )}
+                                  className="w-3.5 h-3.5 text-orange-600 border-gray-300 focus:ring-orange-500 mr-2"
+                                />
+                                <div className="flex flex-col">
+                                  <span className="text-gray-700 font-medium text-xs">{duration.label}</span>
+                                  {duration.value === "1080" && (
+                                    <span className="text-[10px] text-green-600 font-semibold">
+                                      20% OFF
+                                    </span>
+                                  )}
+                                </div>
+                              </label>
+                            ))}
+                          </div>
+                        </div>
                       </div>
                     )}
 
