@@ -5087,8 +5087,8 @@ const Dashboard = () => {
 
                 {/* Universal TDS Toggle removed - now inside Order Summary sections */}
 
-                {/* Renewal/Upgrade Flow (For Renewal/Upgrade transaction type) */}
-                {formData.transactionType === "Renewal/Upgrade" && (
+                {/* Product-based Renewal/Upgrade Flow (Show for all products) */}
+                {formData.productType && formData.transactionType === "Renewal/Upgrade" && (
                   <div className="space-y-6">
 
                     {/* Step 1: Serial Number Input & Validation */}
