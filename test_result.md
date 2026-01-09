@@ -1544,3 +1544,35 @@ agent_communication:
     - agent: "main"
       message: "✅ RDP TAB MODIFICATIONS COMPLETED - Implemented all required changes for RDP tab as per requirements: 1) Added 'New' button on RIGHT side (after subscription input) with proper disable/enable logic based on SER12345 subscription ID, 2) Removed subscription validation step from New Sales flow - user now proceeds directly from Prospect Details to RDP Count selection without intermediate validation, 3) Updated 2 validation checks to remove rdpSubscriptionValidated requirement throughout the file, 4) Removed Product radio buttons from New Sales flow by adding RDP to exclusion list, 5) Maintained all existing constraints - no changes to other UI elements, APIs, or business logic, 6) Frontend service restarted and compiled successfully. The RDP tab New Sales flow now works like Desktop/Mandi/Online/App/Recom products with simplified direct flow. Changes complete the pattern started with App and Recom tabs. Ready for testing to verify: 1) RDP tab Renewal/Upgrade flow with 'New' button behavior, 2) RDP tab New Sales flow without subscription validation, 3) RDP Count selection and adjustment, 4) Order Summary generation, 5) Payment link functionality."
 
+
+
+frontend:
+  - task: "Recom Tab - Send Payment Link Button Enable Fix"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "✅ RECOM SEND PAYMENT LINK BUTTON FIX COMPLETED - Fixed the issue where 'Send Payment Link' button was not getting enabled after selecting a plan on Recom tab. **ROOT CAUSE**: The button disable logic at line 11310-11342 was checking for `planQuantities` object for Desktop, Mandi, AND Recom products. However, Recom uses a different selection mechanism - it sets `formData.planName` directly when a plan is clicked (line 10588), not using `planQuantities`. This mismatch caused the button to remain disabled even when a valid Recom plan was selected. **FIX IMPLEMENTED**: Separated Recom validation logic from Desktop/Mandi. Updated button disable logic to check `formData.planName` and `recomMarketPlace` for Recom product specifically. Now the button correctly enables when: 1) Market Place is selected (Single or Multiple), 2) A plan is selected from the Number of Orders grid. **VALIDATION LOGIC**: For Recom - `if (!formData.planName || !recomMarketPlace) return true;` ensuring both marketplace and plan are selected before enabling the button. Desktop and Mandi continue using `planQuantities` validation as before. **TESTING**: Frontend compiled successfully with no errors. Button should now enable immediately after user clicks on any plan (A, B, C, D, E, F, G, or H) in the Recom New Sales flow."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 5
+  run_ui: true
+
+test_plan:
+  current_focus:
+    - "Recom Tab - Send Payment Link Button Enable Fix"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+    - agent: "main"
+      message: "✅ RECOM BUTTON ENABLE FIX COMPLETED - Fixed the 'Send Payment Link' button not enabling issue on Recom tab. Root cause was button checking for `planQuantities` (used by Desktop/Mandi) instead of `formData.planName` (used by Recom). Updated validation logic at line 11310-11342 to properly check Recom-specific fields: planName and recomMarketPlace. Button now enables when user selects marketplace and clicks on any plan. Frontend compiled successfully. Ready for testing: 1) Navigate to Recom tab, 2) Click 'New' with SER12345, 3) Fill Prospect Details and Save & Continue, 4) Select Market Place (Single or Multiple), 5) Click on any plan (A/B/C/D/E/F/G/H), 6) Verify 'Send Payment Link' button becomes enabled immediately."
+
