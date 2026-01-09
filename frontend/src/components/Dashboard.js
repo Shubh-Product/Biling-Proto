@@ -10486,221 +10486,153 @@ const Dashboard = () => {
                     )}
 
                     {/* Recom Product Configuration - Market Place Based */}
+                    {/* Recom Product Configuration - Direct Flow (No Subscription Validation) */}
                     {formData.productType === "Recom" && (
                       <div className="space-y-4">
-                        {/* Step 1: Subscription ID Entry and Validation */}
-                        <div className="space-y-2">
-                          <div className="flex items-center space-x-3">
-                            <Input
-                              type="text"
-                              placeholder="Enter Subscription ID"
-                              value={recomSubscriptionId}
-                              onChange={(e) => {
-                                setRecomSubscriptionId(e.target.value);
-                                setRecomValidationMessage(""); // Clear message on input change
-                              }}
-                              className="w-64 px-3 py-2 border-2 border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                              disabled={recomSubscriptionValidated}
-                            />
-                            <Button
-                              type="button"
-                              onClick={() => {
-                                // Validate subscription ID (SER123456 is valid for testing)
-                                if (recomSubscriptionId.trim() === "SER123456") {
-                                  setRecomSubscriptionValidated(true);
-                                  setRecomValidationMessage("success");
-                                } else {
-                                  setRecomSubscriptionValidated(false);
-                                  setRecomValidationMessage("error");
-                                }
-                              }}
-                              disabled={recomSubscriptionValidated || !recomSubscriptionId.trim()}
-                              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 disabled:bg-gray-400"
-                            >
-                              {recomSubscriptionValidated ? "Validated ✓" : "Validate"}
-                            </Button>
-                            {recomSubscriptionValidated && (
-                              <Button
-                                type="button"
-                                variant="outline"
-                                onClick={() => {
-                                  setRecomSubscriptionValidated(false);
-                                  setRecomSubscriptionId("");
-                                  setRecomValidationMessage("");
-                                  setRecomMarketPlace("");
-                                  setFormData(prev => ({ ...prev, planName: "" }));
-                                }}
-                                className="text-sm"
-                              >
-                                Reset
-                              </Button>
-                            )}
+                        {/* Market Place Selection */}
+                        <div className="flex items-center space-x-3">
+                          <Label className="text-sm font-medium whitespace-nowrap">Market Place:</Label>
+                          <div className="flex space-x-2">
+                            {[
+                              { value: "Single", label: "Single" },
+                              { value: "Multiple", label: "Multiple" }
+                            ].map((marketplace) => (
+                              <label key={marketplace.value} className={`flex items-center cursor-pointer px-3 py-2 border-2 rounded-lg hover:shadow-md transition-all w-28 ${
+                                recomMarketPlace === marketplace.value
+                                  ? "border-blue-500 bg-blue-50" 
+                                  : "border-gray-200"
+                              }`}>
+                                <input
+                                  type="radio"
+                                  name="recomMarketPlace"
+                                  value={marketplace.value}
+                                  checked={recomMarketPlace === marketplace.value}
+                                  onChange={(e) => {
+                                    setRecomMarketPlace(e.target.value);
+                                    setPlanQuantities({}); // Reset plan quantities
+                                    setFormData(prev => ({ ...prev, planName: "" }));
+                                  }}
+                                  className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 mr-2"
+                                />
+                                <span className="text-gray-700 font-medium text-sm">{marketplace.label}</span>
+                              </label>
+                            ))}
                           </div>
-                          
-                          {/* Validation Messages */}
-                          {recomValidationMessage === "success" && (
-                            <div className="flex items-center space-x-2 text-green-600 text-sm">
-                              <CheckCircle className="w-4 h-4" />
-                              <span>Subscription ID validated successfully!</span>
-                            </div>
-                          )}
-                          {recomValidationMessage === "error" && (
-                            <div className="flex items-center space-x-2 text-red-600 text-sm">
-                              <AlertTriangle className="w-4 h-4" />
-                              <span>Invalid Subscription ID. Please enter a valid ID (e.g., SER123456)</span>
-                            </div>
-                          )}
                         </div>
 
-                        {/* Step 2: Show Market Place and Plans only after validation */}
-                        {recomSubscriptionValidated && (
-                          <>
-                            {/* Market Place Selection */}
-                            <div className="flex items-center space-x-3">
-                              <Label className="text-sm font-medium whitespace-nowrap">Market Place:</Label>
-                              <div className="flex space-x-2">
-                                {[
-                                  { value: "Single", label: "Single" },
-                                  { value: "Multiple", label: "Multiple" }
-                                ].map((marketplace) => (
-                                  <label key={marketplace.value} className={`flex items-center cursor-pointer px-3 py-2 border-2 rounded-lg hover:shadow-md transition-all w-28 ${
-                                    recomMarketPlace === marketplace.value
-                                      ? "border-blue-500 bg-blue-50" 
-                                      : "border-gray-200"
-                                  }`}>
-                                    <input
-                                      type="radio"
-                                      name="recomMarketPlace"
-                                      value={marketplace.value}
-                                      checked={recomMarketPlace === marketplace.value}
-                                      onChange={(e) => {
-                                        setRecomMarketPlace(e.target.value);
-                                        setPlanQuantities({}); // Reset plan quantities
-                                        setFormData(prev => ({ ...prev, planName: "" }));
-                                      }}
-                                      className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 mr-2"
-                                    />
-                                    <span className="text-gray-700 font-medium text-sm">{marketplace.label}</span>
-                                  </label>
-                                ))}
-                              </div>
-                            </div>
-
-                            {/* Recom Plans Display - Based on Market Place Selection */}
-                            {recomMarketPlace && (
-                              <div data-scroll-target="recom-plans" className="space-y-2">
-                                <Label className="text-sm font-medium">Number of Orders:</Label>
-                            
-                            {/* Single Market Place Plans */}
-                            {recomMarketPlace === "Single" && (
-                              <div className="grid grid-cols-5 gap-2">
-                                {[
-                                  { name: "A", orders: "6,000", days: "360" },
-                                  { name: "B", orders: "12,000", days: "360" },
-                                  { name: "C", orders: "30,000", days: "360" },
-                                  { name: "D", orders: "60,000", days: "360" },
-                                  { name: "E", orders: "120,000", days: "360" }
-                                ].map((plan) => {
-                                  const isSelected = formData.planName === `Recom ${plan.name}`;
-                                  return (
-                                    <div 
-                                      key={plan.name}
-                                      onClick={() => {
-                                        setFormData(prev => ({ ...prev, planName: `Recom ${plan.name}` }));
-                                      }}
-                                      className={`relative border-2 rounded-lg p-2 cursor-pointer transition-all ${
-                                        isSelected
-                                          ? "border-blue-500 bg-blue-50 shadow-md" 
-                                          : "border-gray-200 hover:border-blue-300 hover:shadow-sm"
-                                      }`}
-                                    >
-                                      <div className="absolute top-1 left-1 w-5 h-5 bg-gray-300 text-gray-700 font-bold text-[10px] flex items-center justify-center rounded">
-                                        {plan.name}
-                                      </div>
-                                      <div className="text-center mt-5">
-                                        <div className="text-xs font-semibold text-gray-900">{plan.orders}</div>
-                                        <div className="text-[10px] text-gray-600">({plan.days} days)</div>
-                                      </div>
-                                    </div>
-                                  );
-                                })}
-                              </div>
-                            )}
-
-                            {/* Multiple Market Place Plans */}
-                            {recomMarketPlace === "Multiple" && (
-                              <div className="space-y-2">
-                                {/* First Row - 5 plans */}
-                                <div className="grid grid-cols-5 gap-2">
-                                  {[
-                                    { name: "A", orders: "300", days: "21" },
-                                    { name: "B", orders: "12,000", days: "360" },
-                                    { name: "C", orders: "30,000", days: "360" },
-                                    { name: "D", orders: "60,000", days: "360" },
-                                    { name: "E", orders: "120,000", days: "360" }
-                                  ].map((plan) => {
-                                    const isSelected = formData.planName === `Recom ${plan.name}`;
-                                    return (
-                                      <div 
-                                        key={plan.name}
-                                        onClick={() => {
-                                          setFormData(prev => ({ ...prev, planName: `Recom ${plan.name}` }));
-                                        }}
-                                        className={`relative border-2 rounded-lg p-2 cursor-pointer transition-all ${
-                                          isSelected
-                                            ? "border-blue-500 bg-blue-50 shadow-md" 
-                                            : "border-gray-200 hover:border-blue-300 hover:shadow-sm"
-                                        }`}
-                                      >
-                                        <div className="absolute top-1 left-1 w-5 h-5 bg-gray-300 text-gray-700 font-bold text-[10px] flex items-center justify-center rounded">
-                                          {plan.name}
-                                        </div>
-                                        <div className="text-center mt-5">
-                                          <div className="text-xs font-semibold text-gray-900">{plan.orders}</div>
-                                          <div className="text-[10px] text-gray-600">({plan.days} days)</div>
-                                        </div>
-                                      </div>
-                                    );
-                                  })}
+                        {/* Recom Plans Display - Based on Market Place Selection */}
+                        {recomMarketPlace && (
+                          <div data-scroll-target="recom-plans" className="space-y-2">
+                            <Label className="text-sm font-medium">Number of Orders:</Label>
+                        
+                        {/* Single Market Place Plans */}
+                        {recomMarketPlace === "Single" && (
+                          <div className="grid grid-cols-5 gap-2">
+                            {[
+                              { name: "A", orders: "6,000", days: "360" },
+                              { name: "B", orders: "12,000", days: "360" },
+                              { name: "C", orders: "30,000", days: "360" },
+                              { name: "D", orders: "60,000", days: "360" },
+                              { name: "E", orders: "120,000", days: "360" }
+                            ].map((plan) => {
+                              const isSelected = formData.planName === `Recom ${plan.name}`;
+                              return (
+                                <div 
+                                  key={plan.name}
+                                  onClick={() => {
+                                    setFormData(prev => ({ ...prev, planName: `Recom ${plan.name}` }));
+                                  }}
+                                  className={`relative border-2 rounded-lg p-2 cursor-pointer transition-all ${
+                                    isSelected
+                                      ? "border-blue-500 bg-blue-50 shadow-md" 
+                                      : "border-gray-200 hover:border-blue-300 hover:shadow-sm"
+                                  }`}
+                                >
+                                  <div className="absolute top-1 left-1 w-5 h-5 bg-gray-300 text-gray-700 font-bold text-[10px] flex items-center justify-center rounded">
+                                    {plan.name}
+                                  </div>
+                                  <div className="text-center mt-5">
+                                    <div className="text-xs font-semibold text-gray-900">{plan.orders}</div>
+                                    <div className="text-[10px] text-gray-600">({plan.days} days)</div>
+                                  </div>
                                 </div>
-
-                                {/* Second Row - 3 plans */}
-                                <div className="grid grid-cols-5 gap-2">
-                                  {[
-                                    { name: "F", orders: "FOC - 300", days: "21", isFOC: true },
-                                    { name: "G", orders: "FOC - 12,000", days: "360", isFOC: true },
-                                    { name: "H", orders: "12,000", days: "720", isFOC: false }
-                                  ].map((plan) => {
-                                    const isSelected = formData.planName === `Recom ${plan.name}`;
-                                    return (
-                                      <div 
-                                        key={plan.name}
-                                        onClick={() => {
-                                          setFormData(prev => ({ ...prev, planName: `Recom ${plan.name}` }));
-                                        }}
-                                        className={`relative border-2 rounded-lg p-2 cursor-pointer transition-all ${
-                                          isSelected
-                                            ? "border-blue-500 bg-blue-50 shadow-md" 
-                                            : "border-gray-200 hover:border-blue-300 hover:shadow-sm"
-                                        }`}
-                                      >
-                                        <div className="absolute top-1 left-1 w-5 h-5 bg-gray-300 text-gray-700 font-bold text-[10px] flex items-center justify-center rounded">
-                                          {plan.name}
-                                        </div>
-                                        <div className="text-center mt-5">
-                                          <div className="text-xs font-semibold text-gray-900">{plan.orders}</div>
-                                          <div className="text-[10px] text-gray-600">({plan.days} days)</div>
-                                        </div>
-                                      </div>
-                                    );
-                                  })}
-                                </div>
-                              </div>
-                            )}
+                              );
+                            })}
                           </div>
                         )}
-                          </>
+
+                        {/* Multiple Market Place Plans */}
+                        {recomMarketPlace === "Multiple" && (
+                          <div className="space-y-2">
+                            {/* First Row - 5 plans */}
+                            <div className="grid grid-cols-5 gap-2">
+                              {[
+                                { name: "A", orders: "300", days: "21" },
+                                { name: "B", orders: "12,000", days: "360" },
+                                { name: "C", orders: "30,000", days: "360" },
+                                { name: "D", orders: "60,000", days: "360" },
+                                { name: "E", orders: "120,000", days: "360" }
+                              ].map((plan) => {
+                                const isSelected = formData.planName === `Recom ${plan.name}`;
+                                return (
+                                  <div 
+                                    key={plan.name}
+                                    onClick={() => {
+                                      setFormData(prev => ({ ...prev, planName: `Recom ${plan.name}` }));
+                                    }}
+                                    className={`relative border-2 rounded-lg p-2 cursor-pointer transition-all ${
+                                      isSelected
+                                        ? "border-blue-500 bg-blue-50 shadow-md" 
+                                        : "border-gray-200 hover:border-blue-300 hover:shadow-sm"
+                                    }`}
+                                  >
+                                    <div className="absolute top-1 left-1 w-5 h-5 bg-gray-300 text-gray-700 font-bold text-[10px] flex items-center justify-center rounded">
+                                      {plan.name}
+                                    </div>
+                                    <div className="text-center mt-5">
+                                      <div className="text-xs font-semibold text-gray-900">{plan.orders}</div>
+                                      <div className="text-[10px] text-gray-600">({plan.days} days)</div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+
+                            {/* Second Row - 3 plans */}
+                            <div className="grid grid-cols-5 gap-2">
+                              {[
+                                { name: "F", orders: "FOC - 300", days: "21", isFOC: true },
+                                { name: "G", orders: "FOC - 12,000", days: "360", isFOC: true },
+                                { name: "H", orders: "12,000", days: "720", isFOC: false }
+                              ].map((plan) => {
+                                const isSelected = formData.planName === `Recom ${plan.name}`;
+                                return (
+                                  <div 
+                                    key={plan.name}
+                                    onClick={() => {
+                                      setFormData(prev => ({ ...prev, planName: `Recom ${plan.name}` }));
+                                    }}
+                                    className={`relative border-2 rounded-lg p-2 cursor-pointer transition-all ${
+                                      isSelected
+                                        ? "border-blue-500 bg-blue-50 shadow-md" 
+                                        : "border-gray-200 hover:border-blue-300 hover:shadow-sm"
+                                    }`}
+                                  >
+                                    <div className="absolute top-1 left-1 w-5 h-5 bg-gray-300 text-gray-700 font-bold text-[10px] flex items-center justify-center rounded">
+                                      {plan.name}
+                                    </div>
+                                    <div className="text-center mt-5">
+                                      <div className="text-xs font-semibold text-gray-900">{plan.orders}</div>
+                                      <div className="text-[10px] text-gray-600">({plan.days} days)</div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
                         )}
+                      </div>
+                    )}
                       </div>
                     )}
 
