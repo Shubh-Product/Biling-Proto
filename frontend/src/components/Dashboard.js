@@ -10982,7 +10982,7 @@ const Dashboard = () => {
                               }
                               
                               // For App product with subscription-based model
-                              if (formData.productType === "App" && appSubscriptionValidated && formData.duration) {
+                              if (formData.productType === "App" && formData.duration) {
                                 // Sample pricing for App subscriptions
                                 const appPricing = {
                                   "360": 8000,  // Base price for 360 days
