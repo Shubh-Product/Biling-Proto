@@ -2800,22 +2800,16 @@ const Dashboard = () => {
         setCustomerValidated(false);
         setErrors(fieldErrors);
       } else {
-        // Validation successful - auto-select first product and first plan
+        // Validation successful
         setErrors({});
         setCustomerValidated(true);
         setIsProspectDetailsSaved(true);
         setIsProspectDetailsOpen(false); // Collapse accordion after save
         
-        // Auto-select first product and its first plan
-        const firstProduct = getFirstProductType();
-        const firstPlan = firstProduct ? getFirstPlan(firstProduct) : "";
+        // DO NOT auto-select product - preserve the current productType from selected tab
+        // The productType is already set when user clicked a product tab
+        // Only set planName if needed, but keep productType unchanged
         
-        setFormData(prev => ({
-          ...prev,
-          productType: firstProduct,
-          planName: firstPlan
-        }));
-
         // Auto scroll to Product Type section after validation
         setTimeout(() => {
           const productSection = document.getElementById('product-type-section');
