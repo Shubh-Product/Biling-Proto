@@ -5095,6 +5095,49 @@ const Dashboard = () => {
                     <div className="bg-white rounded-lg p-6">
                       
                       <div className="flex items-center space-x-4">
+                        {/* New Button - Triggers New Sales flow */}
+                        <Button 
+                          type="button"
+                          onClick={() => {
+                            // Switch to New Sales flow for selected product
+                            setFormData(prev => ({
+                              ...prev,
+                              transactionType: "New Sales",
+                              // Keep productType from selected tab
+                              // Reset other fields
+                              serialNumber: "",
+                              duration: "",
+                              licenseModel: "",
+                              planName: "",
+                              customerDetails: {
+                                mobile: "",
+                                name: "",
+                                email: "",
+                                company: "",
+                                gstin: "",
+                                city: "",
+                                pincode: "",
+                                address: "",
+                                state: "",
+                                country: "India",
+                                caPanNo: "",
+                                caLicenseNumber: ""
+                              }
+                            }));
+                            // Reset validation states
+                            setCustomerValidated(false);
+                            setSerialValidated(false);
+                            setSerialNumber('');
+                            setCurrentCustomerInfo(null);
+                            setCurrentProductInfo(null);
+                            setActionType('');
+                            setErrors({});
+                          }}
+                          className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 font-semibold"
+                        >
+                          New
+                        </Button>
+
                         <div className="flex items-center space-x-3">
                           <Input
                             value={serialNumber}
