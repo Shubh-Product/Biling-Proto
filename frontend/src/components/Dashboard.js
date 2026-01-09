@@ -10804,108 +10804,40 @@ const Dashboard = () => {
                     )}
 
                     {/* RDP Product Configuration */}
+                    {/* RDP Product Configuration - Direct Flow (No Subscription Validation) */}
                     {formData.productType === "RDP" && (
                       <div className="space-y-4">
-                        {/* Step 1: Subscription ID Entry and Validation */}
-                        <div className="space-y-2">
-                          <div className="flex items-center space-x-3">
-                            <Input
-                              type="text"
-                              placeholder="Enter Subscription ID"
-                              value={rdpSubscriptionId}
-                              onChange={(e) => {
-                                setRdpSubscriptionId(e.target.value);
-                                setRdpValidationMessage(""); // Clear message on input change
-                              }}
-                              className="w-64 px-3 py-2 border-2 border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                              disabled={rdpSubscriptionValidated}
-                            />
-                            <Button
+                        {/* RDP Count with Add/Reduce Control */}
+                        <div className="flex items-center space-x-3">
+                          <Label className="text-sm font-medium whitespace-nowrap">RDP:</Label>
+                          <div className="flex items-center bg-white rounded border-0 px-2 py-1">
+                            <button
                               type="button"
                               onClick={() => {
-                                // Validate subscription ID (SER123456 is valid for testing)
-                                if (rdpSubscriptionId.trim() === "SER123456") {
-                                  setRdpSubscriptionValidated(true);
-                                  setRdpValidationMessage("success");
-                                } else {
-                                  setRdpSubscriptionValidated(false);
-                                  setRdpValidationMessage("error");
+                                if (rdpCount > 1) {
+                                  setRdpCount(rdpCount - 1);
                                 }
                               }}
-                              disabled={rdpSubscriptionValidated || !rdpSubscriptionId.trim()}
-                              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 disabled:bg-gray-400"
+                              className="text-gray-600 hover:text-red-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
                             >
-                              {rdpSubscriptionValidated ? "Validated ✓" : "Validate"}
-                            </Button>
-                            {rdpSubscriptionValidated && (
-                              <Button
-                                type="button"
-                                variant="outline"
-                                onClick={() => {
-                                  setRdpSubscriptionValidated(false);
-                                  setRdpSubscriptionId("");
-                                  setRdpValidationMessage("");
-                                  setRdpCount(1);
-                                  setFormData(prev => ({ ...prev, planName: "" }));
-                                }}
-                                className="text-sm"
-                              >
-                                Reset
-                              </Button>
-                            )}
+                              -
+                            </button>
+                            <span className="text-base font-semibold text-gray-900 min-w-[30px] text-center px-2">
+                              {rdpCount}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setRdpCount(rdpCount + 1);
+                                // Set planName to trigger order summary
+                                setFormData(prev => ({ ...prev, planName: "RDP Service" }));
+                              }}
+                              className="text-gray-600 hover:text-green-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                            >
+                              +
+                            </button>
                           </div>
-                          
-                          {/* Validation Messages */}
-                          {rdpValidationMessage === "success" && (
-                            <div className="flex items-center space-x-2 text-green-600 text-sm">
-                              <CheckCircle className="w-4 h-4" />
-                              <span>Subscription ID validated successfully!</span>
-                            </div>
-                          )}
-                          {rdpValidationMessage === "error" && (
-                            <div className="flex items-center space-x-2 text-red-600 text-sm">
-                              <AlertTriangle className="w-4 h-4" />
-                              <span>Invalid Subscription ID. Please enter a valid ID (e.g., SER123456)</span>
-                            </div>
-                          )}
                         </div>
-
-                        {/* Step 2: Show RDP Count only after validation */}
-                        {rdpSubscriptionValidated && (
-                          <>
-                            {/* RDP Count with Add/Reduce Control */}
-                            <div className="flex items-center space-x-3">
-                              <Label className="text-sm font-medium whitespace-nowrap">RDP:</Label>
-                              <div className="flex items-center bg-white rounded border-0 px-2 py-1">
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    if (rdpCount > 1) {
-                                      setRdpCount(rdpCount - 1);
-                                    }
-                                  }}
-                                  className="text-gray-600 hover:text-red-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
-                                >
-                                  -
-                                </button>
-                                <span className="text-base font-semibold text-gray-900 min-w-[30px] text-center px-2">
-                                  {rdpCount}
-                                </span>
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    setRdpCount(rdpCount + 1);
-                                    // Set planName to trigger order summary
-                                    setFormData(prev => ({ ...prev, planName: "RDP Service" }));
-                                  }}
-                                  className="text-gray-600 hover:text-green-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
-                                >
-                                  +
-                                </button>
-                              </div>
-                            </div>
-                          </>
-                        )}
                       </div>
                     )}
                   </div>
