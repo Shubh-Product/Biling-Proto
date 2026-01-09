@@ -5089,8 +5089,8 @@ const Dashboard = () => {
                     <div className="bg-white rounded-lg p-6">
                       
                       <div className="flex items-center space-x-4">
-                        {/* New Button - Different placement for App and Recom tabs */}
-                        {formData.productType !== "App" && formData.productType !== "Recom" && (
+                        {/* New Button - Different placement for App, Recom and RDP tabs */}
+                        {formData.productType !== "App" && formData.productType !== "Recom" && formData.productType !== "RDP" && (
                           <Button 
                             type="button"
                             onClick={() => {
