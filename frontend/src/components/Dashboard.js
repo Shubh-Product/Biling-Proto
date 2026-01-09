@@ -9874,6 +9874,25 @@ const Dashboard = () => {
                               ))}
                             </div>
                           </div>
+
+                          {/* Region Selection */}
+                          <div className="flex items-center space-x-3">
+                            <Label className="text-sm font-medium whitespace-nowrap">Region:</Label>
+                            <Select
+                              value={formData.region}
+                              onValueChange={(value) => {
+                                setFormData(prev => ({ ...prev, region: value }));
+                              }}
+                            >
+                              <SelectTrigger className="w-32">
+                                <SelectValue placeholder="Select Region" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="India">India</SelectItem>
+                                <SelectItem value="International">International</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
                         </div>
 
                         {/* Desktop Plans Display - 4 Column Grid with Quantity Controls */}
