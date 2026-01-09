@@ -5100,10 +5100,11 @@ const Dashboard = () => {
                           type="button"
                           onClick={() => {
                             // Switch to New Sales flow for selected product
+                            const currentProductType = formData.productType; // Capture current product type
                             setFormData(prev => ({
                               ...prev,
                               transactionType: "New Sales",
-                              // Keep productType from selected tab
+                              productType: currentProductType, // Explicitly preserve productType
                               // Reset other fields
                               serialNumber: "",
                               duration: "",
