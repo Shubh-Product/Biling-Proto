@@ -370,6 +370,56 @@ const Dashboard = () => {
       // Add sample transactions with diverse products and plans that match backend
       const sampleTransactions = [
         {
+          id: 'TXN-1190123456',
+          customer_name: 'DRAFT ENTERPRISES PVT LTD',
+          customer_city: 'Noida',
+          customer_mobile: '9876543211',
+          customer_email: 'admin@draftenterprises.com',
+          customer_gstin: '09AABCD1234E1Z4',
+          license_type: 'Retail',
+          product_type: 'Desktop Subscription',
+          plan_details: { plan_name: 'Gold Multi User' },
+          final_amount: 23599,
+          discount_percent: 0,
+          status: 'Draft',
+          created_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), // 2 days ago
+          plan_duration: '360',
+          purchase_date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+          salesperson: {
+            name: 'Vikram Singh',
+            email: 'vikram.singh@busy.in',
+            mobile: '9123456780'
+          },
+          partner: null,
+          is_inside_sales: true,
+          team_name: 'Inside'
+        },
+        {
+          id: 'TXN-1191234567',
+          customer_name: 'PENDING SOLUTIONS LLP',
+          customer_city: 'Gurgaon',
+          customer_mobile: '9765432100',
+          customer_email: 'contact@pendingsolutions.in',
+          customer_gstin: '06AABCP5678F1Z6',
+          license_type: 'Accountant',
+          product_type: 'Busy Online',
+          plan_details: { plan_name: 'SQL - Annual' },
+          final_amount: 8400,  // 16800 with 50% Accountant discount
+          discount_percent: 50,
+          status: 'Draft',
+          created_at: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(), // 5 hours ago
+          plan_duration: '360',
+          purchase_date: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
+          salesperson: {
+            name: 'Anjali Sharma',
+            email: 'anjali.sharma@busy.in',
+            mobile: '9234567891'
+          },
+          partner: 'DataBridge Partners',
+          is_inside_sales: false,
+          team_name: 'Germenium'
+        },
+        {
           id: 'TXN-1102901234',
           customer_name: 'ABC CONSULTANTS PRIVATE LIMITED',
           customer_city: 'Mumbai',
