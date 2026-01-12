@@ -11652,12 +11652,16 @@ const Dashboard = () => {
                         
                         {/* Payment Method - UPI, Debit Card, Netbanking */}
                         <td className="py-3 px-4">
-                          <p className="text-gray-900 text-sm">
-                            {(() => {
-                              const paymentMethods = ['UPI', 'Debit Card', 'Netbanking'];
-                              return paymentMethods[index % paymentMethods.length];
-                            })()}
-                          </p>
+                          {transaction.status === 'Draft' ? (
+                            <p className="text-gray-500 text-sm">-</p>
+                          ) : (
+                            <p className="text-gray-900 text-sm">
+                              {(() => {
+                                const paymentMethods = ['UPI', 'Debit Card', 'Netbanking'];
+                                return paymentMethods[index % paymentMethods.length];
+                              })()}
+                            </p>
+                          )}
                         </td>
                         
                         {/* Actions - Resend, WhatsApp, Three Dots Menu */}
