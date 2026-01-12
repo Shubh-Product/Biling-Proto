@@ -6211,6 +6211,177 @@ const Dashboard = () => {
                       </div>
                     )}
 
+                    {/* Recom Renewal Configuration - Show when serial validated and customer validated */}
+                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'renew' && formData.productType === "Recom" && (
+                      <div className="space-y-4">
+                        {/* Market Place Selection */}
+                        <div className="flex items-center space-x-3">
+                          <Label className="text-sm font-medium whitespace-nowrap">Market Place:</Label>
+                          <div className="flex space-x-2">
+                            {[
+                              { value: "Single", label: "Single" },
+                              { value: "Multiple", label: "Multiple" }
+                            ].map((marketplace) => (
+                              <label key={marketplace.value} className={`flex items-center cursor-pointer px-3 py-2 border-2 rounded-lg hover:shadow-md transition-all w-28 ${
+                                recomMarketPlace === marketplace.value
+                                  ? "border-teal-500 bg-teal-50" 
+                                  : "border-gray-200"
+                              }`}>
+                                <input
+                                  type="radio"
+                                  name="recomRenewalMarketPlace"
+                                  value={marketplace.value}
+                                  checked={recomMarketPlace === marketplace.value}
+                                  onChange={(e) => {
+                                    setRecomMarketPlace(e.target.value);
+                                    setFormData(prev => ({ ...prev, planName: "" }));
+                                  }}
+                                  className="w-4 h-4 text-teal-600 border-gray-300 focus:ring-teal-500 mr-2"
+                                />
+                                <span className="text-gray-700 font-medium text-sm">{marketplace.label}</span>
+                              </label>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Recom Plans Display - Based on Market Place Selection */}
+                        {recomMarketPlace && (
+                          <div data-scroll-target="recom-renewal-plans" className="space-y-2">
+                            <Label className="text-sm font-medium">Number of Orders:</Label>
+                        
+                        {/* Single Market Place Plans */}
+                        {recomMarketPlace === "Single" && (
+                          <div className="grid grid-cols-5 gap-2">
+                            {[
+                              { name: "A", orders: "6,000", days: "360" },
+                              { name: "B", orders: "12,000", days: "360" },
+                              { name: "C", orders: "30,000", days: "360" },
+                              { name: "D", orders: "60,000", days: "360" },
+                              { name: "E", orders: "120,000", days: "360" }
+                            ].map((plan) => {
+                              const isSelected = formData.planName === `Recom ${plan.name}`;
+                              const isCurrentPlan = currentProductInfo?.planName?.includes(plan.name);
+                              return (
+                                <div 
+                                  key={plan.name}
+                                  onClick={() => {
+                                    setFormData(prev => ({ ...prev, planName: `Recom ${plan.name}`, duration: plan.days }));
+                                  }}
+                                  className={`relative border-2 rounded-lg p-2 cursor-pointer transition-all ${
+                                    isSelected
+                                      ? "border-teal-500 bg-teal-50 shadow-md" 
+                                      : isCurrentPlan
+                                      ? "border-green-400 bg-green-50"
+                                      : "border-gray-200 hover:border-teal-300 hover:shadow-sm"
+                                  }`}
+                                >
+                                  <div className="absolute top-1 left-1 w-5 h-5 bg-gray-300 text-gray-700 font-bold text-[10px] flex items-center justify-center rounded">
+                                    {plan.name}
+                                  </div>
+                                  {isCurrentPlan && (
+                                    <div className="absolute top-1 right-1">
+                                      <CheckCircle className="w-3 h-3 text-green-600" />
+                                    </div>
+                                  )}
+                                  <div className="text-center mt-5">
+                                    <div className="text-xs font-semibold text-gray-900">{plan.orders}</div>
+                                    <div className="text-[10px] text-gray-600">({plan.days} days)</div>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+
+                        {/* Multiple Market Place Plans */}
+                        {recomMarketPlace === "Multiple" && (
+                          <div className="space-y-2">
+                            {/* First Row - 5 plans */}
+                            <div className="grid grid-cols-5 gap-2">
+                              {[
+                                { name: "A", orders: "300", days: "21" },
+                                { name: "B", orders: "12,000", days: "360" },
+                                { name: "C", orders: "30,000", days: "360" },
+                                { name: "D", orders: "60,000", days: "360" },
+                                { name: "E", orders: "120,000", days: "360" }
+                              ].map((plan) => {
+                                const isSelected = formData.planName === `Recom ${plan.name}`;
+                                const isCurrentPlan = currentProductInfo?.planName?.includes(plan.name);
+                                return (
+                                  <div 
+                                    key={plan.name}
+                                    onClick={() => {
+                                      setFormData(prev => ({ ...prev, planName: `Recom ${plan.name}`, duration: plan.days }));
+                                    }}
+                                    className={`relative border-2 rounded-lg p-2 cursor-pointer transition-all ${
+                                      isSelected
+                                        ? "border-teal-500 bg-teal-50 shadow-md" 
+                                        : isCurrentPlan
+                                        ? "border-green-400 bg-green-50"
+                                        : "border-gray-200 hover:border-teal-300 hover:shadow-sm"
+                                    }`}
+                                  >
+                                    <div className="absolute top-1 left-1 w-5 h-5 bg-gray-300 text-gray-700 font-bold text-[10px] flex items-center justify-center rounded">
+                                      {plan.name}
+                                    </div>
+                                    {isCurrentPlan && (
+                                      <div className="absolute top-1 right-1">
+                                        <CheckCircle className="w-3 h-3 text-green-600" />
+                                      </div>
+                                    )}
+                                    <div className="text-center mt-5">
+                                      <div className="text-xs font-semibold text-gray-900">{plan.orders}</div>
+                                      <div className="text-[10px] text-gray-600">({plan.days} days)</div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+
+                            {/* Second Row - 1 plan (720 days) */}
+                            <div className="grid grid-cols-5 gap-2">
+                              {[
+                                { name: "H", orders: "12,000", days: "720" }
+                              ].map((plan) => {
+                                const isSelected = formData.planName === `Recom ${plan.name}`;
+                                const isCurrentPlan = currentProductInfo?.planName?.includes(plan.name);
+                                return (
+                                  <div 
+                                    key={plan.name}
+                                    onClick={() => {
+                                      setFormData(prev => ({ ...prev, planName: `Recom ${plan.name}`, duration: plan.days }));
+                                    }}
+                                    className={`relative border-2 rounded-lg p-2 cursor-pointer transition-all ${
+                                      isSelected
+                                        ? "border-teal-500 bg-teal-50 shadow-md" 
+                                        : isCurrentPlan
+                                        ? "border-green-400 bg-green-50"
+                                        : "border-gray-200 hover:border-teal-300 hover:shadow-sm"
+                                    }`}
+                                  >
+                                    <div className="absolute top-1 left-1 w-5 h-5 bg-gray-300 text-gray-700 font-bold text-[10px] flex items-center justify-center rounded">
+                                      {plan.name}
+                                    </div>
+                                    {isCurrentPlan && (
+                                      <div className="absolute top-1 right-1">
+                                        <CheckCircle className="w-3 h-3 text-green-600" />
+                                      </div>
+                                    )}
+                                    <div className="text-center mt-5">
+                                      <div className="text-xs font-semibold text-gray-900">{plan.orders}</div>
+                                      <div className="text-[10px] text-gray-600">({plan.days} days)</div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                      </div>
+                    )}
+
                     {/* Order Summary for Desktop Renewal - Show when plans are selected (Renewal flow ONLY) */}
                     {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'renew' && formData.productType === "Desktop" && formData.duration && Object.values(planQuantities).some(qty => qty > 0) && (
                       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
