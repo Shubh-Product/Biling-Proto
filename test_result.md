@@ -1640,3 +1640,35 @@ agent_communication:
     - agent: "main"
       message: "✅ DRAFT STATUS SPECIAL HANDLING COMPLETED - Implemented all required changes for Draft status rows in My Payments page: 1) Product & Plans, Amount, and Payment Method columns now show '-' for Draft status, 2) Status badge shows 'Draft' with purple styling, 3) Clicking customer name for Draft status redirects to Generate Payment Link page instead of opening order details pop-up, 4) Form pre-fills with all saved prospect details from draft transaction (mobile, name, email, company, GSTIN, address, city, pincode, state, country, CA details), 5) Customer validation automatically set to true for pre-filled data, 6) All other statuses continue working as before - showing full data and opening order details on click. Frontend compiled successfully. Ready for testing: 1) Navigate to My Payments page, 2) Click Draft filter to view draft transactions, 3) Verify Product & Plans, Amount, Payment Method show '-' for draft rows, 4) Click on customer name in draft row, 5) Verify it redirects to Generate Payment Link page with pre-filled prospect details, 6) Click on customer name in non-draft row, 7) Verify it opens order details modal as usual."
 
+
+
+frontend:
+  - task: "App Tab - Fix Duplicate Order Summary in Renewal Flow"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "✅ DUPLICATE ORDER SUMMARY FIX COMPLETED - Successfully fixed the issue where two order summary tables and two sets of action buttons were displayed for App Renewal flow. **ROOT CAUSE**: The New Sales Order Summary section (lines 10896-11330) and Action Buttons section (lines 11332-11400) were checking for `appValid` condition (productType === 'App' && appSubscriptionCount >= 1 && formData.duration) without verifying the transaction type. This caused them to appear for BOTH New Sales AND Renewal flows simultaneously. The App Renewal flow already has its own dedicated Order Summary section (lines 6086-6212) which was also rendering, resulting in duplicate displays. **FIX IMPLEMENTED**: Added transaction type check `if (formData.transactionType !== 'New Sales') return false;` to both: 1) Order Summary section condition at line 10896 - Now only renders for New Sales flows, 2) Action Buttons section condition at line 11332 - Now only renders for New Sales flows. **RESULT**: App Renewal flow now displays only ONE Order Summary (the dedicated Renewal-specific one with purple gradient styling at lines 6086-6212) and ONE set of Cancel/Send Payment Link buttons. New Sales flow continues to display its own Order Summary (blue gradient styling) and action buttons as before. **VALIDATION**: This fix ensures clean separation between New Sales and Renewal/Upgrade flows. When user enters App subscription number, clicks Renew, and selects duration: Only the purple-themed Renewal Order Summary appears with single set of action buttons. Frontend compiled successfully with no errors."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 8
+  run_ui: true
+
+test_plan:
+  current_focus:
+    - "App Tab - Duplicate Order Summary Fix"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+    - agent: "main"
+      message: "✅ DUPLICATE ORDER SUMMARY FIX COMPLETED - Fixed the bug where App Renewal flow was showing two order summary tables and two sets of buttons. Root cause: New Sales Order Summary section was rendering for all flows including Renewal because it wasn't checking transaction type. Solution: Added `if (formData.transactionType !== 'New Sales') return false;` check to both Order Summary and Action Buttons sections. Now App Renewal displays only ONE order summary (purple-themed, lines 6086-6212) and ONE set of Cancel/Send Payment Link buttons. New Sales flow unaffected. Frontend compiled successfully. Ready for testing: 1) Navigate to App tab, 2) Enter subscription number SER12345, 3) Click Renew button, 4) Select any duration (360/180/90 Days), 5) Verify only ONE Order Summary section appears (purple gradient), 6) Verify only ONE set of Cancel and Send Payment Link buttons, 7) Test New Sales flow to ensure it still shows order summary correctly."
+
