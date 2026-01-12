@@ -10893,8 +10893,11 @@ const Dashboard = () => {
                   </div>
                 )}
 
-                {/* Order Summary */}
+                {/* Order Summary - Only for New Sales flow */}
                 {(() => {
+                  // Only show for New Sales transaction type
+                  if (formData.transactionType !== "New Sales") return false;
+                  
                   const busyOnlineValid = formData.productType === "Busy Online" && formData.duration && formData.accessType && validateBusyOnlineCounts().isValid;
                   const onlineValid = formData.productType === "Online" && onlineUserCount >= 1 && onlineCompanyCount >= 1 && onlineDatabaseType && formData.duration;
                   const mandiValid = formData.productType === "Mandi" && formData.duration && Object.values(planQuantities).some(qty => qty > 0);
