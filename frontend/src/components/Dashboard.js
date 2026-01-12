@@ -11827,7 +11827,7 @@ const Dashboard = () => {
                       <th className="text-center py-3 px-4 font-semibold">Actions</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody style={{ fontSize: '14px' }}>
                     {filteredTransactions.map((transaction, index) => (
                       <tr key={transaction.id} className="border-b border-gray-200 hover:bg-gray-50">
                         {/* Date */}
