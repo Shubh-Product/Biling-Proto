@@ -1608,3 +1608,35 @@ agent_communication:
     - agent: "main"
       message: "✅ DRAFT SAMPLE DATA ADDED - Successfully added 2 sample transaction rows with Status = 'Draft' to My Payments page. Transactions added: 1) DRAFT ENTERPRISES PVT LTD - Desktop Subscription Gold Multi User (₹23,599), created 2 days ago, 2) PENDING SOLUTIONS LLP - Busy Online SQL Annual (₹8,400 with 50% discount), created 5 hours ago. Both include complete details including customer info, product details, pricing, salesperson, and team information. Draft filter button will now show count of 2. Frontend compiled successfully. Ready for testing: 1) Navigate to My Payments page, 2) Check Draft filter button shows count of 2, 3) Click on Draft filter to view only draft transactions, 4) Verify both draft transaction rows are displayed with all details."
 
+
+
+frontend:
+  - task: "My Payments Page - Draft Status Row Display & Click Behavior"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "✅ DRAFT STATUS SPECIAL HANDLING COMPLETED - Successfully implemented special display and click behavior for Draft status rows in My Payments listing page. **COLUMN DISPLAY CHANGES**: Updated 3 columns to show '-' for Draft status rows: 1) Product & Plans column (line 11585-11600) - Shows '-' instead of product details for Draft, 2) Amount column (line 11603-11613) - Shows '-' instead of price and discount for Draft, 3) Payment Method column (line 11648-11658) - Shows '-' instead of payment method for Draft. All other statuses continue to show normal data. **STATUS BADGE STYLING**: Added Draft status badge styling (line 11641-11643) with purple color scheme (bg-purple-100 text-purple-800) to visually distinguish Draft transactions. **CUSTOMER NAME CLICK BEHAVIOR**: Completely revamped onClick handler for customer name column (lines 11522-11552). For Draft status: 1) Does NOT open order details pop-up, 2) Redirects to Generate Payment Link page by setting showCreateForm to true, 3) Pre-fills form with saved prospect details from draft transaction (customer_mobile, customer_name, customer_email, customer_company, customer_gstin, customer_city, customer_pincode, customer_address, customer_state, customer_country, customer_ca_pan, customer_ca_license), 4) Sets customerValidated to true since data is pre-filled from saved draft, 5) Sets product type from draft transaction. For all other statuses: Opens order details modal as before. **IMPLEMENTATION DETAILS**: Used conditional rendering with `transaction.status === 'Draft'` checks. Draft rows show minimal information (customer details and '-' for incomplete fields), clicking customer name continues the payment link generation process from where they left off. Frontend compiled successfully with no errors."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 7
+  run_ui: true
+
+test_plan:
+  current_focus:
+    - "My Payments Page - Draft Status Row Handling"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+    - agent: "main"
+      message: "✅ DRAFT STATUS SPECIAL HANDLING COMPLETED - Implemented all required changes for Draft status rows in My Payments page: 1) Product & Plans, Amount, and Payment Method columns now show '-' for Draft status, 2) Status badge shows 'Draft' with purple styling, 3) Clicking customer name for Draft status redirects to Generate Payment Link page instead of opening order details pop-up, 4) Form pre-fills with all saved prospect details from draft transaction (mobile, name, email, company, GSTIN, address, city, pincode, state, country, CA details), 5) Customer validation automatically set to true for pre-filled data, 6) All other statuses continue working as before - showing full data and opening order details on click. Frontend compiled successfully. Ready for testing: 1) Navigate to My Payments page, 2) Click Draft filter to view draft transactions, 3) Verify Product & Plans, Amount, Payment Method show '-' for draft rows, 4) Click on customer name in draft row, 5) Verify it redirects to Generate Payment Link page with pre-filled prospect details, 6) Click on customer name in non-draft row, 7) Verify it opens order details modal as usual."
+
