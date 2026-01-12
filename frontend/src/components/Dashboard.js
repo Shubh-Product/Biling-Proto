@@ -11522,8 +11522,36 @@ const Dashboard = () => {
                           <div 
                             className="cursor-pointer hover:bg-blue-50 p-2 rounded transition-colors"
                             onClick={() => {
-                              setSelectedTransaction(transaction);
-                              setShowOrderSummaryModal(true);
+                              if (transaction.status === 'Draft') {
+                                // For Draft status: Redirect to Generate Payment Link page with pre-filled data
+                                setShowCreateForm(true);
+                                // Pre-fill form with saved prospect details from draft transaction
+                                setFormData(prev => ({
+                                  ...prev,
+                                  transactionType: "New Sales",
+                                  productType: transaction.product_type || "Desktop",
+                                  customerDetails: {
+                                    mobile: transaction.customer_mobile || "",
+                                    name: transaction.customer_name || "",
+                                    email: transaction.customer_email || "",
+                                    company: transaction.customer_company || "",
+                                    gstin: transaction.customer_gstin || "",
+                                    city: transaction.customer_city || "",
+                                    pincode: transaction.customer_pincode || "",
+                                    address: transaction.customer_address || "",
+                                    state: transaction.customer_state || "",
+                                    country: transaction.customer_country || "India",
+                                    caPanNo: transaction.customer_ca_pan || "",
+                                    caLicenseNumber: transaction.customer_ca_license || ""
+                                  }
+                                }));
+                                // Set customer as validated since we're pre-filling from draft
+                                setCustomerValidated(true);
+                              } else {
+                                // For all other statuses: Show order details modal
+                                setSelectedTransaction(transaction);
+                                setShowOrderSummaryModal(true);
+                              }
                             }}
                           >
                             <p className="font-medium text-blue-600 text-sm hover:text-blue-800 truncate max-w-[200px]" title={transaction.customer_name}>{transaction.customer_name}</p>
