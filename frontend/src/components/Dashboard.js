@@ -11610,7 +11610,7 @@ const Dashboard = () => {
                             </div>
                           )}
                         </td>
-                        {/* Status - Initiated, Pending, Received, Failed, Expired, Cancelled, Inv Generated, Inv Pending */}
+                        {/* Status - Initiated, Pending, Received, Failed, Expired, Cancelled, Draft, Inv Generated, Inv Pending */}
                         <td className="py-3 px-4 text-center">
                           {(() => {
                             const status = transaction.status;
@@ -11637,6 +11637,9 @@ const Dashboard = () => {
                             } else if (status === 'Cancelled') {
                               badgeClass = 'bg-gray-200 text-gray-800';
                               statusText = 'Cancelled';
+                            } else if (status === 'Draft') {
+                              badgeClass = 'bg-purple-100 text-purple-800';
+                              statusText = 'Draft';
                             }
 
                             return (
