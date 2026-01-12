@@ -1576,3 +1576,35 @@ agent_communication:
     - agent: "main"
       message: "✅ RECOM BUTTON ENABLE FIX COMPLETED - Fixed the 'Send Payment Link' button not enabling issue on Recom tab. Root cause was button checking for `planQuantities` (used by Desktop/Mandi) instead of `formData.planName` (used by Recom). Updated validation logic at line 11310-11342 to properly check Recom-specific fields: planName and recomMarketPlace. Button now enables when user selects marketplace and clicks on any plan. Frontend compiled successfully. Ready for testing: 1) Navigate to Recom tab, 2) Click 'New' with SER12345, 3) Fill Prospect Details and Save & Continue, 4) Select Market Place (Single or Multiple), 5) Click on any plan (A/B/C/D/E/F/G/H), 6) Verify 'Send Payment Link' button becomes enabled immediately."
 
+
+
+frontend:
+  - task: "My Payments Page - Add Draft Status Sample Data"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "✅ DRAFT STATUS SAMPLE DATA ADDED - Successfully added 2 sample transaction rows with Status = 'Draft' to the My Payments page. **SAMPLE DATA 1**: Transaction ID: TXN-1190123456, Customer: DRAFT ENTERPRISES PVT LTD (Noida), Product: Desktop Subscription - Gold Multi User, Amount: ₹23,599, License Type: Retail, Created: 2 days ago, Salesperson: Vikram Singh (Inside Team). **SAMPLE DATA 2**: Transaction ID: TXN-1191234567, Customer: PENDING SOLUTIONS LLP (Gurgaon), Product: Busy Online - SQL Annual, Amount: ₹8,400 (50% Accountant discount), License Type: Accountant, Created: 5 hours ago, Salesperson: Anjali Sharma (Germenium Team), Partner: DataBridge Partners. **IMPLEMENTATION**: Added draft entries at the top of the sampleTransactions array (lines 372-420) before existing transactions. Both draft records include all required fields: customer details (name, mobile, email, GSTIN, city), product information (type, plan details), pricing (final amount, discount percent), salesperson information (name, email, mobile, team), and partner details where applicable. **DRAFT FILTER**: The existing Draft filter button at line 4977 will now show count of 2 draft transactions. Users can click on 'Draft' filter to view only these draft transactions. Frontend compiled successfully with no errors."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 6
+  run_ui: true
+
+test_plan:
+  current_focus:
+    - "My Payments Page - Draft Status Sample Data"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "medium_first"
+
+agent_communication:
+    - agent: "main"
+      message: "✅ DRAFT SAMPLE DATA ADDED - Successfully added 2 sample transaction rows with Status = 'Draft' to My Payments page. Transactions added: 1) DRAFT ENTERPRISES PVT LTD - Desktop Subscription Gold Multi User (₹23,599), created 2 days ago, 2) PENDING SOLUTIONS LLP - Busy Online SQL Annual (₹8,400 with 50% discount), created 5 hours ago. Both include complete details including customer info, product details, pricing, salesperson, and team information. Draft filter button will now show count of 2. Frontend compiled successfully. Ready for testing: 1) Navigate to My Payments page, 2) Check Draft filter button shows count of 2, 3) Click on Draft filter to view only draft transactions, 4) Verify both draft transaction rows are displayed with all details."
+
