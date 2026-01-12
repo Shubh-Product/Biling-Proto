@@ -11599,12 +11599,16 @@ const Dashboard = () => {
                         </td>
                         {/* Amount */}
                         <td className="py-3 px-4">
-                          <div>
-                            <p className="font-semibold text-gray-900 text-sm">{formatCurrency(transaction.final_amount)}</p>
-                            {transaction.discount_percent > 0 && (
-                              <p className="text-green-600 text-xs">{transaction.discount_percent}% off</p>
-                            )}
-                          </div>
+                          {transaction.status === 'Draft' ? (
+                            <p className="text-gray-500 text-sm">-</p>
+                          ) : (
+                            <div>
+                              <p className="font-semibold text-gray-900 text-sm">{formatCurrency(transaction.final_amount)}</p>
+                              {transaction.discount_percent > 0 && (
+                                <p className="text-green-600 text-xs">{transaction.discount_percent}% off</p>
+                              )}
+                            </div>
+                          )}
                         </td>
                         {/* Status - Initiated, Pending, Received, Failed, Expired, Cancelled, Inv Generated, Inv Pending */}
                         <td className="py-3 px-4 text-center">
