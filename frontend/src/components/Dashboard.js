@@ -11749,7 +11749,7 @@ const Dashboard = () => {
               </div>
             ) : (
               <div className="w-full overflow-x-auto bg-white rounded-lg shadow-sm">
-                <table className="w-full text-sm border-collapse">
+                <table className="w-full text-sm border-collapse" style={{ fontFamily: 'Roboto Flex, sans-serif' }}>
                   <thead>
                     <tr className="bg-blue-900 text-white">
                       <th
