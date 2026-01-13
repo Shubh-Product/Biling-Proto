@@ -7056,77 +7056,143 @@ const Dashboard = () => {
                     {/* Order Summary for Desktop Upgrade - Show when plans are selected (Upgrade flow ONLY) */}
                     {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'upgrade' && 
                      formData.productType === "Desktop" && formData.upgradeVariant && Object.values(planQuantities).some(qty => qty > 0) && (
-                      <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-lg border border-indigo-200">
-                        <h4 id="upgrade-order-summary-section" className="text-xl font-bold text-indigo-900 mb-4">Upgrade Order Summary</h4>
+                      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
+                        <h4 id="upgrade-order-summary-section" className="text-xl font-bold text-blue-900 mb-4">Order Summary</h4>
                         
                         <div>
-                          {/* Invoice-Style Table for Upgrade */}
+                          {/* Invoice-Style Table */}
                           <div className="bg-white rounded-lg border border-gray-300 overflow-hidden">
                             <table className="w-full">
                               <thead className="bg-gray-100 border-b border-gray-300">
                                 <tr>
                                   <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">S.No</th>
                                   <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">Product</th>
-                                  <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">Duration</th>
+                                  <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">Type</th>
                                   <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">Quantity</th>
                                   <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Rate</th>
                                   <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Amount</th>
                                 </tr>
                               </thead>
-                              <tbody>
+                              <tbody className="divide-y divide-gray-200">
                                 {(() => {
-                                  const selectedPlans = Object.entries(planQuantities)
-                                    .filter(([name, qty]) => qty > 0)
-                                    .map(([name, qty]) => {
-                                      // Use placeholder pricing for upgrade (will be fetched from HiBusy in production)
-                                      const rate = 15000; // Placeholder price
-                                      return { name, quantity: qty, rate };
-                                    });
+                                  const lineItems = [];
+                                  let serialNo = 1;
                                   
-                                  return selectedPlans.length > 0 ? selectedPlans.map((item, index) => (
-                                    <tr key={index} className="border-b hover:bg-gray-50">
-                                      <td className="px-3 py-2 text-left text-xs">{index + 1}</td>
-                                      <td className="px-3 py-2 text-left text-xs font-medium">{item.name}</td>
-                                      <td className="px-3 py-2 text-center text-xs">Upgrade</td>
-                                      <td className="px-3 py-2 text-center text-xs">{item.quantity}</td>
-                                      <td className="px-3 py-2 text-right text-xs">₹{item.rate.toLocaleString('en-IN')}</td>
-                                      <td className="px-3 py-2 text-right text-xs font-semibold">₹{(item.rate * item.quantity).toLocaleString('en-IN')}</td>
-                                    </tr>
-                                  )) : (
-                                    <tr>
-                                      <td colSpan="6" className="px-3 py-4 text-center text-sm text-gray-500">
-                                        No items selected
-                                      </td>
-                                    </tr>
-                                  );
+                                  // Generate line items from planQuantities
+                                  Object.entries(planQuantities).forEach(([planName, quantity]) => {
+                                    if (quantity > 0) {
+                                      const rate = 15000; // Placeholder - will be fetched from HiBusy
+                                      const amount = rate * quantity;
+                                      lineItems.push(
+                                        <tr key={planName} className="hover:bg-gray-50">
+                                          <td className="px-3 py-2 text-sm text-gray-700">{serialNo++}</td>
+                                          <td className="px-3 py-2 text-sm text-gray-900">{planName}</td>
+                                          <td className="px-3 py-2 text-sm text-center text-gray-700">Upgrade</td>
+                                          <td className="px-3 py-2 text-sm text-center text-gray-700">{quantity}</td>
+                                          <td className="px-3 py-2 text-sm text-right text-gray-700">₹{rate.toLocaleString('en-IN')}</td>
+                                          <td className="px-3 py-2 text-sm text-right font-medium text-gray-900">₹{amount.toLocaleString('en-IN')}</td>
+                                        </tr>
+                                      );
+                                    }
+                                  });
+                                  
+                                  if (lineItems.length === 0) {
+                                    return (
+                                      <tr>
+                                        <td colSpan="6" className="px-3 py-4 text-sm text-center text-gray-500 italic">
+                                          Select plans and add quantities to see line items
+                                        </td>
+                                      </tr>
+                                    );
+                                  }
+                                  
+                                  return lineItems;
                                 })()}
                               </tbody>
                             </table>
-                          </div>
-
-                          {/* Summary Section for Upgrade */}
-                          <div className="mt-4 space-y-2 bg-gray-50 p-4 rounded-lg">
+                            
+                            {/* Summary Section */}
                             {(() => {
-                              // Calculate totals for upgrade
-                              const selectedPlans = Object.entries(planQuantities)
-                                .filter(([name, qty]) => qty > 0)
-                                .map(([name, qty]) => {
-                                  const rate = 15000; // Placeholder price
-                                  return { quantity: qty, rate };
-                                });
+                              // Calculate pricing based on planQuantities
+                              let totalBasePrice = 0;
                               
-                              const subtotal = selectedPlans.reduce((sum, item) => sum + (item.rate * item.quantity), 0);
-                              const licenseDiscount = formData.licenseType && formData.licenseDiscount 
-                                ? Math.round(subtotal * formData.licenseDiscount / 100)
-                                : 0;
-                              const afterDiscount = subtotal - licenseDiscount;
-                              const tdsAmount = formData.deductTds ? Math.round(afterDiscount * 0.10) : 0;
-                              const afterTds = afterDiscount - tdsAmount;
+                              Object.entries(planQuantities).forEach(([planName, quantity]) => {
+                                if (quantity > 0) {
+                                  const rate = 15000; // Placeholder
+                                  totalBasePrice += rate * quantity;
+                                }
+                              });
+                              
+                              if (totalBasePrice === 0) return null;
+
+                              // Calculate TDS, GST, and final amount
+                              const tdsAmount = formData.deductTds ? Math.round(totalBasePrice * 0.10) : 0;
+                              const afterTds = totalBasePrice - tdsAmount;
                               const gstAmount = Math.round(afterTds * 0.18);
-                              const grandTotal = afterTds + gstAmount;
+                              const finalAmount = afterTds + gstAmount;
 
                               return (
-                                <>
+                                <div className="border-t border-gray-300 bg-gray-50 p-4">
+                                  <div className="space-y-2">
+                                    <div className="flex justify-between items-center">
+                                      <span className="text-sm font-semibold text-gray-700">Total:</span>
+                                      <span className="text-sm font-semibold text-gray-900">₹{totalBasePrice.toLocaleString('en-IN')}</span>
+                                    </div>
+
+                                    {/* TDS Toggle */}
+                                    <div className="flex justify-between items-center border-t pt-2">
+                                      <span className="text-sm font-medium text-gray-700">Deduct TDS:</span>
+                                      <label className="relative inline-flex items-center cursor-pointer">
+                                        <input
+                                          type="checkbox"
+                                          checked={formData.deductTds}
+                                          onChange={(e) => setFormData(prev => ({ ...prev, deductTds: e.target.checked }))}
+                                          className="sr-only peer"
+                                        />
+                                        <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+                                        <span className="ml-2 text-xs font-medium text-gray-700">
+                                          {formData.deductTds ? 'ON' : 'OFF'}
+                                        </span>
+                                      </label>
+                                    </div>
+
+                                    {/* TDS Deduction */}
+                                    {formData.deductTds && (
+                                      <div className="flex justify-between items-center">
+                                        <span className="text-sm font-medium text-gray-700">TDS (10%):</span>
+                                        <span className="text-sm font-semibold text-red-600">-₹{tdsAmount.toLocaleString('en-IN')}</span>
+                                      </div>
+                                    )}
+
+                                    {/* GST */}
+                                    <div className="flex justify-between items-center">
+                                      <span className="text-sm font-medium text-gray-700">GST (18%):</span>
+                                      <span className="text-sm font-semibold text-gray-900">₹{gstAmount.toLocaleString('en-IN')}</span>
+                                    </div>
+
+                                    <div className="flex justify-between items-center pt-2 border-t border-gray-300">
+                                      <span className="text-base font-bold text-gray-900">Grand Total:</span>
+                                      <span className="text-base font-bold text-blue-600">₹{finalAmount.toLocaleString('en-IN')}</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            })()}
+                          </div>
+                        </div>
+
+                        {/* Send Payment Link Button */}
+                        <div className="flex justify-end mt-6">
+                          <Button
+                            type="button"
+                            onClick={handleSendPaymentLink}
+                            className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg text-lg font-semibold"
+                          >
+                            Send Payment Link
+                          </Button>
+                        </div>
+                      </div>
+                    )}
                                   <div className="flex justify-between text-sm">
                                     <span className="text-gray-600">Total:</span>
                                     <span className="font-semibold">₹{subtotal.toLocaleString('en-IN')}</span>
