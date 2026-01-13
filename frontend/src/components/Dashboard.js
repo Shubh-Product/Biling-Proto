@@ -7193,69 +7193,6 @@ const Dashboard = () => {
                         </div>
                       </div>
                     )}
-                                  <div className="flex justify-between text-sm">
-                                    <span className="text-gray-600">Total:</span>
-                                    <span className="font-semibold">₹{subtotal.toLocaleString('en-IN')}</span>
-                                  </div>
-                                  
-                                  {licenseDiscount > 0 && (
-                                    <div className="flex justify-between text-sm">
-                                      <span className="text-gray-600">License Discount ({formData.licenseDiscount}%):</span>
-                                      <span className="font-semibold text-green-600">-₹{licenseDiscount.toLocaleString('en-IN')}</span>
-                                    </div>
-                                  )}
-
-                                  {/* TDS Toggle for Upgrade */}
-                                  <div className="flex justify-between items-center border-t pt-2">
-                                    <span className="text-gray-600 text-sm font-medium">Deduct TDS:</span>
-                                    <label className="relative inline-flex items-center cursor-pointer">
-                                      <input
-                                        type="checkbox"
-                                        checked={formData.deductTds}
-                                        onChange={(e) => handleTdsToggle(e.target.checked)}
-                                        className="sr-only peer"
-                                      />
-                                      <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600 pointer-events-none"></div>
-                                      <span className="ml-2 text-xs font-medium text-gray-700">
-                                        {formData.deductTds ? 'ON' : 'OFF'}
-                                      </span>
-                                    </label>
-                                  </div>
-
-                                  {tdsAmount > 0 && (
-                                    <div className="flex justify-between text-sm">
-                                      <span className="text-gray-600">TDS Deduction (10%):</span>
-                                      <span className="font-semibold text-red-600">-₹{tdsAmount.toLocaleString('en-IN')}</span>
-                                    </div>
-                                  )}
-
-                                  <div className="flex justify-between text-sm">
-                                    <span className="text-gray-600">GST (18%):</span>
-                                    <span className="font-semibold">₹{gstAmount.toLocaleString('en-IN')}</span>
-                                  </div>
-
-                                  <div className="flex justify-between text-base font-bold border-t pt-2">
-                                    <span className="text-gray-900">Grand Total:</span>
-                                    <span className="text-indigo-600">₹{grandTotal.toLocaleString('en-IN')}</span>
-                                  </div>
-                                </>
-                              );
-                            })()}
-                          </div>
-
-                          {/* Send Payment Link Button for Upgrade */}
-                          <div className="mt-6 flex justify-center">
-                            <Button
-                              type="button"
-                              onClick={handleSendPaymentLink}
-                              className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-lg text-lg font-semibold"
-                            >
-                              Send Payment Link for Upgrade
-                            </Button>
-                          </div>
-                        </div>
-                      </div>
-                    )}
 
                     {/* Step 4a: Renew Same Plan Flow */}
                     {serialValidated && renewalOption === 'renew' && (
