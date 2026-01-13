@@ -7344,7 +7344,7 @@ const Dashboard = () => {
 
                     {/* Order Summary for Mandi Upgrade - Show when plans are selected (Upgrade flow ONLY) */}
                     {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'upgrade' && 
-                     formData.productType === "Mandi" && formData.upgradeVariant && Object.values(planQuantities).some(qty => qty > 0) && (
+                     formData.productType === "Mandi" && formData.upgradeVariant && formData.duration && Object.values(planQuantities).some(qty => qty > 0) && (
                       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
                         <h4 id="mandi-upgrade-order-summary-section" className="text-xl font-bold text-blue-900 mb-4">Order Summary</h4>
                         
