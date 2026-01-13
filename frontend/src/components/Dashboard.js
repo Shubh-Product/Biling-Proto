@@ -6829,9 +6829,12 @@ const Dashboard = () => {
                                     
                                     // Filter out current plan from the list
                                     const currentPlanName = currentProductInfo?.planName || "";
-                                    const plansToShow = filteredPlans.filter(plan => 
-                                      !currentPlanName.includes(plan.name.split(" - ")[0])
-                                    );
+                                    const plansToShow = filteredPlans.filter(plan => {
+                                      // Extract plan name without edition prefix (e.g., "Standard - Single User" -> "Single User")
+                                      const planNameWithoutEdition = plan.name;
+                                      // Don't show if this is exactly the current plan
+                                      return plan.name !== currentPlanName;
+                                    });
                                     
                                     return (
                                       <div className="grid grid-cols-4 gap-2">
