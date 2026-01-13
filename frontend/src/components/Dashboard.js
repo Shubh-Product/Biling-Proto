@@ -7078,16 +7078,16 @@ const Dashboard = () => {
                                   const selectedPlans = Object.entries(planQuantities)
                                     .filter(([name, qty]) => qty > 0)
                                     .map(([name, qty]) => {
-                                      const plans = getDesktopPlans("Subscription", formData.duration);
-                                      const plan = plans?.find(p => p.name === name);
-                                      return { name, quantity: qty, rate: plan?.price || 0 };
+                                      // Use placeholder pricing for upgrade (will be fetched from HiBusy in production)
+                                      const rate = 15000; // Placeholder price
+                                      return { name, quantity: qty, rate };
                                     });
                                   
                                   return selectedPlans.length > 0 ? selectedPlans.map((item, index) => (
                                     <tr key={index} className="border-b hover:bg-gray-50">
                                       <td className="px-3 py-2 text-left text-xs">{index + 1}</td>
                                       <td className="px-3 py-2 text-left text-xs font-medium">{item.name}</td>
-                                      <td className="px-3 py-2 text-center text-xs">{formData.duration} Days</td>
+                                      <td className="px-3 py-2 text-center text-xs">Upgrade</td>
                                       <td className="px-3 py-2 text-center text-xs">{item.quantity}</td>
                                       <td className="px-3 py-2 text-right text-xs">₹{item.rate.toLocaleString('en-IN')}</td>
                                       <td className="px-3 py-2 text-right text-xs font-semibold">₹{(item.rate * item.quantity).toLocaleString('en-IN')}</td>
