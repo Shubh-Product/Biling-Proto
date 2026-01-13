@@ -6681,8 +6681,6 @@ const Dashboard = () => {
                         
                         {/* Variant Selection for Desktop Upgrade */}
                         <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-6">
-                          <h3 className="text-lg font-semibold text-indigo-900 mb-4">Select Upgrade Variant</h3>
-                          
                           {/* Variant Radio Buttons - Desktop / Mandi */}
                           <div className="flex items-center space-x-6">
                             <Label className="text-sm font-medium whitespace-nowrap">Variant:</Label>
@@ -6764,57 +6762,30 @@ const Dashboard = () => {
                                 return (
                                   <div className="grid grid-cols-4 gap-2">
                                     {filteredPlans.length > 0 ? filteredPlans.map((planName) => {
-                                      const quantity = planQuantities[planName] || 0;
-                                      // For upgrade, we'll use placeholder pricing - in real implementation, fetch from HiBusy
+                                      const isSelected = formData.planName === planName;
                                       const price = 15000; // Placeholder
                                       
                                       return (
                                         <div 
-                                          key={planName} 
-                                          className={`relative border-2 rounded-lg p-2 transition-all ${
-                                            quantity > 0
+                                          key={planName}
+                                          onClick={() => {
+                                            // Single click selects plan and sets quantity to 1
+                                            setFormData(prev => ({ ...prev, planName: planName }));
+                                            setPlanQuantities({ [planName]: 1 });
+                                          }}
+                                          className={`relative border-2 rounded-lg p-2 cursor-pointer transition-all ${
+                                            isSelected
                                               ? "border-indigo-500 bg-indigo-50 shadow-md" 
                                               : "border-gray-200 hover:border-gray-300"
                                           }`}
                                         >
-                                          <div className="text-xs font-medium text-gray-900 mb-1 pr-8">
+                                          <div className="text-xs font-medium text-gray-900 mb-1">
                                             {planName}
                                           </div>
                                           <div className="flex flex-col mb-1">
                                             <span className="text-xs font-bold text-indigo-600">
                                               ₹{price.toLocaleString('en-IN')}
                                             </span>
-                                          </div>
-                                          <div className="absolute bottom-1.5 right-1.5 flex items-center bg-white rounded border border-gray-300 px-1 py-0.5">
-                                            <button
-                                              type="button"
-                                              onClick={() => {
-                                                if (quantity > 0) {
-                                                  const newQuantities = { ...planQuantities, [planName]: quantity - 1 };
-                                                  setPlanQuantities(newQuantities);
-                                                  if (quantity - 1 === 0 && formData.planName === planName) {
-                                                    setFormData(prev => ({ ...prev, planName: "" }));
-                                                  }
-                                                }
-                                              }}
-                                              className="text-gray-600 hover:text-red-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
-                                            >
-                                              -
-                                            </button>
-                                            <span className="text-xs font-semibold text-gray-900 min-w-[12px] text-center px-1">
-                                              {quantity}
-                                            </span>
-                                            <button
-                                              type="button"
-                                              onClick={() => {
-                                                const newQuantities = { ...planQuantities, [planName]: quantity + 1 };
-                                                setPlanQuantities(newQuantities);
-                                                setFormData(prev => ({ ...prev, planName: planName }));
-                                              }}
-                                              className="text-gray-600 hover:text-green-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
-                                            >
-                                              +
-                                            </button>
                                           </div>
                                         </div>
                                       );
