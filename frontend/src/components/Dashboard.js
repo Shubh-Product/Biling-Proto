@@ -6972,7 +6972,8 @@ const Dashboard = () => {
                     {/* Online Upgrade Flow - Same as Online Renew (Online tab specific) */}
                     {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'upgrade' && formData.productType === "Online" && (
                       <div className="space-y-4 mt-6">
-                        <div className="bg-gradient-to-r from-green-50 to-teal-50 p-6 rounded-lg border border-green-200">
+                        <div id="product-selection-section" className="space-y-4">
+                          {/* All fields in single row - without Database Type */}
                           <div className="flex items-center space-x-6">
                             {/* User Count (Mandatory) - Add/Reduce control with minimum enforcement */}
                             <div className="flex items-center space-x-2">
@@ -6985,8 +6986,10 @@ const Dashboard = () => {
                                     if (onlineUserCount > onlineMinUserCount) {
                                       const newCount = onlineUserCount - 1;
                                       setOnlineUserCount(newCount);
-                                      // Auto-update company count to match user count
-                                      setOnlineCompanyCount(newCount);
+                                      // Auto-update company count to match user count if not below company minimum
+                                      if (newCount >= onlineMinCompanyCount) {
+                                        setOnlineCompanyCount(newCount);
+                                      }
                                     }
                                   }}
                                   disabled={onlineUserCount <= onlineMinUserCount}
@@ -7053,6 +7056,8 @@ const Dashboard = () => {
                               </div>
                               <span className="text-xs text-gray-500">(Min: {onlineMinCompanyCount})</span>
                             </div>
+
+                            {/* Database Type - REMOVED from upgrade flow */}
 
                             {/* Duration Selection for Online Upgrade */}
                             <div className="flex items-center space-x-2">
