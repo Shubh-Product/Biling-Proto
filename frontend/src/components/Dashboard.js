@@ -6672,6 +6672,234 @@ const Dashboard = () => {
                       </div>
                     )}
 
+                    {/* Desktop Upgrade Flow - Variant Selection (Desktop tab specific) */}
+                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'upgrade' && formData.productType === "Desktop" && (
+                      <div className="space-y-6">
+                        
+                        {/* Variant Selection for Desktop Upgrade */}
+                        <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-6">
+                          <h3 className="text-lg font-semibold text-indigo-900 mb-4">Select Upgrade Variant</h3>
+                          
+                          {/* Variant Radio Buttons - Desktop / Mandi */}
+                          <div className="flex items-center space-x-6">
+                            <Label className="text-sm font-medium whitespace-nowrap">Variant:</Label>
+                            <div className="flex space-x-3">
+                              {[
+                                { value: "Desktop", label: "Desktop" },
+                                { value: "Mandi", label: "Mandi" }
+                              ].map((variant) => (
+                                <label key={variant.value} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all w-32 ${
+                                  formData.upgradeVariant === variant.value 
+                                    ? "border-indigo-500 bg-indigo-50" 
+                                    : "border-gray-200"
+                                }`}>
+                                  <input
+                                    type="radio"
+                                    name="upgradeVariant"
+                                    value={variant.value}
+                                    checked={formData.upgradeVariant === variant.value}
+                                    onChange={(e) => setFormData(prev => ({ 
+                                      ...prev, 
+                                      upgradeVariant: e.target.value,
+                                      licenseModel: "",
+                                      duration: "",
+                                      planName: ""
+                                    }))}
+                                    className="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500 mr-3"
+                                  />
+                                  <span className="text-gray-700 font-medium text-sm">{variant.label}</span>
+                                </label>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Desktop/Mandi Upgrade Plans Configuration */}
+                          {formData.upgradeVariant && (
+                            <div className="space-y-4 mt-4">
+                              {/* License Model and Duration Selection */}
+                              <div className="flex items-center space-x-8">
+                                <div className="flex items-center space-x-3">
+                                  <Label className="text-sm font-medium whitespace-nowrap">License Model:</Label>
+                                  <div className="flex space-x-2">
+                                    {[
+                                      { value: "Perpetual", label: "Perpetual" },
+                                      { value: "Subscription", label: "Subscription" }
+                                    ].map((model) => (
+                                      <label key={model.value} className={`flex items-center cursor-pointer p-2 border-2 rounded-lg hover:shadow-md transition-all w-28 ${
+                                        formData.licenseModel === model.value 
+                                          ? "border-green-500 bg-green-50" 
+                                          : "border-gray-200"
+                                      }`}>
+                                        <input
+                                          type="checkbox"
+                                          name="upgradeL icenseModel"
+                                          value={model.value}
+                                          checked={formData.licenseModel === model.value}
+                                          onChange={(e) => setFormData(prev => ({ 
+                                            ...prev, 
+                                            licenseModel: e.target.checked ? model.value : "",
+                                            duration: "",
+                                            planName: ""
+                                          }))}
+                                          className="w-4 h-4 text-green-600 border-gray-300 focus:ring-green-500 mr-2"
+                                        />
+                                        <span className="text-gray-700 font-medium text-xs">{model.label}</span>
+                                      </label>
+                                    ))}
+                                  </div>
+                                </div>
+
+                                {/* Duration Selection */}
+                                {formData.licenseModel && (
+                                  <div className="flex items-center space-x-3">
+                                    <Label className="text-sm font-medium whitespace-nowrap">Duration:</Label>
+                                    <div className="flex space-x-2">
+                                      {[
+                                        { value: "360 Days", label: "360 Days" },
+                                        { value: "1080 Days", label: "1080 Days" }
+                                      ].map((duration) => (
+                                        <label key={duration.value} className={`flex items-center cursor-pointer p-2 border-2 rounded-lg hover:shadow-md transition-all w-32 ${
+                                          formData.duration === duration.value.split(' ')[0] 
+                                            ? "border-orange-500 bg-orange-50" 
+                                            : "border-gray-200"
+                                        }`}>
+                                          <input
+                                            type="checkbox"
+                                            name="upgradeDuration"
+                                            value={duration.value.split(' ')[0]}
+                                            checked={formData.duration === duration.value.split(' ')[0]}
+                                            onChange={(e) => {
+                                              const newDuration = e.target.checked ? duration.value.split(' ')[0] : "";
+                                              setFormData(prev => ({ 
+                                                ...prev, 
+                                                duration: newDuration,
+                                                planName: ""
+                                              }));
+                                              if (newDuration !== formData.duration) {
+                                                setPlanQuantities({});
+                                              }
+                                            }}
+                                            className="w-4 h-4 text-orange-600 border-gray-300 focus:ring-orange-500 mr-2"
+                                          />
+                                          <div className="flex flex-col">
+                                            <span className="text-gray-700 font-medium text-xs">{duration.label}</span>
+                                            {duration.value === "1080 Days" && (
+                                              <span className="text-xs text-green-600 font-semibold">
+                                                20% OFF
+                                              </span>
+                                            )}
+                                          </div>
+                                        </label>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+
+                              {/* Plan Selection Based on Variant */}
+                              {formData.licenseModel && formData.duration && (
+                                <div className="space-y-2">
+                                  <Label className="text-sm font-medium">Plans:</Label>
+                                  {(() => {
+                                    // Get all plans based on license model and duration
+                                    const allPlans = getDesktopPlans(formData.licenseModel, formData.duration);
+                                    
+                                    // Filter plans based on variant
+                                    let filteredPlans = [];
+                                    if (formData.upgradeVariant === "Desktop") {
+                                      // Show all 16 Desktop plans (Standard, Saffron, Basic, Blue, Enterprise, Emerald)
+                                      filteredPlans = allPlans.filter(plan => 
+                                        plan.name.includes("Standard") ||
+                                        plan.name.includes("Saffron") ||
+                                        plan.name.includes("Basic") ||
+                                        plan.name.includes("Blue") ||
+                                        plan.name.includes("Enterprise") ||
+                                        plan.name.includes("Emerald")
+                                      );
+                                    } else if (formData.upgradeVariant === "Mandi") {
+                                      // Show only 6 Mandi plans (Saffron and Emerald)
+                                      filteredPlans = allPlans.filter(plan => 
+                                        plan.name.includes("Saffron") ||
+                                        plan.name.includes("Emerald")
+                                      );
+                                    }
+                                    
+                                    // Filter out current plan from the list
+                                    const currentPlanName = currentProductInfo?.planName || "";
+                                    const plansToShow = filteredPlans.filter(plan => 
+                                      !currentPlanName.includes(plan.name.split(" - ")[0])
+                                    );
+                                    
+                                    return (
+                                      <div className="grid grid-cols-4 gap-2">
+                                        {plansToShow && plansToShow.length > 0 ? plansToShow.map((plan) => {
+                                          const quantity = planQuantities[plan.name] || 0;
+                                          return (
+                                            <div 
+                                              key={plan.name} 
+                                              className={`relative border-2 rounded-lg p-2 transition-all ${
+                                                quantity > 0
+                                                  ? "border-indigo-500 bg-indigo-50 shadow-md" 
+                                                  : "border-gray-200 hover:border-gray-300"
+                                              }`}
+                                            >
+                                              <div className="text-xs font-medium text-gray-900 mb-1 pr-8">
+                                                {plan.name}
+                                              </div>
+                                              <div className="flex flex-col mb-1">
+                                                <span className="text-xs font-bold text-indigo-600">
+                                                  ₹{plan.price?.toLocaleString('en-IN') || 'Contact'}
+                                                </span>
+                                              </div>
+                                              <div className="absolute bottom-1.5 right-1.5 flex items-center bg-white rounded border border-gray-300 px-1 py-0.5">
+                                                <button
+                                                  type="button"
+                                                  onClick={() => {
+                                                    if (quantity > 0) {
+                                                      const newQuantities = { ...planQuantities, [plan.name]: quantity - 1 };
+                                                      setPlanQuantities(newQuantities);
+                                                      if (quantity - 1 === 0 && formData.planName === plan.name) {
+                                                        setFormData(prev => ({ ...prev, planName: "" }));
+                                                      }
+                                                    }
+                                                  }}
+                                                  className="text-gray-600 hover:text-red-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
+                                                >
+                                                  -
+                                                </button>
+                                                <span className="text-xs font-semibold text-gray-900 min-w-[12px] text-center px-1">
+                                                  {quantity}
+                                                </span>
+                                                <button
+                                                  type="button"
+                                                  onClick={() => {
+                                                    const newQuantities = { ...planQuantities, [plan.name]: quantity + 1 };
+                                                    setPlanQuantities(newQuantities);
+                                                    setFormData(prev => ({ ...prev, planName: plan.name }));
+                                                  }}
+                                                  className="text-gray-600 hover:text-green-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
+                                                >
+                                                  +
+                                                </button>
+                                              </div>
+                                            </div>
+                                          );
+                                        }) : (
+                                          <div className="col-span-4 text-center text-gray-500 text-sm py-4">
+                                            No plans available for this variant
+                                          </div>
+                                        )}
+                                      </div>
+                                    );
+                                  })()}
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
                     {/* Upgrade Flow - Complete Product Selection (Show after customer validation for Upgrade button ONLY) */}
                     {/* This mirrors the exact same flow as renewalOption === 'upgrade' */}
                     {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'upgrade' && (
