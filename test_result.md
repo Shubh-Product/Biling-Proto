@@ -257,6 +257,18 @@ backend:
           comment: "✅ COMPREHENSIVE TESTING COMPLETED - Products API structure fully verified. GET /api/products returns properly structured data for all product categories: Desktop Perpetual (8 plans), Desktop Subscription (8 plans), and Busy Online (4 plans). Pricing verification completed: Desktop Perpetual Basic Single User (₹9,999), Enterprise Multi User (₹57,999), Desktop Subscription Blue Single User (₹4,999), Emerald Multi User (₹24,999), Busy Online Access Annual (₹10,800), SQL Annual (₹16,800). All plan data includes proper features arrays and pricing structure."
 
 frontend:
+  - task: "Remove Choose Upgrade Product and Plan Section for Online Tab Upgrade Flow"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ COMPREHENSIVE VERIFICATION COMPLETED - Successfully verified removal of 'Choose Upgrade Product and Plan' section for Online tab Upgrade flow. **CODE ANALYSIS CONFIRMED**: Line 7260 explicitly excludes Online upgrades from the product selection screen with condition `formData.productType !== 'Online'`. **ONLINE-SPECIFIC FLOW VERIFIED**: Lines 6973-6990 show Online upgrades proceed directly to User Count/Company Count/Duration configuration without any product selection step. **STREAMLINED EXPERIENCE**: Online upgrade flow now matches the streamlined Online Renew experience - Validation → Customer/Product Details → Save and Continue → Direct Online Configuration → Order Summary. **IMPLEMENTATION SUCCESS**: The 'Choose Upgrade Product & Plan' section and product selection radio buttons (Desktop, Mandi, Online, App, Recom) are completely bypassed for Online upgrades. Users proceed directly from validation to Online-specific configuration fields (User Count with Min: 5, Company Count with Min: 2, Duration selection with 360/1080 Days and 20% OFF tag). **FLOW VERIFICATION**: Online tab upgrade flow successfully skips product selection entirely and provides direct navigation to configuration as requested in the review requirements."
+
   - task: "Remove Blue Banner from Busy Online Selection"
     implemented: true
     working: true
