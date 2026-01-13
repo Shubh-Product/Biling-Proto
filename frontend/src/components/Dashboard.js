@@ -6803,6 +6803,134 @@ const Dashboard = () => {
                       </div>
                     )}
 
+                    {/* Mandi Upgrade Flow - Same as Desktop (Mandi tab specific) */}
+                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'upgrade' && formData.productType === "Mandi" && (
+                      <div className="space-y-6">
+                        
+                        {/* Variant Selection for Mandi Upgrade */}
+                        <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-6">
+                          {/* Variant Radio Buttons - Desktop / Mandi */}
+                          <div className="flex items-center space-x-6">
+                            <Label className="text-sm font-medium whitespace-nowrap">Variant:</Label>
+                            <div className="flex space-x-3">
+                              {[
+                                { value: "Desktop", label: "Desktop" },
+                                { value: "Mandi", label: "Mandi" }
+                              ].map((variant) => (
+                                <label key={variant.value} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all w-32 ${
+                                  formData.upgradeVariant === variant.value 
+                                    ? "border-indigo-500 bg-indigo-50" 
+                                    : "border-gray-200"
+                                }`}>
+                                  <input
+                                    type="radio"
+                                    name="mandiUpgradeVariant"
+                                    value={variant.value}
+                                    checked={formData.upgradeVariant === variant.value}
+                                    onChange={(e) => {
+                                      setFormData(prev => ({ 
+                                        ...prev, 
+                                        upgradeVariant: e.target.value,
+                                        planName: ""
+                                      }));
+                                      setPlanQuantities({}); // Reset quantities when variant changes
+                                    }}
+                                    className="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500 mr-3"
+                                  />
+                                  <span className="text-gray-700 font-medium text-sm">{variant.label}</span>
+                                </label>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Plans Display - Directly after Variant Selection */}
+                          {formData.upgradeVariant && (
+                            <div className="space-y-2 mt-4">
+                              <Label className="text-sm font-medium">Plans:</Label>
+                              {(() => {
+                                // Define static plan lists for Desktop and Mandi variants
+                                let plansToShow = [];
+                                
+                                if (formData.upgradeVariant === "Desktop") {
+                                  // Desktop variant: 16 plans
+                                  plansToShow = [
+                                    "Standard - Single User",
+                                    "Standard - Multi User",
+                                    "Standard - Client Server",
+                                    "Saffron - Single User",
+                                    "Saffron - Multi User",
+                                    "Saffron - Client Server",
+                                    "Basic - Single User",
+                                    "Basic - Multi User",
+                                    "Blue - Single User",
+                                    "Blue - Multi User",
+                                    "Enterprise - Single User",
+                                    "Enterprise - Multi User",
+                                    "Enterprise - Client Server",
+                                    "Emerald - Single User",
+                                    "Emerald - Multi User",
+                                    "Emerald - Client Server"
+                                  ];
+                                } else if (formData.upgradeVariant === "Mandi") {
+                                  // Mandi variant: 6 plans
+                                  plansToShow = [
+                                    "Saffron - Single User",
+                                    "Saffron - Multi User",
+                                    "Saffron - Client Server",
+                                    "Emerald - Single User",
+                                    "Emerald - Multi User",
+                                    "Emerald - Client Server"
+                                  ];
+                                }
+                                
+                                // Filter out current active plan
+                                const currentPlanName = currentProductInfo?.planName || "";
+                                const filteredPlans = plansToShow.filter(planName => planName !== currentPlanName);
+                                
+                                return (
+                                  <div className="grid grid-cols-4 gap-2">
+                                    {filteredPlans.length > 0 ? filteredPlans.map((planName) => {
+                                      const isSelected = formData.planName === planName;
+                                      const price = 15000; // Placeholder
+                                      
+                                      return (
+                                        <div 
+                                          key={planName}
+                                          onClick={() => {
+                                            // Single click selects plan and sets quantity to 1
+                                            setFormData(prev => ({ ...prev, planName: planName }));
+                                            setPlanQuantities({ [planName]: 1 });
+                                          }}
+                                          className={`relative border-2 rounded-lg p-2 cursor-pointer transition-all ${
+                                            isSelected
+                                              ? "border-indigo-500 bg-indigo-50 shadow-md" 
+                                              : "border-gray-200 hover:border-gray-300"
+                                          }`}
+                                        >
+                                          <div className="text-xs font-medium text-gray-900 mb-1">
+                                            {planName}
+                                          </div>
+                                          <div className="flex flex-col mb-1">
+                                            <span className="text-xs font-bold text-indigo-600">
+                                              ₹{price.toLocaleString('en-IN')}
+                                            </span>
+                                          </div>
+                                        </div>
+                                      );
+                                    }) : (
+                                      <div className="col-span-4 text-center text-gray-500 text-sm py-4">
+                                        No upgrade plans available
+                                      </div>
+                                    )}
+                                  </div>
+                                );
+                              })()}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
                     {/* Upgrade Flow - Complete Product Selection (Show after customer validation for Upgrade button ONLY) */}
                     {/* This mirrors the exact same flow as renewalOption === 'upgrade' */}
                     {/* Exclude Desktop as it has its own dedicated upgrade flow above */}
