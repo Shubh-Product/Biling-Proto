@@ -7256,8 +7256,8 @@ const Dashboard = () => {
 
                     {/* Upgrade Flow - Complete Product Selection (Show after customer validation for Upgrade button ONLY) */}
                     {/* This mirrors the exact same flow as renewalOption === 'upgrade' */}
-                    {/* Exclude Desktop and Mandi as they have their own dedicated upgrade flows above */}
-                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'upgrade' && formData.productType !== "Desktop" && formData.productType !== "Mandi" && (
+                    {/* Exclude Desktop, Mandi, and Online as they have their own dedicated upgrade flows above */}
+                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'upgrade' && formData.productType !== "Desktop" && formData.productType !== "Mandi" && formData.productType !== "Online" && (
                       <div className="space-y-6">
                         
                         {/* Product Selection - Exactly Same as renewalOption Upgrade Flow */}
