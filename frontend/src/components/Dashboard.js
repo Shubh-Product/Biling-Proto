@@ -7260,6 +7260,320 @@ const Dashboard = () => {
                       </div>
                     )}
 
+                    {/* Recom Upgrade Flow - Same as Recom Renew (Recom tab specific) */}
+                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'upgrade' && formData.productType === "Recom" && (
+                      <div className="space-y-4">
+                        {/* Market Place Selection */}
+                        <div className="flex items-center space-x-3">
+                          <Label className="text-sm font-medium whitespace-nowrap">Market Place:</Label>
+                          <div className="flex space-x-2">
+                            {[
+                              { value: "Single", label: "Single" },
+                              { value: "Multiple", label: "Multiple" }
+                            ].map((marketplace) => (
+                              <label key={marketplace.value} className={`flex items-center cursor-pointer px-3 py-2 border-2 rounded-lg hover:shadow-md transition-all w-28 ${
+                                recomMarketPlace === marketplace.value
+                                  ? "border-teal-500 bg-teal-50" 
+                                  : "border-gray-200"
+                              }`}>
+                                <input
+                                  type="radio"
+                                  name="recomUpgradeMarketPlace"
+                                  value={marketplace.value}
+                                  checked={recomMarketPlace === marketplace.value}
+                                  onChange={(e) => {
+                                    setRecomMarketPlace(e.target.value);
+                                    setFormData(prev => ({ ...prev, planName: "" }));
+                                  }}
+                                  className="w-4 h-4 text-teal-600 border-gray-300 focus:ring-teal-500 mr-2"
+                                />
+                                <span className="text-gray-700 font-medium text-sm">{marketplace.label}</span>
+                              </label>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Recom Plans Display - Based on Market Place Selection */}
+                        {recomMarketPlace && (
+                          <div data-scroll-target="recom-upgrade-plans" className="space-y-2">
+                            <Label className="text-sm font-medium">Number of Orders:</Label>
+                        
+                        {/* Single Market Place Plans */}
+                        {recomMarketPlace === "Single" && (
+                          <div className="grid grid-cols-5 gap-2">
+                            {[
+                              { name: "A", orders: "6,000", days: "360" },
+                              { name: "B", orders: "12,000", days: "360" },
+                              { name: "C", orders: "30,000", days: "360" },
+                              { name: "D", orders: "60,000", days: "360" },
+                              { name: "E", orders: "120,000", days: "360" }
+                            ].map((plan) => {
+                              const isSelected = formData.planName === `Recom ${plan.name}`;
+                              const isCurrentPlan = currentProductInfo?.planName?.includes(plan.name);
+                              return (
+                                <div 
+                                  key={plan.name}
+                                  onClick={() => {
+                                    setFormData(prev => ({ ...prev, planName: `Recom ${plan.name}`, duration: plan.days }));
+                                  }}
+                                  className={`relative border-2 rounded-lg p-2 cursor-pointer transition-all ${
+                                    isSelected
+                                      ? "border-teal-500 bg-teal-50 shadow-md" 
+                                      : isCurrentPlan
+                                      ? "border-green-400 bg-green-50"
+                                      : "border-gray-200 hover:border-teal-300 hover:shadow-sm"
+                                  }`}
+                                >
+                                  <div className="absolute top-1 left-1 w-5 h-5 bg-gray-300 text-gray-700 font-bold text-[10px] flex items-center justify-center rounded">
+                                    {plan.name}
+                                  </div>
+                                  {isCurrentPlan && (
+                                    <div className="absolute top-1 right-1">
+                                      <CheckCircle className="w-3 h-3 text-green-600" />
+                                    </div>
+                                  )}
+                                  <div className="text-center mt-5">
+                                    <div className="text-xs font-semibold text-gray-900">{plan.orders}</div>
+                                    <div className="text-[10px] text-gray-600">({plan.days} days)</div>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+
+                        {/* Multiple Market Place Plans */}
+                        {recomMarketPlace === "Multiple" && (
+                          <div className="space-y-2">
+                            {/* First Row - 5 plans */}
+                            <div className="grid grid-cols-5 gap-2">
+                              {[
+                                { name: "A", orders: "300", days: "21" },
+                                { name: "B", orders: "12,000", days: "360" },
+                                { name: "C", orders: "30,000", days: "360" },
+                                { name: "D", orders: "60,000", days: "360" },
+                                { name: "E", orders: "120,000", days: "360" }
+                              ].map((plan) => {
+                                const isSelected = formData.planName === `Recom ${plan.name}`;
+                                const isCurrentPlan = currentProductInfo?.planName?.includes(plan.name);
+                                return (
+                                  <div 
+                                    key={plan.name}
+                                    onClick={() => {
+                                      setFormData(prev => ({ ...prev, planName: `Recom ${plan.name}`, duration: plan.days }));
+                                    }}
+                                    className={`relative border-2 rounded-lg p-2 cursor-pointer transition-all ${
+                                      isSelected
+                                        ? "border-teal-500 bg-teal-50 shadow-md" 
+                                        : isCurrentPlan
+                                        ? "border-green-400 bg-green-50"
+                                        : "border-gray-200 hover:border-teal-300 hover:shadow-sm"
+                                    }`}
+                                  >
+                                    <div className="absolute top-1 left-1 w-5 h-5 bg-gray-300 text-gray-700 font-bold text-[10px] flex items-center justify-center rounded">
+                                      {plan.name}
+                                    </div>
+                                    {isCurrentPlan && (
+                                      <div className="absolute top-1 right-1">
+                                        <CheckCircle className="w-3 h-3 text-green-600" />
+                                      </div>
+                                    )}
+                                    <div className="text-center mt-5">
+                                      <div className="text-xs font-semibold text-gray-900">{plan.orders}</div>
+                                      <div className="text-[10px] text-gray-600">({plan.days} days)</div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+
+                            {/* Second Row - 1 plan (720 days) */}
+                            <div className="grid grid-cols-5 gap-2">
+                              {[
+                                { name: "H", orders: "12,000", days: "720" }
+                              ].map((plan) => {
+                                const isSelected = formData.planName === `Recom ${plan.name}`;
+                                const isCurrentPlan = currentProductInfo?.planName?.includes(plan.name);
+                                return (
+                                  <div 
+                                    key={plan.name}
+                                    onClick={() => {
+                                      setFormData(prev => ({ ...prev, planName: `Recom ${plan.name}`, duration: plan.days }));
+                                    }}
+                                    className={`relative border-2 rounded-lg p-2 cursor-pointer transition-all ${
+                                      isSelected
+                                        ? "border-teal-500 bg-teal-50 shadow-md" 
+                                        : isCurrentPlan
+                                        ? "border-green-400 bg-green-50"
+                                        : "border-gray-200 hover:border-teal-300 hover:shadow-sm"
+                                    }`}
+                                  >
+                                    <div className="absolute top-1 left-1 w-5 h-5 bg-gray-300 text-gray-700 font-bold text-[10px] flex items-center justify-center rounded">
+                                      {plan.name}
+                                    </div>
+                                    {isCurrentPlan && (
+                                      <div className="absolute top-1 right-1">
+                                        <CheckCircle className="w-3 h-3 text-green-600" />
+                                      </div>
+                                    )}
+                                    <div className="text-center mt-5">
+                                      <div className="text-xs font-semibold text-gray-900">{plan.orders}</div>
+                                      <div className="text-[10px] text-gray-600">({plan.days} days)</div>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                      </div>
+                    )}
+
+                    {/* Order Summary for Recom Upgrade - Show when plan is selected */}
+                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'upgrade' && formData.productType === "Recom" && formData.planName && recomMarketPlace && (
+                      <div className="bg-gradient-to-r from-teal-50 to-cyan-50 p-6 rounded-lg border border-teal-200 mt-6">
+                        <h4 id="recom-upgrade-order-summary-section" className="text-xl font-bold text-teal-900 mb-4">Order Summary</h4>
+                        
+                        <div>
+                          {/* Invoice-Style Table */}
+                          <div className="bg-white rounded-lg border border-gray-300 overflow-hidden">
+                            <table className="w-full">
+                              <thead className="bg-gray-100 border-b border-gray-300">
+                                <tr>
+                                  <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">S.No</th>
+                                  <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">Product</th>
+                                  <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">Market Place</th>
+                                  <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">Duration</th>
+                                  <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Rate</th>
+                                  <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Amount</th>
+                                </tr>
+                              </thead>
+                              <tbody className="divide-y divide-gray-200">
+                                {(() => {
+                                  // Calculate Recom pricing based on plan
+                                  const recomPricing = {
+                                    "Recom A": { single: 4999, multiple: 299, duration: recomMarketPlace === "Single" ? "360" : "21" },
+                                    "Recom B": { single: 7999, multiple: 9999, duration: "360" },
+                                    "Recom C": { single: 15999, multiple: 19999, duration: "360" },
+                                    "Recom D": { single: 29999, multiple: 39999, duration: "360" },
+                                    "Recom E": { single: 59999, multiple: 79999, duration: "360" },
+                                    "Recom H": { single: 0, multiple: 28799, duration: "720" } // 720 days only for multiple
+                                  };
+                                  
+                                  const planPricing = recomPricing[formData.planName];
+                                  const basePrice = recomMarketPlace === "Single" ? planPricing.single : planPricing.multiple;
+                                  const duration = planPricing.duration;
+
+                                  return (
+                                    <tr className="hover:bg-gray-50">
+                                      <td className="px-3 py-2 text-sm text-gray-700">1</td>
+                                      <td className="px-3 py-2 text-sm text-gray-900">
+                                        {formData.planName} - Upgrade
+                                        <div className="text-xs text-gray-500">
+                                          {recomMarketPlace} Marketplace
+                                        </div>
+                                      </td>
+                                      <td className="px-3 py-2 text-sm text-center text-gray-700">
+                                        {recomMarketPlace}
+                                      </td>
+                                      <td className="px-3 py-2 text-sm text-center text-gray-700">
+                                        {duration} Days
+                                      </td>
+                                      <td className="px-3 py-2 text-sm text-right text-gray-700">
+                                        ₹{basePrice.toLocaleString('en-IN')}
+                                      </td>
+                                      <td className="px-3 py-2 text-sm text-right font-medium text-gray-900">
+                                        ₹{basePrice.toLocaleString('en-IN')}
+                                      </td>
+                                    </tr>
+                                  );
+                                })()}
+                              </tbody>
+                            </table>
+                            
+                            {/* Summary Section */}
+                            {(() => {
+                              // Calculate pricing
+                              const recomPricing = {
+                                "Recom A": { single: 4999, multiple: 299, duration: recomMarketPlace === "Single" ? "360" : "21" },
+                                "Recom B": { single: 7999, multiple: 9999, duration: "360" },
+                                "Recom C": { single: 15999, multiple: 19999, duration: "360" },
+                                "Recom D": { single: 29999, multiple: 39999, duration: "360" },
+                                "Recom E": { single: 59999, multiple: 79999, duration: "360" },
+                                "Recom H": { single: 0, multiple: 28799, duration: "720" }
+                              };
+                              
+                              const planPricing = recomPricing[formData.planName];
+                              const basePrice = recomMarketPlace === "Single" ? planPricing.single : planPricing.multiple;
+
+                              // Calculate TDS, GST, and final amount
+                              const tdsAmount = formData.deductTds ? Math.round(basePrice * 0.10) : 0;
+                              const afterTds = basePrice - tdsAmount;
+                              const gstAmount = Math.round(afterTds * 0.18);
+                              const finalAmount = afterTds + gstAmount;
+
+                              return (
+                                <div className="border-t border-gray-300 bg-gray-50 p-4">
+                                  <div className="space-y-2">
+                                    <div className="flex justify-between items-center">
+                                      <span className="text-sm font-semibold text-gray-700">Total:</span>
+                                      <span className="text-sm font-semibold text-gray-900">₹{basePrice.toLocaleString('en-IN')}</span>
+                                    </div>
+
+                                    {/* TDS Toggle */}
+                                    <div className="flex justify-between items-center border-t pt-2">
+                                      <span className="text-sm font-medium text-gray-700">Deduct TDS:</span>
+                                      <label className="relative inline-flex items-center cursor-pointer">
+                                        <input
+                                          type="checkbox"
+                                          checked={formData.deductTds}
+                                          onChange={(e) => setFormData(prev => ({ ...prev, deductTds: e.target.checked }))}
+                                          className="sr-only peer"
+                                        />
+                                        <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-teal-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-teal-600"></div>
+                                        <span className="ml-2 text-xs font-medium text-gray-700">
+                                          {formData.deductTds ? 'ON' : 'OFF'}
+                                        </span>
+                                      </label>
+                                    </div>
+
+                                    {formData.deductTds && (
+                                      <div className="flex justify-between items-center">
+                                        <span className="text-sm text-gray-600">TDS (10%):</span>
+                                        <span className="text-sm text-red-600">- ₹{tdsAmount.toLocaleString('en-IN')}</span>
+                                      </div>
+                                    )}
+
+                                    <div className="flex justify-between items-center border-t pt-2">
+                                      <span className="text-sm font-medium text-gray-700">GST (18%):</span>
+                                      <span className="text-sm font-medium text-gray-900">₹{gstAmount.toLocaleString('en-IN')}</span>
+                                    </div>
+
+                                    <div className="flex justify-between items-center border-t-2 border-gray-400 pt-2 mt-2">
+                                      <span className="text-base font-bold text-gray-900">Grand Total:</span>
+                                      <span className="text-lg font-bold text-teal-900">₹{finalAmount.toLocaleString('en-IN')}</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            })()}
+                          </div>
+
+                          {/* Send Payment Link Button */}
+                          <div className="mt-6 flex justify-end">
+                            <Button
+                              type="submit"
+                              className="bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white px-8 py-3 text-base font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all"
+                            >
+                              Send Payment Link
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
                     {/* Upgrade Flow - Complete Product Selection (Show after customer validation for Upgrade button ONLY) */}
                     {/* This mirrors the exact same flow as renewalOption === 'upgrade' */}
                     {/* Exclude Desktop, Mandi, Online, and Recom as they have their own dedicated upgrade flows above */}
