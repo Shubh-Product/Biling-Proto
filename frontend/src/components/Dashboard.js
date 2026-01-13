@@ -1377,10 +1377,12 @@ const Dashboard = () => {
       setSerialValidated(true);
       // Auto-validate customer for renewal flow to skip customer details step
       setCustomerValidated(true);
-      // Set product type from current product info
+      // Set product type and upgrade variant from current product info
+      const currentProduct = serialData.currentProduct?.type || "Desktop";
       setFormData(prev => ({
         ...prev,
-        productType: serialData.currentProduct?.type || "Desktop"
+        productType: currentProduct,
+        upgradeVariant: currentProduct === "Desktop" || currentProduct === "Mandi" ? currentProduct : ""
       }));
       
       // For Online product, initialize user and company counts from current product
