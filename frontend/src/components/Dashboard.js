@@ -7470,8 +7470,8 @@ const Dashboard = () => {
                           </div>
                         </div>
 
-                        {/* Action Buttons - Cancel and Send Payment Link */}
-                        <div className="flex justify-between items-center mt-6">
+                        {/* Action Buttons - Cancel and Send Payment Link (both on right) */}
+                        <div className="flex justify-end items-center space-x-4 mt-6">
                           <Button
                             type="button"
                             onClick={() => {
