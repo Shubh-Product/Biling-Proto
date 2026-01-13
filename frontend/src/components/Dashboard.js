@@ -6969,6 +6969,286 @@ const Dashboard = () => {
                       </div>
                     )}
 
+                    {/* Online Upgrade Flow - Same as Online Renew (Online tab specific) */}
+                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'upgrade' && formData.productType === "Online" && (
+                      <div className="space-y-4 mt-6">
+                        <div className="bg-gradient-to-r from-green-50 to-teal-50 p-6 rounded-lg border border-green-200">
+                          <div className="flex items-center space-x-6">
+                            {/* User Count (Mandatory) - Add/Reduce control with minimum enforcement */}
+                            <div className="flex items-center space-x-2">
+                              <Label className="text-sm font-medium whitespace-nowrap">User Count:</Label>
+                              <div className="flex items-center bg-white rounded border-0 px-2 py-1">
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    // Can only reduce if above minimum (original subscription count)
+                                    if (onlineUserCount > onlineMinUserCount) {
+                                      const newCount = onlineUserCount - 1;
+                                      setOnlineUserCount(newCount);
+                                      // Auto-update company count to match user count
+                                      setOnlineCompanyCount(newCount);
+                                    }
+                                  }}
+                                  disabled={onlineUserCount <= onlineMinUserCount}
+                                  className={`font-bold text-lg w-6 h-6 flex items-center justify-center ${
+                                    onlineUserCount <= onlineMinUserCount 
+                                      ? 'text-gray-300 cursor-not-allowed' 
+                                      : 'text-gray-600 hover:text-red-600'
+                                  }`}
+                                >
+                                  -
+                                </button>
+                                <span className="text-base font-semibold text-gray-900 min-w-[30px] text-center px-2">
+                                  {onlineUserCount}
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    const newCount = onlineUserCount + 1;
+                                    setOnlineUserCount(newCount);
+                                    // Auto-update company count to match user count
+                                    setOnlineCompanyCount(newCount);
+                                  }}
+                                  className="text-gray-600 hover:text-green-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                                >
+                                  +
+                                </button>
+                              </div>
+                              <span className="text-xs text-gray-500">(Min: {onlineMinUserCount})</span>
+                            </div>
+
+                            {/* Company Count (Mandatory) - Add/Reduce control with minimum enforcement */}
+                            <div className="flex items-center space-x-2">
+                              <Label className="text-sm font-medium whitespace-nowrap">Company Count:</Label>
+                              <div className="flex items-center bg-white rounded border-0 px-2 py-1">
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    // Can only reduce if above minimum (original subscription count)
+                                    if (onlineCompanyCount > onlineMinCompanyCount) {
+                                      setOnlineCompanyCount(onlineCompanyCount - 1);
+                                    }
+                                  }}
+                                  disabled={onlineCompanyCount <= onlineMinCompanyCount}
+                                  className={`font-bold text-lg w-6 h-6 flex items-center justify-center ${
+                                    onlineCompanyCount <= onlineMinCompanyCount 
+                                      ? 'text-gray-300 cursor-not-allowed' 
+                                      : 'text-gray-600 hover:text-red-600'
+                                  }`}
+                                >
+                                  -
+                                </button>
+                                <span className="text-base font-semibold text-gray-900 min-w-[30px] text-center px-2">
+                                  {onlineCompanyCount}
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setOnlineCompanyCount(onlineCompanyCount + 1);
+                                  }}
+                                  className="text-gray-600 hover:text-green-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                                >
+                                  +
+                                </button>
+                              </div>
+                              <span className="text-xs text-gray-500">(Min: {onlineMinCompanyCount})</span>
+                            </div>
+
+                            {/* Duration Selection for Online Upgrade */}
+                            <div className="flex items-center space-x-2">
+                              <Label className="text-sm font-medium whitespace-nowrap">Duration:</Label>
+                              <div className="flex space-x-2">
+                                {[
+                                  { value: "360", label: "360 Days" },
+                                  { value: "1080", label: "1080 Days" }
+                                ].map((duration) => (
+                                  <label key={duration.value} className={`flex items-center cursor-pointer px-2 py-1.5 border-0 rounded-lg hover:shadow-md transition-all ${
+                                    formData.duration === duration.value
+                                      ? "bg-orange-50" 
+                                      : "bg-gray-50"
+                                  }`}>
+                                    <input
+                                      type="radio"
+                                      name="onlineUpgradeDuration"
+                                      value={duration.value}
+                                      checked={formData.duration === duration.value}
+                                      onChange={(e) => {
+                                        setFormData(prev => ({ 
+                                          ...prev, 
+                                          duration: e.target.value,
+                                          planName: "Online Upgrade" // Set planName to trigger order summary
+                                        }));
+                                        // Auto-scroll to order summary
+                                        setTimeout(() => {
+                                          const orderSummary = document.getElementById('online-upgrade-order-summary-section');
+                                          if (orderSummary) {
+                                            orderSummary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                          }
+                                        }, 300);
+                                      }}
+                                      className="w-3.5 h-3.5 text-orange-600 border-gray-300 focus:ring-orange-500 mr-2"
+                                    />
+                                    <div className="flex flex-col">
+                                      <span className="text-gray-700 font-medium text-xs whitespace-nowrap">{duration.label}</span>
+                                      {duration.value === "1080" && (
+                                        <span className="text-[10px] text-green-600 font-semibold">
+                                          20% OFF
+                                        </span>
+                                      )}
+                                    </div>
+                                  </label>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Order Summary for Online Upgrade - Show when duration is selected */}
+                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'upgrade' && formData.productType === "Online" && formData.duration && (
+                      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200 mt-6">
+                        <h4 id="online-upgrade-order-summary-section" className="text-xl font-bold text-blue-900 mb-4">Order Summary</h4>
+                        
+                        <div>
+                          {/* Invoice-Style Table */}
+                          <div className="bg-white rounded-lg border border-gray-300 overflow-hidden">
+                            <table className="w-full">
+                              <thead className="bg-gray-100 border-b border-gray-300">
+                                <tr>
+                                  <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">S.No</th>
+                                  <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">Product</th>
+                                  <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">Duration</th>
+                                  <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">User Count</th>
+                                  <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">Company Count</th>
+                                  <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Rate</th>
+                                  <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Amount</th>
+                                </tr>
+                              </thead>
+                              <tbody className="divide-y divide-gray-200">
+                                {(() => {
+                                  // Calculate Online pricing
+                                  const baseRate = 10000; // Base rate per user per year
+                                  const userRate = baseRate * onlineUserCount;
+                                  const companyRate = 2000 * onlineCompanyCount; // Additional charge per company
+                                  const durationMultiplier = formData.duration === "1080" ? 3 : 1; // 3 years or 1 year
+                                  const totalBasePrice = (userRate + companyRate) * durationMultiplier;
+                                  
+                                  // Apply 20% discount for 1080 days
+                                  const discountedPrice = formData.duration === "1080" 
+                                    ? Math.round(totalBasePrice * 0.8) 
+                                    : totalBasePrice;
+
+                                  return (
+                                    <tr className="hover:bg-gray-50">
+                                      <td className="px-3 py-2 text-sm text-gray-700">1</td>
+                                      <td className="px-3 py-2 text-sm text-gray-900">
+                                        Online Upgrade
+                                        <div className="text-xs text-gray-500">
+                                          Users: {onlineUserCount}, Companies: {onlineCompanyCount}
+                                        </div>
+                                      </td>
+                                      <td className="px-3 py-2 text-sm text-center text-gray-700">
+                                        {formData.duration} Days
+                                        {formData.duration === "1080" && (
+                                          <div className="text-xs text-green-600 font-semibold">20% OFF</div>
+                                        )}
+                                      </td>
+                                      <td className="px-3 py-2 text-sm text-center text-gray-700">{onlineUserCount}</td>
+                                      <td className="px-3 py-2 text-sm text-center text-gray-700">{onlineCompanyCount}</td>
+                                      <td className="px-3 py-2 text-sm text-right text-gray-700">
+                                        {formData.duration === "1080" && totalBasePrice !== discountedPrice && (
+                                          <div className="text-xs text-gray-400 line-through">₹{totalBasePrice.toLocaleString('en-IN')}</div>
+                                        )}
+                                        <div>₹{discountedPrice.toLocaleString('en-IN')}</div>
+                                      </td>
+                                      <td className="px-3 py-2 text-sm text-right font-medium text-gray-900">₹{discountedPrice.toLocaleString('en-IN')}</td>
+                                    </tr>
+                                  );
+                                })()}
+                              </tbody>
+                            </table>
+                            
+                            {/* Summary Section */}
+                            {(() => {
+                              // Calculate pricing
+                              const baseRate = 10000;
+                              const userRate = baseRate * onlineUserCount;
+                              const companyRate = 2000 * onlineCompanyCount;
+                              const durationMultiplier = formData.duration === "1080" ? 3 : 1;
+                              const totalBasePrice = (userRate + companyRate) * durationMultiplier;
+                              
+                              // Apply 20% discount for 1080 days
+                              const discountedPrice = formData.duration === "1080" 
+                                ? Math.round(totalBasePrice * 0.8) 
+                                : totalBasePrice;
+
+                              // Calculate TDS, GST, and final amount
+                              const tdsAmount = formData.deductTds ? Math.round(discountedPrice * 0.10) : 0;
+                              const afterTds = discountedPrice - tdsAmount;
+                              const gstAmount = Math.round(afterTds * 0.18);
+                              const finalAmount = afterTds + gstAmount;
+
+                              return (
+                                <div className="border-t border-gray-300 bg-gray-50 p-4">
+                                  <div className="space-y-2">
+                                    <div className="flex justify-between items-center">
+                                      <span className="text-sm font-semibold text-gray-700">Total:</span>
+                                      <span className="text-sm font-semibold text-gray-900">₹{discountedPrice.toLocaleString('en-IN')}</span>
+                                    </div>
+
+                                    {/* TDS Toggle */}
+                                    <div className="flex justify-between items-center border-t pt-2">
+                                      <span className="text-sm font-medium text-gray-700">Deduct TDS:</span>
+                                      <label className="relative inline-flex items-center cursor-pointer">
+                                        <input
+                                          type="checkbox"
+                                          checked={formData.deductTds}
+                                          onChange={(e) => setFormData(prev => ({ ...prev, deductTds: e.target.checked }))}
+                                          className="sr-only peer"
+                                        />
+                                        <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+                                        <span className="ml-2 text-xs font-medium text-gray-700">
+                                          {formData.deductTds ? 'ON' : 'OFF'}
+                                        </span>
+                                      </label>
+                                    </div>
+
+                                    {formData.deductTds && (
+                                      <div className="flex justify-between items-center">
+                                        <span className="text-sm text-gray-600">TDS (10%):</span>
+                                        <span className="text-sm text-red-600">- ₹{tdsAmount.toLocaleString('en-IN')}</span>
+                                      </div>
+                                    )}
+
+                                    <div className="flex justify-between items-center border-t pt-2">
+                                      <span className="text-sm font-medium text-gray-700">GST (18%):</span>
+                                      <span className="text-sm font-medium text-gray-900">₹{gstAmount.toLocaleString('en-IN')}</span>
+                                    </div>
+
+                                    <div className="flex justify-between items-center border-t-2 border-gray-400 pt-2 mt-2">
+                                      <span className="text-base font-bold text-gray-900">Grand Total:</span>
+                                      <span className="text-lg font-bold text-blue-900">₹{finalAmount.toLocaleString('en-IN')}</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            })()}
+                          </div>
+
+                          {/* Send Payment Link Button */}
+                          <div className="mt-6 flex justify-end">
+                            <Button
+                              type="submit"
+                              className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-8 py-3 text-base font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all"
+                            >
+                              Send Payment Link
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
                     {/* Upgrade Flow - Complete Product Selection (Show after customer validation for Upgrade button ONLY) */}
                     {/* This mirrors the exact same flow as renewalOption === 'upgrade' */}
                     {/* Exclude Desktop and Mandi as they have their own dedicated upgrade flows above */}
