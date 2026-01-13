@@ -5,7 +5,7 @@ from datetime import datetime
 import uuid
 
 class SalesPortalAPITester:
-    def __init__(self, base_url="https://sub-button-revamp.preview.emergentagent.com/api"):
+    def __init__(self, base_url="https://online-upgrade-path.preview.emergentagent.com/api"):
         self.base_url = base_url
         self.tests_run = 0
         self.tests_passed = 0
