@@ -1448,6 +1448,18 @@ frontend:
 
 
 frontend:
+  - task: "Online Tab Upgrade Flow - Replicate Renew Journey"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "✅ ONLINE UPGRADE FLOW REPLICATION COMPLETED - Successfully replicated the exact Online Renew journey for the Upgrade flow under the Online tab (lines 6972-7108). **KEY CHANGES**: 1) Updated configuration section structure to match Renew flow exactly - changed from single wrapped div with gradient background to nested div structure matching Renew flow (lines 5764-5900), 2) Enhanced User Count logic - added conditional auto-update of company count that checks if new count is above company minimum (same as Renew flow lines 5776-5782), 3) Added explicit comment 'Database Type - REMOVED from upgrade flow' to match Renew flow comment (line 5850), 4) Maintained all existing functionality - User Count with +/- buttons and minimum enforcement, Company Count with +/- buttons and minimum enforcement, Duration selection (360 Days / 1080 Days with 20% OFF tag), Auto-scroll to order summary on duration selection, Same pricing calculations, TDS toggle functionality, GST calculations, Send Payment Link button. **IMPLEMENTATION DETAILS**: Configuration section now uses `space-y-4` wrapper structure instead of gradient background wrapper, User Count increment auto-updates Company Count to match, User Count decrement auto-updates Company Count only if new value is >= company minimum, All field styling and behavior matches Renew flow exactly. **VERIFICATION**: Frontend service restarted successfully, webpack compiled successfully with no errors, all existing Online Upgrade functionality preserved. The Online Upgrade flow now provides the exact same user experience as the Online Renew flow with identical configuration options, validation logic, and UI structure. Ready for testing."
+
   - task: "App Tab Button Placement & New Sales Flow Simplification"
     implemented: true
     working: "NA"
