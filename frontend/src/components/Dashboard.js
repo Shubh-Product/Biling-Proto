@@ -64,6 +64,7 @@ const Dashboard = () => {
     companyCount: "1", // Default to 1 company
     deductTds: false, // TDS deduction toggle, default off
     recomOfferAdded: false, // Recom Bundle offer toggle
+    upgradeVariant: "", // For Desktop upgrade: Desktop or Mandi
     customerDetails: {
       mobile: "",
       name: "",
