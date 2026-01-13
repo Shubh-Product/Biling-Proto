@@ -7111,9 +7111,8 @@ const Dashboard = () => {
                               const selectedPlans = Object.entries(planQuantities)
                                 .filter(([name, qty]) => qty > 0)
                                 .map(([name, qty]) => {
-                                  const plans = getDesktopPlans("Subscription", formData.duration);
-                                  const plan = plans?.find(p => p.name === name);
-                                  return { quantity: qty, rate: plan?.price || 0 };
+                                  const rate = 15000; // Placeholder price
+                                  return { quantity: qty, rate };
                                 });
                               
                               const subtotal = selectedPlans.reduce((sum, item) => sum + (item.rate * item.quantity), 0);
