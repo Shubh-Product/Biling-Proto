@@ -7152,8 +7152,19 @@ const Dashboard = () => {
                           </div>
                         </div>
 
-                        {/* Send Payment Link Button */}
-                        <div className="flex justify-end mt-6">
+                        {/* Action Buttons - Cancel and Send Payment Link */}
+                        <div className="flex justify-between items-center mt-6">
+                          <Button
+                            type="button"
+                            onClick={() => {
+                              // Reset upgrade flow
+                              setFormData(prev => ({ ...prev, planName: "", upgradeVariant: "Desktop" }));
+                              setPlanQuantities({});
+                            }}
+                            className="bg-gray-500 hover:bg-gray-600 text-white px-8 py-3 rounded-lg text-lg font-semibold"
+                          >
+                            Cancel
+                          </Button>
                           <Button
                             type="button"
                             onClick={handleSendPaymentLink}
