@@ -7476,7 +7476,7 @@ const Dashboard = () => {
                             type="button"
                             onClick={() => {
                               // Reset upgrade flow
-                              setFormData(prev => ({ ...prev, planName: "", upgradeVariant: "Mandi" }));
+                              setFormData(prev => ({ ...prev, planName: "", upgradeVariant: "Mandi", duration: "" }));
                               setPlanQuantities({});
                             }}
                             className="bg-white hover:bg-gray-100 text-gray-900 border-2 border-gray-300 px-8 py-3 rounded-lg text-lg font-semibold"
