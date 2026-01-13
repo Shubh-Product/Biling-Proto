@@ -7161,14 +7161,14 @@ const Dashboard = () => {
                               setFormData(prev => ({ ...prev, planName: "", upgradeVariant: "Desktop" }));
                               setPlanQuantities({});
                             }}
-                            className="bg-gray-500 hover:bg-gray-600 text-white px-8 py-3 rounded-lg text-lg font-semibold"
+                            className="bg-white hover:bg-gray-100 text-gray-900 border-2 border-gray-300 px-8 py-3 rounded-lg text-lg font-semibold"
                           >
                             Cancel
                           </Button>
                           <Button
                             type="button"
                             onClick={handleSendPaymentLink}
-                            className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg text-lg font-semibold"
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold shadow-md"
                           >
                             Send Payment Link
                           </Button>
