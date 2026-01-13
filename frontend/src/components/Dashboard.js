@@ -6735,7 +6735,7 @@ const Dashboard = () => {
                                       }`}>
                                         <input
                                           type="checkbox"
-                                          name="upgradeL icenseModel"
+                                          name="upgradeLicenseModel"
                                           value={model.value}
                                           checked={formData.licenseModel === model.value}
                                           onChange={(e) => setFormData(prev => ({ 
