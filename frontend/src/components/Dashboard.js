@@ -1382,7 +1382,7 @@ const Dashboard = () => {
       setFormData(prev => ({
         ...prev,
         productType: currentProduct,
-        upgradeVariant: currentProduct === "Desktop" || currentProduct === "Mandi" ? currentProduct : ""
+        upgradeVariant: currentProduct === "Desktop" || currentProduct === "Mandi" ? currentProduct : "Desktop" // Default to Desktop
       }));
       
       // For Online product, initialize user and company counts from current product
