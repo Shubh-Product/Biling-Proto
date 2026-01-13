@@ -1736,3 +1736,35 @@ agent_communication:
     - agent: "main"
       message: "✅ MY PAYMENTS TABLE FONT STYLING UPDATED - Successfully updated the My Payments listing table typography. Changes: 1) Applied Roboto Flex font family to entire table at line 11752 using inline style, 2) Set font size to 14px for all table body rows (tbody) at line 11830, 3) Preserved existing header styling - no changes to thead appearance. Implementation uses inline styles for precise control. Roboto Flex provides modern, readable typography. 14px size balances readability with information density. Frontend compiled successfully. Testing: Navigate to My Payments page, inspect table, verify font family is Roboto Flex throughout, verify data rows use 14px font size, verify header styling unchanged."
 
+
+
+frontend:
+  - task: "Desktop Tab - Upgrade Flow with Variant Selection"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "✅ DESKTOP UPGRADE FLOW WITH VARIANT SELECTION COMPLETED - Successfully implemented Desktop-specific upgrade flow with Variant selection (Desktop/Mandi) and intelligent plan filtering. **VARIANT SELECTION SECTION (Lines 6685-6902)**: Added dedicated upgrade flow for Desktop tab. Shows when: transactionType === 'Renewal/Upgrade' && serialValidated && customerValidated && actionType === 'upgrade' && productType === 'Desktop'. Variant radio buttons allow selection between Desktop and Mandi options with indigo-themed styling. **DEFAULT BEHAVIOR**: Added upgradeVariant field to formData state (line 67). On serial validation, upgradeVariant auto-populated from currentProduct type (lines 1381-1384): If current product is Desktop → pre-selects Desktop variant. If current product is Mandi → pre-selects Mandi variant. User can change variant selection if needed. **LICENSE MODEL & DURATION**: Same as existing flow - Perpetual/Subscription license models with 360/1080 days duration options. Green theming for license model, orange for duration. 1080 days shows '20% OFF' badge. **PLAN FILTERING LOGIC**: Variant = Desktop: Shows 16 plans from HiBusy - Standard (Single/Multi/Client Server), Saffron (Single/Multi/Client Server), Basic (Single/Multi), Blue (Single/Multi), Enterprise (Single/Multi/Client Server), Emerald (Single/Multi/Client Server). Variant = Mandi: Shows 6 plans from HiBusy - Saffron (Single/Multi/Client Server), Emerald (Single/Multi/Client Server). **CURRENT PLAN EXCLUSION**: Filters out active plan from display using currentProductInfo.planName comparison (lines 6830-6833). If user has 'Standard - Single User', that plan won't appear in upgrade options. Forces upgrade to different/higher plan only. **PLAN DISPLAY**: 4-column grid layout with plan cards showing: Plan name, Price with rupee symbol and localization, Quantity controls (+/- buttons) for multiple licenses. Selected plans highlighted with indigo border and background. **INTEGRATION**: Uses existing getDesktopPlans() function to fetch plans based on license model and duration. Uses planQuantities state for quantity management. Uses formData.planName for plan selection tracking. Frontend compiled successfully with no errors."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 11
+  run_ui: true
+
+test_plan:
+  current_focus:
+    - "Desktop Tab - Upgrade Flow with Variant Selection"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+    - agent: "main"
+      message: "✅ DESKTOP UPGRADE FLOW COMPLETED - Implemented Desktop-specific upgrade functionality with Variant selection (Desktop/Mandi) and intelligent plan filtering. User flow: 1) Navigate to Desktop tab, 2) Enter subscription number and click Upgrade, 3) Customer Details section appears, 4) Below that, Variant selection with Desktop/Mandi radio buttons - auto-selected based on current subscription, 5) Select License Model (Perpetual/Subscription), 6) Select Duration (360/1080 days), 7) Plans display based on variant: Desktop shows 16 plans (Standard, Saffron, Basic, Blue, Enterprise, Emerald), Mandi shows 6 plans (Saffron, Emerald), 8) Current/active plan excluded from list - user must upgrade to different plan, 9) Use +/- buttons to select quantity, 10) Order Summary appears after selection. All plans fetched from HiBusy via getDesktopPlans(). 4-column grid layout with pricing and quantity controls. Frontend compiled successfully. Ready for testing: Enter Desktop subscription number, click Upgrade, verify variant pre-selected correctly, test both Desktop and Mandi variants, verify correct plans display, verify current plan not shown, test plan selection and quantity controls."
+
