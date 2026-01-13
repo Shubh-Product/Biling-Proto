@@ -6809,42 +6809,80 @@ const Dashboard = () => {
                         
                         {/* Variant Selection for Mandi Upgrade */}
                         <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-6">
-                          {/* Variant Radio Buttons - Desktop / Mandi */}
-                          <div className="flex items-center space-x-6">
-                            <Label className="text-sm font-medium whitespace-nowrap">Variant:</Label>
-                            <div className="flex space-x-3">
-                              {[
-                                { value: "Desktop", label: "Desktop" },
-                                { value: "Mandi", label: "Mandi" }
-                              ].map((variant) => (
-                                <label key={variant.value} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all w-32 ${
-                                  formData.upgradeVariant === variant.value 
-                                    ? "border-indigo-500 bg-indigo-50" 
-                                    : "border-gray-200"
-                                }`}>
-                                  <input
-                                    type="radio"
-                                    name="mandiUpgradeVariant"
-                                    value={variant.value}
-                                    checked={formData.upgradeVariant === variant.value}
-                                    onChange={(e) => {
-                                      setFormData(prev => ({ 
-                                        ...prev, 
-                                        upgradeVariant: e.target.value,
-                                        planName: ""
-                                      }));
-                                      setPlanQuantities({}); // Reset quantities when variant changes
-                                    }}
-                                    className="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500 mr-3"
-                                  />
-                                  <span className="text-gray-700 font-medium text-sm">{variant.label}</span>
-                                </label>
-                              ))}
+                          {/* Variant and Duration Radio Buttons in Same Row */}
+                          <div className="flex items-center space-x-8">
+                            {/* Variant Selection */}
+                            <div className="flex items-center space-x-3">
+                              <Label className="text-sm font-medium whitespace-nowrap">Variant:</Label>
+                              <div className="flex space-x-3">
+                                {[
+                                  { value: "Desktop", label: "Desktop" },
+                                  { value: "Mandi", label: "Mandi" }
+                                ].map((variant) => (
+                                  <label key={variant.value} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all w-32 ${
+                                    formData.upgradeVariant === variant.value 
+                                      ? "border-indigo-500 bg-indigo-50" 
+                                      : "border-gray-200"
+                                  }`}>
+                                    <input
+                                      type="radio"
+                                      name="mandiUpgradeVariant"
+                                      value={variant.value}
+                                      checked={formData.upgradeVariant === variant.value}
+                                      onChange={(e) => {
+                                        setFormData(prev => ({ 
+                                          ...prev, 
+                                          upgradeVariant: e.target.value,
+                                          duration: "", // Reset duration when variant changes
+                                          planName: ""
+                                        }));
+                                        setPlanQuantities({}); // Reset quantities when variant changes
+                                      }}
+                                      className="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500 mr-3"
+                                    />
+                                    <span className="text-gray-700 font-medium text-sm">{variant.label}</span>
+                                  </label>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Duration Selection - Same Row */}
+                            <div className="flex items-center space-x-3">
+                              <Label className="text-sm font-medium whitespace-nowrap">Duration:</Label>
+                              <div className="flex space-x-3">
+                                {[
+                                  { value: "360", label: "360 Days" },
+                                  { value: "720", label: "720 Days" }
+                                ].map((duration) => (
+                                  <label key={duration.value} className={`flex items-center cursor-pointer p-3 border-2 rounded-lg hover:shadow-md transition-all w-32 ${
+                                    formData.duration === duration.value 
+                                      ? "border-orange-500 bg-orange-50" 
+                                      : "border-gray-200"
+                                  }`}>
+                                    <input
+                                      type="radio"
+                                      name="mandiUpgradeDuration"
+                                      value={duration.value}
+                                      checked={formData.duration === duration.value}
+                                      onChange={(e) => {
+                                        setFormData(prev => ({ 
+                                          ...prev, 
+                                          duration: e.target.value,
+                                          planName: "" // Reset plan when duration changes
+                                        }));
+                                        setPlanQuantities({}); // Reset quantities when duration changes
+                                      }}
+                                      className="w-4 h-4 text-orange-600 border-gray-300 focus:ring-orange-500 mr-3"
+                                    />
+                                    <span className="text-gray-700 font-medium text-sm">{duration.label}</span>
+                                  </label>
+                                ))}
+                              </div>
                             </div>
                           </div>
 
-                          {/* Plans Display - Directly after Variant Selection */}
-                          {formData.upgradeVariant && (
+                          {/* Plans Display - Only after Variant AND Duration Selection */}
+                          {formData.upgradeVariant && formData.duration && (
                             <div className="space-y-2 mt-4">
                               <Label className="text-sm font-medium">Plans:</Label>
                               {(() => {
