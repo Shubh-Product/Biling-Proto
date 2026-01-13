@@ -7116,7 +7116,7 @@ const Dashboard = () => {
                       </div>
                     )}
 
-                    {/* Order Summary for Online Upgrade - Show when duration is selected */}
+                    {/* Order Summary for Online Upgrade - Show when counts are changed (duration auto-set to 360) */}
                     {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'upgrade' && formData.productType === "Online" && formData.duration && (
                       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200 mt-6">
                         <h4 id="online-upgrade-order-summary-section" className="text-xl font-bold text-blue-900 mb-4">Order Summary</h4>
