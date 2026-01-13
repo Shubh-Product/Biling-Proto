@@ -1496,19 +1496,19 @@ frontend:
 metadata:
   created_by: "main_agent"
   version: "1.0"
-  test_sequence: 3
+  test_sequence: 4
   run_ui: true
 
 test_plan:
   current_focus:
-    - "Recom Tab Button Placement & New Sales Flow Simplification"
+    - "Online Tab Upgrade Flow - Replicate Renew Journey"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
 
 agent_communication:
     - agent: "main"
-      message: "✅ RECOM TAB MODIFICATIONS COMPLETED - Implemented all required changes for Recom tab as per requirements: 1) Added 'New' button on RIGHT side (after subscription input, before Renew button) with proper disable/enable logic based on SER12345 subscription ID, 2) Removed subscription validation step from New Sales flow - user now proceeds directly from Prospect Details to Market Place and Plan selection without intermediate validation, 3) Updated 2 validation checks to remove recomSubscriptionValidated requirement throughout the file, 4) Maintained all existing constraints - no changes to other UI elements, APIs, or business logic, 5) Frontend service restarted and compiled successfully. The Recom tab New Sales flow now works like Desktop/Mandi products with simplified direct flow. Changes mirror the App tab modifications completed earlier. Ready for testing to verify: 1) Recom tab Renewal/Upgrade flow with 'New' button behavior, 2) Recom tab New Sales flow without subscription validation, 3) Market Place selection and Plan display, 4) Order Summary generation, 5) Payment link functionality."
+      message: "✅ ONLINE TAB UPGRADE FLOW REPLICATION COMPLETED - Successfully replicated the exact Online Renew journey for the Upgrade flow as requested. **CHANGES IMPLEMENTED**: Modified the Online Upgrade flow configuration section (lines 6972-7108) to match the Online Renew flow (lines 5764-5900) exactly. Key updates: 1) Changed wrapper div structure from gradient background to nested space-y-4 structure, 2) Enhanced User Count logic with conditional company count auto-update (checks minimum threshold), 3) Added explicit Database Type removal comment, 4) All fields maintained: User Count (+/- with min enforcement), Company Count (+/- with min enforcement), Duration selection (360/1080 Days with 20% OFF), auto-scroll functionality, pricing calculations, TDS toggle, GST calculations. **VERIFICATION**: Frontend service restarted and compiled successfully with no errors. The Online Upgrade flow now provides identical user experience to the Online Renew flow. Ready for testing to verify: 1) Online tab Upgrade button triggers correct flow, 2) ONL12345 validation for upgrade, 3) User Count/Company Count auto-update logic, 4) Duration selection and order summary display, 5) Pricing calculations match Renew flow, 6) Payment link generation works correctly."
 
   test_sequence: 2
   run_ui: true
