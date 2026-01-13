@@ -6973,7 +6973,7 @@ const Dashboard = () => {
                     {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'upgrade' && formData.productType === "Online" && (
                       <div className="space-y-4 mt-6">
                         <div id="product-selection-section" className="space-y-4">
-                          {/* All fields in single row - without Database Type */}
+                          {/* All fields in single row - without Database Type and Duration */}
                           <div className="flex items-center space-x-6">
                             {/* User Count (Mandatory) - Add/Reduce control with minimum enforcement */}
                             <div className="flex items-center space-x-2">
@@ -6990,6 +6990,19 @@ const Dashboard = () => {
                                       if (newCount >= onlineMinCompanyCount) {
                                         setOnlineCompanyCount(newCount);
                                       }
+                                      // Set default duration and trigger order summary when count changes
+                                      setFormData(prev => ({ 
+                                        ...prev, 
+                                        duration: "360",
+                                        planName: "Online Upgrade"
+                                      }));
+                                      // Auto-scroll to order summary
+                                      setTimeout(() => {
+                                        const orderSummary = document.getElementById('online-upgrade-order-summary-section');
+                                        if (orderSummary) {
+                                          orderSummary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                        }
+                                      }, 300);
                                     }
                                   }}
                                   disabled={onlineUserCount <= onlineMinUserCount}
@@ -7011,6 +7024,19 @@ const Dashboard = () => {
                                     setOnlineUserCount(newCount);
                                     // Auto-update company count to match user count
                                     setOnlineCompanyCount(newCount);
+                                    // Set default duration and trigger order summary when count changes
+                                    setFormData(prev => ({ 
+                                      ...prev, 
+                                      duration: "360",
+                                      planName: "Online Upgrade"
+                                    }));
+                                    // Auto-scroll to order summary
+                                    setTimeout(() => {
+                                      const orderSummary = document.getElementById('online-upgrade-order-summary-section');
+                                      if (orderSummary) {
+                                        orderSummary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                      }
+                                    }, 300);
                                   }}
                                   className="text-gray-600 hover:text-green-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
                                 >
@@ -7030,6 +7056,19 @@ const Dashboard = () => {
                                     // Can only reduce if above minimum (original subscription count)
                                     if (onlineCompanyCount > onlineMinCompanyCount) {
                                       setOnlineCompanyCount(onlineCompanyCount - 1);
+                                      // Set default duration and trigger order summary when count changes
+                                      setFormData(prev => ({ 
+                                        ...prev, 
+                                        duration: "360",
+                                        planName: "Online Upgrade"
+                                      }));
+                                      // Auto-scroll to order summary
+                                      setTimeout(() => {
+                                        const orderSummary = document.getElementById('online-upgrade-order-summary-section');
+                                        if (orderSummary) {
+                                          orderSummary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                        }
+                                      }, 300);
                                     }
                                   }}
                                   disabled={onlineCompanyCount <= onlineMinCompanyCount}
@@ -7048,6 +7087,19 @@ const Dashboard = () => {
                                   type="button"
                                   onClick={() => {
                                     setOnlineCompanyCount(onlineCompanyCount + 1);
+                                    // Set default duration and trigger order summary when count changes
+                                    setFormData(prev => ({ 
+                                      ...prev, 
+                                      duration: "360",
+                                      planName: "Online Upgrade"
+                                    }));
+                                    // Auto-scroll to order summary
+                                    setTimeout(() => {
+                                      const orderSummary = document.getElementById('online-upgrade-order-summary-section');
+                                      if (orderSummary) {
+                                        orderSummary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                      }
+                                    }, 300);
                                   }}
                                   className="text-gray-600 hover:text-green-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
                                 >
@@ -7058,53 +7110,7 @@ const Dashboard = () => {
                             </div>
 
                             {/* Database Type - REMOVED from upgrade flow */}
-
-                            {/* Duration Selection for Online Upgrade */}
-                            <div className="flex items-center space-x-2">
-                              <Label className="text-sm font-medium whitespace-nowrap">Duration:</Label>
-                              <div className="flex space-x-2">
-                                {[
-                                  { value: "360", label: "360 Days" },
-                                  { value: "1080", label: "1080 Days" }
-                                ].map((duration) => (
-                                  <label key={duration.value} className={`flex items-center cursor-pointer px-2 py-1.5 border-0 rounded-lg hover:shadow-md transition-all ${
-                                    formData.duration === duration.value
-                                      ? "bg-orange-50" 
-                                      : "bg-gray-50"
-                                  }`}>
-                                    <input
-                                      type="radio"
-                                      name="onlineUpgradeDuration"
-                                      value={duration.value}
-                                      checked={formData.duration === duration.value}
-                                      onChange={(e) => {
-                                        setFormData(prev => ({ 
-                                          ...prev, 
-                                          duration: e.target.value,
-                                          planName: "Online Upgrade" // Set planName to trigger order summary
-                                        }));
-                                        // Auto-scroll to order summary
-                                        setTimeout(() => {
-                                          const orderSummary = document.getElementById('online-upgrade-order-summary-section');
-                                          if (orderSummary) {
-                                            orderSummary.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                          }
-                                        }, 300);
-                                      }}
-                                      className="w-3.5 h-3.5 text-orange-600 border-gray-300 focus:ring-orange-500 mr-2"
-                                    />
-                                    <div className="flex flex-col">
-                                      <span className="text-gray-700 font-medium text-xs whitespace-nowrap">{duration.label}</span>
-                                      {duration.value === "1080" && (
-                                        <span className="text-[10px] text-green-600 font-semibold">
-                                          20% OFF
-                                        </span>
-                                      )}
-                                    </div>
-                                  </label>
-                                ))}
-                              </div>
-                            </div>
+                            {/* Duration Selection - REMOVED from upgrade flow, default 360 days used */}
                           </div>
                         </div>
                       </div>
