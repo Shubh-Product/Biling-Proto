@@ -4326,8 +4326,7 @@ const Dashboard = () => {
                       type="text" 
                       value={billingData.companyName}
                       onChange={(e) => setBillingData(prev => ({ ...prev, companyName: e.target.value }))}
-                      disabled={isGstinFilled}
-                      className={`w-full px-3 py-1.5 border border-gray-300 rounded focus:border-blue-500 focus:ring-1 focus:ring-blue-200 focus:outline-none text-xs ${isGstinFilled ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-900'}`}
+                      className="w-full px-3 py-1.5 border border-gray-300 rounded focus:border-blue-500 focus:ring-1 focus:ring-blue-200 focus:outline-none text-xs bg-white text-gray-900"
                       placeholder="Company name"
                     />
                     {errors.companyName && <p className="text-xs text-red-500 mt-0.5">{errors.companyName}</p>}
@@ -4340,8 +4339,7 @@ const Dashboard = () => {
                       type="text" 
                       value={billingData.city}
                       onChange={(e) => setBillingData(prev => ({ ...prev, city: e.target.value }))}
-                      disabled={isGstinFilled}
-                      className={`w-full px-3 py-1.5 border border-gray-300 rounded focus:border-blue-500 focus:ring-1 focus:ring-blue-200 focus:outline-none text-xs ${isGstinFilled ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-900'}`}
+                      className="w-full px-3 py-1.5 border border-gray-300 rounded focus:border-blue-500 focus:ring-1 focus:ring-blue-200 focus:outline-none text-xs bg-white text-gray-900"
                       placeholder="City"
                     />
                     {errors.city && <p className="text-xs text-red-500 mt-0.5">{errors.city}</p>}
@@ -4354,9 +4352,8 @@ const Dashboard = () => {
                       type="text" 
                       value={billingData.pincode}
                       onChange={(e) => setBillingData(prev => ({ ...prev, pincode: e.target.value }))}
-                      disabled={isGstinFilled}
                       maxLength={6}
-                      className={`w-full px-3 py-1.5 border border-gray-300 rounded focus:border-blue-500 focus:ring-1 focus:ring-blue-200 focus:outline-none text-xs ${isGstinFilled ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-900'}`}
+                      className="w-full px-3 py-1.5 border border-gray-300 rounded focus:border-blue-500 focus:ring-1 focus:ring-blue-200 focus:outline-none text-xs bg-white text-gray-900"
                       placeholder="Pincode"
                     />
                     {errors.pincode && <p className="text-xs text-red-500 mt-0.5">{errors.pincode}</p>}
@@ -4369,8 +4366,7 @@ const Dashboard = () => {
                       type="text" 
                       value={billingData.address}
                       onChange={(e) => setBillingData(prev => ({ ...prev, address: e.target.value }))}
-                      disabled={isGstinFilled}
-                      className={`w-full px-3 py-1.5 border border-gray-300 rounded focus:border-blue-500 focus:ring-1 focus:ring-blue-200 focus:outline-none text-xs ${isGstinFilled ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-900'}`}
+                      className="w-full px-3 py-1.5 border border-gray-300 rounded focus:border-blue-500 focus:ring-1 focus:ring-blue-200 focus:outline-none text-xs bg-white text-gray-900"
                       placeholder="Complete address"
                     />
                     {errors.address && <p className="text-xs text-red-500 mt-0.5">{errors.address}</p>}
@@ -4383,8 +4379,7 @@ const Dashboard = () => {
                       type="text" 
                       value={billingData.state}
                       onChange={(e) => setBillingData(prev => ({ ...prev, state: e.target.value }))}
-                      disabled={isGstinFilled}
-                      className={`w-full px-3 py-1.5 border border-gray-300 rounded focus:border-blue-500 focus:ring-1 focus:ring-blue-200 focus:outline-none text-xs ${isGstinFilled ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-900'}`}
+                      className="w-full px-3 py-1.5 border border-gray-300 rounded focus:border-blue-500 focus:ring-1 focus:ring-blue-200 focus:outline-none text-xs bg-white text-gray-900"
                       placeholder="State"
                     />
                     {errors.state && <p className="text-xs text-red-500 mt-0.5">{errors.state}</p>}
