@@ -15212,9 +15212,6 @@ const Dashboard = () => {
           </div>
         </div>
       )}
-
-      {/* Make Payment Modal */}
-      {showMakePaymentPage && <MakePaymentPage />}
     </div>
   );
 };
