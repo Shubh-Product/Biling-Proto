@@ -4901,7 +4901,7 @@ const Dashboard = () => {
       </div>
     </div>
   );
-  }; // End of MakePaymentPage component
+  // End of MakePaymentPage component - this should be moved outside Dashboard
 
   // Menu items configuration
   const menuItems = [
