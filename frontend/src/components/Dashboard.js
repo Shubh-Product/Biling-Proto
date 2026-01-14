@@ -5395,9 +5395,80 @@ const Dashboard = () => {
                           {['Desktop', 'Mandi'].includes(formData.productType) && (
                             <Button 
                               type="button"
-                              onClick={() => {
+                              onClick={async () => {
                                 console.log('Add/Reduce Count clicked');
-                                // TODO: Add add/reduce count functionality
+                                // Validate serial number and set action type to 'addReduceCount'
+                                if (!serialNumber || serialNumber.trim() === '') {
+                                  setErrors(prev => ({ ...prev, serialNumber: 'Please enter a serial number' }));
+                                  return;
+                                }
+                                
+                                setFetchingSerialDetails(true);
+                                setErrors(prev => ({ ...prev, serialNumber: '' }));
+                                
+                                try {
+                                  // Simulate API call for validation
+                                  await new Promise(resolve => setTimeout(resolve, 800));
+                                  
+                                  // Mock validation based on serial number
+                                  const validSerials = {
+                                    'DES12345': {
+                                      customer: {
+                                        name: 'Rajesh Kumar',
+                                        mobile: '9876543210',
+                                        email: 'rajesh.kumar@example.com',
+                                        company: 'Kumar Enterprises',
+                                        gstin: '27KUMAR123456Z',
+                                        city: 'Mumbai'
+                                      },
+                                      product: {
+                                        type: 'Desktop',
+                                        planName: 'Standard - Multi User',
+                                        status: 'Active',
+                                        expiryDate: '2024-12-31',
+                                        licenseModel: 'Subscription',
+                                        currentCount: 10 // Current user/license count
+                                      }
+                                    },
+                                    'MAN12345': {
+                                      customer: {
+                                        name: 'Suresh Patil',
+                                        mobile: '9876543211',
+                                        email: 'suresh.patil@example.com',
+                                        company: 'Patil Traders',
+                                        gstin: '27PATIL123456Z',
+                                        city: 'Pune'
+                                      },
+                                      product: {
+                                        type: 'Mandi',
+                                        planName: 'Saffron - Multi User',
+                                        status: 'Active',
+                                        expiryDate: '2024-11-30',
+                                        licenseModel: 'Subscription',
+                                        currentCount: 5 // Current user/license count
+                                      }
+                                    }
+                                  };
+                                  
+                                  const upperSerial = serialNumber.toUpperCase();
+                                  const mockData = validSerials[upperSerial];
+                                  
+                                  if (mockData) {
+                                    setCurrentCustomerInfo(mockData.customer);
+                                    setCurrentProductInfo(mockData.product);
+                                    setSerialValidated(true);
+                                    setActionType('addReduceCount'); // Set action type to addReduceCount
+                                    setErrors(prev => ({ ...prev, serialNumber: '' }));
+                                  } else {
+                                    setErrors(prev => ({ ...prev, serialNumber: 'Invalid serial number. Please try DES12345 or MAN12345 for testing.' }));
+                                    setSerialValidated(false);
+                                  }
+                                } catch (error) {
+                                  setErrors(prev => ({ ...prev, serialNumber: 'Failed to validate serial number. Please try again.' }));
+                                  setSerialValidated(false);
+                                } finally {
+                                  setFetchingSerialDetails(false);
+                                }
                               }}
                               className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2"
                               disabled={!serialNumber || fetchingSerialDetails}
