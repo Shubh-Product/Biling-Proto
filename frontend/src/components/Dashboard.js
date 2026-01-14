@@ -4285,16 +4285,16 @@ const Dashboard = () => {
           </button>
         </div>
         
-        {/* Content - Two Column Layout */}
-        <div className="flex-1 overflow-hidden">
-          <div className="h-full max-w-[1600px] mx-auto px-6 py-4">
-            <div className="h-full grid grid-cols-2 gap-6">
-              {/* Left Column: Billing Information */}
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 flex flex-col">
+        {/* Content - Vertical Stacked Layout */}
+        <div className="flex-1 overflow-y-auto">
+          <div className="h-full max-w-5xl mx-auto px-6 py-4">
+            <div className="space-y-4">
+              {/* Billing Information Section */}
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
                 <h3 className="text-base font-semibold text-gray-900 mb-3 pb-2 border-b border-gray-200">Billing Information</h3>
                 
-                {/* Billing Fields - Compact 2-column grid */}
-                <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+                {/* Billing Fields - 4-column grid for compact horizontal layout */}
+                <div className="grid grid-cols-4 gap-x-4 gap-y-3">
                   {/* GSTIN */}
                   <div>
                     <label className="block text-xs font-medium text-gray-700 mb-1">GSTIN</label>
