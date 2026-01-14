@@ -4433,95 +4433,83 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              {/* Right Column: Order Details */}                      onChange={(e) => setBillingData(prev => ({ ...prev, email: e.target.value }))}
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none bg-white text-gray-900 text-sm transition-all" 
-                      placeholder="Enter email address"
-                    />
-                    {errors.email && <p className="text-sm text-red-500 mt-1">{errors.email}</p>}
+              {/* Right Column: Order Details */}
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 flex flex-col overflow-hidden">
+                <h3 className="text-base font-semibold text-blue-900 mb-3 pb-2 border-b border-blue-200">Order Details</h3>
+                
+                {/* Product Table - Compact */}
+                <div className="bg-white rounded border border-gray-200 overflow-hidden mb-3 flex-shrink-0">
+                  <table className="w-full text-[10px]">
+                    <thead className="bg-gray-50 border-b border-gray-200">
+                      <tr>
+                        <th className="text-left py-1 px-1.5 font-semibold text-gray-700">S.No</th>
+                        <th className="text-left py-1 px-1.5 font-semibold text-gray-700">Product</th>
+                        <th className="text-center py-1 px-1.5 font-semibold text-gray-700">Duration</th>
+                        <th className="text-center py-1 px-1.5 font-semibold text-gray-700">Qty</th>
+                        <th className="text-right py-1 px-1.5 font-semibold text-gray-700">Rate</th>
+                        <th className="text-right py-1 px-1.5 font-semibold text-gray-700">Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-gray-100">
+                        <td className="py-1 px-1.5 text-gray-800">1</td>
+                        <td className="py-1 px-1.5 text-gray-800">Basic - Single User</td>
+                        <td className="py-1 px-1.5 text-center text-gray-800">360 Days</td>
+                        <td className="py-1 px-1.5 text-center text-gray-800">1</td>
+                        <td className="py-1 px-1.5 text-right text-gray-800">₹9,999</td>
+                        <td className="py-1 px-1.5 text-right font-semibold text-gray-900">₹9,999</td>
+                      </tr>
+                      <tr className="border-b border-gray-100">
+                        <td className="py-1 px-1.5 text-gray-800">2</td>
+                        <td className="py-1 px-1.5 text-gray-800">Mobile App</td>
+                        <td className="py-1 px-1.5 text-center text-gray-800">360 Days</td>
+                        <td className="py-1 px-1.5 text-center text-gray-800">1</td>
+                        <td className="py-1 px-1.5 text-right text-gray-800">₹2,999</td>
+                        <td className="py-1 px-1.5 text-right font-semibold text-gray-900">₹2,999</td>
+                      </tr>
+                      <tr className="border-b border-gray-100">
+                        <td className="py-1 px-1.5 text-gray-800">3</td>
+                        <td className="py-1 px-1.5 text-gray-800">Recom</td>
+                        <td className="py-1 px-1.5 text-center text-gray-800">365 Days</td>
+                        <td className="py-1 px-1.5 text-center text-gray-800">1</td>
+                        <td className="py-1 px-1.5 text-right text-gray-800">₹5,900</td>
+                        <td className="py-1 px-1.5 text-right font-semibold text-gray-900">₹5,900</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* Pricing Summary - Compact */}
+                <div className="bg-blue-50 rounded border border-blue-200 p-2.5 space-y-1 flex-shrink-0">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-gray-700">Total:</span>
+                    <span className="font-semibold text-gray-900">₹18,898</span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-gray-700">TDS Deduction:</span>
+                    <span className="font-semibold text-gray-900">₹0</span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-gray-700">GST (18%):</span>
+                    <span className="font-semibold text-gray-900">₹3,402</span>
+                  </div>
+                  <div className="flex justify-between text-sm pt-1.5 border-t border-blue-300">
+                    <span className="font-bold text-gray-900">Grand Total:</span>
+                    <span className="font-bold text-blue-900 text-base">₹22,300</span>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            {/* Order Details Section - Below Billing Information */}
-            <div>
-              <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-indigo-100 rounded-xl p-3 shadow-xl border-2 border-blue-200">
-                  <h3 className="text-lg font-bold text-blue-900 mb-2 pb-2 border-b-2 border-blue-300" style={{ fontFamily: 'Georgia, serif' }}>Order Details</h3>
-                  
-                  {/* Product Table */}
-                  <div className="bg-white rounded-lg overflow-hidden mb-2">
-                    <table className="w-full text-xs">
-                      <thead className="bg-gray-100 border-b border-gray-200">
-                        <tr>
-                          <th className="text-left py-1 px-2 font-semibold text-gray-700">S.No</th>
-                          <th className="text-left py-1 px-2 font-semibold text-gray-700">Product</th>
-                          <th className="text-left py-1 px-2 font-semibold text-gray-700">Duration</th>
-                          <th className="text-left py-1 px-2 font-semibold text-gray-700">Qty</th>
-                          <th className="text-right py-1 px-2 font-semibold text-gray-700">Rate</th>
-                          <th className="text-right py-1 px-2 font-semibold text-gray-700">Amount</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr className="border-b border-gray-100">
-                          <td className="py-1.5 px-2 text-gray-800">1</td>
-                          <td className="py-1.5 px-2 text-gray-800">Basic - Single User</td>
-                          <td className="py-1.5 px-2 text-gray-800">360 Days</td>
-                          <td className="py-1.5 px-2 text-gray-800">1</td>
-                          <td className="py-1.5 px-2 text-right text-gray-800">₹9,999</td>
-                          <td className="py-1.5 px-2 text-right font-semibold text-gray-900">₹9,999</td>
-                        </tr>
-                        <tr className="border-b border-gray-100">
-                          <td className="py-1.5 px-2 text-gray-800">2</td>
-                          <td className="py-1.5 px-2 text-gray-800">Mobile App</td>
-                          <td className="py-1.5 px-2 text-gray-800">360 Days</td>
-                          <td className="py-1.5 px-2 text-gray-800">1</td>
-                          <td className="py-1.5 px-2 text-right text-gray-800">₹2,999</td>
-                          <td className="py-1.5 px-2 text-right font-semibold text-gray-900">₹2,999</td>
-                        </tr>
-                        <tr className="border-b border-gray-100">
-                          <td className="py-1.5 px-2 text-gray-800">3</td>
-                          <td className="py-1.5 px-2 text-gray-800">Recom</td>
-                          <td className="py-1.5 px-2 text-gray-800">365 Days</td>
-                          <td className="py-1.5 px-2 text-gray-800">1</td>
-                          <td className="py-1.5 px-2 text-right text-gray-800">₹5,900</td>
-                          <td className="py-1.5 px-2 text-right font-semibold text-gray-900">₹5,900</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-
-                  {/* Pricing Summary */}
-                  <div className="bg-white rounded-lg p-2 space-y-1">
-                    <div className="flex justify-between text-xs">
-                      <span className="text-gray-700">Total:</span>
-                      <span className="font-semibold text-gray-900">₹18,898</span>
-                    </div>
-                    <div className="flex justify-between text-xs">
-                      <span className="text-gray-700">TDS Deduction:</span>
-                      <span className="font-semibold text-gray-900">₹0</span>
-                    </div>
-                    <div className="flex justify-between text-xs">
-                      <span className="text-gray-700">GST (18%):</span>
-                      <span className="font-semibold text-gray-900">₹3,402</span>
-                    </div>
-                    <div className="flex justify-between text-sm pt-1 border-t border-gray-200">
-                      <span className="font-bold text-gray-900">Grand Total:</span>
-                      <span className="font-bold text-blue-900">₹22,300</span>
-                    </div>
-                  </div>
-
-                  {/* Proceed to Pay Button */}
-                  <div className="mt-2 flex justify-center">
-                    <button 
-                      onClick={() => setShowPaymentGateway(true)}
-                      className="bg-red-400 hover:bg-red-500 text-white text-sm font-semibold px-8 py-2 rounded-lg shadow-md flex items-center gap-2 transition-colors"
-                    >
-                      Proceed to Pay
-                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
-                  </div>
+                {/* Proceed to Pay Button */}
+                <div className="mt-auto pt-3 flex justify-center flex-shrink-0">
+                  <button 
+                    onClick={() => setShowPaymentGateway(true)}
+                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm font-semibold px-10 py-2.5 rounded-lg shadow-lg flex items-center gap-2 transition-all"
+                  >
+                    Proceed to Pay
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
                 </div>
               </div>
             </div>
