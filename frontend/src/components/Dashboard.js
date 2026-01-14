@@ -4417,7 +4417,7 @@ const Dashboard = () => {
                     {errors.name && <p className="text-xs text-red-500 mt-0.5">{errors.name}</p>}
                   </div>
 
-                  {/* Email */}
+                  {/* Email - Full width (span 2 columns) */}
                   <div className="col-span-2">
                     <label className="block text-xs font-medium text-gray-700 mb-1">Email*</label>
                     <input 
@@ -4432,7 +4432,7 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              {/* Right Column: Order Details */}
+              {/* Order Details Section - Below Billing Information */}
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 flex flex-col overflow-hidden">
                 <h3 className="text-base font-semibold text-blue-900 mb-3 pb-2 border-b border-blue-200">Order Details</h3>
                 
