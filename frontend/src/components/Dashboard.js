@@ -4894,8 +4894,6 @@ const Dashboard = () => {
             </div>
           </div>
         )}
-      </div>
-    );
   };
 
   // Menu items configuration
