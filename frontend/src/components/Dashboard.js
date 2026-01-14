@@ -4265,7 +4265,8 @@ const Dashboard = () => {
     const isGstinFilled = billingData.gstin.length === 15;
 
     return (
-      <div className="min-h-screen bg-gray-50">
+      <>
+        <div className="min-h-screen bg-gray-50">
         {/* Header */}
         <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between shadow-sm z-10">
           <div className="flex items-center gap-2">
