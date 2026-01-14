@@ -4910,6 +4910,11 @@ const Dashboard = () => {
     { id: 'payments', name: 'Payments', icon: Wallet }
   ];
 
+  // If Make Payment page is active, show only that page (full-screen)
+  if (showMakePaymentPage) {
+    return <MakePaymentPage />;
+  }
+
   return (
     <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
