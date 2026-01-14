@@ -4333,20 +4333,6 @@ const Dashboard = () => {
                     {errors.companyName && <p className="text-xs text-red-500 mt-0.5">{errors.companyName}</p>}
                   </div>
 
-                  {/* Address - Full width */}
-                  <div className="col-span-2">
-                    <label className="block text-xs font-medium text-gray-700 mb-1">Address*</label>
-                    <input 
-                      type="text" 
-                      value={billingData.address}
-                      onChange={(e) => setBillingData(prev => ({ ...prev, address: e.target.value }))}
-                      disabled={isGstinFilled}
-                      className={`w-full px-3 py-1.5 border border-gray-300 rounded focus:border-blue-500 focus:ring-1 focus:ring-blue-200 focus:outline-none text-xs ${isGstinFilled ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-900'}`}
-                      placeholder="Complete address"
-                    />
-                    {errors.address && <p className="text-xs text-red-500 mt-0.5">{errors.address}</p>}
-                  </div>
-
                   {/* City */}
                   <div>
                     <label className="block text-xs font-medium text-gray-700 mb-1">City*</label>
@@ -4374,6 +4360,20 @@ const Dashboard = () => {
                       placeholder="Pincode"
                     />
                     {errors.pincode && <p className="text-xs text-red-500 mt-0.5">{errors.pincode}</p>}
+                  </div>
+
+                  {/* Address - Full width (span 2 columns) */}
+                  <div className="col-span-2">
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Address*</label>
+                    <input 
+                      type="text" 
+                      value={billingData.address}
+                      onChange={(e) => setBillingData(prev => ({ ...prev, address: e.target.value }))}
+                      disabled={isGstinFilled}
+                      className={`w-full px-3 py-1.5 border border-gray-300 rounded focus:border-blue-500 focus:ring-1 focus:ring-blue-200 focus:outline-none text-xs ${isGstinFilled ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-900'}`}
+                      placeholder="Complete address"
+                    />
+                    {errors.address && <p className="text-xs text-red-500 mt-0.5">{errors.address}</p>}
                   </div>
 
                   {/* State */}
