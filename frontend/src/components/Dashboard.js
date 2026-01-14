@@ -4332,54 +4332,19 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                  {/* Row 2: Company Name, Address, City, Pincode */}
-                  <div className="grid grid-cols-4 gap-4 mb-2">
-                    <div>
-                      <label className="block text-xs text-gray-700 mb-1">Company Name*</label>
-                      <input 
-                        type="text" 
-                        value={billingData.companyName}
-                        onChange={(e) => setBillingData(prev => ({ ...prev, companyName: e.target.value }))}
-                        disabled={isGstinFilled}
-                        className={`w-full px-0 py-1 border-0 border-b border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-xs ${isGstinFilled ? 'text-gray-500 cursor-not-allowed' : 'text-gray-900'}`}
-                      />
-                      {errors.companyName && <p className="text-xs text-red-500 mt-0.5">{errors.companyName}</p>}
-                    </div>
-                    <div>
-                      <label className="block text-xs text-gray-700 mb-1">Address*</label>
-                      <input 
-                        type="text" 
-                        value={billingData.address}
-                        onChange={(e) => setBillingData(prev => ({ ...prev, address: e.target.value }))}
-                        disabled={isGstinFilled}
-                        className={`w-full px-0 py-1 border-0 border-b border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-xs ${isGstinFilled ? 'text-gray-500 cursor-not-allowed' : 'text-gray-900'}`}
-                      />
-                      {errors.address && <p className="text-xs text-red-500 mt-0.5">{errors.address}</p>}
-                    </div>
-                    <div>
-                      <label className="block text-xs text-gray-700 mb-1">City*</label>
-                      <input 
-                        type="text" 
-                        value={billingData.city}
-                        onChange={(e) => setBillingData(prev => ({ ...prev, city: e.target.value }))}
-                        disabled={isGstinFilled}
-                        className={`w-full px-0 py-1 border-0 border-b border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-xs ${isGstinFilled ? 'text-gray-500 cursor-not-allowed' : 'text-gray-900'}`}
-                      />
-                      {errors.city && <p className="text-xs text-red-500 mt-0.5">{errors.city}</p>}
-                    </div>
-                    <div>
-                      <label className="block text-xs text-gray-700 mb-1">Pincode*</label>
-                      <input 
-                        type="text" 
-                        value={billingData.pincode}
-                        onChange={(e) => setBillingData(prev => ({ ...prev, pincode: e.target.value }))}
-                        disabled={isGstinFilled}
-                        maxLength={6}
-                        className={`w-full px-0 py-1 border-0 border-b border-gray-300 focus:border-blue-500 focus:outline-none bg-transparent text-xs ${isGstinFilled ? 'text-gray-500 cursor-not-allowed' : 'text-gray-900'}`}
-                      />
-                      {errors.pincode && <p className="text-xs text-red-500 mt-0.5">{errors.pincode}</p>}
-                    </div>
-                  </div>
+                {/* Row 2: Address */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Address*</label>
+                  <input 
+                    type="text" 
+                    value={billingData.address}
+                    onChange={(e) => setBillingData(prev => ({ ...prev, address: e.target.value }))}
+                    disabled={isGstinFilled}
+                    className={`w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none text-sm transition-all ${isGstinFilled ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-900'}`}
+                    placeholder="Enter complete address"
+                  />
+                  {errors.address && <p className="text-sm text-red-500 mt-1">{errors.address}</p>}
+                </div>
 
                   {/* Row 3: State (alone in row) */}
                   <div className="grid grid-cols-4 gap-4">
