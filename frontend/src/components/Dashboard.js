@@ -6261,6 +6261,331 @@ const Dashboard = () => {
                       </div>
                     )}
 
+                    {/* Step 2d: Customer & Product Details for Add/Reduce Count (Show after Add/Reduce Count button validation) - Accordion */}
+                    {serialValidated && actionType === 'addReduceCount' && currentCustomerInfo && currentProductInfo && (
+                      <div className="border border-gray-300 rounded-lg overflow-hidden">
+                        
+                        {/* Accordion Header - Always Visible */}
+                        <div 
+                          className={`flex items-center justify-between px-6 py-4 cursor-pointer transition-colors ${
+                            isAddReduceCountCustomerDetailsOpen ? 'bg-purple-50 border-b border-gray-300' : 'bg-gray-50 hover:bg-gray-100'
+                          }`}
+                          onClick={() => {
+                            if (customerValidated) {
+                              setIsAddReduceCountCustomerDetailsOpen(!isAddReduceCountCustomerDetailsOpen);
+                            }
+                          }}
+                        >
+                          <div className="flex items-center space-x-4">
+                            <CardTitle className="text-purple-600 flex items-center text-lg">
+                              Customer Details 
+                              <span className="mx-3 text-gray-400">|</span>
+                              <span className="text-gray-700 font-normal text-base">
+                                {currentCustomerInfo.mobile ? 
+                                  `${currentCustomerInfo.mobile.substring(0, 3)}XXXX${currentCustomerInfo.mobile.substring(currentCustomerInfo.mobile.length - 3)}` 
+                                  : 'No Mobile'}
+                              </span>
+                            </CardTitle>
+                          </div>
+                          <div className="flex items-center space-x-3">
+                            <div className="px-4 py-2 bg-white border border-gray-300 rounded-xl">
+                              <span className="text-sm font-medium text-gray-800">{currentProductInfo.type}</span>
+                            </div>
+                            <div className="px-4 py-2 bg-white border border-gray-300 rounded-xl">
+                              <span className="text-sm font-medium text-gray-800">
+                                {currentProductInfo.licenseModel === 'Perpetual' ? 'PERP M' : currentProductInfo.licenseModel}
+                              </span>
+                            </div>
+                            <div className="px-4 py-2 bg-white border border-gray-300 rounded-xl">
+                              <span className="text-sm font-medium text-gray-800">{currentProductInfo.planName}</span>
+                            </div>
+                            <div className="px-4 py-2 bg-white border border-gray-300 rounded-xl">
+                              <span className="text-sm font-medium text-gray-800">Valid Till: {currentProductInfo.expiryDate}</span>
+                            </div>
+                            <div className={`px-4 py-2 border rounded-xl ${
+                              currentProductInfo.status === 'Active' 
+                                ? 'bg-green-50 border-green-300' 
+                                : 'bg-white border-gray-300'
+                            }`}>
+                              <span className={`text-sm font-medium ${
+                                currentProductInfo.status === 'Active' 
+                                  ? 'text-green-700' 
+                                  : 'text-gray-800'
+                              }`}>{currentProductInfo.status}</span>
+                            </div>
+                            {customerValidated && (
+                              <button
+                                type="button"
+                                className="text-gray-600 hover:text-gray-900 ml-2"
+                              >
+                                {isAddReduceCountCustomerDetailsOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                        
+                        {/* Accordion Content - Collapsible */}
+                        {isAddReduceCountCustomerDetailsOpen && (
+                          <div className="p-6 bg-white">
+                            <div className="grid grid-cols-4 gap-6">
+                              <div>
+                                <Label className="text-xs text-gray-500 mb-1">Name</Label>
+                                <Input
+                                  value={currentCustomerInfo.name}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, name: e.target.value})}
+                                  className="mt-1"
+                                />
+                              </div>
+                              <div>
+                                <Label className="text-xs text-gray-500 mb-1">Company</Label>
+                                <Input
+                                  value={currentCustomerInfo.company}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, company: e.target.value})}
+                                  className="mt-1"
+                                />
+                              </div>
+                              <div>
+                                <Label className="text-xs text-gray-500 mb-1">GSTIN</Label>
+                                <Input
+                                  value={currentCustomerInfo.gstin}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, gstin: e.target.value})}
+                                  className="mt-1"
+                                />
+                              </div>
+                              <div>
+                                <Label className="text-xs text-gray-500 mb-1">City</Label>
+                                <Input
+                                  value={currentCustomerInfo.city}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, city: e.target.value})}
+                                  className="mt-1"
+                                />
+                              </div>
+                            </div>
+                            <div className="flex justify-end mt-6">
+                              <Button
+                                type="button"
+                                onClick={() => {
+                                  // Set customer validated to true to trigger next sections for ADD/REDUCE COUNT
+                                  setCustomerValidated(true);
+                                  // Collapse the accordion
+                                  setIsAddReduceCountCustomerDetailsOpen(false);
+                                  // Auto-scroll to count configuration section
+                                  setTimeout(() => {
+                                    const nextSection = document.getElementById('add-reduce-count-config-section');
+                                    if (nextSection) {
+                                      nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    }
+                                  }, 100);
+                                }}
+                                className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-2 rounded-lg"
+                              >
+                                Save and Continue
+                              </Button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Add/Reduce Count Configuration - Show after customer validation */}
+                    {serialValidated && customerValidated && actionType === 'addReduceCount' && currentProductInfo && (
+                      <div id="add-reduce-count-config-section" className="space-y-4 mt-6">
+                        <div className="bg-gradient-to-r from-purple-50 to-indigo-50 p-6 rounded-lg border border-purple-200">
+                          <div className="flex items-center space-x-8">
+                            {/* Current Count - Non-editable */}
+                            <div className="flex items-center space-x-2">
+                              <Label className="text-sm font-medium whitespace-nowrap">Current Count:</Label>
+                              <Input
+                                type="number"
+                                value={currentProductInfo.currentCount || 0}
+                                disabled
+                                className="w-24 bg-gray-100 text-gray-700 font-semibold"
+                              />
+                            </div>
+
+                            {/* Add / Reduce Count - Editable */}
+                            <div className="flex items-center space-x-2">
+                              <Label className="text-sm font-medium whitespace-nowrap">Add / Reduce Count:</Label>
+                              <Input
+                                type="number"
+                                value={addReduceCountValue}
+                                onChange={(e) => {
+                                  const value = parseInt(e.target.value) || 0;
+                                  setAddReduceCountValue(value);
+                                  // Trigger order summary if there's any change
+                                  if (value !== 0) {
+                                    setFormData(prev => ({ 
+                                      ...prev, 
+                                      planName: `${currentProductInfo.planName} - Count Adjustment` // Set planName to trigger order summary
+                                    }));
+                                  }
+                                }}
+                                placeholder="Enter +/- count"
+                                className="w-32"
+                              />
+                              <span className="text-xs text-gray-500">(Use +/- for add/reduce)</span>
+                            </div>
+
+                            {/* Total Count - Label, Auto-calculated */}
+                            <div className="flex items-center space-x-2">
+                              <Label className="text-sm font-medium whitespace-nowrap">Total Count:</Label>
+                              <div className="px-4 py-2 bg-white border-2 border-purple-300 rounded-lg">
+                                <span className="text-lg font-bold text-purple-900">
+                                  {(currentProductInfo.currentCount || 0) + addReduceCountValue}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Order Summary for Add/Reduce Count - Show when count is changed */}
+                    {serialValidated && customerValidated && actionType === 'addReduceCount' && addReduceCountValue !== 0 && currentProductInfo && (
+                      <div className="bg-gradient-to-r from-purple-50 to-indigo-50 p-6 rounded-lg border border-purple-200 mt-6">
+                        <h4 id="add-reduce-count-order-summary-section" className="text-xl font-bold text-purple-900 mb-4">Order Summary</h4>
+                        
+                        <div>
+                          {/* Invoice-Style Table */}
+                          <div className="bg-white rounded-lg border border-gray-300 overflow-hidden">
+                            <table className="w-full">
+                              <thead className="bg-gray-100 border-b border-gray-300">
+                                <tr>
+                                  <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">S.No</th>
+                                  <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">Product</th>
+                                  <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">Current Count</th>
+                                  <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">Change</th>
+                                  <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">New Count</th>
+                                  <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Rate per Unit</th>
+                                  <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Amount</th>
+                                </tr>
+                              </thead>
+                              <tbody className="divide-y divide-gray-200">
+                                {(() => {
+                                  // Sample rate per unit (this should come from pricing logic)
+                                  const ratePerUnit = 5000;
+                                  const changeAmount = Math.abs(addReduceCountValue) * ratePerUnit;
+                                  const finalAmount = addReduceCountValue > 0 ? changeAmount : -changeAmount;
+
+                                  return (
+                                    <tr className="hover:bg-gray-50">
+                                      <td className="px-3 py-2 text-sm text-gray-700">1</td>
+                                      <td className="px-3 py-2 text-sm text-gray-900">
+                                        <div>{currentProductInfo.planName}</div>
+                                        <div className="text-xs text-gray-600">
+                                          {addReduceCountValue > 0 ? 'Add License' : 'Reduce License'}
+                                        </div>
+                                      </td>
+                                      <td className="px-3 py-2 text-sm text-center text-gray-700">
+                                        {currentProductInfo.currentCount || 0}
+                                      </td>
+                                      <td className="px-3 py-2 text-sm text-center font-medium">
+                                        <span className={addReduceCountValue > 0 ? 'text-green-600' : 'text-red-600'}>
+                                          {addReduceCountValue > 0 ? '+' : ''}{addReduceCountValue}
+                                        </span>
+                                      </td>
+                                      <td className="px-3 py-2 text-sm text-center font-medium text-purple-900">
+                                        {(currentProductInfo.currentCount || 0) + addReduceCountValue}
+                                      </td>
+                                      <td className="px-3 py-2 text-sm text-right text-gray-700">
+                                        ₹{ratePerUnit.toLocaleString('en-IN')}
+                                      </td>
+                                      <td className="px-3 py-2 text-sm text-right font-medium text-gray-900">
+                                        {addReduceCountValue > 0 ? '+' : '-'}₹{Math.abs(finalAmount).toLocaleString('en-IN')}
+                                      </td>
+                                    </tr>
+                                  );
+                                })()}
+                              </tbody>
+                            </table>
+                            
+                            {/* Summary Section */}
+                            {(() => {
+                              const ratePerUnit = 5000;
+                              const changeAmount = Math.abs(addReduceCountValue) * ratePerUnit;
+                              const baseTotal = addReduceCountValue > 0 ? changeAmount : changeAmount; // Always positive for calculation
+                              
+                              // Calculate TDS, GST, and final amount
+                              const tdsAmount = formData.deductTds ? Math.round(baseTotal * 0.10) : 0;
+                              const afterTds = baseTotal - tdsAmount;
+                              const gstAmount = Math.round(afterTds * 0.18);
+                              const finalAmount = afterTds + gstAmount;
+                              
+                              // If reducing, make it negative
+                              const displayAmount = addReduceCountValue > 0 ? finalAmount : -finalAmount;
+
+                              return (
+                                <div className="border-t border-gray-300 bg-gray-50 p-4">
+                                  <div className="space-y-2">
+                                    <div className="flex justify-between items-center">
+                                      <span className="text-sm font-semibold text-gray-700">
+                                        {addReduceCountValue > 0 ? 'Additional Charge:' : 'Credit Amount:'}
+                                      </span>
+                                      <span className="text-sm font-semibold text-gray-900">
+                                        {addReduceCountValue > 0 ? '+' : '-'}₹{baseTotal.toLocaleString('en-IN')}
+                                      </span>
+                                    </div>
+
+                                    {/* TDS Toggle */}
+                                    {addReduceCountValue > 0 && (
+                                      <div className="flex justify-between items-center border-t pt-2">
+                                        <span className="text-sm font-medium text-gray-700">Deduct TDS:</span>
+                                        <label className="relative inline-flex items-center cursor-pointer">
+                                          <input
+                                            type="checkbox"
+                                            checked={formData.deductTds}
+                                            onChange={(e) => setFormData(prev => ({ ...prev, deductTds: e.target.checked }))}
+                                            className="sr-only peer"
+                                          />
+                                          <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"></div>
+                                          <span className="ml-2 text-xs font-medium text-gray-700">
+                                            {formData.deductTds ? 'ON' : 'OFF'}
+                                          </span>
+                                        </label>
+                                      </div>
+                                    )}
+
+                                    {formData.deductTds && addReduceCountValue > 0 && (
+                                      <div className="flex justify-between items-center">
+                                        <span className="text-sm text-gray-600">TDS (10%):</span>
+                                        <span className="text-sm text-red-600">- ₹{tdsAmount.toLocaleString('en-IN')}</span>
+                                      </div>
+                                    )}
+
+                                    {addReduceCountValue > 0 && (
+                                      <div className="flex justify-between items-center border-t pt-2">
+                                        <span className="text-sm font-medium text-gray-700">GST (18%):</span>
+                                        <span className="text-sm font-medium text-gray-900">₹{gstAmount.toLocaleString('en-IN')}</span>
+                                      </div>
+                                    )}
+
+                                    <div className="flex justify-between items-center border-t-2 border-gray-400 pt-2 mt-2">
+                                      <span className="text-base font-bold text-gray-900">
+                                        {addReduceCountValue > 0 ? 'Grand Total:' : 'Credit Amount:'}
+                                      </span>
+                                      <span className={`text-lg font-bold ${addReduceCountValue > 0 ? 'text-purple-900' : 'text-red-600'}`}>
+                                        {addReduceCountValue > 0 ? '+' : '-'}₹{Math.abs(displayAmount).toLocaleString('en-IN')}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            })()}
+                          </div>
+
+                          {/* Send Payment Link Button */}
+                          <div className="mt-6 flex justify-end">
+                            <Button
+                              type="submit"
+                              className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-8 py-3 text-base font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all"
+                            >
+                              {addReduceCountValue > 0 ? 'Send Payment Link' : 'Process Credit'}
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
                     {/* Debug logging for troubleshooting */}
                     {console.log('Renewal Debug:', {
                       transactionType: formData.transactionType,
