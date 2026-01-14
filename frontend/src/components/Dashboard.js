@@ -5773,6 +5773,281 @@ const Dashboard = () => {
                       </div>
                     )}
 
+                    {/* Step 2c: Customer & Product Details for Upgrade to Online (Show after Upgrade to Online button validation) - Accordion */}
+                    {serialValidated && actionType === 'upgradeToOnline' && currentCustomerInfo && currentProductInfo && (
+                      <div className="border border-gray-300 rounded-lg overflow-hidden">
+                        
+                        {/* Accordion Header - Always Visible */}
+                        <div 
+                          className={`flex items-center justify-between px-6 py-4 cursor-pointer transition-colors ${
+                            isUpgradeToOnlineCustomerDetailsOpen ? 'bg-orange-50 border-b border-gray-300' : 'bg-gray-50 hover:bg-gray-100'
+                          }`}
+                          onClick={() => {
+                            if (customerValidated) {
+                              setIsUpgradeToOnlineCustomerDetailsOpen(!isUpgradeToOnlineCustomerDetailsOpen);
+                            }
+                          }}
+                        >
+                          <div className="flex items-center space-x-4">
+                            <CardTitle className="text-orange-600 flex items-center text-lg">
+                              Customer Details 
+                              <span className="mx-3 text-gray-400">|</span>
+                              <span className="text-gray-700 font-normal text-base">
+                                {currentCustomerInfo.mobile ? 
+                                  `${currentCustomerInfo.mobile.substring(0, 3)}XXXX${currentCustomerInfo.mobile.substring(currentCustomerInfo.mobile.length - 3)}` 
+                                  : 'No Mobile'}
+                              </span>
+                            </CardTitle>
+                          </div>
+                          <div className="flex items-center space-x-3">
+                            <div className="px-4 py-2 bg-white border border-gray-300 rounded-xl">
+                              <span className="text-sm font-medium text-gray-800">{currentProductInfo.type}</span>
+                            </div>
+                            <div className="px-4 py-2 bg-white border border-gray-300 rounded-xl">
+                              <span className="text-sm font-medium text-gray-800">
+                                {currentProductInfo.licenseModel === 'Perpetual' ? 'PERP M' : currentProductInfo.licenseModel}
+                              </span>
+                            </div>
+                            <div className="px-4 py-2 bg-white border border-gray-300 rounded-xl">
+                              <span className="text-sm font-medium text-gray-800">{currentProductInfo.planName}</span>
+                            </div>
+                            <div className="px-4 py-2 bg-white border border-gray-300 rounded-xl">
+                              <span className="text-sm font-medium text-gray-800">Valid Till: {currentProductInfo.expiryDate}</span>
+                            </div>
+                            <div className={`px-4 py-2 border rounded-xl ${
+                              currentProductInfo.status === 'Active' 
+                                ? 'bg-green-50 border-green-300' 
+                                : 'bg-white border-gray-300'
+                            }`}>
+                              <span className={`text-sm font-medium ${
+                                currentProductInfo.status === 'Active' 
+                                  ? 'text-green-700' 
+                                  : 'text-gray-800'
+                              }`}>{currentProductInfo.status}</span>
+                            </div>
+                            {customerValidated && (
+                              <button
+                                type="button"
+                                className="text-gray-600 hover:text-gray-900 ml-2"
+                              >
+                                {isUpgradeToOnlineCustomerDetailsOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                        
+                        {/* Accordion Content - Collapsible */}
+                        {isUpgradeToOnlineCustomerDetailsOpen && (
+                          <div className="p-6 bg-white">
+                            <div className="grid grid-cols-4 gap-6">
+                              <div>
+                                <Label className="text-xs text-gray-500 mb-1">Name</Label>
+                                <Input
+                                  value={currentCustomerInfo.name}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, name: e.target.value})}
+                                  className="mt-1"
+                                />
+                              </div>
+                              <div>
+                                <Label className="text-xs text-gray-500 mb-1">Company</Label>
+                                <Input
+                                  value={currentCustomerInfo.company}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, company: e.target.value})}
+                                  className="mt-1"
+                                />
+                              </div>
+                              <div>
+                                <Label className="text-xs text-gray-500 mb-1">GSTIN</Label>
+                                <Input
+                                  value={currentCustomerInfo.gstin}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, gstin: e.target.value})}
+                                  className="mt-1"
+                                />
+                              </div>
+                              <div>
+                                <Label className="text-xs text-gray-500 mb-1">City</Label>
+                                <Input
+                                  value={currentCustomerInfo.city}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, city: e.target.value})}
+                                  className="mt-1"
+                                />
+                              </div>
+                            </div>
+                            <div className="flex justify-end mt-6">
+                              <Button
+                                type="button"
+                                onClick={() => {
+                                  // Set customer validated to true to trigger next sections for UPGRADE TO ONLINE
+                                  setCustomerValidated(true);
+                                  // Collapse the accordion
+                                  setIsUpgradeToOnlineCustomerDetailsOpen(false);
+                                  // Set product type to Online for upgrade to online flow
+                                  setFormData(prev => ({
+                                    ...prev,
+                                    productType: "Online"
+                                  }));
+                                  // Auto-scroll to online configuration section
+                                  setTimeout(() => {
+                                    const nextSection = document.getElementById('upgrade-to-online-config-section');
+                                    if (nextSection) {
+                                      nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    }
+                                  }, 100);
+                                }}
+                                className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-2 rounded-lg"
+                              >
+                                Save and Continue
+                              </Button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Upgrade to Online Configuration - Same as Online New Flow */}
+                    {serialValidated && customerValidated && actionType === 'upgradeToOnline' && (
+                      <div id="upgrade-to-online-config-section" className="space-y-4 mt-6">
+                        {/* All fields in single row */}
+                        <div className="flex items-center space-x-6">
+                          {/* User Count (Mandatory) - Add/Reduce control */}
+                          <div className="flex items-center space-x-2">
+                            <Label className="text-sm font-medium whitespace-nowrap">User Count:</Label>
+                            <div className="flex items-center bg-white rounded border-0 px-2 py-1">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  if (onlineUserCount > 1) {
+                                    const newCount = onlineUserCount - 1;
+                                    setOnlineUserCount(newCount);
+                                    // Auto-update company count to match user count
+                                    setOnlineCompanyCount(newCount);
+                                  }
+                                }}
+                                className="text-gray-600 hover:text-red-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                              >
+                                -
+                              </button>
+                              <span className="text-base font-semibold text-gray-900 min-w-[30px] text-center px-2">
+                                {onlineUserCount}
+                              </span>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  const newCount = onlineUserCount + 1;
+                                  setOnlineUserCount(newCount);
+                                  // Auto-update company count to match user count
+                                  setOnlineCompanyCount(newCount);
+                                }}
+                                className="text-gray-600 hover:text-green-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                              >
+                                +
+                              </button>
+                            </div>
+                          </div>
+
+                          {/* Company Count (Mandatory) - Add/Reduce control prefilled with User Count */}
+                          <div className="flex items-center space-x-2">
+                            <Label className="text-sm font-medium whitespace-nowrap">Company Count:</Label>
+                            <div className="flex items-center bg-white rounded border-0 px-2 py-1">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  if (onlineCompanyCount > 1) {
+                                    setOnlineCompanyCount(onlineCompanyCount - 1);
+                                  }
+                                }}
+                                className="text-gray-600 hover:text-red-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                              >
+                                -
+                              </button>
+                              <span className="text-base font-semibold text-gray-900 min-w-[30px] text-center px-2">
+                                {onlineCompanyCount}
+                              </span>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setOnlineCompanyCount(onlineCompanyCount + 1);
+                                }}
+                                className="text-gray-600 hover:text-green-600 font-bold text-lg w-6 h-6 flex items-center justify-center"
+                              >
+                                +
+                              </button>
+                            </div>
+                          </div>
+
+                          {/* Database Type - Radio buttons */}
+                          <div className="flex items-center space-x-2">
+                            <Label className="text-sm font-medium whitespace-nowrap">Database Type:</Label>
+                            <div className="flex space-x-2">
+                              {[
+                                { value: "Access", label: "Access" },
+                                { value: "Client Server", label: "Client Server" }
+                              ].map((dbType) => (
+                                <label key={dbType.value} className={`flex items-center cursor-pointer px-3 py-2 border-0 rounded-lg hover:shadow-md transition-all ${
+                                  onlineDatabaseType === dbType.value
+                                    ? "bg-blue-50" 
+                                    : "bg-gray-50"
+                                }`}>
+                                  <input
+                                    type="radio"
+                                    name="upgradeToOnlineDatabaseType"
+                                    value={dbType.value}
+                                    checked={onlineDatabaseType === dbType.value}
+                                    onChange={(e) => {
+                                      setOnlineDatabaseType(e.target.value);
+                                      // Set planName to trigger order summary
+                                      setFormData(prev => ({ ...prev, planName: `Online ${e.target.value}` }));
+                                    }}
+                                    className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 mr-2"
+                                  />
+                                  <span className="text-gray-700 font-medium text-sm whitespace-nowrap">{dbType.label}</span>
+                                </label>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Duration Selection for Online - Same as Desktop */}
+                          <div className="flex items-center space-x-2">
+                            <Label className="text-sm font-medium whitespace-nowrap">Duration:</Label>
+                            <div className="flex space-x-2">
+                              {[
+                                { value: "360", label: "360 Days" },
+                                { value: "1080", label: "1080 Days" }
+                              ].map((duration) => (
+                                <label key={duration.value} className={`flex items-center cursor-pointer px-2 py-1.5 border-0 rounded-lg hover:shadow-md transition-all ${
+                                  formData.duration === duration.value
+                                    ? "bg-orange-50" 
+                                    : "bg-gray-50"
+                                }`}>
+                                  <input
+                                    type="radio"
+                                    name="upgradeToOnlineDuration"
+                                    value={duration.value}
+                                    checked={formData.duration === duration.value}
+                                    onChange={(e) => {
+                                      setFormData(prev => ({ 
+                                        ...prev, 
+                                        duration: e.target.value
+                                      }));
+                                    }}
+                                    className="w-3.5 h-3.5 text-orange-600 border-gray-300 focus:ring-orange-500 mr-2"
+                                  />
+                                  <div className="flex flex-col">
+                                    <span className="text-gray-700 font-medium text-xs whitespace-nowrap">{duration.label}</span>
+                                    {duration.value === "1080" && (
+                                      <span className="text-[10px] text-green-600 font-semibold">
+                                        20% OFF
+                                      </span>
+                                    )}
+                                  </div>
+                                </label>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
                     {/* Debug logging for troubleshooting */}
                     {console.log('Renewal Debug:', {
                       transactionType: formData.transactionType,
