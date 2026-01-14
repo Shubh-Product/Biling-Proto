@@ -4266,159 +4266,174 @@ const Dashboard = () => {
 
     return (
       <>
-        <div className="min-h-screen bg-gray-50">
-        {/* Header */}
-        <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between shadow-sm z-10">
+        <div className="h-screen bg-gray-50 flex flex-col overflow-hidden">
+        {/* Compact Header */}
+        <div className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between shadow-sm flex-shrink-0">
           <div className="flex items-center gap-2">
-            <h2 className="text-2xl font-bold text-gray-900">Billing Details</h2>
+            <h2 className="text-xl font-bold text-gray-900">Billing Details</h2>
             <div className="relative group">
-              <svg className="w-5 h-5 text-gray-400 cursor-help" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-gray-400 cursor-help" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <div className="absolute left-0 top-8 w-72 bg-gray-900 text-white text-sm rounded-lg p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 shadow-xl">
+              <div className="absolute left-0 top-6 w-72 bg-gray-900 text-white text-xs rounded-lg p-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 shadow-xl">
                 Your Invoice will be generated on below mentioned details. Make sure it is correct to claim the GST Input Credit
                 <div className="absolute -top-2 left-6 w-4 h-4 bg-gray-900 transform rotate-45"></div>
               </div>
             </div>
           </div>
           <button onClick={() => setShowMakePaymentPage(false)} className="text-gray-400 hover:text-gray-600 transition-colors">
-            <X className="w-6 h-6" />
+            <X className="w-5 h-5" />
           </button>
         </div>
         
-        {/* Content */}
-        <div className="max-w-7xl mx-auto px-6 py-8">
-          <div className="space-y-6">
-            {/* Billing Information Section */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-6 pb-3 border-b border-gray-200">Billing Information</h3>
-              
-              {/* Billing Information Fields */}
-              <div className="space-y-4">
-                {/* Row 1: GSTIN, Company Name */}
-                <div className="grid grid-cols-2 gap-6">
+        {/* Content - Two Column Layout */}
+        <div className="flex-1 overflow-hidden">
+          <div className="h-full max-w-[1600px] mx-auto px-6 py-4">
+            <div className="h-full grid grid-cols-2 gap-6">
+              {/* Left Column: Billing Information */}
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 flex flex-col">
+                <h3 className="text-base font-semibold text-gray-900 mb-3 pb-2 border-b border-gray-200">Billing Information</h3>
+                
+                {/* Billing Fields - Compact 2-column grid */}
+                <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+                  {/* GSTIN */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">GSTIN</label>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">GSTIN</label>
                     <div className="relative">
                       <input 
                         type="text" 
                         value={billingData.gstin}
                         onChange={(e) => handleGstinChange(e.target.value)}
                         maxLength={15}
-                        className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none bg-white text-gray-900 text-sm transition-all" 
-                        placeholder="Enter 15-digit GSTIN"
+                        className="w-full px-3 py-1.5 border border-gray-300 rounded focus:border-blue-500 focus:ring-1 focus:ring-blue-200 focus:outline-none bg-white text-gray-900 text-xs" 
+                        placeholder="15-digit GSTIN"
                       />
                       {gstinFetching && (
-                        <div className="absolute right-3 top-3">
-                          <svg className="animate-spin h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <div className="absolute right-2 top-1.5">
+                          <svg className="animate-spin h-4 w-4 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                           </svg>
                         </div>
                       )}
                     </div>
-                    {errors.gstin && <p className="text-sm text-red-500 mt-1">{errors.gstin}</p>}
+                    {errors.gstin && <p className="text-xs text-red-500 mt-0.5">{errors.gstin}</p>}
                   </div>
+
+                  {/* Company Name */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Company Name*</label>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Company Name*</label>
                     <input 
                       type="text" 
                       value={billingData.companyName}
                       onChange={(e) => setBillingData(prev => ({ ...prev, companyName: e.target.value }))}
                       disabled={isGstinFilled}
-                      className={`w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none text-sm transition-all ${isGstinFilled ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-900'}`}
-                      placeholder="Enter company name"
+                      className={`w-full px-3 py-1.5 border border-gray-300 rounded focus:border-blue-500 focus:ring-1 focus:ring-blue-200 focus:outline-none text-xs ${isGstinFilled ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-900'}`}
+                      placeholder="Company name"
                     />
-                    {errors.companyName && <p className="text-sm text-red-500 mt-1">{errors.companyName}</p>}
+                    {errors.companyName && <p className="text-xs text-red-500 mt-0.5">{errors.companyName}</p>}
                   </div>
-                </div>
 
-                {/* Row 2: Address */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Address*</label>
-                  <input 
-                    type="text" 
-                    value={billingData.address}
-                    onChange={(e) => setBillingData(prev => ({ ...prev, address: e.target.value }))}
-                    disabled={isGstinFilled}
-                    className={`w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none text-sm transition-all ${isGstinFilled ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-900'}`}
-                    placeholder="Enter complete address"
-                  />
-                  {errors.address && <p className="text-sm text-red-500 mt-1">{errors.address}</p>}
-                </div>
+                  {/* Address - Full width */}
+                  <div className="col-span-2">
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Address*</label>
+                    <input 
+                      type="text" 
+                      value={billingData.address}
+                      onChange={(e) => setBillingData(prev => ({ ...prev, address: e.target.value }))}
+                      disabled={isGstinFilled}
+                      className={`w-full px-3 py-1.5 border border-gray-300 rounded focus:border-blue-500 focus:ring-1 focus:ring-blue-200 focus:outline-none text-xs ${isGstinFilled ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-900'}`}
+                      placeholder="Complete address"
+                    />
+                    {errors.address && <p className="text-xs text-red-500 mt-0.5">{errors.address}</p>}
+                  </div>
 
-                {/* Row 3: City, Pincode, State */}
-                <div className="grid grid-cols-3 gap-6">
+                  {/* City */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">City*</label>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">City*</label>
                     <input 
                       type="text" 
                       value={billingData.city}
                       onChange={(e) => setBillingData(prev => ({ ...prev, city: e.target.value }))}
                       disabled={isGstinFilled}
-                      className={`w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none text-sm transition-all ${isGstinFilled ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-900'}`}
-                      placeholder="Enter city"
+                      className={`w-full px-3 py-1.5 border border-gray-300 rounded focus:border-blue-500 focus:ring-1 focus:ring-blue-200 focus:outline-none text-xs ${isGstinFilled ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-900'}`}
+                      placeholder="City"
                     />
-                    {errors.city && <p className="text-sm text-red-500 mt-1">{errors.city}</p>}
+                    {errors.city && <p className="text-xs text-red-500 mt-0.5">{errors.city}</p>}
                   </div>
+
+                  {/* Pincode */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Pincode*</label>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Pincode*</label>
                     <input 
                       type="text" 
                       value={billingData.pincode}
                       onChange={(e) => setBillingData(prev => ({ ...prev, pincode: e.target.value }))}
                       disabled={isGstinFilled}
                       maxLength={6}
-                      className={`w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none text-sm transition-all ${isGstinFilled ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-900'}`}
-                      placeholder="6-digit pincode"
+                      className={`w-full px-3 py-1.5 border border-gray-300 rounded focus:border-blue-500 focus:ring-1 focus:ring-blue-200 focus:outline-none text-xs ${isGstinFilled ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-900'}`}
+                      placeholder="Pincode"
                     />
-                    {errors.pincode && <p className="text-sm text-red-500 mt-1">{errors.pincode}</p>}
+                    {errors.pincode && <p className="text-xs text-red-500 mt-0.5">{errors.pincode}</p>}
                   </div>
+
+                  {/* State */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">State*</label>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">State*</label>
                     <input 
                       type="text" 
                       value={billingData.state}
                       onChange={(e) => setBillingData(prev => ({ ...prev, state: e.target.value }))}
                       disabled={isGstinFilled}
-                      className={`w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none text-sm transition-all ${isGstinFilled ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-900'}`}
-                      placeholder="Enter state"
+                      className={`w-full px-3 py-1.5 border border-gray-300 rounded focus:border-blue-500 focus:ring-1 focus:ring-blue-200 focus:outline-none text-xs ${isGstinFilled ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : 'bg-white text-gray-900'}`}
+                      placeholder="State"
                     />
-                    {errors.state && <p className="text-sm text-red-500 mt-1">{errors.state}</p>}
+                    {errors.state && <p className="text-xs text-red-500 mt-0.5">{errors.state}</p>}
                   </div>
-                </div>
 
-                {/* Row 4: Mobile, Name, Email - Moved after State */}
-                <div className="grid grid-cols-3 gap-6">
+                  {/* Mobile */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Mobile*</label>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Mobile*</label>
                     <input 
                       type="text" 
                       value={billingData.mobile}
                       onChange={(e) => setBillingData(prev => ({ ...prev, mobile: e.target.value }))}
                       maxLength={10}
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none bg-white text-gray-900 text-sm transition-all" 
-                      placeholder="10-digit mobile number"
+                      className="w-full px-3 py-1.5 border border-gray-300 rounded focus:border-blue-500 focus:ring-1 focus:ring-blue-200 focus:outline-none bg-white text-gray-900 text-xs" 
+                      placeholder="Mobile number"
                     />
-                    {errors.mobile && <p className="text-sm text-red-500 mt-1">{errors.mobile}</p>}
+                    {errors.mobile && <p className="text-xs text-red-500 mt-0.5">{errors.mobile}</p>}
                   </div>
+
+                  {/* Name */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Name*</label>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Name*</label>
                     <input 
                       type="text" 
                       value={billingData.name}
                       onChange={(e) => setBillingData(prev => ({ ...prev, name: e.target.value }))}
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none bg-white text-gray-900 text-sm transition-all" 
-                      placeholder="Enter full name"
+                      className="w-full px-3 py-1.5 border border-gray-300 rounded focus:border-blue-500 focus:ring-1 focus:ring-blue-200 focus:outline-none bg-white text-gray-900 text-xs" 
+                      placeholder="Full name"
                     />
-                    {errors.name && <p className="text-sm text-red-500 mt-1">{errors.name}</p>}
+                    {errors.name && <p className="text-xs text-red-500 mt-0.5">{errors.name}</p>}
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Email*</label>
+
+                  {/* Email */}
+                  <div className="col-span-2">
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Email*</label>
                     <input 
                       type="email" 
                       value={billingData.email}
                       onChange={(e) => setBillingData(prev => ({ ...prev, email: e.target.value }))}
+                      className="w-full px-3 py-1.5 border border-gray-300 rounded focus:border-blue-500 focus:ring-1 focus:ring-blue-200 focus:outline-none bg-white text-gray-900 text-xs" 
+                      placeholder="Email address"
+                    />
+                    {errors.email && <p className="text-xs text-red-500 mt-0.5">{errors.email}</p>}
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Order Details */}                      onChange={(e) => setBillingData(prev => ({ ...prev, email: e.target.value }))}
                       className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none bg-white text-gray-900 text-sm transition-all" 
                       placeholder="Enter email address"
                     />
