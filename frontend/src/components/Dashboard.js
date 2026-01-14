@@ -106,6 +106,8 @@ const Dashboard = () => {
   const [onlineMinUserCount, setOnlineMinUserCount] = useState(1); // Track minimum user count for Online renewal (cannot reduce below this)
   const [onlineMinCompanyCount, setOnlineMinCompanyCount] = useState(1); // Track minimum company count for Online renewal (cannot reduce below this)
   const [onlineDatabaseType, setOnlineDatabaseType] = useState(""); // Track database type for Online product
+  const [addReduceCountValue, setAddReduceCountValue] = useState(0); // Track add/reduce count value for Add/Reduce Count flow
+  const [isAddReduceCountCustomerDetailsOpen, setIsAddReduceCountCustomerDetailsOpen] = useState(true); // Track Add/Reduce Count customer details accordion
   const [appSubscriptionId, setAppSubscriptionId] = useState(""); // Track subscription ID for App product
   const [appSubscriptionValidated, setAppSubscriptionValidated] = useState(false); // Track if App subscription is validated
   const [appSubscriptionCount, setAppSubscriptionCount] = useState(1); // Track subscription count for App product
