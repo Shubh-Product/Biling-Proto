@@ -4898,10 +4898,9 @@ const Dashboard = () => {
             </div>
           </div>
         )}
-      </div>
-  </>
-  );
-  }; // End of MakePaymentPage component
+      </>
+    );
+  };
 
   // Menu items configuration
   const menuItems = [
