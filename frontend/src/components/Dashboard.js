@@ -4903,6 +4903,11 @@ const Dashboard = () => {
   );
 };
 
+const MakePaymentPageComponent = () => {
+  // This component was incorrectly nested - moving it outside
+  return null; // Placeholder for now
+};
+
   // Menu items configuration
   const menuItems = [
     { id: 'dashboard', name: 'Dashboard', icon: LayoutDashboard },
