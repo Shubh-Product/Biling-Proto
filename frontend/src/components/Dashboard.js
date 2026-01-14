@@ -5882,11 +5882,8 @@ const Dashboard = () => {
                                   setCustomerValidated(true);
                                   // Collapse the accordion
                                   setIsUpgradeToOnlineCustomerDetailsOpen(false);
-                                  // Set product type to Online for upgrade to online flow
-                                  setFormData(prev => ({
-                                    ...prev,
-                                    productType: "Online"
-                                  }));
+                                  // Keep product type as Desktop/Mandi - DO NOT change to Online to keep tab active
+                                  // The actionType 'upgradeToOnline' will control the flow
                                   // Auto-scroll to online configuration section
                                   setTimeout(() => {
                                     const nextSection = document.getElementById('upgrade-to-online-config-section');
