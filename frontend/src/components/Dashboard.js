@@ -4514,7 +4514,7 @@ const Dashboard = () => {
         
         {/* Payment Gateway Popup */}
         {showPaymentGateway && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[60]" onClick={() => setShowPaymentGateway(false)}>
+          <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[60]" onClick={() => setShowPaymentGateway(false)}>
           <div className="bg-white rounded-lg max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="flex h-full">
               {/* Left Sidebar - Blue Background */}
