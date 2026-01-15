@@ -14301,7 +14301,7 @@ const Dashboard = () => {
                                 className="px-4 py-2 bg-amber-600 text-white text-sm rounded-lg hover:bg-amber-700 flex items-center gap-2"
                               >
                                 <RotateCcw className="w-4 h-4" />
-                                Extend by 3 days
+                                Extend by 7 days
                               </button>
                             </div>
                           </>
