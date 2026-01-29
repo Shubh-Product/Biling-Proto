@@ -14518,51 +14518,6 @@ const Dashboard = () => {
           </div>
         </div>
       )}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  >
-                    <option value="">All</option>
-                    <option value="Approved">Approved</option>
-                    <option value="Rejected">Rejected</option>
-                    <option value="Pending">Pending</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            {/* Modal Footer */}
-            <div className="sticky bottom-0 bg-gray-50 border-t border-gray-200 px-6 py-4 flex justify-end gap-3">
-              <Button
-                onClick={() => {
-                  setAdvancedFilters({
-                    partnerName: '',
-                    status: '',
-                    generatedBy: '',
-                    transactionType: '',
-                    scheme: '',
-                    product: '',
-                    licenseType: '',
-                    linkValidityFrom: '',
-                    linkValidityTo: '',
-                    subscriptionId: '',
-                    offers: '',
-                    poStatus: ''
-                  });
-                }}
-                variant="outline"
-                className="border-gray-300 text-gray-700 hover:bg-gray-100"
-              >
-                Clear All
-              </Button>
-              <Button
-                onClick={() => setShowAdvancedFilter(false)}
-                className="bg-blue-600 hover:bg-blue-700 text-white"
-              >
-                Apply Filters
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* License Type Change Warning Dialog */}
       {showLicenseChangeWarning && (
