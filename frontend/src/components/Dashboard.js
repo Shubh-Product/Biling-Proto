@@ -279,14 +279,10 @@ const Dashboard = () => {
     status: '',
     generatedBy: '',
     transactionType: '',
-    scheme: '',
+    category: '',
     product: '',
-    licenseType: '',
     linkValidityFrom: '',
-    linkValidityTo: '',
-    subscriptionId: '',
-    offers: '',
-    poStatus: ''
+    linkValidityTo: ''
   });
 
   // Make Payment Page state
