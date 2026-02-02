@@ -14,7 +14,7 @@ from datetime import datetime
 
 class ReviewSpecificTester:
     def __init__(self):
-        self.base_url = "https://online-upgrade-path.preview.emergentagent.com/api"
+        self.base_url = "https://renewal-interface.preview.emergentagent.com/api"
         self.tests_passed = 0
         self.tests_failed = 0
         
