@@ -1265,15 +1265,72 @@ const Dashboard = () => {
             city: "Bangalore",
             state: "Karnataka"
           },
-          currentProduct: {
-            type: "App",
-            planName: "Business Pro Package",
-            licenseModel: "Subscription",
+          baseProduct: {
+            type: "Desktop",
+            planName: "Desktop Standard Multi User",
+            licenseModel: "Perpetual",
             duration: "360 Days",
-            expiryDate: "2024-12-15",
+            expiryDate: "2024-12-31",
+            status: "Active"
+          },
+          productInfo: {
+            type: "Mobile App",
+            planName: "Business Pro Package",
             status: "Active",
-            subscriptionId: "APP12345"
-          }
+            purchaseDate: "2023-06-15",
+            lastRenewal: "2024-06-15"
+          },
+          appCounts: {
+            totalFOC: 3,
+            totalPaid: 7
+          },
+          currentApps: [
+            {
+              id: "4180149876",
+              name: "Busy Analytics",
+              type: "Paid",
+              status: "Active",
+              expiryDate: "04-Mar-27",
+              lastUsed: "05-Sep-23",
+              startDate: "05-Sep-23"
+            },
+            {
+              id: "4125190163", 
+              name: "Inventory Manager",
+              type: "Paid",
+              status: "Active",
+              expiryDate: "04-Mar-27",
+              lastUsed: "30-Dec-25",
+              startDate: "30-Dec-25"
+            },
+            {
+              id: "4195786199",
+              name: "Sales Tracker",
+              type: "Paid", 
+              status: "Active",
+              expiryDate: "04-Mar-27",
+              lastUsed: "05-Sep-23",
+              startDate: "05-Sep-23"
+            },
+            {
+              id: "4121487662",
+              name: "Report Generator",
+              type: "Paid",
+              status: "Active", 
+              expiryDate: "04-Mar-27",
+              lastUsed: "30-Dec-25",
+              startDate: "30-Dec-25"
+            },
+            {
+              id: "4199433912",
+              name: "Customer Portal",
+              type: "Paid",
+              status: "Active",
+              expiryDate: "04-Mar-27",
+              lastUsed: "30-Dec-25",
+              startDate: "30-Dec-25"
+            }
+          ]
         },
         "REC12345": {
           valid: true,
@@ -1505,15 +1562,72 @@ const Dashboard = () => {
             city: "Bangalore",
             state: "Karnataka"
           },
-          currentProduct: {
-            type: "App",
-            planName: "Business Pro Package",
-            licenseModel: "Subscription",
+          baseProduct: {
+            type: "Desktop",
+            planName: "Desktop Standard Multi User",
+            licenseModel: "Perpetual",
             duration: "360 Days",
-            expiryDate: "2024-12-15",
+            expiryDate: "2024-12-31",
+            status: "Active"
+          },
+          productInfo: {
+            type: "Mobile App",
+            planName: "Business Pro Package",
             status: "Active",
-            subscriptionId: "APP12345"
-          }
+            purchaseDate: "2023-06-15",
+            lastRenewal: "2024-06-15"
+          },
+          appCounts: {
+            totalFOC: 3,
+            totalPaid: 7
+          },
+          currentApps: [
+            {
+              id: "4180149876",
+              name: "Busy Analytics",
+              type: "Paid",
+              status: "Active",
+              expiryDate: "04-Mar-27",
+              lastUsed: "05-Sep-23",
+              startDate: "05-Sep-23"
+            },
+            {
+              id: "4125190163", 
+              name: "Inventory Manager",
+              type: "Paid",
+              status: "Active",
+              expiryDate: "04-Mar-27",
+              lastUsed: "30-Dec-25",
+              startDate: "30-Dec-25"
+            },
+            {
+              id: "4195786199",
+              name: "Sales Tracker",
+              type: "Paid", 
+              status: "Active",
+              expiryDate: "04-Mar-27",
+              lastUsed: "05-Sep-23",
+              startDate: "05-Sep-23"
+            },
+            {
+              id: "4121487662",
+              name: "Report Generator",
+              type: "Paid",
+              status: "Active", 
+              expiryDate: "04-Mar-27",
+              lastUsed: "30-Dec-25",
+              startDate: "30-Dec-25"
+            },
+            {
+              id: "4199433912",
+              name: "Customer Portal",
+              type: "Paid",
+              status: "Active",
+              expiryDate: "04-Mar-27",
+              lastUsed: "30-Dec-25",
+              startDate: "30-Dec-25"
+            }
+          ]
         },
         "REC12345": {
           valid: true,
