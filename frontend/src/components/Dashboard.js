@@ -12858,6 +12858,97 @@ const Dashboard = () => {
                       </div>
                     )}
 
+                    {/* App Usage Information Section - Show after duration is selected */}
+                    {formData.productType === "App" && formData.duration && (
+                      <div className="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border-2 border-blue-200 p-4">
+                        <div className="bg-blue-100 border-l-4 border-blue-500 p-3 mb-4 rounded">
+                          <p className="text-sm text-blue-800">
+                            <strong>Note:</strong> Currently, you have 20 expired apps. 
+                            <span className="text-blue-600 underline cursor-pointer ml-1">
+                              Also, expiry date of all active apps will be reset to be same.
+                            </span>
+                          </p>
+                        </div>
+
+                        <h4 className="text-base font-bold text-gray-900 mb-3">Current App Usage Details</h4>
+                        
+                        <div className="bg-white rounded-lg border border-gray-300 overflow-hidden">
+                          <table className="w-full text-xs">
+                            <thead className="bg-gray-600 text-white">
+                              <tr>
+                                <th className="px-3 py-2 text-left font-semibold">App ID</th>
+                                <th className="px-3 py-2 text-left font-semibold">Type</th>
+                                <th className="px-3 py-2 text-left font-semibold">Status</th>
+                                <th className="px-3 py-2 text-left font-semibold">Last Used</th>
+                                <th className="px-3 py-2 text-left font-semibold">Start Date</th>
+                                <th className="px-3 py-2 text-left font-semibold">End Date</th>
+                                <th className="px-3 py-2 text-left font-semibold">New End Date</th>
+                                <th className="px-3 py-2 text-right font-semibold">New Validity (Days)</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {/* Sample data rows - Replace with actual data */}
+                              <tr className="border-b border-gray-200 hover:bg-gray-50">
+                                <td className="px-3 py-2 text-gray-800">4121487662</td>
+                                <td className="px-3 py-2 text-gray-800">Paid</td>
+                                <td className="px-3 py-2 text-gray-800">Active (Reset)</td>
+                                <td className="px-3 py-2 text-gray-800"></td>
+                                <td className="px-3 py-2 text-gray-800">30-Dec-25</td>
+                                <td className="px-3 py-2 text-gray-800">04-Mar-27</td>
+                                <td className="px-3 py-2 text-gray-800">27-Feb-27</td>
+                                <td className="px-3 py-2 text-right text-gray-800 font-medium">391</td>
+                              </tr>
+                              <tr className="border-b border-dotted border-gray-300 hover:bg-gray-50">
+                                <td className="px-3 py-2 text-gray-800">4180148876</td>
+                                <td className="px-3 py-2 text-gray-800">Paid</td>
+                                <td className="px-3 py-2 text-gray-800">Active (Reset)</td>
+                                <td className="px-3 py-2 text-gray-800"></td>
+                                <td className="px-3 py-2 text-gray-800">05-Sep-23</td>
+                                <td className="px-3 py-2 text-gray-800">04-Mar-27</td>
+                                <td className="px-3 py-2 text-gray-800">27-Feb-27</td>
+                                <td className="px-3 py-2 text-right text-gray-800 font-medium">391</td>
+                              </tr>
+                              <tr className="border-b border-dotted border-gray-300 hover:bg-gray-50">
+                                <td className="px-3 py-2 text-gray-800">4121487616</td>
+                                <td className="px-3 py-2 text-gray-800">Paid</td>
+                                <td className="px-3 py-2 text-gray-800">Active (Reset)</td>
+                                <td className="px-3 py-2 text-gray-800"></td>
+                                <td className="px-3 py-2 text-gray-800">30-Dec-25</td>
+                                <td className="px-3 py-2 text-gray-800">04-Mar-27</td>
+                                <td className="px-3 py-2 text-gray-800">27-Feb-27</td>
+                                <td className="px-3 py-2 text-right text-gray-800 font-medium">391</td>
+                              </tr>
+                              <tr className="border-b border-dotted border-gray-300 hover:bg-gray-50">
+                                <td className="px-3 py-2 text-gray-800">4180149214</td>
+                                <td className="px-3 py-2 text-gray-800">Paid</td>
+                                <td className="px-3 py-2 text-gray-800">Active (Reset)</td>
+                                <td className="px-3 py-2 text-gray-800"></td>
+                                <td className="px-3 py-2 text-gray-800">05-Sep-23</td>
+                                <td className="px-3 py-2 text-gray-800">04-Mar-27</td>
+                                <td className="px-3 py-2 text-gray-800">27-Feb-27</td>
+                                <td className="px-3 py-2 text-right text-gray-800 font-medium">391</td>
+                              </tr>
+                              <tr className="border-b border-dotted border-gray-300 hover:bg-gray-50">
+                                <td className="px-3 py-2 text-gray-800">4121487663</td>
+                                <td className="px-3 py-2 text-gray-800">Paid</td>
+                                <td className="px-3 py-2 text-gray-800">Active (Reset)</td>
+                                <td className="px-3 py-2 text-gray-800"></td>
+                                <td className="px-3 py-2 text-gray-800">30-Dec-25</td>
+                                <td className="px-3 py-2 text-gray-800">04-Mar-27</td>
+                                <td className="px-3 py-2 text-gray-800">27-Feb-27</td>
+                                <td className="px-3 py-2 text-right text-gray-800 font-medium">391</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <div className="mt-3 text-sm text-gray-700">
+                          <p><strong>Total Active Apps:</strong> 5</p>
+                          <p><strong>Total Expired Apps:</strong> 20</p>
+                        </div>
+                      </div>
+                    )}
+
                     {/* Recom Product Configuration - Market Place Based */}
                     {/* Recom Product Configuration - Direct Flow (No Subscription Validation) */}
                     {formData.productType === "Recom" && (
