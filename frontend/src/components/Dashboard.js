@@ -10293,6 +10293,120 @@ const Dashboard = () => {
                           </div>
                         )}
 
+                        {/* NEW SECTION: App Details Summary Before Order Summary */}
+                        {selectedAppsForRenewal.length > 0 && renewalValidity && (
+                          <div className="bg-white border border-gray-300 rounded-lg p-6 space-y-6">
+                            {/* Informational Text */}
+                            <div className="space-y-3">
+                              <p className="text-blue-600 text-sm font-medium">
+                                All selected apps will have their expiry date reset.
+                              </p>
+                              <p className="text-blue-600 text-sm font-medium">
+                                Deselected apps will be marked as expired and their tenure will be adjusted in the selected apps being renewed.
+                              </p>
+                            </div>
+
+                            {/* Summary Boxes */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div className="bg-gray-200 rounded-lg p-4">
+                                <p className="text-gray-600 text-sm mb-2">Advance Credit</p>
+                                <p className="text-2xl font-bold text-gray-900">13500</p>
+                              </div>
+                              <div className="bg-gray-200 rounded-lg p-4">
+                                <p className="text-gray-600 text-sm mb-2">
+                                  <input type="checkbox" className="mr-2" />
+                                  LP (host non commission discounts)
+                                </p>
+                                <p className="text-2xl font-bold text-gray-900">18000</p>
+                              </div>
+                            </div>
+
+                            <p className="text-gray-600 text-xs">13500 (SUB)</p>
+
+                            {/* Apps Details Table */}
+                            <div className="overflow-x-auto">
+                              <table className="w-full border-collapse">
+                                <thead>
+                                  <tr className="bg-gray-600 text-white">
+                                    <th className="border border-gray-400 px-3 py-2 text-left">
+                                      <input 
+                                        type="checkbox" 
+                                        className="w-4 h-4"
+                                        checked={selectedAppsForRenewal.length === currentApps.length}
+                                        onChange={(e) => {
+                                          if (e.target.checked) {
+                                            setSelectedAppsForRenewal(currentApps.map(app => app.id));
+                                          } else {
+                                            setSelectedAppsForRenewal([]);
+                                          }
+                                        }}
+                                      />
+                                    </th>
+                                    <th className="border border-gray-400 px-3 py-2 text-left text-sm">App ID</th>
+                                    <th className="border border-gray-400 px-3 py-2 text-left text-sm">Type</th>
+                                    <th className="border border-gray-400 px-3 py-2 text-left text-sm">Status</th>
+                                    <th className="border border-gray-400 px-3 py-2 text-left text-sm">Last Used</th>
+                                    <th className="border border-gray-400 px-3 py-2 text-left text-sm">Start Date</th>
+                                    <th className="border border-gray-400 px-3 py-2 text-left text-sm">End Date</th>
+                                    <th className="border border-gray-400 px-3 py-2 text-left text-sm">Remaining Validity (Days)</th>
+                                    <th className="border border-gray-400 px-3 py-2 text-left text-sm">New End Date</th>
+                                    <th className="border border-gray-400 px-3 py-2 text-left text-sm">New Validity (Days)</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {currentApps.map((app) => {
+                                    // Calculate remaining validity
+                                    const endDate = new Date(app.expiryDate);
+                                    const today = new Date();
+                                    const remainingDays = Math.max(0, Math.ceil((endDate - today) / (1000 * 60 * 60 * 24)));
+                                    
+                                    // Calculate new end date based on selected validity
+                                    const newEndDate = new Date();
+                                    newEndDate.setDate(newEndDate.getDate() + parseInt(renewalValidity));
+                                    const formattedNewEndDate = newEndDate.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: '2-digit' });
+                                    
+                                    return (
+                                      <tr key={app.id} className={selectedAppsForRenewal.includes(app.id) ? 'bg-indigo-50' : 'bg-white'}>
+                                        <td className="border border-gray-400 px-3 py-2">
+                                          <input
+                                            type="checkbox"
+                                            className="w-4 h-4"
+                                            checked={selectedAppsForRenewal.includes(app.id)}
+                                            onChange={(e) => {
+                                              if (e.target.checked) {
+                                                setSelectedAppsForRenewal(prev => [...prev, app.id]);
+                                              } else {
+                                                setSelectedAppsForRenewal(prev => prev.filter(id => id !== app.id));
+                                              }
+                                            }}
+                                          />
+                                        </td>
+                                        <td className="border border-gray-400 px-3 py-2 text-sm">{app.id}</td>
+                                        <td className="border border-gray-400 px-3 py-2 text-sm">{app.type}</td>
+                                        <td className="border border-gray-400 px-3 py-2 text-sm">
+                                          <span className={app.status === 'Active' ? 'text-green-600 font-medium' : 'text-red-600 font-medium'}>
+                                            {app.status}
+                                          </span>
+                                        </td>
+                                        <td className="border border-gray-400 px-3 py-2 text-sm">
+                                          {app.lastUsed || '05-Sep-23'}
+                                        </td>
+                                        <td className="border border-gray-400 px-3 py-2 text-sm">
+                                          {app.startDate || '05-Sep-23'}
+                                        </td>
+                                        <td className="border border-gray-400 px-3 py-2 text-sm">{app.expiryDate}</td>
+                                        <td className="border border-gray-400 px-3 py-2 text-sm text-center">{remainingDays}</td>
+                                        <td className="border border-gray-400 px-3 py-2 text-sm">{formattedNewEndDate}</td>
+                                        <td className="border border-gray-400 px-3 py-2 text-sm text-center">{renewalValidity}</td>
+                                      </tr>
+                                    );
+                                  })}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        )}
+
                         {/* Renewal Order Summary */}
                         {selectedAppsForRenewal.length > 0 && renewalValidity && (
                           <Card id="mobile-app-renewal-summary-section">
