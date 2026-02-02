@@ -6962,6 +6962,112 @@ const Dashboard = () => {
                       </div>
                     )}
 
+                    {/* NEW SECTION: App Details Summary Before Order Summary - Only for App Product */}
+                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'renew' && formData.productType === "App" && formData.duration && currentCustomerInfo && (
+                      <div className="bg-white border border-gray-300 rounded-lg p-6 space-y-6 mt-6">
+                        {/* Informational Text */}
+                        <div className="space-y-3">
+                          <p className="text-blue-600 text-sm font-medium">
+                            All selected apps will have their expiry date reset.
+                          </p>
+                          <p className="text-blue-600 text-sm font-medium">
+                            Deselected apps will be marked as expired and their tenure will be adjusted in the selected apps being renewed.
+                          </p>
+                        </div>
+
+                        {/* Summary Boxes */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="bg-gray-200 rounded-lg p-4">
+                            <p className="text-gray-600 text-sm mb-2">Advance Credit</p>
+                            <p className="text-2xl font-bold text-gray-900">13500</p>
+                          </div>
+                          <div className="bg-gray-200 rounded-lg p-4">
+                            <p className="text-gray-600 text-sm mb-2">
+                              <input type="checkbox" className="mr-2" />
+                              LP (host non commission discounts)
+                            </p>
+                            <p className="text-2xl font-bold text-gray-900">18000</p>
+                          </div>
+                        </div>
+
+                        <p className="text-gray-600 text-xs">13500 (SUB)</p>
+
+                        {/* Apps Details Table */}
+                        <div className="overflow-x-auto">
+                          <table className="w-full border-collapse">
+                            <thead>
+                              <tr className="bg-gray-600 text-white">
+                                <th className="border border-gray-400 px-3 py-2 text-left">
+                                  <input 
+                                    type="checkbox" 
+                                    className="w-4 h-4"
+                                    defaultChecked={true}
+                                  />
+                                </th>
+                                <th className="border border-gray-400 px-3 py-2 text-left text-sm">App ID</th>
+                                <th className="border border-gray-400 px-3 py-2 text-left text-sm">Type</th>
+                                <th className="border border-gray-400 px-3 py-2 text-left text-sm">Status</th>
+                                <th className="border border-gray-400 px-3 py-2 text-left text-sm">Last Used</th>
+                                <th className="border border-gray-400 px-3 py-2 text-left text-sm">Start Date</th>
+                                <th className="border border-gray-400 px-3 py-2 text-left text-sm">End Date</th>
+                                <th className="border border-gray-400 px-3 py-2 text-left text-sm">Remaining Validity (Days)</th>
+                                <th className="border border-gray-400 px-3 py-2 text-left text-sm">New End Date</th>
+                                <th className="border border-gray-400 px-3 py-2 text-left text-sm">New Validity (Days)</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {(() => {
+                                // Get mock apps data from APP12345
+                                const appData = mockSerialData["APP12345"];
+                                const apps = appData?.currentApps || [];
+                                
+                                return apps.map((app) => {
+                                  // Calculate remaining validity
+                                  const endDate = new Date(app.expiryDate.split('-').reverse().join('-')); // Convert DD-MMM-YY to proper date
+                                  const today = new Date();
+                                  const remainingDays = Math.max(0, Math.ceil((endDate - today) / (1000 * 60 * 60 * 24)));
+                                  
+                                  // Calculate new end date based on selected validity
+                                  const newEndDate = new Date();
+                                  newEndDate.setDate(newEndDate.getDate() + parseInt(formData.duration));
+                                  const formattedNewEndDate = newEndDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: '2-digit' }).replace(/ /g, '-');
+                                  
+                                  return (
+                                    <tr key={app.id} className="bg-white hover:bg-indigo-50">
+                                      <td className="border border-gray-400 px-3 py-2">
+                                        <input
+                                          type="checkbox"
+                                          className="w-4 h-4"
+                                          defaultChecked={true}
+                                        />
+                                      </td>
+                                      <td className="border border-gray-400 px-3 py-2 text-sm">{app.id}</td>
+                                      <td className="border border-gray-400 px-3 py-2 text-sm">{app.type}</td>
+                                      <td className="border border-gray-400 px-3 py-2 text-sm">
+                                        <span className={app.status === 'Active' ? 'text-green-600 font-medium' : 'text-red-600 font-medium'}>
+                                          {app.status}
+                                        </span>
+                                      </td>
+                                      <td className="border border-gray-400 px-3 py-2 text-sm">
+                                        {app.lastUsed || '05-Sep-23'}
+                                      </td>
+                                      <td className="border border-gray-400 px-3 py-2 text-sm">
+                                        {app.startDate || '05-Sep-23'}
+                                      </td>
+                                      <td className="border border-gray-400 px-3 py-2 text-sm">{app.expiryDate}</td>
+                                      <td className="border border-gray-400 px-3 py-2 text-sm text-center">{remainingDays >= 0 ? remainingDays : 396}</td>
+                                      <td className="border border-gray-400 px-3 py-2 text-sm">{formattedNewEndDate}</td>
+                                      <td className="border border-gray-400 px-3 py-2 text-sm text-center">{formData.duration}</td>
+                                    </tr>
+                                  );
+                                });
+                              })()}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    )}
+
                     {/* Order Summary for Online Renewal - Show when duration is selected */}
                     {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'renew' && formData.productType === "Online" && formData.duration && (
                       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200 mt-6">
