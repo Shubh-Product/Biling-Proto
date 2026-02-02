@@ -1694,39 +1694,49 @@ const Dashboard = () => {
           },
           currentApps: [
             {
-              id: "APP001",
+              id: "4180149876",
               name: "Busy Analytics",
-              type: "FOC",
+              type: "Paid",
               status: "Active",
-              expiryDate: "2024-12-31"
+              expiryDate: "04-Mar-27",
+              lastUsed: "05-Sep-23",
+              startDate: "05-Sep-23"
             },
             {
-              id: "APP002", 
+              id: "4125190163", 
               name: "Inventory Manager",
               type: "Paid",
               status: "Active",
-              expiryDate: "2024-11-30"
+              expiryDate: "04-Mar-27",
+              lastUsed: "30-Dec-25",
+              startDate: "30-Dec-25"
             },
             {
-              id: "APP003",
+              id: "4195786199",
               name: "Sales Tracker",
               type: "Paid", 
-              status: "Expired",
-              expiryDate: "2024-08-31"
+              status: "Active",
+              expiryDate: "04-Mar-27",
+              lastUsed: "05-Sep-23",
+              startDate: "05-Sep-23"
             },
             {
-              id: "APP004",
+              id: "4121487662",
               name: "Report Generator",
-              type: "FOC",
+              type: "Paid",
               status: "Active", 
-              expiryDate: "2024-12-31"
+              expiryDate: "04-Mar-27",
+              lastUsed: "30-Dec-25",
+              startDate: "30-Dec-25"
             },
             {
-              id: "APP005",
+              id: "4199433912",
               name: "Customer Portal",
               type: "Paid",
               status: "Active",
-              expiryDate: "2024-10-31"
+              expiryDate: "04-Mar-27",
+              lastUsed: "30-Dec-25",
+              startDate: "30-Dec-25"
             }
           ]
         },
