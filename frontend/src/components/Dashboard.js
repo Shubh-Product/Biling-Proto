@@ -6028,31 +6028,93 @@ const Dashboard = () => {
                         {/* Accordion Content - Collapsible */}
                         {isUpgradeCustomerDetailsOpen && (
                           <div className="p-6 bg-white">
-                            <div className="grid grid-cols-4 gap-6">
+                            {/* Row 1: Category, Mobile, Email, Name */}
+                            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
                               <div>
-                                <Label className="text-xs text-gray-500 mb-1">Name</Label>
+                                <Label className="text-xs text-gray-500 mb-1">Category</Label>
+                                <select
+                                  value={formData.licenseType || "Retail"}
+                                  onChange={(e) => setFormData(prev => ({...prev, licenseType: e.target.value}))}
+                                  className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                                >
+                                  <option value="Retail">Regular</option>
+                                  <option value="CA">CA</option>
+                                  <option value="Accountant">Accountant</option>
+                                  <option value="GST Practitioner">GSTP</option>
+                                </select>
+                              </div>
+
+                              <div>
+                                <Label className="text-xs text-gray-500 mb-1">Mobile <span className="text-red-500">*</span></Label>
+                                <div className="flex mt-1">
+                                  <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md">
+                                    +91
+                                  </span>
+                                  <Input
+                                    type="tel"
+                                    value={currentCustomerInfo.mobile}
+                                    onChange={(e) => {
+                                      const value = e.target.value.replace(/\D/g, '');
+                                      if (value.length <= 10) {
+                                        setCurrentCustomerInfo({...currentCustomerInfo, mobile: value});
+                                      }
+                                    }}
+                                    maxLength={10}
+                                    className="rounded-l-none"
+                                  />
+                                </div>
+                              </div>
+
+                              <div>
+                                <Label className="text-xs text-gray-500 mb-1">Email <span className="text-red-500">*</span></Label>
+                                <Input
+                                  type="email"
+                                  value={currentCustomerInfo.email}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, email: e.target.value})}
+                                  className="mt-1"
+                                />
+                              </div>
+
+                              <div>
+                                <Label className="text-xs text-gray-500 mb-1">Name <span className="text-red-500">*</span></Label>
                                 <Input
                                   value={currentCustomerInfo.name}
                                   onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, name: e.target.value})}
                                   className="mt-1"
                                 />
                               </div>
+                            </div>
+
+                            {/* Row 2: GSTIN, Company Name, Address, City */}
+                            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
                               <div>
-                                <Label className="text-xs text-gray-500 mb-1">Company</Label>
+                                <Label className="text-xs text-gray-500 mb-1">GSTIN</Label>
+                                <Input
+                                  value={currentCustomerInfo.gstin}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, gstin: e.target.value.toUpperCase()})}
+                                  maxLength={15}
+                                  className="mt-1"
+                                />
+                              </div>
+
+                              <div>
+                                <Label className="text-xs text-gray-500 mb-1">Company Name</Label>
                                 <Input
                                   value={currentCustomerInfo.company}
                                   onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, company: e.target.value})}
                                   className="mt-1"
                                 />
                               </div>
+
                               <div>
-                                <Label className="text-xs text-gray-500 mb-1">GSTIN</Label>
+                                <Label className="text-xs text-gray-500 mb-1">Address</Label>
                                 <Input
-                                  value={currentCustomerInfo.gstin}
-                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, gstin: e.target.value})}
+                                  value={currentCustomerInfo.address || ''}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, address: e.target.value})}
                                   className="mt-1"
                                 />
                               </div>
+
                               <div>
                                 <Label className="text-xs text-gray-500 mb-1">City</Label>
                                 <Input
@@ -6062,6 +6124,28 @@ const Dashboard = () => {
                                 />
                               </div>
                             </div>
+
+                            {/* Row 3: Pincode, State */}
+                            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                              <div>
+                                <Label className="text-xs text-gray-500 mb-1">Pincode</Label>
+                                <Input
+                                  value={currentCustomerInfo.pincode || ''}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, pincode: e.target.value})}
+                                  className="mt-1"
+                                />
+                              </div>
+
+                              <div>
+                                <Label className="text-xs text-gray-500 mb-1">State</Label>
+                                <Input
+                                  value={currentCustomerInfo.state || ''}
+                                  onChange={(e) => setCurrentCustomerInfo({...currentCustomerInfo, state: e.target.value})}
+                                  className="mt-1"
+                                />
+                              </div>
+                            </div>
+
                             <div className="flex justify-end mt-6">
                               <Button
                                 type="button"
