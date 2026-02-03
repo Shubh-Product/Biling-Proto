@@ -1884,6 +1884,19 @@ test_plan:
   test_all: false
   test_priority: "critical_first"
 
+frontend:
+  - task: "New Section in App Tab Renew Flow Before Order Summary"
+    implemented: true
+    working: false
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+          agent: "main"
+          comment: "❌ NEW SECTION IMPLEMENTED BUT NOT ACCESSIBLE - Successfully implemented new section with informational text, summary boxes (Advance Credit: 13500, LP: 18000), and detailed 10-column table showing all apps (lines 6966-7068). However, section is not accessible because APP12345 validation changes productType from 'App' to 'Desktop', causing tab switch. Root cause: APP12345 mock data structure uses baseProduct.type='Desktop' which overrides the App tab selection during validation. NEW SECTION code is complete and functional but cannot be reached in current flow due to tab switching issue. Implementation includes: 2 blue informational messages, 2 summary boxes with values, complete table with all 10 columns (App ID, Type, Status, Last Used, Start Date, End Date, Remaining Validity, New End Date, New Validity), and proper conditional rendering."
+
 agent_communication:
     - agent: "main"
       message: "✅ DESKTOP UPGRADE FLOW FIX COMPLETED - Fixed critical issue preventing Desktop upgrade flow from working. Problem: General upgrade flow was not excluding Desktop, causing both flows to render and conflict. Solution 1: Added `formData.productType !== 'Desktop'` condition to general upgrade flow at line 6908, ensuring Desktop uses only its dedicated variant selection flow. Solution 2: Improved current plan filtering logic at lines 6830-6837 to use exact match comparison instead of partial string matching. Result: Desktop upgrade now works correctly with Variant selection (Desktop/Mandi), proper plan filtering (Desktop shows 16 plans, Mandi shows 6 plans), and current plan exclusion. Frontend compiled successfully. Ready for testing: 1) Navigate to Desktop tab, 2) Enter subscription number, 3) Click Upgrade, 4) Verify only one upgrade section appears (Variant Selection), 5) Verify Desktop/Mandi radio buttons work, 6) Verify correct plans display for each variant, 7) Verify current plan not in list, 8) Test plan selection and quantities."
