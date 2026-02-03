@@ -7041,9 +7041,54 @@ const Dashboard = () => {
                             </thead>
                             <tbody>
                               {(() => {
-                                // Get mock apps data from APP12345
-                                const appData = mockSerialData["APP12345"];
-                                const apps = appData?.currentApps || [];
+                                // Hardcoded apps data for APP12345
+                                const apps = [
+                                  {
+                                    id: "4180149876",
+                                    name: "Busy Analytics",
+                                    type: "Paid",
+                                    status: "Active",
+                                    expiryDate: "04-Mar-27",
+                                    lastUsed: "05-Sep-23",
+                                    startDate: "05-Sep-23"
+                                  },
+                                  {
+                                    id: "4125190163", 
+                                    name: "Inventory Manager",
+                                    type: "Paid",
+                                    status: "Active",
+                                    expiryDate: "04-Mar-27",
+                                    lastUsed: "30-Dec-25",
+                                    startDate: "30-Dec-25"
+                                  },
+                                  {
+                                    id: "4195786199",
+                                    name: "Sales Tracker",
+                                    type: "Paid", 
+                                    status: "Active",
+                                    expiryDate: "04-Mar-27",
+                                    lastUsed: "05-Sep-23",
+                                    startDate: "05-Sep-23"
+                                  },
+                                  {
+                                    id: "4121487662",
+                                    name: "Report Generator",
+                                    type: "Paid",
+                                    status: "Active", 
+                                    expiryDate: "04-Mar-27",
+                                    lastUsed: "30-Dec-25",
+                                    startDate: "30-Dec-25"
+                                  },
+                                  {
+                                    id: "4199433912",
+                                    name: "Customer Portal",
+                                    type: "Paid",
+                                    status: "Active",
+                                    expiryDate: "04-Mar-27",
+                                    lastUsed: "30-Dec-25",
+                                    startDate: "30-Dec-25"
+                                  }
+                                ];
                                 
                                 return apps.map((app) => {
                                   // Calculate remaining validity
