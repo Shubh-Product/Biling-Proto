@@ -1265,6 +1265,14 @@ const Dashboard = () => {
             city: "Bangalore",
             state: "Karnataka"
           },
+          currentProduct: {
+            type: "App",
+            planName: "Business Pro Package",
+            licenseModel: "Subscription",
+            duration: "360 Days",
+            expiryDate: "2024-12-15",
+            status: "Active"
+          },
           baseProduct: {
             type: "Desktop",
             planName: "Desktop Standard Multi User",
@@ -1562,6 +1570,14 @@ const Dashboard = () => {
             city: "Bangalore",
             state: "Karnataka"
           },
+          currentProduct: {
+            type: "App",
+            planName: "Business Pro Package",
+            licenseModel: "Subscription",
+            duration: "360 Days",
+            expiryDate: "2024-12-15",
+            status: "Active"
+          },
           baseProduct: {
             type: "Desktop",
             planName: "Desktop Standard Multi User",
@@ -1786,6 +1802,14 @@ const Dashboard = () => {
             gstin: "27KUMAR123456Z",
             city: "Mumbai",
             state: "Maharashtra"
+          },
+          currentProduct: {
+            type: "App",
+            planName: "Business Pro Package",
+            licenseModel: "Subscription",
+            duration: "360 Days",
+            expiryDate: "2024-12-15",
+            status: "Active"
           },
           baseProduct: {
             type: "Desktop",
