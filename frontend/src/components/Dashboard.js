@@ -6999,23 +6999,6 @@ const Dashboard = () => {
                           </p>
                         </div>
 
-                        {/* Summary Boxes */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div className="bg-gray-200 rounded-lg p-4">
-                            <p className="text-gray-600 text-sm mb-2">Advance Credit</p>
-                            <p className="text-2xl font-bold text-gray-900">13500</p>
-                          </div>
-                          <div className="bg-gray-200 rounded-lg p-4">
-                            <p className="text-gray-600 text-sm mb-2">
-                              <input type="checkbox" className="mr-2" />
-                              LP (host non commission discounts)
-                            </p>
-                            <p className="text-2xl font-bold text-gray-900">18000</p>
-                          </div>
-                        </div>
-
-                        <p className="text-gray-600 text-xs">13500 (SUB)</p>
-
                         {/* Apps Details Table */}
                         <div className="overflow-x-auto">
                           <table className="w-full border-collapse">
