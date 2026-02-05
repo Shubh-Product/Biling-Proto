@@ -14863,16 +14863,16 @@ const Dashboard = () => {
                                       <span>Download Invoice</span>
                                     </button>
                                     
-                                    {/* Send Invoice */}
+                                    {/* Download PO */}
                                     <button
                                       onClick={() => {
-                                        console.log('Send invoice for:', transaction.id);
+                                        console.log('Download PO for:', transaction.id);
                                         setOpenMenuId(null);
                                       }}
                                       className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center space-x-2"
                                     >
-                                      <Mail className="w-4 h-4" />
-                                      <span>Send Invoice</span>
+                                      <FileText className="w-4 h-4" />
+                                      <span>Download PO</span>
                                     </button>
                                     
                                     {/* Cancel Link */}
