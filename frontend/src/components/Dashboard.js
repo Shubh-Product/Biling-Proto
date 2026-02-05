@@ -14802,7 +14802,7 @@ const Dashboard = () => {
                               </svg>
                             </button>
                             
-                            {/* Three Dots Menu - Download Invoice, Send Invoice, Cancel */}
+                            {/* Three Dots Menu - Download Invoice, Download PO, Cancel */}
                             <div className="relative">
                               <button
                                 onClick={(e) => {
