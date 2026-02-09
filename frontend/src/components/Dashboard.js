@@ -7306,13 +7306,8 @@ const Dashboard = () => {
                                         duration: e.target.value,
                                         planName: "App Renewal" // Set planName to trigger order summary
                                       }));
-                                      // Auto-scroll to order summary
-                                      setTimeout(() => {
-                                        const orderSummary = document.getElementById('order-summary-section');
-                                        if (orderSummary) {
-                                          orderSummary.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                        }
-                                      }, 300);
+                                      setShowAppOrderSummary(false); // Reset order summary visibility when duration changes
+                                    }}
                                     }}
                                     className="w-4 h-4 text-blue-600 mr-3"
                                   />
