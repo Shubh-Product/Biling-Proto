@@ -7458,6 +7458,25 @@ const Dashboard = () => {
                             </tbody>
                           </table>
                         </div>
+
+                        {/* Next Button - Bottom Right */}
+                        <div className="flex justify-end mt-6">
+                          <Button
+                            onClick={() => {
+                              setShowAppOrderSummary(true);
+                              // Scroll to order summary section
+                              setTimeout(() => {
+                                const orderSummarySection = document.getElementById('app-order-summary-section');
+                                if (orderSummarySection) {
+                                  orderSummarySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }
+                              }, 100);
+                            }}
+                            className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2"
+                          >
+                            Next
+                          </Button>
+                        </div>
                       </div>
                     )}
 
