@@ -7309,7 +7309,6 @@ const Dashboard = () => {
                                       }));
                                       setShowAppOrderSummary(false); // Reset order summary visibility when duration changes
                                     }}
-                                    }}
                                     className="w-4 h-4 text-blue-600 mr-3"
                                   />
                                   <span className="text-gray-700 font-medium">{duration} Days</span>
