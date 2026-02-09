@@ -7624,10 +7624,10 @@ const Dashboard = () => {
                       </div>
                     )}
 
-                    {/* Order Summary for App Renewal - Show when duration is selected */}
-                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'renew' && formData.productType === "App" && formData.duration && (
+                    {/* Order Summary for App Renewal - Show when duration is selected AND Next button is clicked */}
+                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'renew' && formData.productType === "App" && formData.duration && showAppOrderSummary && (
                       <div className="bg-gradient-to-r from-purple-50 to-indigo-50 p-6 rounded-lg border border-purple-200 mt-6">
-                        <h4 id="order-summary-section" className="text-xl font-bold text-purple-900 mb-4">Order Summary</h4>
+                        <h4 id="app-order-summary-section" className="text-xl font-bold text-purple-900 mb-4">Order Summary</h4>
                         
                         <div>
                           {/* Invoice-Style Table */}
