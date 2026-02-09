@@ -1440,6 +1440,7 @@ const Dashboard = () => {
       setCurrentCustomerInfo(serialData.customer);
       setCurrentProductInfo(serialData.currentProduct);
       setSerialValidated(true);
+      setShowAppOrderSummary(false); // Reset App order summary visibility on new serial validation
       // Auto-validate customer for renewal flow to skip customer details step
       setCustomerValidated(true);
       // Set product type and upgrade variant from current product info
