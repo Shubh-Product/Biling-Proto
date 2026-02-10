@@ -13977,6 +13977,58 @@ const Dashboard = () => {
                   </div>
                 )}
 
+                {/* Client Server Count Management Section - Only for Desktop/Mandi New Sales with Client Server plans */}
+                {formData.transactionType === "New Sales" && 
+                 (formData.productType === "Desktop" || formData.productType === "Mandi") && 
+                 formData.duration &&
+                 Object.entries(planQuantities).some(([planName, qty]) => {
+                   const plans = getDesktopPlans(formData.licenseModel, formData.duration);
+                   const plan = plans.find(p => p.name === planName);
+                   return qty > 0 && plan?.applicableTo === "Client Server";
+                 }) && customerValidated && (
+                  <div className="bg-white border border-gray-300 rounded-lg p-6 mt-6">
+                    <h4 className="text-lg font-bold text-gray-900 mb-4">📊 Manage Client Server Counts</h4>
+                    <p className="text-sm text-gray-600 mb-4">Enter the count for each selected Client Server plan:</p>
+                    
+                    <div className="space-y-3">
+                      {Object.entries(planQuantities)
+                        .filter(([planName, qty]) => {
+                          const plans = getDesktopPlans(formData.licenseModel, formData.duration);
+                          const plan = plans.find(p => p.name === planName);
+                          return qty > 0 && plan?.applicableTo === "Client Server";
+                        })
+                        .map(([planName, qty], index) => {
+                          const count = planCounts[planName] || 0;
+                          return (
+                            <div key={planName} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200">
+                              <div className="flex-1">
+                                <p className="font-medium text-gray-900">{planName}</p>
+                                <p className="text-xs text-gray-500 mt-1">
+                                  Quantity Selected: <span className="font-semibold text-blue-600">{qty}</span>
+                                </p>
+                              </div>
+                              <div className="flex items-center space-x-3">
+                                <Label className="text-sm font-medium text-gray-700">Count:</Label>
+                                <Input
+                                  type="number"
+                                  min="0"
+                                  value={count}
+                                  onChange={(e) => {
+                                    const value = parseInt(e.target.value) || 0;
+                                    setPlanCounts(prev => ({ ...prev, [planName]: Math.max(0, value) }));
+                                  }}
+                                  className="w-24 text-center"
+                                  placeholder="0"
+                                />
+                              </div>
+                            </div>
+                          );
+                        })
+                      }
+                    </div>
+                  </div>
+                )}
+
                 {/* Order Summary - Only for New Sales flow */}
                 {(() => {
                   // Only show for New Sales transaction type
