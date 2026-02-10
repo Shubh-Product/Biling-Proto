@@ -13293,39 +13293,6 @@ const Dashboard = () => {
                                     </div>
 
                                     {/* Count Control - Show only for Client Server plans when quantity >= 1 */}
-                                    {isClientServer && quantity >= 1 && (
-                                      <div className="mb-1 flex items-center">
-                                        <span className="text-[10px] text-gray-600 mr-1">Count:</span>
-                                        <div className="flex items-center bg-white rounded border border-gray-300 px-0.5 py-0.5">
-                                          <button
-                                            type="button"
-                                            onClick={() => {
-                                              if (count > 0) {
-                                                const newCounts = { ...planCounts, [plan.name]: count - 1 };
-                                                setPlanCounts(newCounts);
-                                              }
-                                            }}
-                                            className="text-gray-600 hover:text-red-600 font-bold text-[10px] w-3 h-3 flex items-center justify-center"
-                                          >
-                                            -
-                                          </button>
-                                          <span className="text-[10px] font-semibold text-gray-900 min-w-[10px] text-center px-0.5">
-                                            {count}
-                                          </span>
-                                          <button
-                                            type="button"
-                                            onClick={() => {
-                                              const newCounts = { ...planCounts, [plan.name]: count + 1 };
-                                              setPlanCounts(newCounts);
-                                            }}
-                                            className="text-gray-600 hover:text-green-600 font-bold text-[10px] w-3 h-3 flex items-center justify-center"
-                                          >
-                                            +
-                                          </button>
-                                        </div>
-                                      </div>
-                                    )}
-
                                     <div className="absolute bottom-1.5 right-1.5 flex items-center bg-white rounded border border-gray-300 px-1 py-0.5">
                                       <button
                                         type="button"
@@ -13335,6 +13302,14 @@ const Dashboard = () => {
                                             setPlanQuantities(newQuantities);
                                             if (quantity - 1 === 0 && formData.planName === plan.name) {
                                               setFormData(prev => ({ ...prev, planName: "" }));
+                                            }
+                                            // Adjust planCounts array for Client Server plans
+                                            if (isClientServer && planCounts[plan.name]) {
+                                              const currentArray = Array.isArray(planCounts[plan.name]) ? planCounts[plan.name] : [];
+                                              if (currentArray.length > 0) {
+                                                const newArray = currentArray.slice(0, -1);
+                                                setPlanCounts(prev => ({ ...prev, [plan.name]: newArray }));
+                                              }
                                             }
                                           }
                                         }}
@@ -13352,6 +13327,12 @@ const Dashboard = () => {
                                           setPlanQuantities(newQuantities);
                                           if (quantity === 0) {
                                             setFormData(prev => ({ ...prev, planName: plan.name }));
+                                          }
+                                          // Adjust planCounts array for Client Server plans
+                                          if (isClientServer) {
+                                            const currentArray = Array.isArray(planCounts[plan.name]) ? planCounts[plan.name] : [];
+                                            const newArray = [...currentArray, 0];
+                                            setPlanCounts(prev => ({ ...prev, [plan.name]: newArray }));
                                           }
                                         }}
                                         className="text-gray-600 hover:text-green-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
