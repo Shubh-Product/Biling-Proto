@@ -13988,7 +13988,7 @@ const Dashboard = () => {
                  }) && customerValidated && (
                   <div className="bg-white border border-gray-300 rounded-lg p-6 mt-6">
                     <h4 className="text-lg font-bold text-gray-900 mb-4">📊 Manage Client Server Counts</h4>
-                    <p className="text-sm text-gray-600 mb-4">Enter the count for each selected Client Server plan:</p>
+                    <p className="text-sm text-gray-600 mb-4">Enter the count for each Client Server instance. Each row represents one unit.</p>
                     
                     <div className="space-y-3">
                       {Object.entries(planQuantities)
@@ -13997,33 +13997,56 @@ const Dashboard = () => {
                           const plan = plans.find(p => p.name === planName);
                           return qty > 0 && plan?.applicableTo === "Client Server";
                         })
-                        .map(([planName, qty], index) => {
-                          const count = planCounts[planName] || 0;
-                          return (
-                            <div key={planName} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200">
-                              <div className="flex-1">
-                                <p className="font-medium text-gray-900">{planName}</p>
-                                <p className="text-xs text-gray-500 mt-1">
-                                  Quantity Selected: <span className="font-semibold text-blue-600">{qty}</span>
-                                </p>
+                        .map(([planName, qty]) => {
+                          // Initialize planCounts array for this plan if not exists
+                          if (!planCounts[planName] || !Array.isArray(planCounts[planName])) {
+                            const initialCounts = Array(qty).fill(0);
+                            setPlanCounts(prev => ({ ...prev, [planName]: initialCounts }));
+                          }
+                          
+                          // Generate rows equal to quantity
+                          return Array.from({ length: qty }, (_, index) => {
+                            const countArray = planCounts[planName] || [];
+                            const count = countArray[index] || 0;
+                            
+                            return (
+                              <div key={`${planName}-${index}`} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-blue-300 transition-all">
+                                <div className="flex-1">
+                                  <div className="flex items-center space-x-3">
+                                    <span className="flex items-center justify-center w-8 h-8 bg-blue-100 text-blue-700 rounded-full font-bold text-sm">
+                                      {index + 1}
+                                    </span>
+                                    <div>
+                                      <p className="font-medium text-gray-900">{planName}</p>
+                                      <p className="text-xs text-gray-500 mt-0.5">
+                                        Unit {index + 1} of {qty}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="flex items-center space-x-3">
+                                  <Label className="text-sm font-medium text-gray-700">Count:</Label>
+                                  <Input
+                                    type="number"
+                                    min="0"
+                                    value={count}
+                                    onChange={(e) => {
+                                      const value = parseInt(e.target.value) || 0;
+                                      setPlanCounts(prev => {
+                                        const currentArray = Array.isArray(prev[planName]) ? [...prev[planName]] : Array(qty).fill(0);
+                                        currentArray[index] = Math.max(0, value);
+                                        return { ...prev, [planName]: currentArray };
+                                      });
+                                    }}
+                                    className="w-24 text-center font-semibold"
+                                    placeholder="0"
+                                  />
+                                </div>
                               </div>
-                              <div className="flex items-center space-x-3">
-                                <Label className="text-sm font-medium text-gray-700">Count:</Label>
-                                <Input
-                                  type="number"
-                                  min="0"
-                                  value={count}
-                                  onChange={(e) => {
-                                    const value = parseInt(e.target.value) || 0;
-                                    setPlanCounts(prev => ({ ...prev, [planName]: Math.max(0, value) }));
-                                  }}
-                                  className="w-24 text-center"
-                                  placeholder="0"
-                                />
-                              </div>
-                            </div>
-                          );
+                            );
+                          });
                         })
+                        .flat()
                       }
                     </div>
                   </div>
