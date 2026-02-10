@@ -13139,6 +13139,14 @@ const Dashboard = () => {
                                               if (quantity - 1 === 0 && formData.planName === plan.name) {
                                                 setFormData(prev => ({ ...prev, planName: "" }));
                                               }
+                                              // Adjust planCounts array for Client Server plans
+                                              if (isClientServer && planCounts[plan.name]) {
+                                                const currentArray = Array.isArray(planCounts[plan.name]) ? planCounts[plan.name] : [];
+                                                if (currentArray.length > 0) {
+                                                  const newArray = currentArray.slice(0, -1); // Remove last element
+                                                  setPlanCounts(prev => ({ ...prev, [plan.name]: newArray }));
+                                                }
+                                              }
                                             }
                                           }}
                                           className="text-gray-600 hover:text-red-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
@@ -13156,6 +13164,12 @@ const Dashboard = () => {
                                             // Set this plan as selected if it's the first one with quantity
                                             if (quantity === 0) {
                                               setFormData(prev => ({ ...prev, planName: plan.name }));
+                                            }
+                                            // Adjust planCounts array for Client Server plans
+                                            if (isClientServer) {
+                                              const currentArray = Array.isArray(planCounts[plan.name]) ? planCounts[plan.name] : [];
+                                              const newArray = [...currentArray, 0]; // Add new element with 0
+                                              setPlanCounts(prev => ({ ...prev, [plan.name]: newArray }));
                                             }
                                           }}
                                           className="text-gray-600 hover:text-green-600 font-bold text-xs w-4 h-4 flex items-center justify-center"
