@@ -8228,6 +8228,145 @@ const Dashboard = () => {
                       </div>
                     )}
 
+                    {/* RDP Renewal Flow - Duration Selection */}
+                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'renew' && formData.productType === "RDP" && (
+                      <div className="space-y-6">
+                        {/* Duration Selection for RDP Renewal */}
+                        <div className="bg-white border border-gray-300 rounded-lg p-6">
+                          <h4 className="text-lg font-bold text-gray-900 mb-4">Select Renewal Duration</h4>
+                          <div className="flex items-center space-x-4">
+                            <Label className="text-sm font-medium whitespace-nowrap">Duration:</Label>
+                            <div className="flex space-x-3">
+                              {[
+                                { value: "360", label: "360 Days (1 Year)" },
+                                { value: "720", label: "720 Days (2 Years)" },
+                                { value: "1080", label: "1080 Days (3 Years)" }
+                              ].map((duration) => (
+                                <label key={duration.value} className={`flex items-center cursor-pointer px-4 py-2.5 border-2 rounded-lg hover:shadow-md transition-all ${
+                                  formData.duration === duration.value
+                                    ? "border-blue-500 bg-blue-50" 
+                                    : "border-gray-200"
+                                }`}>
+                                  <input
+                                    type="radio"
+                                    name="rdpDuration"
+                                    value={duration.value}
+                                    checked={formData.duration === duration.value}
+                                    onChange={(e) => {
+                                      setFormData(prev => ({ 
+                                        ...prev, 
+                                        duration: e.target.value,
+                                        planName: "RDP Renewal"
+                                      }));
+                                    }}
+                                    className="w-4 h-4 text-blue-600 mr-3"
+                                  />
+                                  <span className="text-gray-700 font-medium">{duration.label}</span>
+                                </label>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* RDP Renewal Order Summary */}
+                    {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'renew' && formData.productType === "RDP" && formData.duration && (
+                      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200 mt-6">
+                        <h4 id="rdp-order-summary-section" className="text-xl font-bold text-blue-900 mb-4">🔄 Renewal Order Summary</h4>
+                        
+                        <div>
+                          {/* Invoice-Style Table */}
+                          <div className="bg-white rounded-lg border border-gray-300 overflow-hidden">
+                            <table className="w-full">
+                              <thead className="bg-gray-100 border-b border-gray-300">
+                                <tr>
+                                  <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">S.No</th>
+                                  <th className="px-3 py-2 text-left text-xs font-semibold text-gray-700">Product</th>
+                                  <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">Duration</th>
+                                  <th className="px-3 py-2 text-center text-xs font-semibold text-gray-700">Quantity</th>
+                                  <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Rate</th>
+                                  <th className="px-3 py-2 text-right text-xs font-semibold text-gray-700">Amount</th>
+                                </tr>
+                              </thead>
+                              <tbody className="divide-y divide-gray-200">
+                                {(() => {
+                                  // RDP Renewal Pricing
+                                  const rdpPricing = {
+                                    "360": 15000,
+                                    "720": 28000,
+                                    "1080": 39000
+                                  };
+                                  const basePrice = rdpPricing[formData.duration] || 15000;
+                                  const currentRdpCount = currentProductInfo?.rdpCount || 1;
+                                  const totalPrice = basePrice * currentRdpCount;
+
+                                  return (
+                                    <tr className="hover:bg-gray-50">
+                                      <td className="px-3 py-2 text-sm text-gray-700">1</td>
+                                      <td className="px-3 py-2 text-sm text-gray-900">
+                                        <div>RDP Renewal</div>
+                                        <div className="text-xs text-gray-600">Current RDP Count: {currentRdpCount}</div>
+                                      </td>
+                                      <td className="px-3 py-2 text-sm text-center text-gray-700">{formData.duration} Days</td>
+                                      <td className="px-3 py-2 text-sm text-center text-gray-700">{currentRdpCount}</td>
+                                      <td className="px-3 py-2 text-sm text-right text-gray-700">₹{basePrice.toLocaleString('en-IN')}</td>
+                                      <td className="px-3 py-2 text-sm text-right font-medium text-gray-900">₹{totalPrice.toLocaleString('en-IN')}</td>
+                                    </tr>
+                                  );
+                                })()}
+                              </tbody>
+                            </table>
+                          </div>
+
+                          {/* Summary Section */}
+                          <div className="mt-4 flex justify-end">
+                            <div className="w-80 space-y-2">
+                              {(() => {
+                                const rdpPricing = {
+                                  "360": 15000,
+                                  "720": 28000,
+                                  "1080": 39000
+                                };
+                                const basePrice = rdpPricing[formData.duration] || 15000;
+                                const currentRdpCount = currentProductInfo?.rdpCount || 1;
+                                const subtotal = basePrice * currentRdpCount;
+                                const gstAmount = Math.round(subtotal * 0.18);
+                                const grandTotal = subtotal + gstAmount;
+
+                                return (
+                                  <>
+                                    <div className="flex justify-between text-sm">
+                                      <span className="text-gray-700">Base Amount:</span>
+                                      <span className="font-semibold text-gray-900">₹{subtotal.toLocaleString('en-IN')}</span>
+                                    </div>
+                                    <div className="flex justify-between text-sm">
+                                      <span className="text-gray-700">GST (18%):</span>
+                                      <span className="font-semibold text-gray-900">₹{gstAmount.toLocaleString('en-IN')}</span>
+                                    </div>
+                                    <div className="border-t border-gray-300 pt-2 flex justify-between">
+                                      <span className="text-base font-bold text-blue-900">Grand Total:</span>
+                                      <span className="text-base font-bold text-blue-900">₹{grandTotal.toLocaleString('en-IN')}</span>
+                                    </div>
+                                  </>
+                                );
+                              })()}
+                            </div>
+                          </div>
+
+                          {/* Send Payment Link Button */}
+                          <div className="mt-6 flex justify-end">
+                            <Button
+                              type="submit"
+                              className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-8 py-3 text-base font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all"
+                            >
+                              Send Payment Link
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
                     {/* Desktop Upgrade Flow - Variant Selection (Desktop tab specific) */}
                     {formData.transactionType === "Renewal/Upgrade" && serialValidated && customerValidated && actionType === 'upgrade' && formData.productType === "Desktop" && (
                       <div className="space-y-6">
