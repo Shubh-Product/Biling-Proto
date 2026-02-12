@@ -5467,15 +5467,15 @@ const Dashboard = () => {
                           {/* Add/Reduce and Renew Buttons for RDP tab - Positioned on right */}
                           {formData.productType === "RDP" && (
                             <div className="flex space-x-3">
-                              {/* Add/Reduce Button */}
+                              {/* Add/Reduce Button - Same as old New button functionality */}
                               <Button 
                                 type="button"
                                 onClick={() => {
-                                  // Switch to Add/Reduce Count flow for RDP
+                                  // Switch to New Sales flow for RDP (same as old New button)
                                   const currentProductType = formData.productType;
                                   setFormData(prev => ({
                                     ...prev,
-                                    transactionType: "Add / Reduce Count",
+                                    transactionType: "New Sales",
                                     productType: currentProductType,
                                     serialNumber: "",
                                     duration: "",
