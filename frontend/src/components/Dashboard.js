@@ -5153,46 +5153,46 @@ const Dashboard = () => {
             <div className="min-h-screen">
               {/* Header */}
               <div className="bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg">
-                <div className="max-w-4xl mx-auto px-6 py-6">
+                <div className="max-w-3xl mx-auto px-3 py-3 sm:px-4 sm:py-4 md:px-6 md:py-5">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-2 sm:space-x-3">
                       <button 
                         onClick={() => {
                           setShowBankSelection(false);
                           setShowAllBanks(false);
                         }}
-                        className="text-white hover:bg-blue-700 p-2 rounded-lg transition-all"
+                        className="text-white hover:bg-blue-700 p-1 sm:p-1.5 rounded-lg transition-all"
                       >
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                         </svg>
                       </button>
-                      <h1 className="text-2xl font-bold text-white">Select Your Bank</h1>
+                      <h1 className="text-base sm:text-lg md:text-xl font-bold text-white">Select Your Bank</h1>
                     </div>
-                    <div className="text-white text-sm">
-                      <p className="font-semibold">Amount to Pay</p>
-                      <p className="text-xl font-bold">₹{(billingData.amount || 0).toLocaleString('en-IN')}</p>
+                    <div className="text-white text-xs sm:text-sm">
+                      <p className="font-semibold hidden sm:block">Amount to Pay</p>
+                      <p className="text-sm sm:text-base md:text-lg font-bold">₹{(billingData.amount || 0).toLocaleString('en-IN')}</p>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Content */}
-              <div className="max-w-4xl mx-auto px-6 py-8">
+              <div className="max-w-3xl mx-auto px-3 py-4 sm:px-4 sm:py-6 md:px-6 md:py-8">
                 {/* Search Bar */}
-                <div className="mb-6">
+                <div className="mb-4 sm:mb-6">
                   <div className="relative">
                     <input
                       type="text"
                       placeholder="Search for your bank..."
-                      className="w-full px-4 py-3 pl-12 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-3 py-2 sm:px-4 sm:py-3 pl-10 sm:pl-12 border border-gray-300 sm:border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base"
                       onChange={(e) => {
                         const searchTerm = e.target.value.toLowerCase();
                         // Filter banks based on search - this would filter the display
                         console.log('Searching for:', searchTerm);
                       }}
                     />
-                    <svg className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="absolute left-3 sm:left-4 top-2 sm:top-3.5 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                   </div>
