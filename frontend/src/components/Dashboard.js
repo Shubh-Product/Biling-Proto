@@ -4730,7 +4730,7 @@ const Dashboard = () => {
                           </div>
                           <div className="text-left">
                             <h3 className="font-bold text-gray-900 text-sm sm:text-base md:text-lg">Cards</h3>
-                            <p className="text-xs text-gray-600 leading-tight">Debit / Credit cards & EMI</p>
+                            <p className="text-xs text-gray-600 leading-tight">Debit / Credit cards</p>
                           </div>
                         </div>
                         <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 group-open:rotate-90 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
