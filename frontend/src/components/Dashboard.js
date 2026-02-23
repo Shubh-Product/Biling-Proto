@@ -5357,7 +5357,8 @@ const Dashboard = () => {
                         </svg>
                       </div>
                     </button>
-                  ))}
+                  ));
+                  })()}
                 </div>
               </div>
             </div>
