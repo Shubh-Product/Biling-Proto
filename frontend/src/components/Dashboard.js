@@ -4694,10 +4694,10 @@ const Dashboard = () => {
                   <div className="bg-white border-2 border-gray-200 rounded-xl hover:border-blue-500 hover:shadow-lg transition-all">
                     <button
                       onClick={() => {
-                        // Redirect to UPI payment screen (as per reference image)
+                        // Show custom UPI payment screen
                         setShowPaymentMethodSelection(false);
-                        setShowPaymentGateway(true);
-                        console.log('Redirecting to Razorpay UPI Payment Screen');
+                        setShowUpiScreen(true);
+                        console.log('Opening UPI Payment Screen');
                       }}
                       className="w-full p-6 flex items-center justify-between"
                     >
