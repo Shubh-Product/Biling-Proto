@@ -4814,7 +4814,7 @@ const Dashboard = () => {
                     </details>
                   </div>
 
-                  {/* Net Banking (Accordion with Popular Banks) */}
+                  {/* Net Banking (Accordion with Bank Grid) */}
                   <div className="bg-white border-2 border-gray-200 rounded-xl hover:border-blue-500 transition-all">
                     <details className="group">
                       <summary className="w-full p-6 flex items-center justify-between cursor-pointer list-none">
@@ -4834,54 +4834,111 @@ const Dashboard = () => {
                         </svg>
                       </summary>
                       
-                      {/* Popular Banks List */}
-                      <div className="border-t border-gray-200 bg-gray-50 p-4">
-                        <div className="space-y-2">
-                          {/* Popular Banks */}
-                          {[
-                            { name: "State Bank of India", code: "SBI" },
-                            { name: "HDFC Bank", code: "HDFC" },
-                            { name: "ICICI Bank", code: "ICICI" },
-                            { name: "Axis Bank", code: "AXIS" },
-                            { name: "Kotak Mahindra Bank", code: "KOTAK" },
-                            { name: "Punjab National Bank", code: "PNB" }
-                          ].map((bank) => (
-                            <button
-                              key={bank.code}
-                              onClick={() => {
-                                setShowPaymentMethodSelection(false);
-                                setShowPaymentGateway(true);
-                                console.log(`Redirecting to Razorpay Net Banking - ${bank.name}`);
-                              }}
-                              className="w-full bg-white border border-gray-200 rounded-lg p-3 hover:border-blue-500 hover:shadow-sm transition-all text-left"
-                            >
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-3">
-                                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                                    <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                    </svg>
-                                  </div>
-                                  <span className="font-medium text-gray-900 text-sm">{bank.name}</span>
-                                </div>
-                                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                </svg>
+                      {/* Bank Grid Layout */}
+                      <div className="border-t border-gray-200 bg-gray-50 p-6">
+                        <h3 className="text-center text-2xl font-bold text-gray-900 mb-6">Select your preferred bank</h3>
+                        
+                        <div className="grid grid-cols-3 gap-6">
+                          {/* HDFC Bank */}
+                          <button
+                            onClick={() => {
+                              setShowPaymentMethodSelection(false);
+                              setShowPaymentGateway(true);
+                              console.log('Redirecting to Razorpay Net Banking - HDFC Bank');
+                            }}
+                            className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 transition-all"
+                          >
+                            <div className="w-24 h-24 bg-white rounded-full shadow-md flex items-center justify-center mb-3">
+                              <div className="w-16 h-16 bg-red-600 rounded-lg flex items-center justify-center">
+                                <span className="text-white font-bold text-xl">H</span>
                               </div>
-                            </button>
-                          ))}
-                          
-                          {/* More Button */}
+                            </div>
+                            <span className="font-bold text-gray-900 text-center">HDFC Bank</span>
+                          </button>
+
+                          {/* Kotak Mahindra Bank */}
+                          <button
+                            onClick={() => {
+                              setShowPaymentMethodSelection(false);
+                              setShowPaymentGateway(true);
+                              console.log('Redirecting to Razorpay Net Banking - Kotak Mahindra Bank');
+                            }}
+                            className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 transition-all"
+                          >
+                            <div className="w-24 h-24 bg-white rounded-full shadow-md flex items-center justify-center mb-3">
+                              <div className="w-16 h-16 bg-blue-900 rounded-full flex items-center justify-center">
+                                <span className="text-white font-bold text-xl">K</span>
+                              </div>
+                            </div>
+                            <span className="font-bold text-gray-900 text-center">Kotak Mahindra Bank</span>
+                          </button>
+
+                          {/* ICICI Bank */}
+                          <button
+                            onClick={() => {
+                              setShowPaymentMethodSelection(false);
+                              setShowPaymentGateway(true);
+                              console.log('Redirecting to Razorpay Net Banking - ICICI Bank');
+                            }}
+                            className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 transition-all"
+                          >
+                            <div className="w-24 h-24 bg-white rounded-full shadow-md flex items-center justify-center mb-3">
+                              <div className="w-16 h-16 bg-orange-600 rounded-lg flex items-center justify-center">
+                                <span className="text-white font-bold text-xl">I</span>
+                              </div>
+                            </div>
+                            <span className="font-bold text-gray-900 text-center">ICICI Bank</span>
+                          </button>
+
+                          {/* State Bank of India */}
+                          <button
+                            onClick={() => {
+                              setShowPaymentMethodSelection(false);
+                              setShowPaymentGateway(true);
+                              console.log('Redirecting to Razorpay Net Banking - State Bank of India');
+                            }}
+                            className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 transition-all"
+                          >
+                            <div className="w-24 h-24 bg-white rounded-full shadow-md flex items-center justify-center mb-3">
+                              <div className="w-16 h-16 bg-blue-700 rounded-full flex items-center justify-center">
+                                <span className="text-white font-bold text-xl">SBI</span>
+                              </div>
+                            </div>
+                            <span className="font-bold text-gray-900 text-center">State Bank of India</span>
+                          </button>
+
+                          {/* Axis Bank */}
+                          <button
+                            onClick={() => {
+                              setShowPaymentMethodSelection(false);
+                              setShowPaymentGateway(true);
+                              console.log('Redirecting to Razorpay Net Banking - Axis Bank');
+                            }}
+                            className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 transition-all"
+                          >
+                            <div className="w-24 h-24 bg-white rounded-full shadow-md flex items-center justify-center mb-3">
+                              <div className="w-16 h-16 bg-red-900 rounded-lg flex items-center justify-center">
+                                <span className="text-white font-bold text-xl">A</span>
+                              </div>
+                            </div>
+                            <span className="font-bold text-gray-900 text-center">Axis Bank</span>
+                          </button>
+
+                          {/* More Banks */}
                           <button
                             onClick={() => {
                               setShowBankSelection(true);
                             }}
-                            className="w-full bg-blue-50 border-2 border-blue-500 text-blue-600 font-semibold rounded-lg p-3 hover:bg-blue-100 transition-all flex items-center justify-center space-x-2"
+                            className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 transition-all"
                           >
-                            <span>More Banks</span>
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                            </svg>
+                            <div className="w-24 h-24 bg-white rounded-full shadow-md flex items-center justify-center mb-3">
+                              <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
+                                <svg className="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                                </svg>
+                              </div>
+                            </div>
+                            <span className="font-bold text-gray-900 text-center">More Banks</span>
                           </button>
                         </div>
                       </div>
