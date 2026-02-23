@@ -4934,115 +4934,68 @@ const Dashboard = () => {
 
               {/* Content */}
               <div className="max-w-4xl mx-auto px-6 py-8">
-                {!showAllBanks ? (
-                  <>
-                    {/* Popular Banks Section */}
-                    <div className="mb-6">
-                      <h2 className="text-lg font-bold text-gray-900 mb-4">Popular Banks</h2>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {[
-                          { name: "State Bank of India", code: "SBI" },
-                          { name: "HDFC Bank", code: "HDFC" },
-                          { name: "ICICI Bank", code: "ICICI" },
-                          { name: "Axis Bank", code: "AXIS" },
-                          { name: "Kotak Mahindra Bank", code: "KOTAK" },
-                          { name: "Punjab National Bank", code: "PNB" }
-                        ].map((bank) => (
-                          <button
-                            key={bank.code}
-                            onClick={() => {
-                              setShowBankSelection(false);
-                              setShowPaymentMethodSelection(false);
-                              setShowPaymentGateway(true);
-                              console.log(`Redirecting to Razorpay Net Banking - ${bank.name}`);
-                            }}
-                            className="bg-white border-2 border-gray-200 rounded-lg p-4 hover:border-blue-500 hover:shadow-md transition-all text-left"
-                          >
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center space-x-3">
-                                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                                  <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                  </svg>
-                                </div>
-                                <span className="font-medium text-gray-900">{bank.name}</span>
-                              </div>
-                              <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                              </svg>
-                            </div>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
+                {/* Search Bar */}
+                <div className="mb-6">
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Search for your bank..."
+                      className="w-full px-4 py-3 pl-12 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      onChange={(e) => {
+                        const searchTerm = e.target.value.toLowerCase();
+                        // Filter banks based on search - this would filter the display
+                        console.log('Searching for:', searchTerm);
+                      }}
+                    />
+                    <svg className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                  </div>
+                </div>
 
-                    {/* More Banks Button */}
-                    <div className="mt-6">
-                      <button
-                        onClick={() => setShowAllBanks(true)}
-                        className="w-full bg-white border-2 border-blue-500 text-blue-600 font-semibold rounded-lg p-4 hover:bg-blue-50 transition-all flex items-center justify-center space-x-2"
-                      >
-                        <span>View More Banks</span>
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </button>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    {/* All Banks Section */}
-                    <div className="mb-4">
-                      <button
-                        onClick={() => setShowAllBanks(false)}
-                        className="text-blue-600 hover:text-blue-700 font-medium flex items-center space-x-1 mb-4"
-                      >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                        </svg>
-                        <span>Back to Popular Banks</span>
-                      </button>
-                      <h2 className="text-lg font-bold text-gray-900 mb-4">All Banks</h2>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {[
-                        "State Bank of India", "HDFC Bank", "ICICI Bank", "Axis Bank", 
-                        "Kotak Mahindra Bank", "Punjab National Bank", "Bank of Baroda",
-                        "Canara Bank", "Union Bank of India", "Bank of India",
-                        "Indian Bank", "Central Bank of India", "Indian Overseas Bank",
-                        "UCO Bank", "Bank of Maharashtra", "Punjab & Sind Bank",
-                        "IDBI Bank", "Yes Bank", "IndusInd Bank", "Federal Bank",
-                        "South Indian Bank", "Karur Vysya Bank", "Tamilnad Mercantile Bank",
-                        "City Union Bank", "Dhanlaxmi Bank", "RBL Bank"
-                      ].map((bank, index) => (
-                        <button
-                          key={index}
-                          onClick={() => {
-                            setShowBankSelection(false);
-                            setShowPaymentMethodSelection(false);
-                            setShowPaymentGateway(true);
-                            console.log(`Redirecting to Razorpay Net Banking - ${bank}`);
-                          }}
-                          className="bg-white border-2 border-gray-200 rounded-lg p-4 hover:border-blue-500 hover:shadow-md transition-all text-left"
-                        >
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-3">
-                              <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                                <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                </svg>
-                              </div>
-                              <span className="font-medium text-gray-900">{bank}</span>
-                            </div>
-                            <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                {/* All Banks Section */}
+                <div className="mb-4">
+                  <h2 className="text-lg font-bold text-gray-900 mb-4">All Banks</h2>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {[
+                    "State Bank of India", "HDFC Bank", "ICICI Bank", "Axis Bank", 
+                    "Kotak Mahindra Bank", "Punjab National Bank", "Bank of Baroda",
+                    "Canara Bank", "Union Bank of India", "Bank of India",
+                    "Indian Bank", "Central Bank of India", "Indian Overseas Bank",
+                    "UCO Bank", "Bank of Maharashtra", "Punjab & Sind Bank",
+                    "IDBI Bank", "Yes Bank", "IndusInd Bank", "Federal Bank",
+                    "South Indian Bank", "Karur Vysya Bank", "Tamilnad Mercantile Bank",
+                    "City Union Bank", "Dhanlaxmi Bank", "RBL Bank",
+                    "Bandhan Bank", "IDFC First Bank", "AU Small Finance Bank",
+                    "Equitas Small Finance Bank"
+                  ].map((bank, index) => (
+                    <button
+                      key={index}
+                      onClick={() => {
+                        setShowBankSelection(false);
+                        setShowPaymentMethodSelection(false);
+                        setShowPaymentGateway(true);
+                        console.log(`Redirecting to Razorpay Net Banking - ${bank}`);
+                      }}
+                      className="bg-white border-2 border-gray-200 rounded-lg p-4 hover:border-blue-500 hover:shadow-md transition-all text-left"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                             </svg>
                           </div>
-                        </button>
-                      ))}
-                    </div>
-                  </>
-                )}
+                          <span className="font-medium text-gray-900">{bank}</span>
+                        </div>
+                        <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </div>
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
