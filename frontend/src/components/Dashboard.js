@@ -5199,10 +5199,10 @@ const Dashboard = () => {
                 </div>
 
                 {/* All Banks Section */}
-                <div className="mb-4">
-                  <h2 className="text-lg font-bold text-gray-900 mb-4">All Banks</h2>
+                <div className="mb-3 sm:mb-4">
+                  <h2 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4">All Banks</h2>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                   {[
                     { name: "State Bank of India", logo: "/bank-logos/sbiLogoOnly.svg" },
                     { name: "HDFC Bank", logo: "/bank-logos/hdfcBankLogoOnly.svg" },
