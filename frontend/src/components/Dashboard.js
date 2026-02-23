@@ -4992,6 +4992,104 @@ const Dashboard = () => {
                   <p className="text-4xl font-bold text-gray-900">₹{(billingData.amount || 0).toLocaleString('en-IN')}</p>
                 </div>
 
+                {/* UPI Apps Selection - Using Actual Icons */}
+                <div className="bg-white rounded-lg border border-gray-300 p-6 mb-6">
+                  <h3 className="text-base font-semibold text-gray-900 mb-4 text-center">Select your UPI app</h3>
+                  <div className="grid grid-cols-5 gap-4">
+                    {/* Google Pay */}
+                    <button
+                      onClick={() => {
+                        setShowUpiScreen(false);
+                        setShowPaymentGateway(true);
+                        console.log('Processing payment via Google Pay');
+                      }}
+                      className="flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-all border-2 border-transparent hover:border-blue-500"
+                    >
+                      <img 
+                        src="/assets/upi-icons/upiGooglePayIcon.svg" 
+                        alt="Google Pay" 
+                        className="w-16 h-16 mb-2"
+                      />
+                      <span className="text-xs text-gray-700 font-medium">Google Pay</span>
+                    </button>
+
+                    {/* PhonePe */}
+                    <button
+                      onClick={() => {
+                        setShowUpiScreen(false);
+                        setShowPaymentGateway(true);
+                        console.log('Processing payment via PhonePe');
+                      }}
+                      className="flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-all border-2 border-transparent hover:border-blue-500"
+                    >
+                      <img 
+                        src="/assets/upi-icons/upiPhonePeIcon.svg" 
+                        alt="PhonePe" 
+                        className="w-16 h-16 mb-2"
+                      />
+                      <span className="text-xs text-gray-700 font-medium">PhonePe</span>
+                    </button>
+
+                    {/* Paytm */}
+                    <button
+                      onClick={() => {
+                        setShowUpiScreen(false);
+                        setShowPaymentGateway(true);
+                        console.log('Processing payment via Paytm');
+                      }}
+                      className="flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-all border-2 border-transparent hover:border-blue-500"
+                    >
+                      <img 
+                        src="/assets/upi-icons/upiPaytmIcon.svg" 
+                        alt="Paytm" 
+                        className="w-16 h-16 mb-2"
+                      />
+                      <span className="text-xs text-gray-700 font-medium">Paytm</span>
+                    </button>
+
+                    {/* BHIM */}
+                    <button
+                      onClick={() => {
+                        setShowUpiScreen(false);
+                        setShowPaymentGateway(true);
+                        console.log('Processing payment via BHIM');
+                      }}
+                      className="flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-all border-2 border-transparent hover:border-blue-500"
+                    >
+                      <img 
+                        src="/assets/upi-icons/paymentModeUPI.svg" 
+                        alt="BHIM" 
+                        className="w-16 h-16 mb-2"
+                      />
+                      <span className="text-xs text-gray-700 font-medium">BHIM</span>
+                    </button>
+
+                    {/* Amazon Pay */}
+                    <button
+                      onClick={() => {
+                        setShowUpiScreen(false);
+                        setShowPaymentGateway(true);
+                        console.log('Processing payment via Amazon Pay');
+                      }}
+                      className="flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-all border-2 border-transparent hover:border-blue-500"
+                    >
+                      <img 
+                        src="/assets/upi-icons/amazonpay.png" 
+                        alt="Amazon Pay" 
+                        className="w-16 h-16 mb-2 object-contain"
+                      />
+                      <span className="text-xs text-gray-700 font-medium">Amazon Pay</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* OR Divider */}
+                <div className="flex items-center mb-6">
+                  <div className="flex-1 border-t border-gray-300"></div>
+                  <span className="px-4 text-sm text-gray-500 font-medium">OR</span>
+                  <div className="flex-1 border-t border-gray-300"></div>
+                </div>
+
                 {/* UPI ID Input */}
                 <div className="bg-white rounded-lg border border-gray-300 p-6 mb-6">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -5021,21 +5119,6 @@ const Dashboard = () => {
                         <li>Your UPI ID will be displayed there</li>
                       </ul>
                     </div>
-                  </div>
-                </div>
-
-                {/* UPI Apps Logos */}
-                <div className="mb-8">
-                  <p className="text-xs text-gray-600 text-center mb-3">Supported UPI apps</p>
-                  <div className="flex justify-center items-center space-x-6 flex-wrap">
-                    {['Google Pay', 'PhonePe', 'Paytm', 'BHIM', 'Amazon Pay'].map((app) => (
-                      <div key={app} className="flex flex-col items-center">
-                        <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-1">
-                          <span className="text-xs font-semibold text-gray-700">{app.slice(0, 2)}</span>
-                        </div>
-                        <span className="text-xs text-gray-600">{app}</span>
-                      </div>
-                    ))}
                   </div>
                 </div>
 
