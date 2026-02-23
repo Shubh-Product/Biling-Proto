@@ -4770,7 +4770,7 @@ const Dashboard = () => {
                             setShowPaymentGateway(true);
                             console.log('Redirecting to Cashfree Credit Card');
                           }}
-                          className="w-full px-2.5 py-2 sm:px-3 sm:py-2.5 md:px-4 md:py-3 flex items-center justify-between hover:bg-gray-100 transition-all border-b border-gray-200"
+                          className="w-full px-2.5 py-2 sm:px-3 sm:py-2.5 md:px-4 md:py-3 flex items-center justify-between hover:bg-gray-100 transition-all"
                         >
                           <div className="flex items-center space-x-2">
                             <div className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -4779,31 +4779,6 @@ const Dashboard = () => {
                             <div className="text-left">
                               <h4 className="font-semibold text-gray-900 text-xs sm:text-sm md:text-base">Credit Card</h4>
                               <p className="text-xs text-gray-600 leading-tight">Visa, Mastercard, Amex</p>
-                            </div>
-                          </div>
-                          <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
-                        </button>
-
-                        {/* EMI on Credit Card */}
-                        <button
-                          onClick={() => {
-                            setShowPaymentMethodSelection(false);
-                            setShowPaymentGateway(true);
-                            console.log('Redirecting to Cashfree Credit Card EMI');
-                          }}
-                          className="w-full px-2.5 py-2 sm:px-3 sm:py-2.5 md:px-4 md:py-3 flex items-center justify-between hover:bg-gray-100 transition-all"
-                        >
-                          <div className="flex items-center space-x-2">
-                            <div className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                              </svg>
-                            </div>
-                            <div className="text-left">
-                              <h4 className="font-semibold text-gray-900 text-xs sm:text-sm md:text-base">EMI on Credit Card</h4>
-                              <p className="text-xs text-gray-600 leading-tight">3, 6, 9, 12 months EMI options</p>
                             </div>
                           </div>
                           <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
