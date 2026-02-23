@@ -4689,13 +4689,14 @@ const Dashboard = () => {
               {/* Content */}
               <div className="max-w-4xl mx-auto px-6 py-8">
                 <div className="space-y-4">
-                  {/* UPI */}
+                  {/* UPI - Direct redirect to UPI screen */}
                   <div className="bg-white border-2 border-gray-200 rounded-xl hover:border-blue-500 hover:shadow-lg transition-all">
                     <button
                       onClick={() => {
+                        // Redirect to UPI payment screen (as per reference image)
                         setShowPaymentMethodSelection(false);
                         setShowPaymentGateway(true);
-                        console.log('Redirecting to Razorpay UPI');
+                        console.log('Redirecting to Razorpay UPI Payment Screen');
                       }}
                       className="w-full p-6 flex items-center justify-between"
                     >
@@ -4812,27 +4813,78 @@ const Dashboard = () => {
                     </details>
                   </div>
 
-                  {/* Net Banking */}
-                  <div className="bg-white border-2 border-gray-200 rounded-xl hover:border-blue-500 hover:shadow-lg transition-all">
-                    <button
-                      onClick={() => setShowBankSelection(true)}
-                      className="w-full p-6 flex items-center justify-between"
-                    >
-                      <div className="flex items-center space-x-4">
-                        <div className="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center">
-                          <svg className="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                          </svg>
+                  {/* Net Banking (Accordion with Popular Banks) */}
+                  <div className="bg-white border-2 border-gray-200 rounded-xl hover:border-blue-500 transition-all">
+                    <details className="group">
+                      <summary className="w-full p-6 flex items-center justify-between cursor-pointer list-none">
+                        <div className="flex items-center space-x-4">
+                          <div className="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center">
+                            <svg className="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                            </svg>
+                          </div>
+                          <div className="text-left">
+                            <h3 className="font-bold text-gray-900 text-xl">Net Banking</h3>
+                            <p className="text-sm text-gray-600">All Indian banks supported</p>
+                          </div>
                         </div>
-                        <div className="text-left">
-                          <h3 className="font-bold text-gray-900 text-xl">Net Banking</h3>
-                          <p className="text-sm text-gray-600">All Indian banks supported</p>
+                        <svg className="w-6 h-6 text-gray-400 group-open:rotate-90 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </summary>
+                      
+                      {/* Popular Banks List */}
+                      <div className="border-t border-gray-200 bg-gray-50 p-4">
+                        <div className="space-y-2">
+                          {/* Popular Banks */}
+                          {[
+                            { name: "State Bank of India", code: "SBI" },
+                            { name: "HDFC Bank", code: "HDFC" },
+                            { name: "ICICI Bank", code: "ICICI" },
+                            { name: "Axis Bank", code: "AXIS" },
+                            { name: "Kotak Mahindra Bank", code: "KOTAK" },
+                            { name: "Punjab National Bank", code: "PNB" }
+                          ].map((bank) => (
+                            <button
+                              key={bank.code}
+                              onClick={() => {
+                                setShowPaymentMethodSelection(false);
+                                setShowPaymentGateway(true);
+                                console.log(`Redirecting to Razorpay Net Banking - ${bank.name}`);
+                              }}
+                              className="w-full bg-white border border-gray-200 rounded-lg p-3 hover:border-blue-500 hover:shadow-sm transition-all text-left"
+                            >
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-3">
+                                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                    </svg>
+                                  </div>
+                                  <span className="font-medium text-gray-900 text-sm">{bank.name}</span>
+                                </div>
+                                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                              </div>
+                            </button>
+                          ))}
+                          
+                          {/* More Button */}
+                          <button
+                            onClick={() => {
+                              setShowBankSelection(true);
+                            }}
+                            className="w-full bg-blue-50 border-2 border-blue-500 text-blue-600 font-semibold rounded-lg p-3 hover:bg-blue-100 transition-all flex items-center justify-center space-x-2"
+                          >
+                            <span>More Banks</span>
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </button>
                         </div>
                       </div>
-                      <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
+                    </details>
                   </div>
                 </div>
 
@@ -4850,7 +4902,7 @@ const Dashboard = () => {
           </div>
         )}
 
-        {/* Bank Selection Screen - FULL PAGE */}
+        {/* Bank Selection Screen - FULL PAGE with Search */}
         {showBankSelection && (
           <div className="fixed inset-0 bg-gray-50 z-[60] overflow-y-auto">
             <div className="min-h-screen">
