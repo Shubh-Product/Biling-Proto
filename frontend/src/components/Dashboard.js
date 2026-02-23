@@ -5008,7 +5008,7 @@ const Dashboard = () => {
                       <img 
                         src="/assets/upi-icons/upiGooglePayIcon.svg" 
                         alt="Google Pay" 
-                        className="w-16 h-16 mb-2"
+                        className="w-8 h-8 mb-2"
                       />
                       <span className="text-xs text-gray-700 font-medium">Google Pay</span>
                     </button>
@@ -5025,7 +5025,7 @@ const Dashboard = () => {
                       <img 
                         src="/assets/upi-icons/upiPhonePeIcon.svg" 
                         alt="PhonePe" 
-                        className="w-16 h-16 mb-2"
+                        className="w-8 h-8 mb-2"
                       />
                       <span className="text-xs text-gray-700 font-medium">PhonePe</span>
                     </button>
@@ -5042,7 +5042,7 @@ const Dashboard = () => {
                       <img 
                         src="/assets/upi-icons/upiPaytmIcon.svg" 
                         alt="Paytm" 
-                        className="w-16 h-16 mb-2"
+                        className="w-8 h-8 mb-2"
                       />
                       <span className="text-xs text-gray-700 font-medium">Paytm</span>
                     </button>
@@ -5059,7 +5059,7 @@ const Dashboard = () => {
                       <img 
                         src="/assets/upi-icons/paymentModeUPI.svg" 
                         alt="BHIM" 
-                        className="w-16 h-16 mb-2"
+                        className="w-8 h-8 mb-2"
                       />
                       <span className="text-xs text-gray-700 font-medium">BHIM</span>
                     </button>
@@ -5076,7 +5076,7 @@ const Dashboard = () => {
                       <img 
                         src="/assets/upi-icons/amazonpay.png" 
                         alt="Amazon Pay" 
-                        className="w-16 h-16 mb-2 object-contain"
+                        className="w-8 h-8 mb-2 object-contain"
                       />
                       <span className="text-xs text-gray-700 font-medium">Amazon Pay</span>
                     </button>
@@ -5103,23 +5103,6 @@ const Dashboard = () => {
                   <p className="text-xs text-gray-500 mt-2">
                     Please enter your UPI ID (e.g., 9876543210@paytm, username@bank)
                   </p>
-                </div>
-
-                {/* Help Text */}
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                  <div className="flex items-start space-x-3">
-                    <svg className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <div className="text-sm text-blue-800">
-                      <p className="font-medium mb-1">How to find your UPI ID?</p>
-                      <ul className="list-disc list-inside space-y-1 text-blue-700">
-                        <li>Open your UPI app (Google Pay, PhonePe, Paytm, etc.)</li>
-                        <li>Go to Profile or Settings</li>
-                        <li>Your UPI ID will be displayed there</li>
-                      </ul>
-                    </div>
-                  </div>
                 </div>
 
                 {/* Spacer to push button to bottom */}
