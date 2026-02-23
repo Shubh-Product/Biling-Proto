@@ -5249,11 +5249,11 @@ const Dashboard = () => {
                         setShowPaymentGateway(true);
                         console.log(`Redirecting to Razorpay Net Banking - ${bank.name}`);
                       }}
-                      className="bg-white border-2 border-gray-200 rounded-lg p-4 hover:border-blue-500 hover:shadow-md transition-all text-left"
+                      className="bg-white border border-gray-200 sm:border-2 rounded-lg p-2 sm:p-3 md:p-4 hover:border-blue-500 hover:shadow-md transition-all text-left"
                     >
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center p-1">
+                        <div className="flex items-center space-x-2 sm:space-x-3">
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg flex items-center justify-center p-1 flex-shrink-0">
                             <img 
                               src={bank.logo} 
                               alt={bank.name}
@@ -5261,13 +5261,13 @@ const Dashboard = () => {
                               onError={(e) => {
                                 // Fallback to icon if image fails to load
                                 e.target.style.display = 'none';
-                                e.target.parentElement.innerHTML = '<svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>';
+                                e.target.parentElement.innerHTML = '<svg class="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>';
                               }}
                             />
                           </div>
-                          <span className="font-medium text-gray-900">{bank.name}</span>
+                          <span className="font-medium text-gray-900 text-sm sm:text-base">{bank.name}</span>
                         </div>
-                        <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                       </div>
