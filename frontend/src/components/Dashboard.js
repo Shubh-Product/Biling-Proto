@@ -4815,30 +4815,30 @@ const Dashboard = () => {
                   </div>
 
                   {/* Net Banking (Accordion with Bank Grid) */}
-                  <div className="bg-white border-2 border-gray-200 rounded-xl hover:border-blue-500 transition-all">
+                  <div className="bg-white border border-gray-200 rounded-lg sm:rounded-xl hover:border-blue-500 transition-all">
                     <details className="group">
-                      <summary className="w-full p-6 flex items-center justify-between cursor-pointer list-none">
-                        <div className="flex items-center space-x-4">
-                          <div className="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center">
-                            <svg className="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <summary className="w-full p-3 sm:p-4 md:p-5 flex items-center justify-between cursor-pointer list-none">
+                        <div className="flex items-center space-x-2 sm:space-x-3">
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                             </svg>
                           </div>
                           <div className="text-left">
-                            <h3 className="font-bold text-gray-900 text-xl">Net Banking</h3>
-                            <p className="text-sm text-gray-600">All Indian banks supported</p>
+                            <h3 className="font-bold text-gray-900 text-base sm:text-lg">Net Banking</h3>
+                            <p className="text-xs text-gray-600">All Indian banks supported</p>
                           </div>
                         </div>
-                        <svg className="w-6 h-6 text-gray-400 group-open:rotate-90 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 group-open:rotate-90 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                       </summary>
                       
                       {/* Bank Grid Layout */}
-                      <div className="border-t border-gray-200 bg-gray-50 p-6">
-                        <h3 className="text-center text-2xl font-bold text-gray-900 mb-6">Select your preferred bank</h3>
+                      <div className="border-t border-gray-200 bg-gray-50 p-3 sm:p-4">
+                        <h3 className="text-center text-sm sm:text-base md:text-lg font-bold text-gray-900 mb-3 sm:mb-4">Select your preferred bank</h3>
                         
-                        <div className="grid grid-cols-3 gap-6">
+                        <div className="grid grid-cols-3 gap-2 sm:gap-3">
                           {/* HDFC Bank */}
                           <button
                             onClick={() => {
@@ -4846,16 +4846,16 @@ const Dashboard = () => {
                               setShowPaymentGateway(true);
                               console.log('Redirecting to Razorpay Net Banking - HDFC Bank');
                             }}
-                            className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 transition-all"
+                            className="flex flex-col items-center p-2 sm:p-3 rounded-lg hover:bg-gray-100 transition-all"
                           >
-                            <div className="w-24 h-24 bg-white rounded-full shadow-md flex items-center justify-center mb-3">
+                            <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-white rounded-full shadow-md flex items-center justify-center mb-1 sm:mb-2">
                               <img 
                                 src="https://customer-assets.emergentagent.com/job_ce709b91-7229-4cd5-8770-3cc10965f7ab/artifacts/unitk67k_hdfcBankLogoOnly.svg" 
                                 alt="HDFC Bank" 
-                                className="w-16 h-16 object-contain"
+                                className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain"
                               />
                             </div>
-                            <span className="font-bold text-gray-900 text-center">HDFC Bank</span>
+                            <span className="font-bold text-gray-900 text-center text-xs sm:text-sm">HDFC Bank</span>
                           </button>
 
                           {/* Kotak Mahindra Bank */}
@@ -4865,16 +4865,16 @@ const Dashboard = () => {
                               setShowPaymentGateway(true);
                               console.log('Redirecting to Razorpay Net Banking - Kotak Mahindra Bank');
                             }}
-                            className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 transition-all"
+                            className="flex flex-col items-center p-2 sm:p-3 rounded-lg hover:bg-gray-100 transition-all"
                           >
-                            <div className="w-24 h-24 bg-white rounded-full shadow-md flex items-center justify-center mb-3">
+                            <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-white rounded-full shadow-md flex items-center justify-center mb-1 sm:mb-2">
                               <img 
                                 src="https://customer-assets.emergentagent.com/job_ce709b91-7229-4cd5-8770-3cc10965f7ab/artifacts/o13z30zv_kotakBankLogoOnly.png" 
                                 alt="Kotak Mahindra Bank" 
-                                className="w-16 h-16 object-contain"
+                                className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain"
                               />
                             </div>
-                            <span className="font-bold text-gray-900 text-center">Kotak Mahindra Bank</span>
+                            <span className="font-bold text-gray-900 text-center text-xs sm:text-sm">Kotak Mahindra Bank</span>
                           </button>
 
                           {/* ICICI Bank */}
@@ -4884,16 +4884,16 @@ const Dashboard = () => {
                               setShowPaymentGateway(true);
                               console.log('Redirecting to Razorpay Net Banking - ICICI Bank');
                             }}
-                            className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 transition-all"
+                            className="flex flex-col items-center p-2 sm:p-3 rounded-lg hover:bg-gray-100 transition-all"
                           >
-                            <div className="w-24 h-24 bg-white rounded-full shadow-md flex items-center justify-center mb-3">
+                            <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-white rounded-full shadow-md flex items-center justify-center mb-1 sm:mb-2">
                               <img 
                                 src="https://customer-assets.emergentagent.com/job_ce709b91-7229-4cd5-8770-3cc10965f7ab/artifacts/5py163ts_iciciBankLogoOnly.svg" 
                                 alt="ICICI Bank" 
-                                className="w-16 h-16 object-contain"
+                                className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain"
                               />
                             </div>
-                            <span className="font-bold text-gray-900 text-center">ICICI Bank</span>
+                            <span className="font-bold text-gray-900 text-center text-xs sm:text-sm">ICICI Bank</span>
                           </button>
 
                           {/* State Bank of India */}
@@ -4903,16 +4903,16 @@ const Dashboard = () => {
                               setShowPaymentGateway(true);
                               console.log('Redirecting to Razorpay Net Banking - State Bank of India');
                             }}
-                            className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 transition-all"
+                            className="flex flex-col items-center p-2 sm:p-3 rounded-lg hover:bg-gray-100 transition-all"
                           >
-                            <div className="w-24 h-24 bg-white rounded-full shadow-md flex items-center justify-center mb-3">
+                            <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-white rounded-full shadow-md flex items-center justify-center mb-1 sm:mb-2">
                               <img 
                                 src="https://customer-assets.emergentagent.com/job_ce709b91-7229-4cd5-8770-3cc10965f7ab/artifacts/mq9pq7dw_sbiLogoOnly.svg" 
                                 alt="State Bank of India" 
-                                className="w-16 h-16 object-contain"
+                                className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain"
                               />
                             </div>
-                            <span className="font-bold text-gray-900 text-center">State Bank of India</span>
+                            <span className="font-bold text-gray-900 text-center text-xs sm:text-sm">State Bank of India</span>
                           </button>
 
                           {/* Axis Bank */}
@@ -4922,16 +4922,16 @@ const Dashboard = () => {
                               setShowPaymentGateway(true);
                               console.log('Redirecting to Razorpay Net Banking - Axis Bank');
                             }}
-                            className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 transition-all"
+                            className="flex flex-col items-center p-2 sm:p-3 rounded-lg hover:bg-gray-100 transition-all"
                           >
-                            <div className="w-24 h-24 bg-white rounded-full shadow-md flex items-center justify-center mb-3">
+                            <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-white rounded-full shadow-md flex items-center justify-center mb-1 sm:mb-2">
                               <img 
                                 src="https://customer-assets.emergentagent.com/job_ce709b91-7229-4cd5-8770-3cc10965f7ab/artifacts/7556e74t_axisBankLogoOnly.svg" 
                                 alt="Axis Bank" 
-                                className="w-16 h-16 object-contain"
+                                className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain"
                               />
                             </div>
-                            <span className="font-bold text-gray-900 text-center">Axis Bank</span>
+                            <span className="font-bold text-gray-900 text-center text-xs sm:text-sm">Axis Bank</span>
                           </button>
 
                           {/* More Banks */}
@@ -4939,16 +4939,16 @@ const Dashboard = () => {
                             onClick={() => {
                               setShowBankSelection(true);
                             }}
-                            className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 transition-all"
+                            className="flex flex-col items-center p-2 sm:p-3 rounded-lg hover:bg-gray-100 transition-all"
                           >
-                            <div className="w-24 h-24 bg-white rounded-full shadow-md flex items-center justify-center mb-3">
-                              <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
-                                <svg className="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-white rounded-full shadow-md flex items-center justify-center mb-1 sm:mb-2">
+                              <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gray-200 rounded-full flex items-center justify-center">
+                                <svg className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
                                 </svg>
                               </div>
                             </div>
-                            <span className="font-bold text-gray-900 text-center">More Banks</span>
+                            <span className="font-bold text-gray-900 text-center text-xs sm:text-sm">More Banks</span>
                           </button>
                         </div>
                       </div>
