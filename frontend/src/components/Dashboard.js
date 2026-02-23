@@ -4906,9 +4906,11 @@ const Dashboard = () => {
                             className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 transition-all"
                           >
                             <div className="w-24 h-24 bg-white rounded-full shadow-md flex items-center justify-center mb-3">
-                              <div className="w-16 h-16 bg-blue-700 rounded-full flex items-center justify-center">
-                                <span className="text-white font-bold text-xl">SBI</span>
-                              </div>
+                              <img 
+                                src="https://customer-assets.emergentagent.com/job_ce709b91-7229-4cd5-8770-3cc10965f7ab/artifacts/mq9pq7dw_sbiLogoOnly.svg" 
+                                alt="State Bank of India" 
+                                className="w-16 h-16 object-contain"
+                              />
                             </div>
                             <span className="font-bold text-gray-900 text-center">State Bank of India</span>
                           </button>
