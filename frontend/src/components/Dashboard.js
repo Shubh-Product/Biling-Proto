@@ -4719,21 +4719,21 @@ const Dashboard = () => {
                   </div>
 
                   {/* Cards (Accordion) */}
-                  <div className="bg-white border-2 border-gray-200 rounded-xl hover:border-blue-500 transition-all">
+                  <div className="bg-white border border-gray-200 rounded-lg sm:rounded-xl hover:border-blue-500 transition-all">
                     <details className="group">
-                      <summary className="w-full p-6 flex items-center justify-between cursor-pointer list-none">
-                        <div className="flex items-center space-x-4">
-                          <div className="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center">
-                            <svg className="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <summary className="w-full p-3 sm:p-4 md:p-5 flex items-center justify-between cursor-pointer list-none">
+                        <div className="flex items-center space-x-2 sm:space-x-3">
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                             </svg>
                           </div>
                           <div className="text-left">
-                            <h3 className="font-bold text-gray-900 text-xl">Cards</h3>
-                            <p className="text-sm text-gray-600">Debit / Credit cards & EMI</p>
+                            <h3 className="font-bold text-gray-900 text-base sm:text-lg">Cards</h3>
+                            <p className="text-xs text-gray-600">Debit / Credit cards & EMI</p>
                           </div>
                         </div>
-                        <svg className="w-6 h-6 text-gray-400 group-open:rotate-90 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 group-open:rotate-90 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                       </summary>
@@ -4747,18 +4747,18 @@ const Dashboard = () => {
                             setShowPaymentGateway(true);
                             console.log('Redirecting to Razorpay Debit Card');
                           }}
-                          className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-100 transition-all border-b border-gray-200"
+                          className="w-full px-3 py-2 sm:px-4 sm:py-3 flex items-center justify-between hover:bg-gray-100 transition-all border-b border-gray-200"
                         >
-                          <div className="flex items-center space-x-3">
-                            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                              <CreditCard className="w-6 h-6 text-green-600" />
+                          <div className="flex items-center space-x-2">
+                            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                              <CreditCard className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
                             </div>
                             <div className="text-left">
-                              <h4 className="font-semibold text-gray-900 text-lg">Debit Card</h4>
-                              <p className="text-xs text-gray-600">Visa, Mastercard, RuPay</p>
+                              <h4 className="font-semibold text-gray-900 text-sm sm:text-base">Debit Card</h4>
+                              <p className="text-xs text-gray-600 leading-tight">Visa, Mastercard, RuPay</p>
                             </div>
                           </div>
-                          <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </button>
@@ -4770,18 +4770,18 @@ const Dashboard = () => {
                             setShowPaymentGateway(true);
                             console.log('Redirecting to Cashfree Credit Card');
                           }}
-                          className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-100 transition-all border-b border-gray-200"
+                          className="w-full px-3 py-2 sm:px-4 sm:py-3 flex items-center justify-between hover:bg-gray-100 transition-all border-b border-gray-200"
                         >
-                          <div className="flex items-center space-x-3">
-                            <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
-                              <CreditCard className="w-6 h-6 text-orange-600" />
+                          <div className="flex items-center space-x-2">
+                            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                              <CreditCard className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
                             </div>
                             <div className="text-left">
-                              <h4 className="font-semibold text-gray-900 text-lg">Credit Card</h4>
-                              <p className="text-xs text-gray-600">Visa, Mastercard, Amex</p>
+                              <h4 className="font-semibold text-gray-900 text-sm sm:text-base">Credit Card</h4>
+                              <p className="text-xs text-gray-600 leading-tight">Visa, Mastercard, Amex</p>
                             </div>
                           </div>
-                          <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </button>
@@ -4793,20 +4793,20 @@ const Dashboard = () => {
                             setShowPaymentGateway(true);
                             console.log('Redirecting to Cashfree Credit Card EMI');
                           }}
-                          className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-100 transition-all"
+                          className="w-full px-3 py-2 sm:px-4 sm:py-3 flex items-center justify-between hover:bg-gray-100 transition-all"
                         >
-                          <div className="flex items-center space-x-3">
-                            <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
-                              <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <div className="flex items-center space-x-2">
+                            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                              <svg className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                               </svg>
                             </div>
                             <div className="text-left">
-                              <h4 className="font-semibold text-gray-900 text-lg">EMI on Credit Card</h4>
-                              <p className="text-xs text-gray-600">3, 6, 9, 12 months EMI options</p>
+                              <h4 className="font-semibold text-gray-900 text-sm sm:text-base">EMI on Credit Card</h4>
+                              <p className="text-xs text-gray-600 leading-tight">3, 6, 9, 12 months EMI options</p>
                             </div>
                           </div>
-                          <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </button>
