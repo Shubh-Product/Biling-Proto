@@ -4846,16 +4846,16 @@ const Dashboard = () => {
                               setShowPaymentGateway(true);
                               console.log('Redirecting to Razorpay Net Banking - HDFC Bank');
                             }}
-                            className="flex flex-col items-center p-2 sm:p-3 rounded-lg hover:bg-gray-100 transition-all"
+                            className="flex flex-col items-center p-1.5 sm:p-2 rounded-lg hover:bg-gray-100 transition-all"
                           >
-                            <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-white rounded-full shadow-md flex items-center justify-center mb-1 sm:mb-2">
+                            <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-white rounded-full shadow-md flex items-center justify-center mb-1">
                               <img 
                                 src="https://customer-assets.emergentagent.com/job_ce709b91-7229-4cd5-8770-3cc10965f7ab/artifacts/unitk67k_hdfcBankLogoOnly.svg" 
                                 alt="HDFC Bank" 
-                                className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain"
+                                className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 object-contain"
                               />
                             </div>
-                            <span className="font-bold text-gray-900 text-center text-xs sm:text-sm">HDFC Bank</span>
+                            <span className="font-bold text-gray-900 text-center text-xs leading-tight">HDFC Bank</span>
                           </button>
 
                           {/* Kotak Mahindra Bank */}
