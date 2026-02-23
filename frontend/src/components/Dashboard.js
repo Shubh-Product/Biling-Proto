@@ -5204,16 +5204,42 @@ const Dashboard = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {[
-                    "State Bank of India", "HDFC Bank", "ICICI Bank", "Axis Bank", 
-                    "Kotak Mahindra Bank", "Punjab National Bank", "Bank of Baroda",
-                    "Canara Bank", "Union Bank of India", "Bank of India",
-                    "Indian Bank", "Central Bank of India", "Indian Overseas Bank",
-                    "UCO Bank", "Bank of Maharashtra", "Punjab & Sind Bank",
-                    "IDBI Bank", "Yes Bank", "IndusInd Bank", "Federal Bank",
-                    "South Indian Bank", "Karur Vysya Bank", "Tamilnad Mercantile Bank",
-                    "City Union Bank", "Dhanlaxmi Bank", "RBL Bank",
-                    "Bandhan Bank", "IDFC First Bank", "AU Small Finance Bank",
-                    "Equitas Small Finance Bank"
+                    { name: "State Bank of India", logo: "/bank-logos/sbiLogoOnly.svg" },
+                    { name: "HDFC Bank", logo: "/bank-logos/hdfcBankLogoOnly.svg" },
+                    { name: "ICICI Bank", logo: "/bank-logos/iciciBankLogoOnly.svg" },
+                    { name: "Axis Bank", logo: "/bank-logos/axisBankLogoOnly.svg" },
+                    { name: "Kotak Mahindra Bank", logo: "/bank-logos/kotakBankLogoOnly.png" },
+                    { name: "Punjab National Bank", logo: "/bank-logos/pnbBankLogoOnly.png" },
+                    { name: "Canara Bank", logo: "/bank-logos/canaraBankLogoOnly.png" },
+                    { name: "Union Bank of India", logo: "/bank-logos/unionBankLogoOnly.png" },
+                    { name: "Bank of India", logo: "/bank-logos/bankOfIndiaLogoOnly.png" },
+                    { name: "Indian Bank", logo: "/bank-logos/indianBankLogoOnly.png" },
+                    { name: "Central Bank of India", logo: "/bank-logos/centralBankofIndiaLogoOnly.svg" },
+                    { name: "Indian Overseas Bank", logo: "/bank-logos/indianOverseasBankLogoOnly.png" },
+                    { name: "UCO Bank", logo: "/bank-logos/ucoBankLogoOnly.png" },
+                    { name: "Bank of Maharashtra", logo: "/bank-logos/bankofMaharashtraLogoOnly.png" },
+                    { name: "Punjab & Sind Bank", logo: "/bank-logos/punjabSindhBankLogoOnly.png" },
+                    { name: "IDBI Bank", logo: "/bank-logos/idbiBankLogoOnly.png" },
+                    { name: "Yes Bank", logo: "/bank-logos/yesBankLogoOnly.svg" },
+                    { name: "IndusInd Bank", logo: "/bank-logos/indusindBankLogoOnly.svg" },
+                    { name: "Federal Bank", logo: "/bank-logos/federalBankLogoOnly.png" },
+                    { name: "South Indian Bank", logo: "/bank-logos/southIndianBankLogoOnly.png" },
+                    { name: "Karur Vysya Bank", logo: "/bank-logos/karurVyasBankLogoOnly.png" },
+                    { name: "Tamilnad Mercantile Bank", logo: "/bank-logos/tamilandBankLogoOnly.png" },
+                    { name: "City Union Bank", logo: "/bank-logos/cityUnionBankLogoOnly.png" },
+                    { name: "Dhanlaxmi Bank", logo: "/bank-logos/dhanlaxmiBankLogoOnly.png" },
+                    { name: "RBL Bank", logo: "/bank-logos/rblBankLogoOnly.svg" },
+                    { name: "Bandhan Bank", logo: "/bank-logos/bandhanBankLogoOnly.png" },
+                    { name: "IDFC First Bank", logo: "/bank-logos/idfcBankLogoOnly.png" },
+                    { name: "AU Small Finance Bank", logo: "/bank-logos/auBankLogoOnly.png" },
+                    { name: "Jammu & Kashmir Bank", logo: "/bank-logos/jammuKashmirBankLogoOnly.png" },
+                    { name: "Karnataka Bank", logo: "/bank-logos/karnatakaBankLogoOnly.png" },
+                    { name: "DCB Bank", logo: "/bank-logos/dcbBankLogoOnly.png" },
+                    { name: "Standard Chartered Bank", logo: "/bank-logos/standardCharteredBankLogoOnly.png" },
+                    { name: "Deutsche Bank", logo: "/bank-logos/deutscheBankLogoOnly.svg" },
+                    { name: "Shamrao Vithal Bank", logo: "/bank-logos/shamraoVithalBankLogoOnly.png" },
+                    { name: "Shivalik Bank", logo: "/bank-logos/shivalikBankLogoOnly.png" },
+                    { name: "Janata Sahakari Bank", logo: "/bank-logos/janataSahakariBankLogoOnly.png" }
                   ].map((bank, index) => (
                     <button
                       key={index}
@@ -5221,18 +5247,25 @@ const Dashboard = () => {
                         setShowBankSelection(false);
                         setShowPaymentMethodSelection(false);
                         setShowPaymentGateway(true);
-                        console.log(`Redirecting to Razorpay Net Banking - ${bank}`);
+                        console.log(`Redirecting to Razorpay Net Banking - ${bank.name}`);
                       }}
                       className="bg-white border-2 border-gray-200 rounded-lg p-4 hover:border-blue-500 hover:shadow-md transition-all text-left"
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                            <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                            </svg>
+                          <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center p-1">
+                            <img 
+                              src={bank.logo} 
+                              alt={bank.name}
+                              className="w-full h-full object-contain"
+                              onError={(e) => {
+                                // Fallback to icon if image fails to load
+                                e.target.style.display = 'none';
+                                e.target.parentElement.innerHTML = '<svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>';
+                              }}
+                            />
                           </div>
-                          <span className="font-medium text-gray-900">{bank}</span>
+                          <span className="font-medium text-gray-900">{bank.name}</span>
                         </div>
                         <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
