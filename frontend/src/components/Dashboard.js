@@ -4804,8 +4804,20 @@ const Dashboard = () => {
 
                   {/* Net Banking (Accordion with Bank Grid) */}
                   <div className="bg-white border border-gray-200 rounded-lg hover:border-blue-500 transition-all">
-                    <details className="group">
-                      <summary className="w-full p-2.5 sm:p-3 md:p-4 flex items-center justify-between cursor-pointer list-none">
+                    <details 
+                      className="group"
+                      open={openAccordion === 'netbanking'}
+                      onToggle={(e) => {
+                        e.preventDefault();
+                      }}
+                    >
+                      <summary 
+                        className="w-full p-2.5 sm:p-3 md:p-4 flex items-center justify-between cursor-pointer list-none"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setOpenAccordion(openAccordion === 'netbanking' ? null : 'netbanking');
+                        }}
+                      >
                         <div className="flex items-center space-x-2">
                           <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
                             <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
