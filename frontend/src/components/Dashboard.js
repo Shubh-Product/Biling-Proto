@@ -4643,7 +4643,7 @@ const Dashboard = () => {
                 {/* Proceed to Pay Button */}
                 <div className="mt-auto pt-3 flex justify-center flex-shrink-0">
                   <button 
-                    onClick={() => setShowPaymentGateway(true)}
+                    onClick={() => setShowPaymentMethodSelection(true)}
                     className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm font-semibold px-10 py-2.5 rounded-lg shadow-lg flex items-center gap-2 transition-all"
                   >
                     Proceed to Pay
