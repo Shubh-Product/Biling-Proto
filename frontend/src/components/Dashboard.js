@@ -4974,7 +4974,53 @@ const Dashboard = () => {
         {showUpiScreen && (
           <div className="fixed inset-0 bg-gray-50 z-[60] overflow-y-auto">
             <div className="min-h-screen flex flex-col">
-              {/* Header */}
+              {/* Payment Gateway Branding Header */}
+              <div className="bg-white border-b border-gray-200">
+                <div className="max-w-5xl mx-auto px-4 py-3">
+                  <div className="flex items-center justify-between">
+                    {/* Left side - eazypay Pro by ICICI Bank */}
+                    <div className="flex items-start">
+                      <div className="flex flex-col">
+                        <div className="flex items-center space-x-1 mb-1">
+                          <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center">
+                            <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="text-2xl font-bold" style={{ color: '#1a5490' }}>eazy<span style={{ color: '#ff6b35' }}>pay</span></span>
+                          </div>
+                        </div>
+                        <div className="text-center">
+                          <span className="text-base font-semibold text-red-600 ml-8">Pro</span>
+                        </div>
+                        <div className="flex items-center space-x-1 text-sm text-gray-600 ml-8">
+                          <span className="font-medium">BY</span>
+                          <div className="flex items-center">
+                            <div className="w-4 h-4 bg-orange-500 rounded-full mr-1"></div>
+                            <span className="font-bold" style={{ color: '#ff6b35' }}>ICICI</span>
+                            <span className="font-bold ml-1" style={{ color: '#1a5490' }}>Bank</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Divider */}
+                    <div className="h-20 w-px bg-gray-300 mx-6"></div>
+
+                    {/* Right side - Powered by CCAvenue */}
+                    <div className="flex flex-col items-end">
+                      <span className="text-xs text-gray-500 font-medium mb-1">POWERED BY</span>
+                      <div className="flex items-center space-x-1">
+                        <span className="text-3xl font-bold" style={{ color: '#2196F3' }}>CC</span>
+                        <span className="text-3xl font-bold text-gray-900">Avenue</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Navigation Header */}
               <div className="bg-white shadow-sm">
                 <div className="max-w-2xl mx-auto px-6 py-4">
                   <div className="flex items-center space-x-4">
