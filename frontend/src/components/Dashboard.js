@@ -4366,6 +4366,7 @@ const Dashboard = () => {
     const [gstinFetching, setGstinFetching] = React.useState(false);
     const [errors, setErrors] = React.useState({});
     const [showPaymentGateway, setShowPaymentGateway] = React.useState(false);
+    const [showPaymentMethodSelection, setShowPaymentMethodSelection] = React.useState(false);
     const [showAcknowledgement, setShowAcknowledgement] = React.useState(false);
     const [redirectCountdown, setRedirectCountdown] = React.useState(3);
 
