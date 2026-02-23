@@ -5232,62 +5232,100 @@ const Dashboard = () => {
                     <input
                       type="text"
                       placeholder="Search for your bank..."
+                      value={bankSearchQuery}
                       className="w-full px-3 py-2 sm:px-4 sm:py-3 pl-10 sm:pl-12 border border-gray-300 sm:border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base"
                       onChange={(e) => {
-                        const searchTerm = e.target.value.toLowerCase();
-                        // Filter banks based on search - this would filter the display
-                        console.log('Searching for:', searchTerm);
+                        setBankSearchQuery(e.target.value);
                       }}
                     />
                     <svg className="absolute left-3 sm:left-4 top-2 sm:top-3.5 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
+                    {bankSearchQuery && (
+                      <button
+                        onClick={() => setBankSearchQuery('')}
+                        className="absolute right-3 sm:right-4 top-2 sm:top-3.5 text-gray-400 hover:text-gray-600"
+                      >
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    )}
                   </div>
                 </div>
 
                 {/* All Banks Section */}
                 <div className="mb-3 sm:mb-4">
-                  <h2 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4">All Banks</h2>
+                  <h2 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4">
+                    {bankSearchQuery ? `Search Results for "${bankSearchQuery}"` : 'All Banks'}
+                  </h2>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
-                  {[
-                    { name: "State Bank of India", logo: "/bank-logos/sbiLogoOnly.svg" },
-                    { name: "HDFC Bank", logo: "/bank-logos/hdfcBankLogoOnly.svg" },
-                    { name: "ICICI Bank", logo: "/bank-logos/iciciBankLogoOnly.svg" },
-                    { name: "Axis Bank", logo: "/bank-logos/axisBankLogoOnly.svg" },
-                    { name: "Kotak Mahindra Bank", logo: "/bank-logos/kotakBankLogoOnly.png" },
-                    { name: "Punjab National Bank", logo: "/bank-logos/pnbBankLogoOnly.png" },
-                    { name: "Canara Bank", logo: "/bank-logos/canaraBankLogoOnly.png" },
-                    { name: "Union Bank of India", logo: "/bank-logos/unionBankLogoOnly.png" },
-                    { name: "Bank of India", logo: "/bank-logos/bankOfIndiaLogoOnly.png" },
-                    { name: "Indian Bank", logo: "/bank-logos/indianBankLogoOnly.png" },
-                    { name: "Central Bank of India", logo: "/bank-logos/centralBankofIndiaLogoOnly.svg" },
-                    { name: "Indian Overseas Bank", logo: "/bank-logos/indianOverseasBankLogoOnly.png" },
-                    { name: "UCO Bank", logo: "/bank-logos/ucoBankLogoOnly.png" },
-                    { name: "Bank of Maharashtra", logo: "/bank-logos/bankofMaharashtraLogoOnly.png" },
-                    { name: "Punjab & Sind Bank", logo: "/bank-logos/punjabSindhBankLogoOnly.png" },
-                    { name: "IDBI Bank", logo: "/bank-logos/idbiBankLogoOnly.png" },
-                    { name: "Yes Bank", logo: "/bank-logos/yesBankLogoOnly.svg" },
-                    { name: "IndusInd Bank", logo: "/bank-logos/indusindBankLogoOnly.svg" },
-                    { name: "Federal Bank", logo: "/bank-logos/federalBankLogoOnly.png" },
-                    { name: "South Indian Bank", logo: "/bank-logos/southIndianBankLogoOnly.png" },
-                    { name: "Karur Vysya Bank", logo: "/bank-logos/karurVyasBankLogoOnly.png" },
-                    { name: "Tamilnad Mercantile Bank", logo: "/bank-logos/tamilandBankLogoOnly.png" },
-                    { name: "City Union Bank", logo: "/bank-logos/cityUnionBankLogoOnly.png" },
-                    { name: "Dhanlaxmi Bank", logo: "/bank-logos/dhanlaxmiBankLogoOnly.png" },
-                    { name: "RBL Bank", logo: "/bank-logos/rblBankLogoOnly.svg" },
-                    { name: "Bandhan Bank", logo: "/bank-logos/bandhanBankLogoOnly.png" },
-                    { name: "IDFC First Bank", logo: "/bank-logos/idfcBankLogoOnly.png" },
-                    { name: "AU Small Finance Bank", logo: "/bank-logos/auBankLogoOnly.png" },
-                    { name: "Jammu & Kashmir Bank", logo: "/bank-logos/jammuKashmirBankLogoOnly.png" },
-                    { name: "Karnataka Bank", logo: "/bank-logos/karnatakaBankLogoOnly.png" },
-                    { name: "DCB Bank", logo: "/bank-logos/dcbBankLogoOnly.png" },
-                    { name: "Standard Chartered Bank", logo: "/bank-logos/standardCharteredBankLogoOnly.png" },
-                    { name: "Deutsche Bank", logo: "/bank-logos/deutscheBankLogoOnly.svg" },
-                    { name: "Shamrao Vithal Bank", logo: "/bank-logos/shamraoVithalBankLogoOnly.png" },
-                    { name: "Shivalik Bank", logo: "/bank-logos/shivalikBankLogoOnly.png" },
-                    { name: "Janata Sahakari Bank", logo: "/bank-logos/janataSahakariBankLogoOnly.png" }
-                  ].map((bank, index) => (
+                  {(() => {
+                    const allBanks = [
+                      { name: "State Bank of India", logo: "/bank-logos/sbiLogoOnly.svg" },
+                      { name: "HDFC Bank", logo: "/bank-logos/hdfcBankLogoOnly.svg" },
+                      { name: "ICICI Bank", logo: "/bank-logos/iciciBankLogoOnly.svg" },
+                      { name: "Axis Bank", logo: "/bank-logos/axisBankLogoOnly.svg" },
+                      { name: "Kotak Mahindra Bank", logo: "/bank-logos/kotakBankLogoOnly.png" },
+                      { name: "Punjab National Bank", logo: "/bank-logos/pnbBankLogoOnly.png" },
+                      { name: "Canara Bank", logo: "/bank-logos/canaraBankLogoOnly.png" },
+                      { name: "Union Bank of India", logo: "/bank-logos/unionBankLogoOnly.png" },
+                      { name: "Bank of India", logo: "/bank-logos/bankOfIndiaLogoOnly.png" },
+                      { name: "Indian Bank", logo: "/bank-logos/indianBankLogoOnly.png" },
+                      { name: "Central Bank of India", logo: "/bank-logos/centralBankofIndiaLogoOnly.svg" },
+                      { name: "Indian Overseas Bank", logo: "/bank-logos/indianOverseasBankLogoOnly.png" },
+                      { name: "UCO Bank", logo: "/bank-logos/ucoBankLogoOnly.png" },
+                      { name: "Bank of Maharashtra", logo: "/bank-logos/bankofMaharashtraLogoOnly.png" },
+                      { name: "Punjab & Sind Bank", logo: "/bank-logos/punjabSindhBankLogoOnly.png" },
+                      { name: "IDBI Bank", logo: "/bank-logos/idbiBankLogoOnly.png" },
+                      { name: "Yes Bank", logo: "/bank-logos/yesBankLogoOnly.svg" },
+                      { name: "IndusInd Bank", logo: "/bank-logos/indusindBankLogoOnly.svg" },
+                      { name: "Federal Bank", logo: "/bank-logos/federalBankLogoOnly.png" },
+                      { name: "South Indian Bank", logo: "/bank-logos/southIndianBankLogoOnly.png" },
+                      { name: "Karur Vysya Bank", logo: "/bank-logos/karurVyasBankLogoOnly.png" },
+                      { name: "Tamilnad Mercantile Bank", logo: "/bank-logos/tamilandBankLogoOnly.png" },
+                      { name: "City Union Bank", logo: "/bank-logos/cityUnionBankLogoOnly.png" },
+                      { name: "Dhanlaxmi Bank", logo: "/bank-logos/dhanlaxmiBankLogoOnly.png" },
+                      { name: "RBL Bank", logo: "/bank-logos/rblBankLogoOnly.svg" },
+                      { name: "Bandhan Bank", logo: "/bank-logos/bandhanBankLogoOnly.png" },
+                      { name: "IDFC First Bank", logo: "/bank-logos/idfcBankLogoOnly.png" },
+                      { name: "AU Small Finance Bank", logo: "/bank-logos/auBankLogoOnly.png" },
+                      { name: "Jammu & Kashmir Bank", logo: "/bank-logos/jammuKashmirBankLogoOnly.png" },
+                      { name: "Karnataka Bank", logo: "/bank-logos/karnatakaBankLogoOnly.png" },
+                      { name: "DCB Bank", logo: "/bank-logos/dcbBankLogoOnly.png" },
+                      { name: "Standard Chartered Bank", logo: "/bank-logos/standardCharteredBankLogoOnly.png" },
+                      { name: "Deutsche Bank", logo: "/bank-logos/deutscheBankLogoOnly.svg" },
+                      { name: "Shamrao Vithal Bank", logo: "/bank-logos/shamraoVithalBankLogoOnly.png" },
+                      { name: "Shivalik Bank", logo: "/bank-logos/shivalikBankLogoOnly.png" },
+                      { name: "Janata Sahakari Bank", logo: "/bank-logos/janataSahakariBankLogoOnly.png" }
+                    ];
+                    
+                    const filteredBanks = bankSearchQuery
+                      ? allBanks.filter(bank => 
+                          bank.name.toLowerCase().includes(bankSearchQuery.toLowerCase())
+                        )
+                      : allBanks;
+                    
+                    if (filteredBanks.length === 0) {
+                      return (
+                        <div className="col-span-full text-center py-12">
+                          <svg className="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <p className="text-gray-500 text-lg font-medium mb-2">No banks found</p>
+                          <p className="text-gray-400 text-sm">Try searching with a different name</p>
+                          <button
+                            onClick={() => setBankSearchQuery('')}
+                            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                          >
+                            Clear Search
+                          </button>
+                        </div>
+                      );
+                    }
+                    
+                    return filteredBanks.map((bank, index) => (
                     <button
                       key={index}
                       onClick={() => {
