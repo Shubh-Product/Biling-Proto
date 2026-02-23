@@ -4666,12 +4666,12 @@ const Dashboard = () => {
             <div className="min-h-screen">
               {/* Header */}
               <div className="bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg">
-                <div className="max-w-3xl mx-auto px-3 py-3 sm:px-4 sm:py-4 md:px-6 md:py-5">
+                <div className="max-w-3xl mx-auto px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2 sm:space-x-3">
+                    <div className="flex items-center space-x-2">
                       <button 
                         onClick={() => setShowPaymentMethodSelection(false)}
-                        className="text-white hover:bg-blue-700 p-1 sm:p-1.5 rounded-lg transition-all"
+                        className="text-white hover:bg-blue-700 p-1 rounded-lg transition-all"
                       >
                         <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -4680,16 +4680,16 @@ const Dashboard = () => {
                       <h1 className="text-base sm:text-lg md:text-xl font-bold text-white">Select Payment Method</h1>
                     </div>
                     <div className="text-white text-xs sm:text-sm">
-                      <p className="font-semibold hidden sm:block">Amount to Pay</p>
-                      <p className="text-sm sm:text-base md:text-lg font-bold">₹{(billingData.amount || 0).toLocaleString('en-IN')}</p>
+                      <p className="font-semibold hidden sm:block text-xs">Amount to Pay</p>
+                      <p className="text-sm sm:text-base font-bold">₹{(billingData.amount || 0).toLocaleString('en-IN')}</p>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Content */}
-              <div className="max-w-3xl mx-auto px-3 py-3 sm:px-4 sm:py-4 md:px-6 md:py-6">
-                <div className="space-y-2 sm:space-y-3">
+              <div className="max-w-3xl mx-auto px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4">
+                <div className="space-y-1.5 sm:space-y-2">
                   {/* UPI - Direct redirect to UPI screen */}
                   <div className="bg-white border border-gray-200 rounded-lg sm:rounded-xl hover:border-blue-500 hover:shadow-lg transition-all">
                     <button
