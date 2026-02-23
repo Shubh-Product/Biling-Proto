@@ -4657,6 +4657,152 @@ const Dashboard = () => {
           </div>
         </div>
         
+        {/* Payment Method Selection Screen */}
+        {showPaymentMethodSelection && (
+          <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[60]" onClick={() => setShowPaymentMethodSelection(false)}>
+            <div className="bg-white rounded-lg max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+              {/* Header */}
+              <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6 rounded-t-lg">
+                <div className="flex justify-between items-center">
+                  <h2 className="text-2xl font-bold text-white">Select Payment Method</h2>
+                  <button onClick={() => setShowPaymentMethodSelection(false)} className="text-white hover:text-gray-200">
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Payment Methods */}
+              <div className="p-6 space-y-4">
+                {/* UPI */}
+                <div className="border-2 border-gray-200 rounded-lg hover:border-blue-500 transition-all">
+                  <button
+                    onClick={() => {
+                      setShowPaymentMethodSelection(false);
+                      setShowPaymentGateway(true);
+                      // Redirect to Razorpay UPI
+                      console.log('Redirecting to Razorpay UPI');
+                    }}
+                    className="w-full p-4 flex items-center justify-between hover:bg-gray-50 transition-all"
+                  >
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                        <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                      <div className="text-left">
+                        <h3 className="font-semibold text-gray-900 text-lg">UPI</h3>
+                        <p className="text-sm text-gray-600">Pay using any UPI app</p>
+                      </div>
+                    </div>
+                    <ChevronDown className="w-5 h-5 text-gray-400 transform rotate-[-90deg]" />
+                  </button>
+                </div>
+
+                {/* Cards (Accordion) */}
+                <div className="border-2 border-gray-200 rounded-lg hover:border-blue-500 transition-all">
+                  <details className="group">
+                    <summary className="w-full p-4 flex items-center justify-between cursor-pointer hover:bg-gray-50 transition-all list-none">
+                      <div className="flex items-center space-x-4">
+                        <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                          </svg>
+                        </div>
+                        <div className="text-left">
+                          <h3 className="font-semibold text-gray-900 text-lg">Cards</h3>
+                          <p className="text-sm text-gray-600">Debit / Credit cards</p>
+                        </div>
+                      </div>
+                      <ChevronDown className="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform" />
+                    </summary>
+                    
+                    {/* Card Options */}
+                    <div className="border-t border-gray-200 bg-gray-50">
+                      {/* Debit Card */}
+                      <button
+                        onClick={() => {
+                          setShowPaymentMethodSelection(false);
+                          setShowPaymentGateway(true);
+                          // Redirect to Razorpay Debit Card
+                          console.log('Redirecting to Razorpay Debit Card');
+                        }}
+                        className="w-full p-4 flex items-center justify-between hover:bg-gray-100 transition-all border-b border-gray-200"
+                      >
+                        <div className="flex items-center space-x-3">
+                          <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                            <CreditCard className="w-5 h-5 text-green-600" />
+                          </div>
+                          <div className="text-left">
+                            <h4 className="font-medium text-gray-900">Debit Card</h4>
+                            <p className="text-xs text-gray-600">Via Razorpay</p>
+                          </div>
+                        </div>
+                        <ChevronDown className="w-4 h-4 text-gray-400 transform rotate-[-90deg]" />
+                      </button>
+
+                      {/* Credit Card */}
+                      <button
+                        onClick={() => {
+                          setShowPaymentMethodSelection(false);
+                          setShowPaymentGateway(true);
+                          // Redirect to Cashfree Credit Card
+                          console.log('Redirecting to Cashfree Credit Card');
+                        }}
+                        className="w-full p-4 flex items-center justify-between hover:bg-gray-100 transition-all"
+                      >
+                        <div className="flex items-center space-x-3">
+                          <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                            <CreditCard className="w-5 h-5 text-orange-600" />
+                          </div>
+                          <div className="text-left">
+                            <h4 className="font-medium text-gray-900">Credit Card</h4>
+                            <p className="text-xs text-gray-600">Via Cashfree</p>
+                          </div>
+                        </div>
+                        <ChevronDown className="w-4 h-4 text-gray-400 transform rotate-[-90deg]" />
+                      </button>
+                    </div>
+                  </details>
+                </div>
+
+                {/* Net Banking */}
+                <div className="border-2 border-gray-200 rounded-lg hover:border-blue-500 transition-all">
+                  <button
+                    onClick={() => {
+                      setShowPaymentMethodSelection(false);
+                      setShowPaymentGateway(true);
+                      // Redirect to Razorpay Net Banking
+                      console.log('Redirecting to Razorpay Net Banking');
+                    }}
+                    className="w-full p-4 flex items-center justify-between hover:bg-gray-50 transition-all"
+                  >
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                        <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                      </div>
+                      <div className="text-left">
+                        <h3 className="font-semibold text-gray-900 text-lg">Net Banking</h3>
+                        <p className="text-sm text-gray-600">Pay via Internet Banking</p>
+                      </div>
+                    </div>
+                    <ChevronDown className="w-5 h-5 text-gray-400 transform rotate-[-90deg]" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Footer Note */}
+              <div className="px-6 pb-6">
+                <p className="text-xs text-gray-500 text-center">
+                  Your payment information is secure and encrypted
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+        
         {/* Payment Gateway Popup */}
         {showPaymentGateway && (
           <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[60]" onClick={() => setShowPaymentGateway(false)}>
