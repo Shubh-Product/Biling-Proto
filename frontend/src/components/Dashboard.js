@@ -4367,6 +4367,8 @@ const Dashboard = () => {
     const [errors, setErrors] = React.useState({});
     const [showPaymentGateway, setShowPaymentGateway] = React.useState(false);
     const [showPaymentMethodSelection, setShowPaymentMethodSelection] = React.useState(false);
+    const [showBankSelection, setShowBankSelection] = React.useState(false);
+    const [showAllBanks, setShowAllBanks] = React.useState(false);
     const [showAcknowledgement, setShowAcknowledgement] = React.useState(false);
     const [redirectCountdown, setRedirectCountdown] = React.useState(3);
 
