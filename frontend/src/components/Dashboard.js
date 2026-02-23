@@ -4691,7 +4691,7 @@ const Dashboard = () => {
               <div className="max-w-3xl mx-auto px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4">
                 <div className="space-y-1.5 sm:space-y-2">
                   {/* UPI - Direct redirect to UPI screen */}
-                  <div className="bg-white border border-gray-200 rounded-lg sm:rounded-xl hover:border-blue-500 hover:shadow-lg transition-all">
+                  <div className="bg-white border border-gray-200 rounded-lg hover:border-blue-500 hover:shadow-lg transition-all">
                     <button
                       onClick={() => {
                         // Show custom UPI payment screen
@@ -4699,17 +4699,17 @@ const Dashboard = () => {
                         setShowUpiScreen(true);
                         console.log('Opening UPI Payment Screen');
                       }}
-                      className="w-full p-3 sm:p-4 md:p-5 flex items-center justify-between"
+                      className="w-full p-2.5 sm:p-3 md:p-4 flex items-center justify-between"
                     >
-                      <div className="flex items-center space-x-2 sm:space-x-3">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
-                          <svg className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                           </svg>
                         </div>
                         <div className="text-left">
-                          <h3 className="font-bold text-gray-900 text-base sm:text-lg">UPI</h3>
-                          <p className="text-xs text-gray-600">Google Pay, PhonePe, Paytm & more</p>
+                          <h3 className="font-bold text-gray-900 text-sm sm:text-base md:text-lg">UPI</h3>
+                          <p className="text-xs text-gray-600 leading-tight">Google Pay, PhonePe, Paytm & more</p>
                         </div>
                       </div>
                       <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
