@@ -4815,18 +4815,18 @@ const Dashboard = () => {
                   </div>
 
                   {/* Net Banking (Accordion with Bank Grid) */}
-                  <div className="bg-white border border-gray-200 rounded-lg sm:rounded-xl hover:border-blue-500 transition-all">
+                  <div className="bg-white border border-gray-200 rounded-lg hover:border-blue-500 transition-all">
                     <details className="group">
-                      <summary className="w-full p-3 sm:p-4 md:p-5 flex items-center justify-between cursor-pointer list-none">
-                        <div className="flex items-center space-x-2 sm:space-x-3">
-                          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
-                            <svg className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <summary className="w-full p-2.5 sm:p-3 md:p-4 flex items-center justify-between cursor-pointer list-none">
+                        <div className="flex items-center space-x-2">
+                          <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                             </svg>
                           </div>
                           <div className="text-left">
-                            <h3 className="font-bold text-gray-900 text-base sm:text-lg">Net Banking</h3>
-                            <p className="text-xs text-gray-600">All Indian banks supported</p>
+                            <h3 className="font-bold text-gray-900 text-sm sm:text-base md:text-lg">Net Banking</h3>
+                            <p className="text-xs text-gray-600 leading-tight">All Indian banks supported</p>
                           </div>
                         </div>
                         <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 group-open:rotate-90 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -4835,10 +4835,10 @@ const Dashboard = () => {
                       </summary>
                       
                       {/* Bank Grid Layout */}
-                      <div className="border-t border-gray-200 bg-gray-50 p-3 sm:p-4">
-                        <h3 className="text-center text-sm sm:text-base md:text-lg font-bold text-gray-900 mb-3 sm:mb-4">Select your preferred bank</h3>
+                      <div className="border-t border-gray-200 bg-gray-50 p-2 sm:p-3">
+                        <h3 className="text-center text-xs sm:text-sm md:text-base font-bold text-gray-900 mb-2 sm:mb-3">Select your preferred bank</h3>
                         
-                        <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                        <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
                           {/* HDFC Bank */}
                           <button
                             onClick={() => {
