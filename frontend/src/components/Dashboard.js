@@ -4903,6 +4903,117 @@ const Dashboard = () => {
           </div>
         )}
 
+        {/* UPI Payment Screen - FULL PAGE */}
+        {showUpiScreen && (
+          <div className="fixed inset-0 bg-gray-50 z-[60] overflow-y-auto">
+            <div className="min-h-screen flex flex-col">
+              {/* Header */}
+              <div className="bg-white shadow-sm">
+                <div className="max-w-2xl mx-auto px-6 py-4">
+                  <div className="flex items-center space-x-4">
+                    <button 
+                      onClick={() => {
+                        setShowUpiScreen(false);
+                        setShowPaymentMethodSelection(true);
+                      }}
+                      className="text-gray-600 hover:text-gray-900 p-2 rounded-lg transition-all"
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+                    <h1 className="text-xl font-bold text-gray-900">UPI</h1>
+                  </div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 flex flex-col max-w-2xl w-full mx-auto px-6 py-8">
+                {/* Amount Section */}
+                <div className="text-center mb-8">
+                  <p className="text-sm text-gray-600 mb-2">Amount to pay</p>
+                  <p className="text-4xl font-bold text-gray-900">₹{(billingData.amount || 0).toLocaleString('en-IN')}</p>
+                </div>
+
+                {/* UPI ID Input */}
+                <div className="bg-white rounded-lg border border-gray-300 p-6 mb-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Enter your UPI ID
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="example@paytm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg"
+                  />
+                  <p className="text-xs text-gray-500 mt-2">
+                    Please enter your UPI ID (e.g., 9876543210@paytm, username@bank)
+                  </p>
+                </div>
+
+                {/* Help Text */}
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                  <div className="flex items-start space-x-3">
+                    <svg className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <div className="text-sm text-blue-800">
+                      <p className="font-medium mb-1">How to find your UPI ID?</p>
+                      <ul className="list-disc list-inside space-y-1 text-blue-700">
+                        <li>Open your UPI app (Google Pay, PhonePe, Paytm, etc.)</li>
+                        <li>Go to Profile or Settings</li>
+                        <li>Your UPI ID will be displayed there</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                {/* UPI Apps Logos */}
+                <div className="mb-8">
+                  <p className="text-xs text-gray-600 text-center mb-3">Supported UPI apps</p>
+                  <div className="flex justify-center items-center space-x-6 flex-wrap">
+                    {['Google Pay', 'PhonePe', 'Paytm', 'BHIM', 'Amazon Pay'].map((app) => (
+                      <div key={app} className="flex flex-col items-center">
+                        <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-1">
+                          <span className="text-xs font-semibold text-gray-700">{app.slice(0, 2)}</span>
+                        </div>
+                        <span className="text-xs text-gray-600">{app}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Spacer to push button to bottom */}
+                <div className="flex-1"></div>
+
+                {/* Make Payment Button */}
+                <div className="mt-auto">
+                  <button
+                    onClick={() => {
+                      // Process UPI payment
+                      setShowUpiScreen(false);
+                      setShowPaymentGateway(true);
+                      console.log('Processing UPI payment');
+                    }}
+                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg font-semibold py-4 rounded-lg shadow-lg transition-all"
+                  >
+                    Make Payment
+                  </button>
+                  
+                  {/* Security Note */}
+                  <div className="mt-4 text-center">
+                    <div className="inline-flex items-center space-x-2 text-gray-600">
+                      <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
+                      <p className="text-xs">100% secure payment</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Bank Selection Screen - FULL PAGE with Search */}
         {showBankSelection && (
           <div className="fixed inset-0 bg-gray-50 z-[60] overflow-y-auto">
