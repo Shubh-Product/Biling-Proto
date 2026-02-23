@@ -4367,6 +4367,7 @@ const Dashboard = () => {
     const [errors, setErrors] = React.useState({});
     const [showPaymentGateway, setShowPaymentGateway] = React.useState(false);
     const [showPaymentMethodSelection, setShowPaymentMethodSelection] = React.useState(false);
+    const [openAccordion, setOpenAccordion] = React.useState(null); // Track which payment accordion is open
     const [showUpiScreen, setShowUpiScreen] = React.useState(false);
     const [showBankSelection, setShowBankSelection] = React.useState(false);
     const [showAllBanks, setShowAllBanks] = React.useState(false);
