@@ -4710,7 +4710,7 @@ const Dashboard = () => {
                           </svg>
                         </div>
                         <div className="text-left">
-                          <h3 className="font-bold text-gray-900 text-sm sm:text-base md:text-lg">UPI</h3>
+                          <h3 className="font-bold text-gray-900 text-sm sm:text-base md:text-lg">UPI / QR Code</h3>
                           <p className="text-xs text-gray-600 leading-tight">Google Pay, PhonePe, Paytm & more</p>
                         </div>
                       </div>
